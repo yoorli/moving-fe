@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import RootPage from "./page/root";
 import UserLoginPage from "./page/user/login";
 import DriverLoginPage from "./page/driver/login";
+import UserLayout from "./layout/UserLayout";
+import DriverLayout from "./layout/DriverLayout";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +12,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
+    element: <UserLayout />,
     children: [
       {
         path: "login",
@@ -40,6 +43,7 @@ const router = createBrowserRouter([
 
   {
     path: "/driver",
+    element: <DriverLayout />,
     children: [
       {
         path: "login",
