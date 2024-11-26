@@ -5,8 +5,6 @@
 
   width: 100%;
   height: 100%;
-
-  background-color: red;
 }
 
 .wrapper {
@@ -22,8 +20,35 @@
   height: 100%;
   max-height: 852px;
 
-  border: 5px solid black;
   background-color: white;
+}
+
+p {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+a {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1b92ff;
+}
+
+a:visited {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1b92ff;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: inherit;
+  height: 140px;
+  gap: 18px;
 }
 
 .mid {
@@ -46,5 +71,29 @@
   width: 100%;
   height: 100%;
 
+  gap: 32px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: inherit;
+  height: 432px;
+  gap: 32px;
+}
+
+.bottom > span {
+  font-size: 20px;
+  font-weight: 400;
+  color: #525252;
+}
+
+.snsIcon {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   gap: 32px;
 }

@@ -26,6 +26,5 @@ export const loginValidation = (name: string, value?: string) => {
   if (name === "password") {
     return passwordValidation(value);
   }
-
   return;
 };
