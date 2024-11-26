@@ -1,3 +1,5 @@
+import style from "./index.module.css";
+
 export default function UserLoginPage() {
-  return <span>로그인</span>;
+  return <div className={style.contaer}></div>;
 }
