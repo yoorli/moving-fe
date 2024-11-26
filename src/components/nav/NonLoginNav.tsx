@@ -1,6 +1,6 @@
 import LoginBtn from "../btn/LoginBtn";
 import style from "./NonLoginNav.module.css";
-import logo from "../../../assets/logo-icon-text.png";
+import logo from "../../assets/logo.svg";
 import useDirection from "../../lib/function/direction";
 
 export default function NonLoginNav() {
