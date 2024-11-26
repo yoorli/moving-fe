@@ -1,14 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
-import RootPage from "./page/root";
 import UserLoginPage from "./page/user/login";
 import DriverLoginPage from "./page/driver/login";
 import UserLayout from "./layout/UserLayout";
 import DriverLayout from "./layout/DriverLayout";
+import RendingLayout from "./layout/RendingLayout";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <RootPage />,
+    element: <RendingLayout />,
+    children: [
+      { path: "/", element: <span>렌딩페이지 입니다.</span> },
+      { path: "/searchDriver", element: <span>기사님 찾기</span> },
+    ],
   },
   {
     path: "/user",
@@ -27,7 +30,7 @@ const router = createBrowserRouter([
         element: <span>견적 요청</span>,
       },
       {
-        path: "searchDirver",
+        path: "searchDriver",
         element: <span>기사님 찾기</span>,
       },
       {

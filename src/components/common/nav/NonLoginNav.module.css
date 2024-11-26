@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 82px;
+
+  width: 100%;
+  height: 88px;
+}
+
+.logoImg {
+  width: 116px;
+  height: 44px;
+  cursor: pointer;
+}
+
+.navContainer {
+  display: flex;
+  justify-content: start;
+
+  width: 100%;
+  max-width: 1284px;
+}
+
+.navWrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+.navItem {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+
+  cursor: pointer;
+}

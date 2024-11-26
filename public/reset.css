@@ -156,3 +156,9 @@ button {
   background: transparent;
   cursor: pointer;
 }
+
+ a {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+}

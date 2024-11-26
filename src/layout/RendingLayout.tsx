@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import style from "./DriverLayout.module.css";
+import style from "./RendingLayout.module.css";
 import NonLoginNav from "../components/common/nav/NonLoginNav";
 
-export default function DriverLayout() {
+export default function RendingLayout() {
   return (
     <div className={style.container}>
       <div className={style.page_wrapper}>
