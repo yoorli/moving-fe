@@ -1,7 +1,7 @@
 import LoginBtn from "../btn/LoginBtn";
 import style from "./NonLoginNav.module.css";
 import logo from "../../../assets/logo-icon-text.png";
-import useDirection from "../../../lib/function/direction";
+import useDirection from "../../lib/function/direction";
 
 export default function NonLoginNav() {
   const { direction_root, direction_searchDriver, direction_userLogin } =
