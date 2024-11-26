@@ -1,0 +1,78 @@
+/* @import url('./reset.css'); */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+:root {
+  --black-500: #040404;
+  --black-400: #1F1F1F;
+  --black-300: #373737;
+  --black-200: #525252;
+  --black-100: #6B6B6B;
+
+  --gray-500: #808080;
+  --gray-400: #999999;
+  --gray-300: #ABABAB;
+  --gray-200: #C4C4C4;
+  --gray-100: #DEDEDE;
+  --gray-50: #000000;
+
+  --blue-400: #242945;
+  --blue-300: #1B92FF;
+  --blue-200: #4DA9FF;
+  --blue-100: #E9F4FF;
+  --blue-50: #F5FAFF;
+
+  --yellow: #FFC149;
+
+  --red-200: #FF4F64;
+  --red-100: #FFEEF0;
+
+  --background-400: #FCFCFC;
+  --background-300: #F7F7F7;
+  --background-200: #EFEFEF;
+  --background-100: #F4F7FB;
+
+  --line-200: #E6E6E6;
+  --line-100: #F2F2F2;
+
+  --error: #eb3e3e;
+}
+
+.Text-3xl {
+  font-size: 32px;
+  line-height: 42px;
+}
+
+.Text-2xl {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.Text-xl {
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.Text-2lg {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.Text-lg {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.Text-md {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.Text-sm {
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.Text-xs {
+  font-size: 12px;
+  line-height: 20px;
+}
