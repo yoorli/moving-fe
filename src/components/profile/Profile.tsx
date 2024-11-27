@@ -1,5 +1,5 @@
 import style from './Profile.module.css';
-import assets from '../../variables/images';
+import assets from '../../lib/assets/images';
 
 export default function Profile() {
   return (
