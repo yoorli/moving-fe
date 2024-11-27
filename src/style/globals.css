@@ -13,7 +13,7 @@
   --gray-300: #ababab;
   --gray-200: #c4c4c4;
   --gray-100: #dedede;
-  --gray-50: #000000;
+  --gray-50: #ffffff;
 
   --blue-400: #242945;
   --blue-300: #1b92ff;
@@ -35,6 +35,16 @@
   --line-100: #f2f2f2;
 
   --error: #eb3e3e;
+}
+
+body {
+  font-family: 'Pretendard Variable', Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  display: flex;
+  flex-direction: column;
+  color: var(--black-400);
 }
 
 .Text-3xl {
