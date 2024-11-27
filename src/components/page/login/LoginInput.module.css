@@ -29,7 +29,7 @@
   padding-bottom: 16px;
 
   border-radius: 16px;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--line-100);
 
   font-size: 20px;
   font-weight: 400;
@@ -37,17 +37,17 @@
 }
 
 .input.complete {
-  border: 1px solid #1b92ff;
+  border: 1px solid var(--blue-300);
 }
 .input.invalid {
-  border: 1px solid #ff4f64;
+  border: 1px solid var(--red-200);
 }
 .input:focus.invalid {
-  border: 1px solid #ff4f64;
+  border: 1px solid var(--red-200);
 }
 
 .input:focus {
-  border: 1px solid #1b92ff;
+  border: 1px solid var(--blue-300);
 }
 
 .invaild {
@@ -57,7 +57,7 @@
   width: 100%;
   font-size: 16px;
   font-weight: 500;
-  color: #ff4f64;
+  color: var(--red-200);
 }
 
 .inputContainer {
@@ -81,5 +81,5 @@
   top: 20px;
 }
 .iconPill:hover {
-  background-color: lightgray;
+  background-color: var(--gray-100);
 }

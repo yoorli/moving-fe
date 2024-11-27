@@ -32,16 +32,10 @@ p {
 .mid > p > a {
   font-size: 20px;
   font-weight: 600;
-  color: #1b92ff;
+  color: var(--blue-200);
 
   box-sizing: border-box;
   padding-left: 8px;
-}
-
-a:visited {
-  font-size: 20px;
-  font-weight: 600;
-  color: #1b92ff;
 }
 
 .top {
@@ -92,7 +86,7 @@ a:visited {
 .bottom > span {
   font-size: 20px;
   font-weight: 400;
-  color: #525252;
+  color: var(--black-200);
 }
 
 .snsIcon {

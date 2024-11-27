@@ -8,7 +8,7 @@
   height: 64px;
 
   border-radius: 16px;
-  background-color: #d2d2d2;
+  background-color: var(--gray-100);
 
   color: white;
   font-size: 18px;
@@ -18,5 +18,5 @@
 }
 
 .container.complete {
-  background-color: #1b92ff;
+  background-color: var(--blue-300);
 }
