@@ -19,12 +19,75 @@ export const passwordValidation = (password?: string) => {
   }
 };
 
+export const nameValidation = (name?: string) => {
+  const length = name?.length;
+  //값이 있을 경우에만 유효성 검사 실행.
+  if (length && (length < 2 || length >= 11)) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+export const phoneValidation = (phoneNumber?: string) => {
+  const phoneRegEx = /^(01[016789]{1})[0-9]{4}[0-9]{4}$/;
+  //값이 있을 경우에만 유효성 검사 실행.
+  if (phoneNumber && !phoneRegEx.test(phoneNumber)) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+export const passwordEqualValidation = (
+  confirmPassword?: string,
+  password?: string,
+) => {
+  if (!password && !confirmPassword) {
+    return true;
+  }
+  if (!password) {
+    return false;
+  }
+
+  //값이 있을 경우에만 유효성 검사 실행.
+  if (password && confirmPassword && !(password === confirmPassword)) {
+    return false;
+  } else {
+    return true;
+  } // 비밀번호 일치 여부 검시.
+};
+
+//
 export const loginValidation = (name: string, value?: string) => {
-  if (name === "email") {
+  if (name === 'email') {
     return emailValidation(value);
   }
-  if (name === "password") {
+  if (name === 'password') {
     return passwordValidation(value);
+  }
+  return;
+};
+
+export const signupValidation = (
+  name: string,
+  value?: string,
+  password?: string,
+) => {
+  if (name === 'name') {
+    return nameValidation(value);
+  }
+  if (name === 'email') {
+    return emailValidation(value);
+  }
+  if (name === 'phoneNumber') {
+    return phoneValidation(value);
+  }
+  if (name === 'password') {
+    return passwordValidation(value);
+  }
+  if (name === 'confirmPassword') {
+    return passwordEqualValidation(value, password);
   }
   return;
 };
