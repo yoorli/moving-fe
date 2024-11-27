@@ -1,4 +1,4 @@
-import style from "./LoginBtn.module.css";
+import style from './LoginBtn.module.css';
 
 type Props = {
   context: string;
