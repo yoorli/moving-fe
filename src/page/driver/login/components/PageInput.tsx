@@ -24,6 +24,7 @@ export const EmailInputComponent = ({
         type="text"
         id="email"
         name="email"
+        placeholder="이메일을 입력 해주세요."
       />
       {validation ? null : (
         <span className={style.invaild}>이메일 형식이 아닙니다.</span>
@@ -52,6 +53,7 @@ export const PasswordInputComponent = ({
           type={invisible ? "password" : "text"}
           id="password"
           name="password"
+          placeholder="비밀번호을 입력 해주세요."
         />
         <div className={style.iconPill}>
           {invisible ? (

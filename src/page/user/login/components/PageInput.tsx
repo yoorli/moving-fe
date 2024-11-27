@@ -20,6 +20,7 @@ export const EmailInputComponent = ({
           style[value && validation ? "complete" : ""]
         } ${style[value && !validation ? "invalid" : ""]} `}
         value={value ?? ""}
+        placeholder="이메일을 입력 해주세요."
         onChange={inputHeandler}
         type="text"
         id="email"
@@ -52,6 +53,7 @@ export const PasswordInputComponent = ({
           type={invisible ? "password" : "text"}
           id="password"
           name="password"
+          placeholder="비밀번호을 입력 해주세요."
         />
         <div className={style.iconPill}>
           {invisible ? (
