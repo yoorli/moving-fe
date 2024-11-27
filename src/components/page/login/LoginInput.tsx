@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from "./PageInput.module.css";
+import style from "./LoginInput.module.css";
 
 type InputType = {
   value: string;

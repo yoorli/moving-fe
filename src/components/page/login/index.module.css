@@ -28,10 +28,14 @@ p {
   font-weight: 400;
 }
 
-a {
+.top > p > a,
+.mid > p > a {
   font-size: 20px;
   font-weight: 600;
   color: #1b92ff;
+
+  box-sizing: border-box;
+  padding-left: 8px;
 }
 
 a:visited {

@@ -1,12 +1,13 @@
 import { useState } from "react";
+
+import style from "../../../components/page/login/index.module.css";
+import { loginValidation } from "../../../lib/function/validation";
+import LoginBtn from "../../../components/page/login/LoginBtn";
+import { Link } from "react-router-dom";
 import {
   EmailInputComponent,
   PasswordInputComponent,
-} from "./components/PageInput";
-import style from "./index.module.css";
-import { loginValidation } from "../../../lib/function/validation";
-import LoginBtn from "./components/LoginBtn";
-import { Link } from "react-router-dom";
+} from "../../../components/page/login/LoginInput";
 
 type FormLogin = {
   email: string;
@@ -72,7 +73,7 @@ export default function UserLoginPage() {
             />
           </svg>
           <p>
-            기사님이신가요? <Link to="/driver/login">기사님 전용 페이지</Link>
+            기사님이신가요?<Link to="/driver/login">기사님 전용 페이지</Link>
           </p>
         </div>
         <div className={style.mid}>
@@ -99,7 +100,7 @@ export default function UserLoginPage() {
           </form>
 
           <p>
-            아직 무빙 회원이 아니신가요?{" "}
+            아직 무빙 회원이 아니신가요?
             <Link to="/user/signup">이메일로 회원가입하기</Link>
           </p>
         </div>
