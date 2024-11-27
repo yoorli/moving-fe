@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         element: <UserLoginPage />,
       },
       {
-        path: 'join',
+        path: 'signup',
         element: <span>회원가입</span>,
       },
       {
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         element: <DriverLoginPage />,
       },
       {
-        path: 'join',
+        path: 'signup',
         element: <span>회원가입</span>,
       },
       {
