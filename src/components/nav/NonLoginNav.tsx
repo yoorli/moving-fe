@@ -1,7 +1,7 @@
-import LoginBtn from "../btn/LoginBtn";
-import style from "./NonLoginNav.module.css";
-import logo from "../../assets/logo.svg";
-import useDirection from "../../lib/function/direction";
+import style from './NonLoginNav.module.css';
+import logo from '../../assets/logo.svg';
+import useDirection from '../../lib/function/direction';
+import LoginBtn from '../btn/LoginBtn';
 
 export default function NonLoginNav() {
   const { direction_root, direction_searchDriver, direction_userLogin } =
@@ -12,7 +12,7 @@ export default function NonLoginNav() {
         onClick={direction_root}
         className={style.logoImg}
         src={logo}
-        alt=""
+        alt=''
       />
       <div className={style.navContainer}>
         <nav>
@@ -23,7 +23,7 @@ export default function NonLoginNav() {
           </ul>
         </nav>
       </div>
-      <LoginBtn onClick={direction_userLogin} context="로그인" />
+      <LoginBtn onClick={direction_userLogin} context='로그인' />
     </div>
   );
 }
