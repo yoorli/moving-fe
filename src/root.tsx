@@ -4,6 +4,9 @@ import RendingLayout from './layout/RendingLayout';
 import UserLayout from './layout/UserLayout';
 import DriverLoginPage from './page/driver/login';
 import UserLoginPage from './page/user/login';
+import UserSignupPage from './page/user/signup';
+import DriverSignupPage from './page/driver/signup';
+import DriverCallPage from './page/driver/costCall';
 import UserCostCallPage from './page/user/costCall';
 
 const router = createBrowserRouter([
@@ -23,8 +26,8 @@ const router = createBrowserRouter([
         element: <UserLoginPage />,
       },
       {
-        path: 'join',
-        element: <span>회원가입</span>,
+        path: 'signup',
+        element: <UserSignupPage />,
       },
       {
         path: 'costCall',
@@ -54,12 +57,12 @@ const router = createBrowserRouter([
         element: <DriverLoginPage />,
       },
       {
-        path: 'join',
-        element: <span>회원가입</span>,
+        path: 'signup',
+        element: <DriverSignupPage />,
       },
       {
         path: 'costCall',
-        element: <span>견적 요청</span>,
+        element: <DriverCallPage />,
       },
       {
         path: 'constHandler',

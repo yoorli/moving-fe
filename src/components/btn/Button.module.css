@@ -1,0 +1,266 @@
+/* .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+/* 이미지와 함께 있는 텍스트 */
+.buttonImg {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 비활성화 */
+.disabled {
+  background-color: var(--gray-100) !important;
+  cursor: default !important;
+}
+
+/* nav - 로그인 */
+.solid116pxBlue300 {
+  max-width: 116px;
+  width: 100%;
+  height: 44px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* 랜딩 페이지 - 로그인 */
+.solid340pxBlue300 {
+  max-width: 340px;
+  width: 100%;
+  height: 64px;
+  border-radius: 50px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 랜딩 페이지 - 회원가입 */
+.outlined340pxBlue300 {
+  max-width: 340px;
+  width: 100%;
+  height: 64px;
+  border-radius: 50px;
+  background-color: var(--gray-50);
+  color: var(--blue-300);
+  border: 1px solid var(--blue-300);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 로그인 및 회원가입 페이지 및 프로필 등록 - 로그인(활성화) */
+/* 작성 가능한 리뷰 - 리뷰 작성하기 */
+.solid640pxBlue300 {
+  max-width: 640px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 유저 */
+/* 견적 요청 - 선택완료 | 견적 확정하기 */
+/* 기사님 상세페이지 - 일반 견적 요청 하기 */
+/* 작성 가능한 리뷰 - 리뷰 등록 */
+/* 받은 요청 - 견적 보내기 | 반려하기 */
+.solid560pxBlue300 {
+  max-width: 560px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 견적 요청(주소) - 출발지|도착지 선택하기 */
+.outlined560pxBlue300 {
+  max-width: 560px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--gray-50);
+  color: var(--blue-300);
+  border: 1px solid var(--blue-300);
+  font-weight: 600;
+  font-size: 20px;
+  text-align: left;
+  padding: 0 0 0 24px;
+}
+
+/* 견적 요청 - 받은 견적 보러가기 */
+.solid196pxBlue300 {
+  max-width: 196px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 기사님 상세페이지 - 기사님 찜하기 */
+.outlined354pxLine200 {
+  max-width: 354px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--gray-50);
+  color: var(--black-500);
+  border: 1px solid var(--line-200);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 기사님 상세페이지 - 지정 견적 요청하기 */
+/* 내 견적 관리 - 견적 확정하기 */
+.solid354pxBlue300 {
+  max-width: 354px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 내 견적 관리_대기 중인 견적 - 견적 확정하기 */
+.outlined314pxLine200 {
+  max-width: 314.5px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--gray-50);
+  color: var(--black-500);
+  border: 1px solid var(--line-200);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 기사님 상세페이지 - 지정 견적 요청하기 */
+.solid314pxBlue300 {
+  max-width: 314.5px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 내가 작성한 리뷰 - 리뷰 작성하러 가기 */
+.solid180pxBlue300 {
+  max-width: 180px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 프로필 수정 - 수정하기 */
+/* 기사님_프로필 수정 - 수정하기 */
+.solid660pxBlue300 {
+  max-width: 660px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 프로필 수정 - 취소 */
+/* 기사님_프로필 수정 - 취소 */
+.outlined660pxBlue300 {
+  max-width: 660px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--gray-50);
+  color: var(--blue-300);
+  border: 1px solid var(--blue-300);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 기사님 */
+/* 받은 요청 - 견적 보내기 */
+.solid448pxBlue300 {
+  max-width: 448px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 받은 요청 - 반려 */
+.outlined448pxBlue300 {
+  max-width: 448px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--gray-50);
+  color: var(--blue-300);
+  border: 1px solid var(--blue-300);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 내 견적 관리 - 견적 상세보기 */
+.solid123pxBlue100 {
+  max-width: 123px;
+  width: 100%;
+  height: 46px;
+  border-radius: 16px;
+  background-color: var(--blue-100);
+  color: var(--blue-300);
+  border: 1px solid var(--blue-200);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* 마이페이지 - 기본 정보 수정 */
+.solid280pxBackground200 {
+  max-width: 280px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--background-200);
+  color: var(--gray-300);
+  border: 1px solid var(--gray-200);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 마이페이지 - 내 프로필 수정 */
+.solid280pxBlue300 {
+  max-width: 280px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-weight: 600;
+  font-size: 20px;
+}

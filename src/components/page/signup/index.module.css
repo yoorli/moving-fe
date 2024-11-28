@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 56px;
+
+  width: 100%;
+  max-width: 640px;
+  height: 100%;
+  max-height: 1268x;
+
+  background-color: white;
+}
+
+p {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.mid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: inherit;
+  height: 966px;
+  gap: 56px;
+}
+
+.mid > p > a {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--blue-200);
+
+  box-sizing: border-box;
+  padding-left: 8px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  gap: 32px;
+}
