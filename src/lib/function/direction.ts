@@ -1,19 +1,33 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export default function useDirection() {
   const nav = useNavigate();
 
   const direction_root = () => {
-    nav("/");
+    nav('/');
   };
 
   const direction_searchDriver = () => {
-    nav("/searchDriver");
+    nav('/searchDriver');
   };
 
   const direction_userLogin = () => {
-    nav("/user/login");
+    nav('/user/login');
   };
 
-  return { direction_root, direction_searchDriver, direction_userLogin };
+  const direction_pendingCost = () => {
+    nav('/user/pendingCost');
+  };
+
+  const direction_receivedCost = () => {
+    nav('/user/receivedCost');
+  };
+
+  return {
+    direction_root,
+    direction_searchDriver,
+    direction_userLogin,
+    direction_pendingCost,
+    direction_receivedCost,
+  };
 }
