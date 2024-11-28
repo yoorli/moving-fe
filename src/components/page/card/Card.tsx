@@ -3,6 +3,7 @@ import Profile from './Profile';
 
 type ProfileProps = {
   type?: string;
+  size? : string;
   user: {
     label : string;
     called? : boolean;
@@ -15,17 +16,18 @@ type ProfileProps = {
     confirmedCases?: number;
     likes?: number;
     movingDate?: string,
-    cost?: number
+    cost?: number,
+    district?: string[],
   };
 };
 
-export default function Card({ type, user }: ProfileProps) {
+export default function Card({ type, size, user }: ProfileProps) {
   return (
     <div className={styles.card}>
       {user.label}
       {user.called}
       {user.content}
-      <Profile user={user} type={type}/>
+      <Profile user={user} type={type} size={size}/>
     </div>
   );
 }
