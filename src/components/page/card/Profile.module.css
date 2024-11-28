@@ -1,0 +1,75 @@
+.profile {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid var(--line-100);
+  border-radius: 6px;
+}
+
+.profileImage {
+  border: 2px solid var(--blue-400);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 70px;
+  height: 65px;
+  object-fit: cover;
+  position: absolute;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black-300);
+}
+
+.likes {
+  min-width: 49px;
+  display: flex;
+  justify-content: end;
+  gap: 2px;
+  color: var(--blue-400);
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.stars {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2px;
+}
+
+.separator {
+  color: var(--line-200);
+  font-weight: 100;
+}
+
+.career {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+}
