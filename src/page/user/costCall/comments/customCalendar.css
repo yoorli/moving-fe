@@ -1,0 +1,40 @@
+/* 배경색 변경 */
+.react-calendar {
+  background-color: #ffffff;
+  border-radius: 32px;
+}
+
+/* 오늘 날짜의 배경색을 빨간색으로 변경 */
+.react-calendar__tile--now {
+  background-color: red;
+  color: white;
+}
+
+/* 선택된 날짜 배경색을 파란색으로 변경 */
+.react-calendar__tile--active {
+  background-color: blue;
+  color: white;
+}
+
+/* 주말 (토요일, 일요일)의 텍스트 색을 빨간색으로 변경 */
+.react-calendar__tile--weekend {
+  color: red;
+}
+
+/* 날짜 클릭 시 테두리 스타일 */
+.react-calendar__tile--hover {
+  border: 2px solid #4caf50;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  text-align: center;
+  font-family: Noto_Sans;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+/*월 화 수 목 금 토 일 밑줄 없애기*/
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+}

@@ -4,6 +4,7 @@ import RendingLayout from './layout/RendingLayout';
 import UserLayout from './layout/UserLayout';
 import DriverLoginPage from './page/driver/login';
 import UserLoginPage from './page/user/login';
+import UserCostCallPage from './page/user/costCall';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'costCall',
-        element: <span>견적 요청</span>,
+        element: <UserCostCallPage />,
       },
       {
         path: 'searchDriver',
