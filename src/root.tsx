@@ -1,9 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Outlet } from 'react-router-dom';
 import DriverLayout from './layout/DriverLayout';
 import RendingLayout from './layout/RendingLayout';
 import UserLayout from './layout/UserLayout';
 import DriverLoginPage from './page/driver/login';
 import UserLoginPage from './page/user/login';
+import UserFavoriteMover from './page/user/favoriteMover';
+import PendingCost from './page/user/pendingCost';
+import ReceivedCost from './page/user/receivedCost';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
@@ -37,8 +40,21 @@ const router = createBrowserRouter([
         element: <span>기사님 찾기</span>,
       },
       {
-        path: 'constHandler',
-        element: <span>내 견적 관리</span>,
+        element: <Outlet />,
+        children: [
+          {
+            path: 'pendingCost',
+            element: <PendingCost />,
+          },
+          {
+            path: 'receivedCost',
+            element: <ReceivedCost />,
+          },
+        ],
+      },
+      {
+        path: 'favoriteMover',
+        element: <UserFavoriteMover />,
       },
       {
         path: 'profile',
