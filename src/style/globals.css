@@ -1,4 +1,3 @@
-/* @import url('./reset.css'); */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 
 :root {
@@ -37,42 +36,37 @@
   --error: #eb3e3e;
 }
 
-.Text-3xl {
-  font-size: 32px;
-  line-height: 42px;
+html {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
 }
 
-.Text-2xl {
-  font-size: 24px;
-  line-height: 32px;
+body {
+  display: flex;
+  flex-direction: column;
+  color: var(--black-400);
 }
 
-.Text-xl {
-  font-size: 20px;
-  line-height: 32px;
+.flexRow {
+  display: flex;
+  justify-content: space-between;
 }
 
-.Text-2lg {
-  font-size: 18px;
-  line-height: 26px;
-}
-
-.Text-lg {
-  font-size: 16px;
-  line-height: 26px;
-}
-
-.Text-md {
-  font-size: 14px;
-  line-height: 24px;
-}
-
-.Text-sm {
-  font-size: 13px;
-  line-height: 22px;
-}
-
-.Text-xs {
-  font-size: 12px;
-  line-height: 20px;
+.flexColumn {
+  display: flex;
+  flex-direction: column;
 }

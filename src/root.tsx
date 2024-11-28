@@ -7,6 +7,9 @@ import UserLoginPage from './page/user/login';
 import UserFavoriteMover from './page/user/favoriteMover';
 import PendingCost from './page/user/pendingCost';
 import ReceivedCost from './page/user/receivedCost';
+import UserSignupPage from './page/user/signup';
+import DriverSignupPage from './page/driver/signup';
+import DriverCallPage from './page/driver/costCall';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'signup',
-        element: <span>회원가입</span>,
+        element: <UserSignupPage />,
       },
       {
         path: 'costCall',
@@ -70,11 +73,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'signup',
-        element: <span>회원가입</span>,
+        element: <DriverSignupPage />,
       },
       {
         path: 'costCall',
-        element: <span>견적 요청</span>,
+        element: <DriverCallPage />,
       },
       {
         path: 'constHandler',
