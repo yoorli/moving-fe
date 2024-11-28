@@ -6,8 +6,8 @@ type ProfileProps = {
   type?: string;
   size?: string;
   user: {
-    name: string;
-    image: string;
+    nickname: string;
+    profileImage: string;
     rating?: number;
     reviews?: number;
     experience?: number;
@@ -15,7 +15,7 @@ type ProfileProps = {
     likes?: number;
     movingDate?: string;
     cost?: number;
-    district?: string[];
+    serviceRegion?: string[];
   };
 };
 
@@ -31,8 +31,8 @@ export default function Profile({ type, size, user }: ProfileProps) {
         }}
       >
         <img
-          src={user.image}
-          alt={`${user.name}'s profile`}
+          src={user.profileImage}
+          alt={`${user.nickname}'s profile`}
           className={styles.avatar}
           style={{
             width: size === 'large' ? '108px' : '70px',
@@ -52,7 +52,7 @@ export default function Profile({ type, size, user }: ProfileProps) {
             fontSize: !imgWidth ? '14px' : size === 'medium' ? '18px' : '24px',
           }}
         >
-          <span>{user.name} 기사님</span>
+          <span>{user.nickname} 기사님</span>
           {user.likes !== undefined && (
             <span className={styles.likes}>
               <img src={fullHeartMedium} alt='fullHeart' /> {user.likes}
@@ -105,7 +105,7 @@ export default function Profile({ type, size, user }: ProfileProps) {
                 <span className={styles.separator}>|</span>
                 <span className={styles.text}>
                   <span style={{ color: 'var(--gray-300)' }}>견적가</span>
-                  {user.cost}건
+                  {user.cost}원
                 </span>
               </>
             )}
