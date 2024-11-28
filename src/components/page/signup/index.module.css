@@ -13,12 +13,12 @@
   justify-content: center;
   align-items: center;
 
-  gap: 72px;
+  gap: 56px;
 
   width: 100%;
   max-width: 640px;
   height: 100%;
-  max-height: 852px;
+  max-height: 1268x;
 
   background-color: white;
 }
@@ -35,7 +35,7 @@ p {
   align-items: center;
 
   width: inherit;
-  height: 432px;
+  height: 966px;
   gap: 56px;
 }
 
