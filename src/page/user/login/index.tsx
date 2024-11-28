@@ -8,10 +8,8 @@ import {
   EmailInputComponent,
   PasswordInputComponent,
 } from '../../../components/page/login/LoginInput';
-import logo from '../../../assets/logo.svg';
-import google from '../../../assets/images/img_login_google_large.svg';
-import kakao from '../../../assets/images/img_login_kakao_large.svg';
-import naver from '../../../assets/images/img_login_naver_large.svg';
+import { UserLoginTop } from '../../../components/page/login/LoginTop';
+import { UserLoginBottom } from '../../../components/page/login/LoginBottom';
 
 type FormLogin = {
   email: string;
@@ -49,22 +47,22 @@ export default function UserLoginPage() {
 
   const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!(validation.email && validation.password)) {
-      return;
-    } else {
+    if (
+      values.email &&
+      values.password &&
+      validation.email &&
+      validation.password
+    ) {
       /**TODO API request */
+    } else {
+      return;
     }
   };
 
   return (
     <div className={style.container}>
       <div className={style.wrapper}>
-        <div className={style.top}>
-          <img src={logo} alt='' />
-          <p>
-            기사님이신가요?<Link to='/driver/login'>기사님 전용 페이지</Link>
-          </p>
-        </div>
+        <UserLoginTop />
         <div className={style.mid}>
           <form className={style.loginForm} onSubmit={loginSubmit}>
             <EmailInputComponent
@@ -93,14 +91,7 @@ export default function UserLoginPage() {
             <Link to='/user/signup'>이메일로 회원가입하기</Link>
           </p>
         </div>
-        <div className={style.bottom}>
-          <span>SNS 계정으로 간편 가입하기</span>
-          <div className={style.snsIcon}>
-            <img src={google} alt='' />
-            <img src={kakao} alt='' />
-            <img src={naver} alt='' />
-          </div>
-        </div>
+        <UserLoginBottom />
       </div>
     </div>
   );

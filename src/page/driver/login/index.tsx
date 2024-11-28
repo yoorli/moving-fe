@@ -9,10 +9,8 @@ import {
   PasswordInputComponent,
 } from '../../../components/page/login/LoginInput';
 import LoginBtn from '../../../components/page/login/LoginBtn';
-import logo from '../../../assets/logo.svg';
-import google from '../../../assets/images/img_login_google_large.svg';
-import kakao from '../../../assets/images/img_login_kakao_large.svg';
-import naver from '../../../assets/images/img_login_naver_large.svg';
+import { DriverLoginTop } from '../../../components/page/login/LoginTop';
+import { DriverLoginBottom } from '../../../components/page/login/LoginBottom';
 
 type FormLogin = {
   email: string;
@@ -60,12 +58,7 @@ export default function DriverLoginPage() {
   return (
     <div className={style.container}>
       <div className={style.wrapper}>
-        <div className={style.top}>
-          <img src={logo} alt='' />
-          <p>
-            일반 유저라면?<Link to='/user/login'>일반 유저 전용 페이지</Link>
-          </p>
-        </div>
+        <DriverLoginTop />
         <div className={style.mid}>
           <form className={style.loginForm} onSubmit={loginSubmit}>
             <EmailInputComponent
@@ -94,14 +87,7 @@ export default function DriverLoginPage() {
             <Link to='/driver/signup'>이메일로 회원가입하기</Link>
           </p>
         </div>
-        <div className={style.bottom}>
-          <span>SNS 계정으로 간편 가입하기</span>
-          <div className={style.snsIcon}>
-            <img src={google} alt='' />
-            <img src={kakao} alt='' />
-            <img src={naver} alt='' />
-          </div>
-        </div>
+        <DriverLoginBottom />
       </div>
     </div>
   );
