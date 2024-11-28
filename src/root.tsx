@@ -6,6 +6,7 @@ import DriverLoginPage from './page/driver/login';
 import UserLoginPage from './page/user/login';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
+import DriverCallPage from './page/driver/costCall';
 
 const router = createBrowserRouter([
   {
@@ -60,7 +61,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'costCall',
-        element: <span>견적 요청</span>,
+        element: <DriverCallPage />,
       },
       {
         path: 'constHandler',
