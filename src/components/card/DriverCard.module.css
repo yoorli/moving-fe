@@ -33,3 +33,36 @@
   font-size: 14px;
   font-weight: 500;
 }
+
+.detailInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.schedule{
+  display: flex;
+  gap: 16px;
+}
+
+.separator {
+  color: var(--line-200);
+  font-weight: 100;
+}
+
+.movingInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--black-300);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.movingLabel {
+  background-color: var(--background-100);
+  color: var(--gray-500);
+  font-size: 18px;
+  font-weight: 400;
+  padding: 4px 6px;
+}

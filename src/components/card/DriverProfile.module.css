@@ -15,11 +15,15 @@
   overflow: hidden;
   display: flex;
   align-items: center;
+  width: 120px;
+  height: 100px;
 }
 
 .avatar {
   object-fit: cover;
   position: absolute;
+  width: 108px;
+  height: 100px;
 }
 
 .info {
@@ -28,13 +32,14 @@
   gap: 12px;
   height: 58px;
   width: 100%;
+  height: 80px;
 }
 
 .name {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 600;
   color: var(--black-300);
   height: 100%;
@@ -51,18 +56,30 @@
 .details {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
+  gap: 16px;
+  font-size: 16px;
   font-weight: 500;
   white-space: nowrap;
   height: 100%;
+  color: var(--black-300);
+}
+
+.detailsPType {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+  height: 100%;
+  color: var(--black-300);
 }
 
 .stars {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2px;
+  gap: 6px;
 }
 
 .separator {
@@ -74,5 +91,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+}
+
+.textPType {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
