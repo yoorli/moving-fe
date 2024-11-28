@@ -1,4 +1,4 @@
-import Card from '../../../components/page/card/Card';
+import Card from '../../../components/card/Card';
 
 import styles from './index.module.css';
 
@@ -45,6 +45,7 @@ export default function DriverCallPage() {
       <div className={styles.card}>
         <Card user={driver1}/>
         <Card user={driver1} size='medium'/>
+        <Card user={driver1} size='large'/>
         <Card user={driver2} type='review'/>
         <Card user={driver2} type='review' size='medium'/>
         <Card user={driver3} type='review' size='large'/>

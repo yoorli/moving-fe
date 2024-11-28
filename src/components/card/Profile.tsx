@@ -1,6 +1,6 @@
 import styles from './Profile.module.css';
-import fullHeartMedium from '../../../assets/icons/ic_full_heart_medium.svg';
-import yellowStarSmall from '../../../assets/icons/ic_yellow_star_small.svg';
+import fullHeartMedium from '../../assets/icons/ic_full_heart_medium.svg';
+import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
 
 type ProfileProps = {
   type?: string;
