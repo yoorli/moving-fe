@@ -130,8 +130,8 @@ export default function UserSignupPage() {
             />
           </form>
           <p>
-            아직 무빙 회원이 아니신가요?
-            <Link to='/user/signup'>이메일로 회원가입하기</Link>
+            이미 무빙 회원이신가요?
+            <Link to='/user/login'>로그인</Link>
           </p>
         </div>
         <UserSignupBottom />

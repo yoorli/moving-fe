@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import style from '../../../components/page/signup/index.module.css';
-import { UserSignupBottom } from '../../../components/page/signup/SignupBottom';
+import { DriverSignupBottom } from '../../../components/page/signup/SignupBottom';
 import { DriverSignupTop } from '../../../components/page/signup/SignupTop';
 import { Link } from 'react-router-dom';
 import {
@@ -130,11 +130,11 @@ export default function DriverSignupPage() {
             />
           </form>
           <p>
-            아직 무빙 회원이 아니신가요?
-            <Link to='/user/signup'>이메일로 회원가입하기</Link>
+            이미 무빙 회원이신가요?
+            <Link to='/driver/login'>로그인</Link>
           </p>
         </div>
-        <UserSignupBottom />
+        <DriverSignupBottom />
       </div>
     </div>
   );
