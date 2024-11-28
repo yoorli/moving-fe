@@ -44,9 +44,12 @@ const router = createBrowserRouter([
         path: 'profile',
         element: <span>profile</span>,
       },
+      {
+        path: 'edit',
+        element: <span>프로필 수정 페이지 입니다.</span>,
+      },
     ],
   },
-
   {
     path: '/driver',
     element: <DriverLayout />,
