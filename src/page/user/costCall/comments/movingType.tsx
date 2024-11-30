@@ -34,7 +34,7 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
       case 'option3':
         return '사무실이사 (사무실, 상업공간)';
       default:
-        return '선택된 종류가 없습니다. 수정해 주세요.';
+        return '수정 버튼을 눌러 이사 종류를 다시 선택해 주세요.';
     }
   };
 

@@ -2,18 +2,71 @@
 .react-calendar {
   background-color: #ffffff;
   border-radius: 32px;
+  border: none;
+  width: 560px;
+  margin-bottom: 24px;
 }
 
-/* 오늘 날짜의 배경색을 빨간색으로 변경 */
+.react-calendar__navigation {
+  height: 60px;
+  margin-top: 24px;
+}
+
+.react-calendar__navigation__label {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.react-calendar__navigation__label__labelText {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.react-calendar__navigation__arrow {
+  font-size: 35px;
+  background-color: transparent !important;
+}
+
+.react-calendar__navigation button:disabled {
+  background-color: transparent !important;
+  color: var(--gray-500) !important;
+  cursor: not-allowed !important;
+  border: none !important;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: none;
+}
+
 .react-calendar__tile--now {
-  background-color: red;
+  background-color: var(--blue-200);
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
   color: white;
+  flex: unset !important;
+  margin: 0 auto !important;
+}
+
+.react-calendar__tile:disabled {
+  background-color: transparent !important;
+  cursor: not-allowed !important;
+}
+
+.react-calendar__navigation button:disabled {
+  background-color: transparent !important;
 }
 
 /* 선택된 날짜 배경색을 파란색으로 변경 */
 .react-calendar__tile--active {
-  background-color: blue;
+  background-color: var(--blue-300);
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
   color: white;
+  flex: unset !important;
+  margin: 0 auto !important;
 }
 
 /* 주말 (토요일, 일요일)의 텍스트 색을 빨간색으로 변경 */
@@ -28,13 +81,22 @@
 
 .react-calendar__month-view__weekdays__weekday {
   text-align: center;
-  font-family: Noto_Sans;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 20px;
   margin-bottom: 25px;
+  color: rgba(128, 128, 128, 1);
 }
 
 /*월 화 수 목 금 토 일 밑줄 없애기*/
 .react-calendar__month-view__weekdays__weekday abbr {
   text-decoration: none;
+}
+
+.react-calendar__month-view__days {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.react-calendar button {
+  margin-bottom: 10px;
 }
