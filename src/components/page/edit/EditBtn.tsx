@@ -6,11 +6,12 @@ export const CancelBtn = () => {
 
 type Props = {
   validation: boolean;
+  text: string;
 };
-export const EditBtn = ({ validation }: Props) => {
+export const TextBtn = ({ validation, text }: Props) => {
   return (
     <div className={`${style.edit} ${style[validation ? 'complete' : '']}`}>
-      수정하기
+      {text}
     </div>
   );
 };

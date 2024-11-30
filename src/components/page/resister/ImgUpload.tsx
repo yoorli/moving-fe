@@ -11,6 +11,8 @@ export default function ImgUpload({
 }) {
   return (
     <label className={style.container} htmlFor='image'>
+      <span className={style.title}>프로필 이미지</span>
+      <img className={style.image} src={preview ?? altImg} alt='' />
       <input
         style={{ width: '0px', height: '0px' }}
         type='file'
@@ -18,8 +20,6 @@ export default function ImgUpload({
         name='image'
         onChange={inputHeandler}
       />
-      <span className={style.title}>프로필 이미지</span>
-      <img className={style.image} src={preview ?? altImg} alt='' />
     </label>
   );
 }

@@ -11,6 +11,7 @@ import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
 import UserEditPage from './page/user/edit';
+import UserResisterPage from './page/user/resister';
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: 'edit',
         element: <UserEditPage />,
+      },
+      {
+        path: 'resister',
+        element: <UserResisterPage />,
       },
     ],
   },

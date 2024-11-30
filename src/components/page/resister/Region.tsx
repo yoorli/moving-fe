@@ -1,14 +1,36 @@
 import React from 'react';
 import style from './Region.module.css';
-import { ServiceRegion } from '../../../page/user/edit/type';
+import { RegionSelectItem } from './SelectItem';
+
+export enum ServiceRegion {
+  SEOUL = '서울',
+  GYEONGGI = '경기',
+  INCHEON = '인천',
+  GANGWON = '강원',
+  CHUNGBUK = '충북',
+  CHUNGNAM = '충남',
+  SEJONG = '세종',
+  DAEJEON = '대전',
+  JEONBUK = '전북',
+  JEONNAM = '전남',
+  GWANGJU = '광주',
+  GYEONGBUK = '경북',
+  GYEONGNAM = '경남',
+  DAEGU = '대구',
+  ULSAN = '울산',
+  BUSAN = '부산',
+  JEJU = '제주',
+}
 
 export default function Region({
   inputHeandler,
+  title,
   region,
   validation,
   nomalMessage,
   errorMessage,
 }: {
+  title: string;
   region: ServiceRegion | undefined;
   validation: boolean;
   errorMessage: string;
@@ -18,7 +40,7 @@ export default function Region({
   return (
     <div className={style.container}>
       <div className={style.textWrapper}>
-        <span className={style.topText}>내가 사는 지역</span>
+        <span className={style.topText}>{title}</span>
         <span
           className={`${style.bottomText} ${style[validation ? '' : 'invalied']}`}
         >
@@ -26,103 +48,103 @@ export default function Region({
         </span>
       </div>
       <div className={style.itemContainer}>
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.SEOUL}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.GYEONGGI}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.INCHEON}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.GANGWON}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.CHUNGBUK}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.CHUNGNAM}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.SEJONG}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.DAEJEON}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.JEONBUK}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.JEONNAM}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.GWANGJU}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.GYEONGBUK}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.GYEONGNAM}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.DAEGU}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.ULSAN}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.BUSAN}
           validation={validation}
         />
-        <RegionItem
+        <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
           name={ServiceRegion.JEJU}
@@ -130,34 +152,5 @@ export default function Region({
         />
       </div>
     </div>
-  );
-}
-
-function RegionItem({
-  inputHeandler,
-  region,
-  validation,
-  name,
-}: {
-  region: ServiceRegion | undefined;
-  validation: boolean;
-  name: ServiceRegion;
-  inputHeandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}) {
-  return (
-    <label
-      className={`${style.itemWrapper} ${style[validation && region === name ? 'selected' : '']}`}
-      htmlFor={name}
-    >
-      <input
-        style={{ position: 'absolute', width: '0px', height: '0px' }}
-        type='checkbox'
-        name={name}
-        id={name}
-        checked={validation}
-        onChange={inputHeandler}
-      />
-      {name}
-    </label>
   );
 }
