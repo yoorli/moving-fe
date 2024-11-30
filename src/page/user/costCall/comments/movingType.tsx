@@ -106,7 +106,7 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
             </div>
           </div>
           {!type ? (
-            <Button text='선택완료' style='solid640pxBlue300' />
+            <Button text='선택완료' style='solid640pxBlue300' disabled />
           ) : (
             <Button
               text='선택완료'
