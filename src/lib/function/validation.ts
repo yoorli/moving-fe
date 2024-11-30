@@ -91,3 +91,30 @@ export const signupValidation = (
   }
   return;
 };
+
+export const editValidation = (
+  name: string,
+  value?: string,
+  oldPassword?: string,
+  newPassword?: string,
+) => {
+  if (name === 'name') {
+    return nameValidation(value);
+  }
+  if (name === 'email') {
+    return emailValidation(value);
+  }
+  if (name === 'phoneNumber') {
+    return phoneValidation(value);
+  }
+  if (name === 'currentPassword') {
+    return passwordEqualValidation(value, oldPassword);
+  }
+  if (name === 'newPassword') {
+    return passwordValidation(value);
+  }
+  if (name === 'confirmNewPassword') {
+    return passwordEqualValidation(value, newPassword);
+  }
+  return;
+};

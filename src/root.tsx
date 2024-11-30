@@ -7,6 +7,7 @@ import UserLoginPage from './page/user/login';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
+import UserEditPage from './page/user/edit';
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'edit',
-        element: <span>프로필 수정 페이지 입니다.</span>,
+        element: <UserEditPage />,
       },
     ],
   },

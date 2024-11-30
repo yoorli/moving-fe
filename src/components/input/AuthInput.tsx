@@ -1,50 +1,65 @@
 import React, { useState } from 'react';
-import style from './LoginInput.module.css';
-import eyeClose from '../../../assets/icons/ic_eye_close.svg';
-import eyeOpen from '../../../assets/icons/ic_eye_open.svg';
+import style from './AuthInput.module.css';
+import eyeClose from '../../assets/icons/ic_eye_close.svg';
+import eyeOpen from '../../assets/icons/ic_eye_open.svg';
 
-type InputType = {
+type NomalInputType = {
+  title: string;
+  placeholder: string;
   value: string;
+  type?: string;
+  name: string;
   inputHeandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validation: boolean;
+  errorMessage: string;
 };
 
-export const EmailInputComponent = ({
+export const NomalInputComponent = ({
+  title,
+  placeholder,
   value,
+  type = 'text',
+  name,
   inputHeandler,
   validation,
-}: InputType) => {
+  errorMessage,
+}: NomalInputType) => {
   return (
     <div className={style.container}>
-      <span className={style.text}>이메일</span>
+      <span className={style.text}>{title}</span>
       <input
         className={`${style.input} ${
           style[value && validation ? 'complete' : '']
         } ${style[value && !validation ? 'invalid' : '']} `}
         value={value ?? ''}
-        placeholder='이메일을 입력해 주세요.'
+        placeholder={placeholder}
         onChange={inputHeandler}
-        type='text'
-        id='email'
-        name='email'
+        type={type}
+        id={name}
+        name={name}
       />
       {validation ? null : (
-        <span className={style.invaild}>이메일 형식이 아닙니다.</span>
+        <span className={style.invaild}>{errorMessage}</span>
       )}
     </div>
   );
 };
 
-export const PasswordInputComponent = ({
+export const InvisibleInputComponent = ({
+  title,
+  placeholder,
   value,
+  type = 'text',
+  name,
   inputHeandler,
   validation,
-}: InputType) => {
+  errorMessage,
+}: NomalInputType) => {
   const [invisible, setInvisible] = useState<boolean>(true);
 
   return (
     <div className={style.container}>
-      <span className={style.text}>비밀번호</span>
+      <span className={style.text}>{title}</span>
       <div className={style.inputContainer}>
         <input
           value={value ?? ''}
@@ -52,10 +67,10 @@ export const PasswordInputComponent = ({
           className={`${style.input} ${
             style[value && validation ? 'complete' : '']
           } ${style[value && !validation ? 'invalid' : '']} `}
-          type={invisible ? 'password' : 'text'}
-          id='password'
-          name='password'
-          placeholder='비밀번호을 입력해 주세요.'
+          type={invisible ? 'password' : type}
+          id={name}
+          name={name}
+          placeholder={placeholder}
         />
         <div className={style.iconPill}>
           {invisible ? (
@@ -78,7 +93,7 @@ export const PasswordInputComponent = ({
         </div>
       </div>
       {validation ? null : (
-        <span className={style.invaild}>비밀번호가 올바르지 않습니다.</span>
+        <span className={style.invaild}>{errorMessage}</span>
       )}
     </div>
   );

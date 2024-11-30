@@ -1,0 +1,22 @@
+/* ------------------------------------  */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 24px;
+
+  width: 160px;
+}
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--black-300);
+}
+.image {
+  width: 160px;
+  height: 160px;
+
+  border-radius: 6px;
+}
