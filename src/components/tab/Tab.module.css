@@ -1,0 +1,50 @@
+.container {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.select {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+
+  width: 100%;
+  max-width: 1400px;
+  height: 88px;
+
+  margin: 0 auto;
+}
+
+.selectedContent {
+  padding: 16px 0;
+
+  font-weight: 600;
+  font-size: 20px;
+
+  color: var(--gray-400);
+
+  cursor: pointer;
+}
+
+.active {
+  border-bottom: 2px solid var(--black-400);
+
+  color: var(--black-400);
+}
+
+.nonSelect {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  max-width: 1400px;
+  height: 96px;
+
+  margin: 0 auto;
+}
+
+.content {
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--black-400);
+}
+
