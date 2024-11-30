@@ -3,8 +3,8 @@ import pageStyles from '../index.module.css';
 import styles from './movingType.module.css';
 import icCheckCircleLarge from '../../../../assets/icons/ic_check_circle_large.svg';
 import icCheckCircleEmptyLarge from '../../../../assets/icons/ic_check_circle_empty_medium.svg';
-// import icCheckCircleM from '../../../../assets/icons/ic_check_circle_medium.svg';
-// import icCheckM from '../../../../assets/icons/ic_check_circle_empty_large.svg';
+// import icCheckCircleMedium from '../../../../assets/icons/ic_check_circle_medium.svg';
+// import icCheckCircleEmptyMedium from '../../../../assets/icons/ic_check_circle_empty_large.svg';
 import Button from '../../../../components/btn/Button';
 
 type ValuePiece = string | null;
