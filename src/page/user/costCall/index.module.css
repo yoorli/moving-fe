@@ -61,7 +61,7 @@
   border-radius: 0px 30px 30px 30px;
 }
 
-.selectOption {
+.option {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -72,4 +72,41 @@
   padding: 20px 40px;
   font-size: 18px;
   font-weight: 500;
+}
+
+.selectOption {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: auto;
+  width: fit-content;
+  background-color: var(--blue-300);
+  border-radius: 30px 0px 30px 30px;
+  padding: 20px 40px;
+  color: var(--gray-50);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.selectEditButton {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: auto;
+  width: fit-content;
+  padding: 6px 8px 0px 0px;
+  position: relative;
+  color: var(--gray-500);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.selectEditButton::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 90%;
+  height: 1px;
+  background-color: var(--gray-500);
 }
