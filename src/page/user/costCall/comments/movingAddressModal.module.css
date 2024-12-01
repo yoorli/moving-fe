@@ -1,4 +1,4 @@
-.layout {
+.modalWrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   z-index: 1000;
 }
 
-.modal {
+.modalContent {
   background: white;
   border-radius: 8px;
   width: 300px;
@@ -24,28 +24,19 @@
   padding: 32px 24px;
 }
 
-.modalTop {
+.modalHeader {
   display: flex;
   justify-content: space-between;
 }
 
-.modalText {
+.modalTitle {
   font-size: 24px;
   font-weight: 600;
 }
 
-.searchBar {
+.searchContainer {
   margin-top: 40px;
   position: relative;
-}
-
-.searchInput {
-  background-color: var(--background-100);
-  width: 100%;
-  border-radius: 16px;
-  border: none;
-  padding: 14px 24px 14px 45px;
-  margin-bottom: 24px;
 }
 
 .searchIcon {
@@ -55,15 +46,24 @@
   transform: translateY(-50%);
 }
 
+.searchInputField {
+  background-color: var(--background-100);
+  width: 100%;
+  border-radius: 16px;
+  border: none;
+  padding: 14px 24px 14px 45px;
+  margin-bottom: 24px;
+}
+
 .searchIconCancel {
   position: absolute;
   top: 22px;
-  right: 14px;
+  right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
 }
 
-.addressLayout {
+.addressItem {
   width: 100%;
   padding: 20px 16px 24px 16px;
   border: 1px solid var(--line-100);
@@ -77,19 +77,19 @@
   background-color: var(--blue-50);
 }
 
-.addressZoneNo {
+.addressPostalCode {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 16px;
 }
 
-.addressRoad {
+.addressDetail {
   margin-bottom: 16px;
   font-size: 14px;
   font-weight: 400;
 }
 
-.addressName {
+.addressLabel {
   padding: 2px 8.5px;
   border-radius: 16px;
   background-color: var(--blue-50);
@@ -98,10 +98,10 @@
   color: var(--blue-300);
 }
 
-.button {
+.submitButton {
   margin-top: 40px;
 }
 
-.emptyListButton {
+.submitEmptyListButton {
   margin-top: 100px;
 }

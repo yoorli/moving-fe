@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import cn from 'classnames';
 import pageStyles from '../index.module.css';
-import styles from './movingType.module.css';
+import styles from './MovingType.module.css';
 import icCheckCircleLarge from '../../../../assets/icons/ic_check_circle_large.svg';
 import icCheckCircleEmptyLarge from '../../../../assets/icons/ic_check_circle_empty_medium.svg';
 // import icCheckCircleMedium from '../../../../assets/icons/ic_check_circle_medium.svg';

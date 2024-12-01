@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import pageStyles from '../index.module.css';
-import style from './comment.module.css';
+import styles from './Comment.module.css';
 import Button from '../../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
-import './customCalendar.css';
+import './MovingDate.css';
 
 interface MovingCommentProps {
   value: string | null | undefined;
@@ -32,17 +32,17 @@ export default function Comments({
         요청 사항이 있으면 적어 주세요
       </div>
       <div className={pageStyles.optionBubble}>
-        <div className={style.layout}>
-          <div className={style.text}>요청사항</div>
+        <div className={styles.formLayout}>
+          <div className={styles.inputLabel}>요청사항</div>
           <textarea
-            className={style.textarea}
+            className={styles.textareaField}
             name='comment'
             placeholder='요청사항을 입력해 주세요'
             value={comment}
             onChange={handleChange}
           />
           <Button
-            className={style.button}
+            className={styles.submitButton}
             text='견적 확정하기'
             style='solid640pxBlue300'
             disabled={!disabled}

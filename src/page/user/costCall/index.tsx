@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import MovingType from './comments/movingType';
-import MovingDate from './comments/movingDate';
-import AddressCompo from './comments/address';
-import Comments from './comments/comment';
+import MovingType from './comments/MovingType';
+import MovingDate from './comments/MovingDate';
+import Navigation from './comments/Navigation';
+import MovingAddress from './comments/MovingAddress';
+import Comments from './comments/Comment';
 import styles from './index.module.css';
 
 export interface FormValues {
@@ -28,6 +29,7 @@ export default function UserCostCallPage() {
     arrival: null,
     comment: null,
   });
+
   const [isSelectOption, setIsSelectOption] = useState<SelectValues>({
     movingType: false,
     movingDate: false,
@@ -57,29 +59,11 @@ export default function UserCostCallPage() {
   );
 
   return (
-    <div className={styles.layout}>
-      <div className={styles.center}>
-        <div className={styles.nav}>
-          <div className={styles.navLayout}>
-            <div className={styles.navText}>견적요청</div>
-            <div className={styles.navBar}>
-              <div
-                className={styles.navBarFull}
-                style={
-                  isSelectOption.arrival && isSelectOption.departure
-                    ? { width: '100%' }
-                    : isSelectOption.movingDate
-                      ? { width: '75%' }
-                      : isSelectOption.movingType
-                        ? { width: '50%' }
-                        : { width: '25%' }
-                }
-              />
-            </div>
-          </div>
-        </div>
+    <div className={styles.container}>
+      <div className={styles.mainContent}>
+        <Navigation isSelectOption={isSelectOption} />
 
-        <div className={styles.body}>
+        <div className={styles.contentSection}>
           <MovingType
             onClick={(type) => handleSelectCompletion('movingType', type)}
             value={values.movingType}
@@ -94,7 +78,7 @@ export default function UserCostCallPage() {
           </div>
           <div>
             {isSelectOption.movingDate && (
-              <AddressCompo
+              <MovingAddress
                 arrival={values.arrival}
                 departure={values.departure}
                 arrivalClick={(arrival) =>

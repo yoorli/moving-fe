@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import AddressModal from './addressModal';
+import AddressModal from './MovingAddressModal';
 import pageStyles from '../index.module.css';
-import style from './address.module.css';
+import styles from './MovingAddress.module.css';
 import Button from '../../../../components/btn/Button';
 // import { createPortal } from 'react-dom';
 // import ModalContent from './modalTest';
@@ -11,17 +11,17 @@ export interface AddressValue {
   departure: string | null;
 }
 
-interface AddressCompoProps extends AddressValue {
+interface MovingAddressProps extends AddressValue {
   arrivalClick: (arrival: string | null) => void;
   departureClick: (departure: string | null) => void;
 }
 
-export default function AddressCompo({
+export default function MovingAddress({
   arrival,
   departure,
   arrivalClick,
   departureClick,
-}: AddressCompoProps) {
+}: MovingAddressProps) {
   const [addressValues, setAddressValues] = useState<AddressValue>({
     arrival: '',
     departure: '',
@@ -64,10 +64,10 @@ export default function AddressCompo({
     isModalOpen: boolean,
     type: 'departure' | 'arrival',
   ) => (
-    <div className={style.layout}>
-      <div className={style.text}>{label}</div>
+    <div className={styles.layout}>
+      <div className={styles.text}>{label}</div>
       <Button
-        className={style.button}
+        className={styles.button}
         text={value || `${label} 선택하기`}
         style='outlined560pxBlue300'
         onClick={onClick}
@@ -126,7 +126,7 @@ export default function AddressCompo({
           >
             <div> 출발지</div>
             <div>{departure}</div>
-            <div className={style.selectOption}> 도착지</div>
+            <div className={styles.selectOption}> 도착지</div>
             <div>{arrival}</div>
           </div>
 

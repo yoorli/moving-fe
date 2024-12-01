@@ -1,15 +1,15 @@
-.layout {
+.formLayout {
   width: 560px;
   padding: 12px 0;
 }
 
-.text {
+.inputLabel {
   font-size: 18px;
   font-weight: 500;
   padding-bottom: 16px;
 }
 
-.textarea {
+.textareaField {
   border: 1px solid var(--line-200);
   border-radius: 16px;
   width: 100%;
@@ -18,6 +18,6 @@
   resize: none;
 }
 
-.button {
+.submitButton {
   margin-top: 40px;
 }

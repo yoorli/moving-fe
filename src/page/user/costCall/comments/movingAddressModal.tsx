@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import { fetchAddress } from '../../../../lib/api/kakao';
-import style from './addressModal.module.css';
+import styles from './MovingAddressModal.module.css';
 import icSearchLarge from '../../../../assets/icons/ic_search_large.svg';
 import icXCircleLarge from '../../../../assets/icons/ic_x_circle_large.svg';
 import icXLarge from '../../../../assets/icons/ic_x_large.svg';
@@ -17,6 +17,7 @@ interface AddressValues {
     address_name: string;
   };
 }
+
 interface ModalProps {
   setValue(name: 'arrival' | 'departure', value: string | null): void;
   type: 'arrival' | 'departure';
@@ -61,25 +62,30 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   const handleInputCancel = () => {
     setAddress('');
     setIndex(null);
+    setAddressList([]);
   };
 
   return (
-    <div className={style.layout}>
-      <div className={style.modal}>
-        <div className={style.modalTop}>
-          <div className={style.modalText}>출발지를 입력해 주세요</div>
+    <div className={styles.modalWrapper}>
+      <div className={styles.modalContent}>
+        <div className={styles.modalHeader}>
+          <div className={styles.modalTitle}>
+            {type === 'departure'
+              ? '출발지를 선택해 주세요'
+              : '도착지를 선택해 주세요'}
+          </div>
           <img src={icXLarge} alt='' width={36} height={36} onClick={onClose} />
         </div>
-        <div className={style.searchBar}>
+        <div className={styles.searchContainer}>
           <img
-            className={style.searchIcon}
+            className={styles.searchIcon}
             src={icSearchLarge}
             alt=''
             width={36}
             height={36}
           />
           <input
-            className={style.searchInput}
+            className={styles.searchInputField}
             name='address'
             placeholder='주소를 입력해 주세요'
             value={address}
@@ -87,7 +93,7 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
             onKeyDown={inputOnKeyDown}
           />
           <img
-            className={style.searchIconCancel}
+            className={styles.searchIconCancel}
             src={icXCircleLarge}
             alt=''
             width={36}
@@ -99,22 +105,22 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
         {addressList?.map((address, i) => (
           <li key={i} onClick={() => handleClick(i, address)}>
             <div
-              className={cn(style.addressLayout, {
-                [style.addressSelectLayout]: index === i,
+              className={cn(styles.addressItem, {
+                [styles.addressSelectLayout]: index === i,
               })}
             >
-              <div className={style.addressZoneNo}>
+              <div className={styles.addressPostalCode}>
                 {address?.road_address?.zone_no}
               </div>
-              <div className={style.addressRoad}>
-                <span className={style.addressName}>도로명</span> &nbsp;
+              <div className={styles.addressDetail}>
+                <span className={styles.addressLabel}>도로명</span> &nbsp;
                 {address?.road_address?.address_name}
                 &nbsp;
                 {address?.road_address?.building_name}
               </div>
-              <div className={style.addressRoad}>
+              <div className={styles.addressDetail}>
                 <span
-                  className={style.addressName}
+                  className={styles.addressLabel}
                   style={{ padding: '2px 14.5px' }}
                 >
                   지번
@@ -127,8 +133,8 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
         ))}
 
         <Button
-          className={cn(style.button, {
-            [style.emptyListButton]: addressList.length === 0,
+          className={cn(styles.submitButton, {
+            [styles.submitEmptyListButton]: addressList.length === 0,
           })}
           text='선택완료'
           style='solid640pxBlue300'
