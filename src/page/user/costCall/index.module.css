@@ -94,7 +94,7 @@
   align-items: flex-start;
   margin-left: auto;
   width: fit-content;
-  padding: 6px 8px 0px 0px;
+  padding: 12px 8px 0px 0px;
   position: relative;
   color: var(--gray-500);
   cursor: pointer;
