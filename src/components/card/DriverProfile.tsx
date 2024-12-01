@@ -31,7 +31,7 @@ type ProfileProps = {
 };
 
 export default function Profile({ type, user }: ProfileProps) {
-  const isPc = useIsPc
+  const isPc = useIsPc();
   return (
     <div
       className={classNames(styles.profile, {
@@ -40,7 +40,7 @@ export default function Profile({ type, user }: ProfileProps) {
     >
       <div
         className={classNames(styles.profileImage, {
-          [styles.profileImagePType]: (type === 'profile' && !isPc),
+          [styles.profileImagePType]: type === 'profile' && !isPc,
         })}
       >
         <img

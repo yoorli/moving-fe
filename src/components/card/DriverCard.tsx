@@ -34,7 +34,7 @@ type ProfileProps = {
 };
 
 export default function Card({ type, user }: ProfileProps) {
-  const isPc = useIsPc;
+  const isPc = useIsPc();
   return (
     <div
       className={classNames(styles.card, {
@@ -43,13 +43,15 @@ export default function Card({ type, user }: ProfileProps) {
     >
       {type === 'profile' ? (
         <div className={styles.topPType}>
-          <div className={styles.profileImage}>
-            <img
-              src={user.profileImage}
-              alt={`${user.nickname}'s profile`}
-              className={styles.avatar}
-            />
-          </div>
+          {!isPc && (
+            <div className={styles.profileImage}>
+              <img
+                src={user.profileImage}
+                alt={`${user.nickname}'s profile`}
+                className={styles.avatar}
+              />
+            </div>
+          )}
           <div className={styles.namePType}>
             {user.nickname}
             <div className={styles.contentPType}>{user.description}</div>
