@@ -13,6 +13,7 @@ import DriverCallPage from './page/driver/costCall';
 import UserEditPage from './page/user/edit';
 import UserResisterPage from './page/user/resister';
 import DriverResisterPage from './page/driver/resister';
+import DriverEditProfilePage from './page/driver/editProfile';
 
 const router = createBrowserRouter([
   {
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: 'resister',
         element: <DriverResisterPage />,
+      },
+      {
+        path: 'editProfile',
+        element: <DriverEditProfilePage />,
       },
       {
         path: 'constHandler',

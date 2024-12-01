@@ -27,8 +27,6 @@ export default function DriverResisterMid({
   return (
     <div className={style.mid}>
       <div className={style.left}>
-        <ImgUpload preview={preview} inputHeandler={inputHeandler} />
-        <hr className={style.rightLine} />
         <NomalInputComponent
           title='이름*'
           placeholder='기사님 성함을 입력해 주세요'
@@ -38,6 +36,8 @@ export default function DriverResisterMid({
           validation={validation.name}
           errorMessage='성함을 입력해 주세요.'
         />
+        <hr className={style.rightLine} />
+        <ImgUpload preview={preview} inputHeandler={inputHeandler} />
         <hr className={style.rightLine} />
         <NomalInputComponent
           title='경력*'
@@ -58,8 +58,7 @@ export default function DriverResisterMid({
           validation={validation.introduce_simple}
           errorMessage='8자리 이상 입력해 주세요.'
         />
-      </div>
-      <div className={style.right}>
+        <hr className={style.rightLine} />
         <NomalTextAreaComponent
           title='상세 설명*'
           placeholder='상세 내용을 입력해 주세요.'
@@ -69,7 +68,8 @@ export default function DriverResisterMid({
           validation={validation.introduce_detail}
           errorMessage='10자리 이상 입력해 주세요.'
         />
-        <hr className={style.rightLine} />
+      </div>
+      <div className={style.right}>
         <ServiceType
           title='이용 서비스'
           values={values}
