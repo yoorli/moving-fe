@@ -3,6 +3,7 @@ import { EditFormValues } from '../../../page/user/edit/type';
 import { TypeSelectItem } from './SelectItem';
 import style from './ServiceType.module.css';
 import { ResisterFormValues } from '../../../page/user/resister/type';
+import { DriverResisterFormValue } from '../../../page/driver/resister/type';
 
 export enum I_ServiceType {
   SMALL = '소형이사',
@@ -19,7 +20,7 @@ export default function ServiceType({
   inputHeandler,
 }: {
   title: string;
-  values: EditFormValues | ResisterFormValues;
+  values: EditFormValues | ResisterFormValues | DriverResisterFormValue;
   validation: boolean;
   errorMessage: string;
   nomalMessage: string;

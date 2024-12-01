@@ -30,7 +30,7 @@ export default function EditMidComponent({
           name='name'
           inputHeandler={inputHeandler}
           validation={validation.name}
-          errorMessage='2글자 이상, 10자 이하로 입력해주세요.'
+          errorMessage='성함을 입력해 주세요'
         />
         <NomalInputComponent
           title='이메일'

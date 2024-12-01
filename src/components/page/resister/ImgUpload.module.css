@@ -8,6 +8,8 @@
   gap: 24px;
 
   width: 160px;
+
+  cursor: pointer;
 }
 .title {
   font-size: 20px;

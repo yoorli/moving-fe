@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Region.module.css';
-import { RegionSelectItem } from './SelectItem';
+import { RegionSelectArrayItem, RegionSelectItem } from './SelectItem';
 
 export enum ServiceRegion {
   SEOUL = '서울',
@@ -147,6 +147,139 @@ export default function Region({
         <RegionSelectItem
           inputHeandler={inputHeandler}
           region={region}
+          name={ServiceRegion.JEJU}
+          validation={validation}
+        />
+      </div>
+    </div>
+  );
+}
+
+export function RegionArray({
+  inputHeandler,
+  title,
+  region,
+  validation,
+  nomalMessage,
+  errorMessage,
+}: {
+  title: string;
+  region: Array<ServiceRegion | null>;
+  validation: boolean;
+  errorMessage: string;
+  nomalMessage: string;
+  inputHeandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
+  return (
+    <div className={style.container}>
+      <div className={style.textWrapper}>
+        <span className={style.topText}>{title}</span>
+        <span
+          className={`${style.bottomText} ${style[validation ? '' : 'invalied']}`}
+        >
+          {validation ? nomalMessage : errorMessage}
+        </span>
+      </div>
+      <div className={style.itemContainer}>
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.SEOUL)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.SEOUL}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.GYEONGGI)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.GYEONGGI}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.INCHEON)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.INCHEON}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.GANGWON)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.GANGWON}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.CHUNGBUK)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.CHUNGBUK}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.CHUNGNAM)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.CHUNGNAM}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.SEJONG)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.SEJONG}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.DAEJEON)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.DAEJEON}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.JEONBUK)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.JEONBUK}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.JEONNAM)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.JEONNAM}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.GWANGJU)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.GWANGJU}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.GYEONGBUK)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.GYEONGBUK}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.GYEONGNAM)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.GYEONGNAM}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.DAEGU)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.DAEGU}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.ULSAN)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.ULSAN}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.BUSAN)}
+          inputHeandler={inputHeandler}
+          name={ServiceRegion.BUSAN}
+          validation={validation}
+        />
+        <RegionSelectArrayItem
+          include={region.includes(ServiceRegion.JEJU)}
+          inputHeandler={inputHeandler}
           name={ServiceRegion.JEJU}
           validation={validation}
         />
