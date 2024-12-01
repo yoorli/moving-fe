@@ -1,17 +1,15 @@
-.container0 {
+.container {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+  padding: 50px;
 }
 
-.container {
-  width: 955px;
-}
+/* 743px ~ 375px */
+/* @media (max-width: 743px) {
+} */
 
-.container1 {
-  width: 688px;
-}
-
-.container2 {
-  width: 1400px;
-}
+/* 1119px ~ 744px */
+/* @media (max-width: 1199px) and (min-width: 744px) {
+} */

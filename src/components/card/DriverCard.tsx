@@ -1,13 +1,14 @@
-// import { useMediaQuery } from 'react-responsive';
 import classNames from 'classnames';
+
+import { useIsPc } from '../../lib/function/useMediaQuery';
 
 import DriverProfile from './DriverProfile';
 import Button from '../btn/Button';
 
 import styles from './DriverCard.module.css';
 
-import writing from '../../assets/icons/ic_writing_medium.svg'
-import writingGray from '../../assets/icons/ic_writing_gray.svg'
+import writing from '../../assets/icons/ic_writing_medium.svg';
+import writingGray from '../../assets/icons/ic_writing_gray.svg';
 
 type ProfileProps = {
   type?: string;
@@ -33,12 +34,22 @@ type ProfileProps = {
 };
 
 export default function Card({ type, user }: ProfileProps) {
-  // const isPc = useMediaQuery({ query: '(min-width: 1200px)' });
+  const isPc = useIsPc;
   return (
-    // 기본 - 기사님 찾기
-    <div className={classNames(styles.card, { [styles.cardPType]: type === 'profile' })}>
+    <div
+      className={classNames(styles.card, {
+        [styles.cardPType]: type === 'profile',
+      })}
+    >
       {type === 'profile' ? (
         <div className={styles.topPType}>
+          <div className={styles.profileImage}>
+            <img
+              src={user.profileImage}
+              alt={`${user.nickname}'s profile`}
+              className={styles.avatar}
+            />
+          </div>
           <div className={styles.namePType}>
             {user.nickname}
             <div className={styles.contentPType}>{user.description}</div>
@@ -52,14 +63,14 @@ export default function Card({ type, user }: ProfileProps) {
                 console.log('onClick 성공');
               }}
             />
-              <Button
-                text='내 프로필 수정'
-                src={writing}
-                style='solid280pxBlue300'
-                onClick={() => {
-                  console.log('onClick 성공');
-                }}
-              />
+            <Button
+              text='내 프로필 수정'
+              src={writing}
+              style='solid280pxBlue300'
+              onClick={() => {
+                console.log('onClick 성공');
+              }}
+            />
           </div>
         </div>
       ) : (
@@ -83,11 +94,21 @@ export default function Card({ type, user }: ProfileProps) {
       {type === 'waiting' && (
         <div className={styles.detailInfo}>
           <div className={styles.schedule}>
-            <span className={styles.movingInfo}>
+            <span
+              className={classNames(styles.movingInfo, {
+                [styles.movingInfoNoPc]: !isPc,
+              })}
+            >
               <span className={styles.movingLabel}>이사일</span>{' '}
               {user.movingDate}
             </span>
-            <span className={styles.separator}>|</span>
+            <span
+              className={classNames(styles.separator, {
+                [styles.separatorHidden]: !isPc,
+              })}
+            >
+              |
+            </span>
             <span className={styles.movingInfo}>
               <span className={styles.movingLabel}>출발</span> {user.start}
             </span>
@@ -120,13 +141,13 @@ export default function Card({ type, user }: ProfileProps) {
       )}
       {type === 'review' && (
         <div className={styles.reviewBtn}>
-           <Button
-              text='리뷰 작성하기'
-              style='solid640pxBlue300'
-              onClick={() => {
-                console.log('onClick 성공');
-              }}
-            />
+          <Button
+            text='리뷰 작성하기'
+            style='solid640pxBlue300'
+            onClick={() => {
+              console.log('onClick 성공');
+            }}
+          />
         </div>
       )}
     </div>

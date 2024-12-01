@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 
+import { useIsPc } from '../../lib/function/useMediaQuery';
+
 import styles from './DriverProfile.module.css';
 
 import fullHeartMedium from '../../assets/icons/ic_full_heart_medium.svg';
@@ -29,9 +31,18 @@ type ProfileProps = {
 };
 
 export default function Profile({ type, user }: ProfileProps) {
+  const isPc = useIsPc
   return (
-    <div className={classNames(styles.profile, { [styles.profilePType]: type === 'profile' })}>
-      <div className={styles.profileImage}>
+    <div
+      className={classNames(styles.profile, {
+        [styles.profilePType]: type === 'profile',
+      })}
+    >
+      <div
+        className={classNames(styles.profileImage, {
+          [styles.profileImagePType]: (type === 'profile' && !isPc),
+        })}
+      >
         <img
           src={user.profileImage}
           alt={`${user.nickname}'s profile`}
@@ -64,17 +75,24 @@ export default function Profile({ type, user }: ProfileProps) {
             </div>
             <div className={styles.detailsPType}>
               <span className={styles.textPType}>
-                <span style={{ color: 'var(--gray-500)' }}>제공 서비스</span>
+                <span className={styles.movingLabel}>제공 서비스</span>
                 {user.service?.join(', ')}
               </span>
-              <span className={styles.separator}>|</span>
+              <span
+                className={classNames(styles.separator, {
+                  [styles.separatorHidden]: !isPc,
+                })}
+              >
+                |
+              </span>
               <span className={styles.textPType}>
-                <span style={{ color: 'var(--gray-500)' }}>지역</span>
+                <span className={styles.movingLabel}>지역</span>
                 {user.serviceRegion?.join(', ')}
               </span>
             </div>
           </>
         ) : (
+          // 기본 프로필
           <div className={styles.name}>
             <span>{user.nickname} 기사님</span>
             {user.likes !== undefined && (
@@ -85,7 +103,7 @@ export default function Profile({ type, user }: ProfileProps) {
           </div>
         )}
         {/* 기본 프로필 */}
-        {!type && (
+        {!(type === 'review' || type === 'profile') && (
           <div className={styles.details}>
             {user.rating !== undefined && user.reviews !== undefined && (
               <>

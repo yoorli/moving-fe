@@ -152,39 +152,27 @@ export default function DriverCallPage() {
   };
 
   return (
-    <div className={styles.container0}>
       <div className={styles.container}>
         {/* {users.map((user) => (
           <DriverCard key={user.id} user={user} />
         ))} */}
         *Card-list/기사님 찾기 &lt;Card user=&#123;driver1&#125;&gt;
         <DriverCard user={driver1} />
-      </div>
-      <div className={styles.container1}>
         *Card-list/견적내역 &lt;Card user=&#123;driver2&#125;
-        cType=&apos;cost&apos;&gt;
+        type=&apos;cost&apos;&gt;
         <DriverCard user={driver2} type='cost' />
-      </div>
-      <div className={styles.container1}>
         *Card-list/대기중인내역 &lt;Card user=&#123;driver3&#125;
-        cType=&apos;waiting&apos;&gt;
+        type=&apos;waiting&apos;&gt;
         <DriverCard user={driver3} type='waiting' />
-      </div>
-      <div className={styles.container1}>
         *Card-list/찜한 기사님 &lt;Card user=&#123;driver4&#125;
-        cType=&apos;dibs&apos;&gt;
+        type=&apos;dibs&apos;&gt;
         <DriverCard user={driver4} type='dibs' />
-      </div>
-      <div className={styles.container2}>
         *Card-list/profile &lt;Card user=&#123;driver5&#125;
-        cType=&apos;profile&apos; type=&apos;profile&apos;&gt;
+        type=&apos;profile&apos; type=&apos;profile&apos;&gt;
         <DriverCard user={driver5} type='profile' />
-      </div>
-      <div className={styles.container1}>
         *Card-list/작성 가능한 리뷰 &lt;Card user=&#123;driver6&#125;
         type=&apos;review&apos;&gt;
         <DriverCard user={driver6} type='review' />
       </div>
-    </div>
   );
 }
