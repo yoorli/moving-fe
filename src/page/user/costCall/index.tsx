@@ -13,6 +13,13 @@ export interface FormValues {
   comment?: undefined | string | null;
 }
 
+export interface SelectValues {
+  movingType: boolean;
+  movingDate: boolean;
+  departure: boolean;
+  arrival: boolean;
+}
+
 export default function UserCostCallPage() {
   const [values, setValues] = useState<FormValues>({
     movingType: null,
@@ -20,6 +27,12 @@ export default function UserCostCallPage() {
     departure: null,
     arrival: null,
     comment: null,
+  });
+  const [isSelectOption, setIsSelectOption] = useState<SelectValues>({
+    movingType: false,
+    movingDate: false,
+    departure: false,
+    arrival: false,
   });
 
   const handleSelectCompletion = (
@@ -30,7 +43,18 @@ export default function UserCostCallPage() {
       ...prev,
       [name]: value,
     }));
+    setIsSelectOption((prev: SelectValues) => ({
+      ...prev,
+      [name]: true,
+    }));
   };
+
+  const isButtonEnabled = !!(
+    values.movingType &&
+    values.movingDate &&
+    values.arrival &&
+    values.departure !== null
+  );
 
   return (
     <div className={styles.layout}>
@@ -50,28 +74,37 @@ export default function UserCostCallPage() {
             value={values.movingType}
           />
           <div>
-            <MovingDate
-              onClick={(date) => handleSelectCompletion('movingDate', date)}
-              value={values.movingDate}
-            />
+            {isSelectOption.movingType && (
+              <MovingDate
+                onClick={(date) => handleSelectCompletion('movingDate', date)}
+                value={values.movingDate}
+              />
+            )}
           </div>
           <div>
-            <AddressCompo
-              arrival={values.arrival}
-              departure={values.departure}
-              arrivalClick={(arrival) =>
-                handleSelectCompletion('arrival', arrival)
-              }
-              departureClick={(departure) =>
-                handleSelectCompletion('departure', departure)
-              }
-            />
+            {isSelectOption.movingDate && (
+              <AddressCompo
+                arrival={values.arrival}
+                departure={values.departure}
+                arrivalClick={(arrival) =>
+                  handleSelectCompletion('arrival', arrival)
+                }
+                departureClick={(departure) =>
+                  handleSelectCompletion('departure', departure)
+                }
+              />
+            )}
           </div>
           <div>
-            <Comments
-              value={values.comment}
-              onClick={(comment) => handleSelectCompletion('comment', comment)}
-            />
+            {isSelectOption.arrival && isSelectOption.departure && (
+              <Comments
+                value={values.comment}
+                onClick={(comment) =>
+                  handleSelectCompletion('comment', comment)
+                }
+                disabled={isButtonEnabled}
+              />
+            )}
           </div>
         </div>
       </div>
