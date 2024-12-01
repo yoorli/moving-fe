@@ -25,7 +25,7 @@ interface ModalProps {
 
 export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   const [addressList, setAddressList] = useState<Address[]>([]);
-  const [meta, setMeta] = useState<string[]>([]);
+  // const [meta, setMeta] = useState<string[]>([]);
   const [address, setAddress] = useState('');
   const [index, setIndex] = useState<null | number>(null);
 
@@ -36,9 +36,9 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const fetchData = async () => {
-        const { addressList, meta } = await fetchAddress(address);
+        const { addressList } = await fetchAddress(address);
         setAddressList(addressList);
-        setMeta(meta);
+        // setMeta(meta);
         setIndex(null);
       };
       fetchData();
@@ -62,8 +62,6 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
     setAddress('');
     setIndex(null);
   };
-
-  console.log(meta);
 
   return (
     <div className={style.layout}>
