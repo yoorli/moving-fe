@@ -82,7 +82,7 @@ export default function DriverResisterMid({
         <RegionArray
           title='내가 사는 지역'
           nomalMessage='*견적 요청 시 지역을 설정할 수 있어요.'
-          errorMessage='* 1개만 선택해 주세요'
+          errorMessage='* 1개 이상 선택해 주세요'
           inputHeandler={inputHeandler}
           region={values.region}
           validation={validation.region}
