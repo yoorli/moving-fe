@@ -12,16 +12,8 @@
 
 .selectOption {
   border: 1px solid var(--blue-300);
-  border-radius: 16px;
-  padding: 24px 32px 24px 32px;
-  gap: 8px;
-  margin-bottom: 16px;
-  width: 560px;
-  display: flex;
-  align-items: center;
   box-shadow: inset 4px 4px 10px 0px #c3d9f233;
   background-color: var(--blue-50);
-  cursor: pointer;
 }
 
 .optionText {

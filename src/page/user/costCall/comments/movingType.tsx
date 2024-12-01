@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import cn from 'classnames';
 import pageStyles from '../index.module.css';
 import styles from './movingType.module.css';
 import icCheckCircleLarge from '../../../../assets/icons/ic_check_circle_large.svg';
@@ -48,63 +49,27 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
       </div>
       {!value && (
         <div className={pageStyles.option}>
-          <div
-            className={type === 'option1' ? styles.selectOption : styles.option}
-            onClick={() => handleClick('option1')}
-          >
-            <img
-              className={styles.checkBox}
-              src={
-                type === 'option1'
-                  ? icCheckCircleLarge
-                  : icCheckCircleEmptyLarge
-              }
-              width={36}
-              height={36}
-              alt=''
-            />
-            <div className={styles.optionText}>
-              소형이사 (원룸, 투룸, 20평대 미만)
+          {['option1', 'option2', 'option3'].map((option) => (
+            <div
+              key={option}
+              className={cn(styles.option, {
+                [styles.selectOption]: type === option,
+              })}
+              onClick={() => handleClick(option)}
+            >
+              <img
+                className={styles.checkBox}
+                src={
+                  type === option ? icCheckCircleLarge : icCheckCircleEmptyLarge
+                }
+                width={36}
+                height={36}
+                alt=''
+              />
+              <div className={styles.optionText}>{showText(option)}</div>
             </div>
-          </div>
-          <div
-            className={type === 'option2' ? styles.selectOption : styles.option}
-            onClick={() => handleClick('option2')}
-          >
-            <img
-              className={styles.checkBox}
-              src={
-                type === 'option2'
-                  ? icCheckCircleLarge
-                  : icCheckCircleEmptyLarge
-              }
-              width={36}
-              height={36}
-              alt=''
-            />
-            <div className={styles.optionText}>
-              가정이사 (쓰리룸, 20평대 이상)
-            </div>
-          </div>
-          <div
-            className={type === 'option3' ? styles.selectOption : styles.option}
-            onClick={() => handleClick('option3')}
-          >
-            <img
-              className={styles.checkBox}
-              src={
-                type === 'option3'
-                  ? icCheckCircleLarge
-                  : icCheckCircleEmptyLarge
-              }
-              width={36}
-              height={36}
-              alt=''
-            />
-            <div className={styles.optionText}>
-              사무실이사 (사무실, 상업공간)
-            </div>
-          </div>
+          ))}
+
           <Button
             text='선택완료'
             style='solid640pxBlue300'
