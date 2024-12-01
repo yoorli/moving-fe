@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import pageStyles from '../index.module.css';
 import Button from '../../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
-import './TovingDate.css';
+import './MovingDate.css';
 
 type DateValue = Date | null;
 interface CalendarTestProps {

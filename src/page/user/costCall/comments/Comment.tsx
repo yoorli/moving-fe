@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import pageStyles from '../index.module.css';
-import styles from './Tomment.module.css';
+import styles from './Comment.module.css';
 import Button from '../../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
-import './TovingDate.css';
 
 interface MovingCommentProps {
   value: string | null | undefined;

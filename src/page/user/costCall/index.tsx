@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import MovingType from './comments/TovingType';
-import MovingDate from './comments/TovingDate';
-import Navigation from './comments/Mavigation';
-import MovingAddress from './comments/TovingAddress';
-import Comments from './comments/Tomment';
+import MovingType from './comments/MovingType';
+import MovingDate from './comments/MovingDate';
+import Navigation from './comments/Navigation';
+import MovingAddress from './comments/MovingAddress';
+import Comments from './comments/Comment';
 import styles from './index.module.css';
 
 export interface FormValues {
