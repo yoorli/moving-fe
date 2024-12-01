@@ -68,13 +68,11 @@
   padding: 20px 16px 24px 16px;
   border: 1px solid var(--line-100);
   border-radius: 16px;
+  cursor: pointer;
 }
 
 .addressSelectLayout {
-  width: 100%;
-  padding: 20px 16px 24px 16px;
   border: 1px solid var(--line-200);
-  border-radius: 16px;
   box-shadow: inset 4px 4px 10px 0px #e0e0e033;
   background-color: var(--blue-50);
 }

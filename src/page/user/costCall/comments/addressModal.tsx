@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cn from 'classnames';
 import { fetchAddress } from '../../../../lib/api/kakao';
 import style from './addressModal.module.css';
 import icSearchLarge from '../../../../assets/icons/ic_search_large.svg';
@@ -95,13 +96,13 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
             onClick={() => handleInputCancel()}
           />
         </div>
+
         {addressList?.map((address, i) => (
           <li key={i} onClick={() => handleClick(i, address)}>
             <div
-              className={
-                index === i ? style.addressSelectLayout : style.addressLayout
-              }
-              style={{ cursor: 'pointer' }}
+              className={cn(style.addressLayout, {
+                [style.addressSelectLayout]: index === i,
+              })}
             >
               <div className={style.addressZoneNo}>
                 {address?.road_address?.zone_no}
@@ -118,7 +119,7 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
                   style={{ padding: '2px 14.5px' }}
                 >
                   지번
-                </span>{' '}
+                </span>
                 {address.address?.address_name}&nbsp;
                 {address?.road_address?.building_name}
               </div>
