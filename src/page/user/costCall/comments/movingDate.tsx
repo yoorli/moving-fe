@@ -75,7 +75,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
             formatMonthYear={(locale, date) => format(date, 'yyyy. MM')}
           />
 
-          {!value ? (
+          {!date ? (
             <Button text='선택완료' style='solid640pxBlue300' disabled />
           ) : (
             <Button
