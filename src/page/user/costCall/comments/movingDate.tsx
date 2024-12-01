@@ -75,15 +75,12 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
             formatMonthYear={(locale, date) => format(date, 'yyyy. MM')}
           />
 
-          {!date ? (
-            <Button text='선택완료' style='solid640pxBlue300' disabled />
-          ) : (
-            <Button
-              text='선택완료'
-              style='solid640pxBlue300'
-              onClick={() => handleSelectClick(date)}
-            />
-          )}
+          <Button
+            text='선택완료'
+            style='solid640pxBlue300'
+            disabled={!date}
+            onClick={() => handleSelectClick(date)}
+          />
         </div>
       )}
       {value && (

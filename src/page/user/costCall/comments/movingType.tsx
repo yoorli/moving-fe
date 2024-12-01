@@ -105,15 +105,12 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
               사무실이사 (사무실, 상업공간)
             </div>
           </div>
-          {!type ? (
-            <Button text='선택완료' style='solid640pxBlue300' disabled />
-          ) : (
-            <Button
-              text='선택완료'
-              style='solid640pxBlue300'
-              onClick={() => handleSelectClick(type)}
-            />
-          )}
+          <Button
+            text='선택완료'
+            style='solid640pxBlue300'
+            disabled={!type}
+            onClick={() => handleSelectClick(type)}
+          />
         </div>
       )}
       {value && (
