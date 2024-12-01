@@ -32,8 +32,6 @@ export default function UserCostCallPage() {
     }));
   };
 
-  console.log(values);
-
   return (
     <div className={styles.layout}>
       <div className={styles.center}>
