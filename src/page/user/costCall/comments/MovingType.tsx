@@ -28,11 +28,11 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
 
   const showText = (value: string): string => {
     switch (value) {
-      case 'option1':
+      case 'SMALL':
         return '소형이사 (원룸, 투룸, 20평대 미만)';
-      case 'option2':
+      case 'HOUSE':
         return '가정이사 (쓰리룸, 20평대 이상)';
-      case 'option3':
+      case 'OFFICE':
         return '사무실이사 (사무실, 상업공간)';
       default:
         return '수정 버튼을 눌러 이사 종류를 다시 선택해 주세요.';
@@ -51,7 +51,7 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
       </div>
       {!value && (
         <div className={pageStyles.optionBubble}>
-          {['option1', 'option2', 'option3'].map((option) => (
+          {['SMALL', 'HOUSE', 'OFFICE'].map((option) => (
             <div
               key={option}
               className={cn(styles.option, {
