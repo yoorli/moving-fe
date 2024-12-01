@@ -1,4 +1,4 @@
-import styles from './Navigation.module.css';
+import styles from './Mavigation.module.css';
 
 export interface SelectValues {
   isSelectOption: {
