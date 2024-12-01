@@ -101,6 +101,7 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
               className={
                 index === i ? style.addressSelectLayout : style.addressLayout
               }
+              style={{ cursor: 'pointer' }}
             >
               <div className={style.addressZoneNo}>
                 {address?.road_address?.zone_no}

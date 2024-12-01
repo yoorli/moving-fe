@@ -7,6 +7,7 @@
   width: 560px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .selectOption {
@@ -20,6 +21,7 @@
   align-items: center;
   box-shadow: inset 4px 4px 10px 0px #c3d9f233;
   background-color: var(--blue-50);
+  cursor: pointer;
 }
 
 .optionText {
