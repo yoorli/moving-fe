@@ -70,7 +70,7 @@ export default function DriverCallPage() {
   // const { users } = mockData;
   const driver1 = {
     id: 1,
-    label: '소형이사',
+    label: ['소형이사', '대형이사'],
     called: true,
     description: '고객님의 물품을 운송해 드립니다.',
     profileImage: avatarPinkMedium,
@@ -84,7 +84,7 @@ export default function DriverCallPage() {
 
   const driver2 = {
     id: 2,
-    label: '포장이사',
+    label: ['소형이사', '포장이사'],
     called: true,
     description: '고객님의 물품을 운송해 드립니다.',
     profileImage: avatarBlueMedium,
@@ -99,7 +99,7 @@ export default function DriverCallPage() {
 
   const driver3 = {
     id: 3,
-    label: '대형이사',
+    label: ['대형이사'],
     called: false,
     description: '고객님의 물품을 운송해 드립니다.',
     profileImage: avatarGreenLarge,
@@ -117,7 +117,7 @@ export default function DriverCallPage() {
 
   const driver4 = {
     id: 4,
-    label: '대형이사',
+    label: ['대형이사', '포장이사'],
     called: false,
     profileImage: avatarPurpleLarge,
     nickname: 'test4',
@@ -138,12 +138,12 @@ export default function DriverCallPage() {
     experience: 7,
     confirmedCases: 150,
     service: ['소형이사', '포장이사'],
-    serviceRegion: ['서울', '경기']
+    serviceRegion: ['서울', '경기'],
   };
 
   const driver6 = {
     id: 6,
-    label: '소형이사',
+    label: ['소형이사', '대형이사', '포장이사'],
     called: true,
     profileImage: avatarYellowLarge,
     nickname: 'test6',
@@ -152,25 +152,35 @@ export default function DriverCallPage() {
   };
 
   return (
-    <div>
+    <div className={styles.container0}>
       <div className={styles.container}>
         {/* {users.map((user) => (
           <DriverCard key={user.id} user={user} />
         ))} */}
         *Card-list/기사님 찾기 &lt;Card user=&#123;driver1&#125;&gt;
         <DriverCard user={driver1} />
+      </div>
+      <div className={styles.container1}>
         *Card-list/견적내역 &lt;Card user=&#123;driver2&#125;
         cType=&apos;cost&apos;&gt;
-        <DriverCard user={driver2} cType='cost' />
+        <DriverCard user={driver2} type='cost' />
+      </div>
+      <div className={styles.container1}>
         *Card-list/대기중인내역 &lt;Card user=&#123;driver3&#125;
         cType=&apos;waiting&apos;&gt;
-        <DriverCard user={driver3} cType='waiting' />
+        <DriverCard user={driver3} type='waiting' />
+      </div>
+      <div className={styles.container1}>
         *Card-list/찜한 기사님 &lt;Card user=&#123;driver4&#125;
         cType=&apos;dibs&apos;&gt;
-        <DriverCard user={driver4} cType='dibs' />
+        <DriverCard user={driver4} type='dibs' />
+      </div>
+      <div className={styles.container2}>
         *Card-list/profile &lt;Card user=&#123;driver5&#125;
         cType=&apos;profile&apos; type=&apos;profile&apos;&gt;
-        <DriverCard user={driver5} cType='profile' type='profile'/>
+        <DriverCard user={driver5} type='profile' />
+      </div>
+      <div className={styles.container1}>
         *Card-list/작성 가능한 리뷰 &lt;Card user=&#123;driver6&#125;
         type=&apos;review&apos;&gt;
         <DriverCard user={driver6} type='review' />

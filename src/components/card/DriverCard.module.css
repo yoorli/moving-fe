@@ -9,6 +9,37 @@
   gap: 14px;
 }
 
+.cardPType {
+  background-color: var(--background-200);
+}
+
+.topPType {
+  display: flex;
+  justify-content: space-between;
+}
+
+.namePType {
+  color: var(--black-300);
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.contentPType {
+  color: var(--gray-400);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.buttonBoxPType {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
 .label {
   min-height: 26px;
   max-height: 34px;
@@ -65,4 +96,13 @@
   font-size: 18px;
   font-weight: 400;
   padding: 4px 6px;
+}
+
+.costBtn {
+  display: flex;
+  gap: 11px;
+}
+
+.reviewBtn {
+  
 }

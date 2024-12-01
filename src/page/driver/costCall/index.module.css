@@ -1,6 +1,17 @@
-.container {
-  width: 688px;
+.container0 {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+}
+
+.container {
+  width: 955px;
+}
+
+.container1 {
+  width: 688px;
+}
+
+.container2 {
+  width: 1400px;
 }

@@ -1,4 +1,7 @@
+import classNames from 'classnames';
+
 import styles from './DriverProfile.module.css';
+
 import fullHeartMedium from '../../assets/icons/ic_full_heart_medium.svg';
 import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
 
@@ -6,7 +9,7 @@ type ProfileProps = {
   type?: string;
   size?: string;
   user: {
-    label?: string;
+    label?: string[];
     called?: boolean;
     description?: string;
     profileImage: string;
@@ -27,7 +30,7 @@ type ProfileProps = {
 
 export default function Profile({ type, user }: ProfileProps) {
   return (
-    <div className={styles.profile}>
+    <div className={classNames(styles.profile, { [styles.profilePType]: type === 'profile' })}>
       <div className={styles.profileImage}>
         <img
           src={user.profileImage}

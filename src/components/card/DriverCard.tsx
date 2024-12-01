@@ -1,13 +1,19 @@
+// import { useMediaQuery } from 'react-responsive';
+import classNames from 'classnames';
+
 import DriverProfile from './DriverProfile';
+import Button from '../btn/Button';
 
 import styles from './DriverCard.module.css';
 
+import writing from '../../assets/icons/ic_writing_medium.svg'
+import writingGray from '../../assets/icons/ic_writing_gray.svg'
+
 type ProfileProps = {
-  cType?: string;
   type?: string;
   size?: string;
   user: {
-    label?: string;
+    label?: string[];
     called?: boolean;
     profileImage: string;
     nickname: string;
@@ -26,35 +32,55 @@ type ProfileProps = {
   };
 };
 
-export default function Card({ cType, type, user }: ProfileProps) {
+export default function Card({ type, user }: ProfileProps) {
   // const isPc = useMediaQuery({ query: '(min-width: 1200px)' });
   return (
     // 기본 - 기사님 찾기
-    <div className={styles.card}>
-      {cType === 'profile' ? (
-        <>
-          {user.nickname}
-          <span className={styles.content}>{user.description}</span>
-        </>
+    <div className={classNames(styles.card, { [styles.cardPType]: type === 'profile' })}>
+      {type === 'profile' ? (
+        <div className={styles.topPType}>
+          <div className={styles.namePType}>
+            {user.nickname}
+            <div className={styles.contentPType}>{user.description}</div>
+          </div>
+          <div className={styles.buttonBoxPType}>
+            <Button
+              text='기본 정보 수정'
+              src={writingGray}
+              style='solid280pxBackground200'
+              onClick={() => {
+                console.log('onClick 성공');
+              }}
+            />
+              <Button
+                text='내 프로필 수정'
+                src={writing}
+                style='solid280pxBlue300'
+                onClick={() => {
+                  console.log('onClick 성공');
+                }}
+              />
+          </div>
+        </div>
       ) : (
         <div className={styles.label}>
           {user.label}
           {user.called ? ' 지정견적요청' : ''}
         </div>
       )}
-      {(cType === 'cost' || cType === undefined) && (
+      {(type === 'cost' || type === undefined) && (
         <>
           <span className={styles.content}>{user.description}</span>
         </>
       )}
       <DriverProfile user={user} type={type} />
-      {cType === 'cost' && (
+      {type === 'cost' && (
         <div className={styles.cost}>
           <span className={styles.text}>견적 금액</span>
           {user.cost}원
         </div>
       )}
-      {cType === 'waiting' && (
+      {type === 'waiting' && (
         <div className={styles.detailInfo}>
           <div className={styles.schedule}>
             <span className={styles.movingInfo}>
@@ -74,6 +100,33 @@ export default function Card({ cType, type, user }: ProfileProps) {
             <span className={styles.text}>견적 금액</span>
             {user.cost}원
           </div>
+          <div className={styles.costBtn}>
+            <Button
+              text='견적 확정하기'
+              style='solid448pxBlue300'
+              onClick={() => {
+                console.log('onClick 성공');
+              }}
+            />
+            <Button
+              text='상세보기'
+              style='outlined448pxBlue300'
+              onClick={() => {
+                console.log('onClick 성공');
+              }}
+            />
+          </div>
+        </div>
+      )}
+      {type === 'review' && (
+        <div className={styles.reviewBtn}>
+           <Button
+              text='리뷰 작성하기'
+              style='solid640pxBlue300'
+              onClick={() => {
+                console.log('onClick 성공');
+              }}
+            />
         </div>
       )}
     </div>
