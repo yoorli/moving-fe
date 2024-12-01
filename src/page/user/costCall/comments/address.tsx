@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import AddressModal from './addressModal';
+import pageStyles from '../index.module.css';
+import style from './address.module.css';
+import Button from '../../../../components/btn/Button';
+// import { createPortal } from 'react-dom';
+// import ModalContent from './modalTest';
 
 export interface ValuePiece {
   arrival: string | null;
@@ -23,6 +28,7 @@ export default function AddressCompo({
   });
   const [isDepartureModal, setIsDepartureModal] = useState(false);
   const [isArrivalModal, setIsArrivalModal] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const handleClick = () => {
     setIsDepartureModal((prev) => !prev);
@@ -37,40 +43,104 @@ export default function AddressCompo({
       arrivalClick(addressValues.arrival);
       departureClick(addressValues.departure);
     }
+    setIsEdit(true);
+  };
+
+  const handleEditClick = () => {
+    arrivalClick(null);
+    departureClick(null);
+
+    setIsEdit(false);
   };
 
   const handleSetValue = (name: 'arrival' | 'departure', value: string) => {
     setAddressValues((prev) => ({
       ...prev,
-      [name]: value, // name에 해당하는 값만 업데이트
+      [name]: value,
     }));
   };
 
   return (
     <div>
       <div>
-        <div>이사 지역을 선택해 주세요</div>
-        <div>
-          <button onClick={handleClick}>출발지역 선택</button>
-        </div>
-        {isDepartureModal && (
-          <AddressModal setValue={handleSetValue} type='departure' />
-        )}
-        <div>
-          <button onClick={handleClickTwo}>도착지역 선택</button>
-        </div>
-        {isArrivalModal && (
-          <AddressModal setValue={handleSetValue} type='arrival' />
-        )}
-        <button onClick={handleSelectClick}>선택완료</button>
-      </div>
-      {departure && arrival && (
-        <div>
-          <div>{departure}</div>
+        <div className={pageStyles.white}>이사 지역을 선택해 주세요</div>
 
-          <button onClick={() => departureClick(null)}>수정하기</button>
-          <div>{arrival}</div>
-          <button onClick={() => arrivalClick(null)}>수정하기</button>
+        {!isEdit && (
+          <div className={pageStyles.option}>
+            <div className={style.layout}>
+              <div className={style.text}>출발지</div>
+              <Button
+                className={style.btn}
+                text={
+                  addressValues.departure
+                    ? `${addressValues.departure}`
+                    : '출발지역 선택하기'
+                }
+                style='outlined560pxBlue300'
+                onClick={() => {
+                  handleClick();
+                }}
+              />
+            </div>
+            {isDepartureModal && (
+              <AddressModal
+                setValue={handleSetValue}
+                type='departure'
+                onClose={() => {
+                  setIsDepartureModal(false);
+                }}
+              />
+            )}
+
+            <div className={style.layout}>
+              <div className={style.text}>도착지</div>
+              <Button
+                className={style.btn}
+                text={
+                  addressValues.arrival
+                    ? `${addressValues.arrival}`
+                    : '도착지역 선택하기'
+                }
+                style='outlined560pxBlue300'
+                onClick={() => {
+                  handleClickTwo();
+                }}
+              />
+            </div>
+            {isArrivalModal && (
+              <AddressModal
+                setValue={handleSetValue}
+                type='arrival'
+                onClose={() => {
+                  setIsArrivalModal(false);
+                }}
+              />
+            )}
+
+            <Button
+              text='선택완료'
+              style='solid640pxBlue300'
+              onClick={() => handleSelectClick()}
+              disabled={!(addressValues.arrival && addressValues.departure)}
+            />
+          </div>
+        )}
+      </div>
+      {isEdit && (
+        <div>
+          <div className={pageStyles.selectOption} style={{ gap: '10px' }}>
+            <div> 출발지</div>
+            <div>{departure}</div>
+            <div className={style.selectOption}> 도착지</div>
+            <div>{arrival}</div>
+          </div>
+
+          <div
+            className={pageStyles.selectEditButton}
+            onClick={() => handleEditClick()}
+          >
+            수정하기
+          </div>
         </div>
       )}
     </div>
