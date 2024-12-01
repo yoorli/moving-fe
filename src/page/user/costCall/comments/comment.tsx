@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import pageStyles from '../index.module.css';
 import style from './comment.module.css';
 import Button from '../../../../components/btn/Button';
-
 import 'react-calendar/dist/Calendar.css';
 import './customCalendar.css';
 
@@ -29,8 +28,10 @@ export default function Comments({
 
   return (
     <div>
-      <div className={pageStyles.white}>요청 사항이 있으면 적어 주세요</div>
-      <div className={pageStyles.option}>
+      <div className={pageStyles.optionGuideBubble}>
+        요청 사항이 있으면 적어 주세요
+      </div>
+      <div className={pageStyles.optionBubble}>
         <div className={style.layout}>
           <div className={style.text}>요청사항</div>
           <textarea
@@ -41,7 +42,7 @@ export default function Comments({
             onChange={handleChange}
           />
           <Button
-            className={style.btn}
+            className={style.button}
             text='견적 확정하기'
             style='solid640pxBlue300'
             disabled={!disabled}

@@ -7,7 +7,7 @@ import icXCircleLarge from '../../../../assets/icons/ic_x_circle_large.svg';
 import icXLarge from '../../../../assets/icons/ic_x_large.svg';
 import Button from '../../../../components/btn/Button';
 
-interface Address {
+interface AddressValues {
   road_address: {
     zone_no: string;
     address_name: string;
@@ -17,7 +17,6 @@ interface Address {
     address_name: string;
   };
 }
-
 interface ModalProps {
   setValue(name: 'arrival' | 'departure', value: string | null): void;
   type: 'arrival' | 'departure';
@@ -25,16 +24,16 @@ interface ModalProps {
 }
 
 export default function AddressModal({ setValue, type, onClose }: ModalProps) {
-  const [addressList, setAddressList] = useState<Address[]>([]);
+  const [addressList, setAddressList] = useState<AddressValues[]>([]);
   // const [meta, setMeta] = useState<string[]>([]);
   const [address, setAddress] = useState('');
   const [index, setIndex] = useState<null | number>(null);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddress(e.target.value);
   };
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const inputOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const fetchData = async () => {
         const { addressList } = await fetchAddress(address);
@@ -46,12 +45,12 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
     }
   };
 
-  const handleClick = (i: number, selectedAddress: Address) => {
+  const handleClick = (i: number, selectedAddress: AddressValues) => {
     setAddress(selectedAddress.road_address.address_name);
     setIndex(i);
   };
 
-  const handleSelectCompletion = (
+  const handleSelectClick = (
     type: 'departure' | 'arrival',
     address: string,
   ) => {
@@ -84,8 +83,8 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
             name='address'
             placeholder='주소를 입력해 주세요'
             value={address}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
+            onChange={inputChange}
+            onKeyDown={inputOnKeyDown}
           />
           <img
             className={style.searchIconCancel}
@@ -128,12 +127,14 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
         ))}
 
         <Button
-          className={style.btn}
+          className={cn(style.button, {
+            [style.emptyListButton]: addressList.length === 0,
+          })}
           text='선택완료'
           style='solid640pxBlue300'
           disabled={index === null}
           onClick={() =>
-            handleSelectCompletion(
+            handleSelectClick(
               type === 'departure' ? 'departure' : 'arrival',
               address,
             )

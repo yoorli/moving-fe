@@ -1,7 +1,8 @@
 .layout {
   background-color: #f7f7f7;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
 }
 
 .center {
@@ -37,7 +38,7 @@
   background-color: var(--line-200);
 }
 
-.navBarColor {
+.navBarFull {
   height: 8px;
   background-color: var(--blue-200);
   border-radius: 30px;
@@ -50,7 +51,7 @@
   width: 1400px;
 }
 
-.white {
+.optionGuideBubble {
   margin-bottom: 24px;
   background-color: var(--gray-50);
   font-size: 18px;
@@ -60,7 +61,7 @@
   border-radius: 0px 30px 30px 30px;
 }
 
-.option {
+.optionBubble {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -74,7 +75,7 @@
   box-sizing: border-box;
 }
 
-.selectOption {
+.selectOptionBubble {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -88,7 +89,7 @@
   font-weight: 500;
 }
 
-.selectEditButton {
+.editButton {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -102,7 +103,7 @@
   font-weight: 500;
 }
 
-.selectEditButton::after {
+.editButton::after {
   content: '';
   position: absolute;
   bottom: -2px;

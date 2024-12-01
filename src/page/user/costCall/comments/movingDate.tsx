@@ -7,22 +7,16 @@ import Button from '../../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
 import './customCalendar.css';
 
-type ValuePiece = Date | null;
-
+type DateValue = Date | null;
 interface CalendarTestProps {
   onClick: (newDate: string | null) => void;
-
   value: string | null;
 }
 
 export default function CalenderTest({ onClick, value }: CalendarTestProps) {
-  const [date, setDate] = useState<ValuePiece>(null);
+  const [date, setDate] = useState<DateValue>(null);
 
   const today = new Date();
-
-  const handleDateChange = (newDate: ValuePiece) => {
-    setDate(newDate);
-  };
 
   const handleSelectClick = (date: Date | null) => {
     if (date) {
@@ -39,10 +33,10 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
   };
 
   const handleCalendarChange = (
-    newValue: ValuePiece | [ValuePiece, ValuePiece],
+    newValue: DateValue | [DateValue, DateValue],
   ) => {
     if (newValue instanceof Date) {
-      handleDateChange(newValue);
+      setDate(newValue);
     }
   };
 
@@ -59,9 +53,11 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
 
   return (
     <div>
-      <div className={pageStyles.white}>이사 예정일을 선택해 주세요</div>
+      <div className={pageStyles.optionGuideBubble}>
+        이사 예정일을 선택해 주세요
+      </div>
       {!value && (
-        <div className={pageStyles.option}>
+        <div className={pageStyles.optionBubble}>
           <Calendar
             locale='ko'
             onChange={handleCalendarChange}
@@ -85,9 +81,11 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
       )}
       {value && (
         <div>
-          <div className={pageStyles.selectOption}>{dateFormat(value)}</div>
+          <div className={pageStyles.selectOptionBubble}>
+            {dateFormat(value)}
+          </div>
           <button
-            className={pageStyles.selectEditButton}
+            className={pageStyles.editButton}
             onClick={() => onClick(null)}
           >
             수정하기

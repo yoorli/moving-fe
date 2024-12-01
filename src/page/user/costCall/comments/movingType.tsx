@@ -8,10 +8,10 @@ import icCheckCircleEmptyLarge from '../../../../assets/icons/ic_check_circle_em
 // import icCheckCircleEmptyMedium from '../../../../assets/icons/ic_check_circle_empty_large.svg';
 import Button from '../../../../components/btn/Button';
 
-type ValuePiece = string | null;
+type TypeValue = string | null;
 
 interface MovingTypeProps {
-  onClick: (type: ValuePiece) => void;
+  onClick: (type: TypeValue) => void;
   value: string | null;
 }
 
@@ -42,13 +42,15 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
   return (
     <div>
       <div>
-        <div className={pageStyles.white}>
+        <div className={pageStyles.optionGuideBubble}>
           몇 가지 정보만 알려 주시면 최대 5개의 견적을 받을 수 있어요 :)
         </div>
-        <div className={pageStyles.white}>이사 종류를 선택해 주세요</div>
+        <div className={pageStyles.optionGuideBubble}>
+          이사 종류를 선택해 주세요
+        </div>
       </div>
       {!value && (
-        <div className={pageStyles.option}>
+        <div className={pageStyles.optionBubble}>
           {['option1', 'option2', 'option3'].map((option) => (
             <div
               key={option}
@@ -80,11 +82,11 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
       )}
       {value && (
         <div>
-          <div className={pageStyles.selectOption}>
+          <div className={pageStyles.selectOptionBubble}>
             <div>{showText(value)}</div>
           </div>
           <button
-            className={pageStyles.selectEditButton}
+            className={pageStyles.editButton}
             onClick={() => onClick(null)}
           >
             수정하기

@@ -6,12 +6,12 @@ import Button from '../../../../components/btn/Button';
 // import { createPortal } from 'react-dom';
 // import ModalContent from './modalTest';
 
-export interface ValuePiece {
+export interface AddressValue {
   arrival: string | null;
   departure: string | null;
 }
 
-interface AddressCompoProps extends ValuePiece {
+interface AddressCompoProps extends AddressValue {
   arrivalClick: (arrival: string | null) => void;
   departureClick: (departure: string | null) => void;
 }
@@ -22,7 +22,7 @@ export default function AddressCompo({
   arrivalClick,
   departureClick,
 }: AddressCompoProps) {
-  const [addressValues, setAddressValues] = useState<ValuePiece>({
+  const [addressValues, setAddressValues] = useState<AddressValue>({
     arrival: '',
     departure: '',
   });
@@ -67,7 +67,7 @@ export default function AddressCompo({
     <div className={style.layout}>
       <div className={style.text}>{label}</div>
       <Button
-        className={style.btn}
+        className={style.button}
         text={value || `${label} 선택하기`}
         style='outlined560pxBlue300'
         onClick={onClick}
@@ -88,10 +88,12 @@ export default function AddressCompo({
 
   return (
     <div>
-      <div className={pageStyles.white}>이사 지역을 선택해 주세요</div>
+      <div className={pageStyles.optionGuideBubble}>
+        이사 지역을 선택해 주세요
+      </div>
 
       {!isEdit && (
-        <div className={pageStyles.option}>
+        <div className={pageStyles.optionBubble}>
           {renderButton(
             '출발지',
             addressValues.departure,
@@ -118,7 +120,10 @@ export default function AddressCompo({
 
       {isEdit && (
         <div>
-          <div className={pageStyles.selectOption} style={{ gap: '10px' }}>
+          <div
+            className={pageStyles.selectOptionBubble}
+            style={{ gap: '10px' }}
+          >
             <div> 출발지</div>
             <div>{departure}</div>
             <div className={style.selectOption}> 도착지</div>
@@ -126,7 +131,7 @@ export default function AddressCompo({
           </div>
 
           <div
-            className={pageStyles.selectEditButton}
+            className={pageStyles.editButton}
             onClick={() => handleEditClick()}
           >
             수정하기

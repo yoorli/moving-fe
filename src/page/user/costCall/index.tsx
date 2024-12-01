@@ -64,7 +64,7 @@ export default function UserCostCallPage() {
             <div className={styles.navText}>견적요청</div>
             <div className={styles.navBar}>
               <div
-                className={styles.navBarColor}
+                className={styles.navBarFull}
                 style={
                   isSelectOption.arrival && isSelectOption.departure
                     ? { width: '100%' }
