@@ -6,7 +6,7 @@
   height: 40px;
 }
 
-.page-button {
+.pageButton {
   font-weight: 500;
   font-size: 14px;
   line-height: 16.71px;
@@ -27,21 +27,21 @@
   color: #ffffff !important;
 }
 
-.page-button:hover {
+.pageButton:hover {
   color: var(--grey-800);
 }
 
-.arrow-button {
+.arrowButton {
   border: none;
   background: none;
   cursor: pointer;
 }
 
-.disabled-arrow {
+.disabledArrow {
   stroke: var(--grey-400) !important;
 }
 
-.enabled-arrow {
+.enabledArrow {
   stroke: var(--grey-800) !important;
 }
 
@@ -50,7 +50,7 @@
     max-width: 288px;
   }
 
-  .page-button {
+  .pageButton {
     font-size: 12px;
     line-height: 14.71px;
   }

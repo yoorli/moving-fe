@@ -34,9 +34,7 @@ const Pagination = ({ currentPage, data, itemsPerPage, onPageChange }: Paginatio
       pages.push(
         <button
           key={i}
-          className={`${styles['page-button']} ${
-            i === currentPage ? styles.active : ''
-          }`}
+          className={`${styles.pageButton} ${i === currentPage ? styles.active : ''}`}
           onClick={() => handlePageClick(i)}
         >
           {i}
@@ -49,7 +47,7 @@ const Pagination = ({ currentPage, data, itemsPerPage, onPageChange }: Paginatio
   return (
     <div className={styles.pagination}>
       <button
-        className={styles['arrow-button']}
+        className={styles.arrowButton}
         onClick={handlePrevClick}
         disabled={currentPage === 1}
         style={{ color: currentPage === 1 ? '#A3A3A3' : '#262626' }}
@@ -61,9 +59,7 @@ const Pagination = ({ currentPage, data, itemsPerPage, onPageChange }: Paginatio
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className={
-            currentPage === 1
-              ? styles['disabled-arrow']
-              : styles['enabled-arrow']
+            currentPage === 1 ? styles.disabledArrow : styles.enabledArrow
           }
         >
           <path
@@ -79,7 +75,7 @@ const Pagination = ({ currentPage, data, itemsPerPage, onPageChange }: Paginatio
       {renderPages()}
 
       <button
-        className={styles['arrow-button']}
+        className={styles.arrowButton}
         onClick={handleNextClick}
         disabled={currentPage === totalPages}
         style={{ color: currentPage === totalPages ? '#A3A3A3' : '#262626' }}
@@ -91,9 +87,7 @@ const Pagination = ({ currentPage, data, itemsPerPage, onPageChange }: Paginatio
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className={
-            currentPage === totalPages
-              ? styles['disabled-arrow']
-              : styles['enabled-arrow']
+            currentPage === totalPages ? styles.disabledArrow : styles.enabledArrow
           }
         >
           <path
