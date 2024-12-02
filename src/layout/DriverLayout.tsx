@@ -4,11 +4,13 @@ import NonLoginNav from '../components/nav/NonLoginNav';
 
 export default function DriverLayout() {
   return (
-    <div className={style.container}>
-      <div className={style.wrapper}>
-        <NonLoginNav />
-        <Outlet />
+    <>
+      <div className={style.container}>
+        <div className={style.wrapper}>
+          <NonLoginNav />
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
