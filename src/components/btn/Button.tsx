@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import styles from './Button.module.css';
+import style from './Button.module.css';
 
 /**
  * 형식: solid|outlined Width color
@@ -35,7 +35,7 @@ type ButtonStyle = keyof typeof BUTTON_STYLES;
 
 interface ButtonProps {
   text: string;
-  style: ButtonStyle;
+  btnStyle: ButtonStyle;
   src?: string;
   srcLocationFront?: boolean;
   alt?: string;
@@ -49,15 +49,15 @@ export default function Button({
   src,
   srcLocationFront,
   alt,
-  style,
+  btnStyle,
   className,
   disabled,
   onClick,
   ...props
 }: ButtonProps) {
   const buttonClass = classNames(className, {
-    [styles[style ?? '']]: style,
-    [styles['disabled']]: disabled,
+    [style[btnStyle ?? '']]: btnStyle,
+    [style['disabled']]: disabled,
   });
   return (
     <button
@@ -67,7 +67,7 @@ export default function Button({
       {...props}
     >
       {src ? (
-        <span className={styles.buttonImg}>
+        <span className={style.buttonImg}>
           {srcLocationFront ? (
             <>
               <img src={src} alt={alt} /> {text}
