@@ -1,0 +1,205 @@
+.profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 18px;
+  border: 1px solid var(--line-100);
+  border-radius: 6px;
+}
+
+.profilePType {
+  background-color: var(--background-100);
+  border: 1px solid var(--line-200);
+}
+
+.profileImage {
+  border: 2px solid var(--blue-400);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  width: 70px;
+  height: 60px;
+}
+
+.profileImagePType {
+  display: none;
+}
+
+.avatar {
+  object-fit: cover;
+  position: absolute;
+  width: 70px;
+  height: 64px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--black-300);
+  height: 100%;
+}
+
+.likes {
+  min-width: 49px;
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  color: var(--blue-400);
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--black-300);
+}
+
+.detailsPType {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+  height: 100%;
+  color: var(--black-300);
+}
+
+.textPType {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.movingLabel {
+  height: 34px;
+  border-radius: 4px;
+  padding: 4px 6px;
+  border: 1px solid var(--line-100);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--gray-500);
+  background-color: var(--background-200);
+  text-align: center;
+  line-height: 24px;
+}
+
+.stars {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.separator {
+  color: var(--line-200);
+  font-weight: 100;
+}
+
+.separatorHidden {
+  display: none;
+}
+
+.text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 743px) {
+  .profile {
+    gap: 14px;
+  }
+
+  .detailsPType {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 744px) {
+  .profile {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .profile {
+    max-width: 907px;
+    padding: 10px;
+  }
+
+  .profileImage {
+    width: 60px;
+    height: 50px;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 64px;
+  }
+
+  .info {
+    gap: 14px;
+  }
+
+  .name {
+    font-size: 14px;
+  }
+
+  .likes {
+    font-size: 13px;
+    font-weight: 500;
+    min-width: 49px;
+    gap: 10px;
+  }
+
+  .details {
+    gap: 8px;
+  }
+
+  .detailsPType {
+    gap: 14px;
+    font-size: 14px;
+  }
+
+  .textPType {
+    gap: 8px;
+  }
+
+  .movingLabel {
+    height: 28px;
+    padding: 2px 6px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .stars {
+    font-size: 13px;
+    gap: 2px;
+  }
+
+  .text {
+    font-size: 13px;
+    gap: 2px;
+  }
+}

@@ -11,6 +11,12 @@ import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
 import UserCostCallPage from './page/user/costCall';
+import UserResisterPage from './page/user/resister';
+import DriverResisterPage from './page/driver/resister';
+import DriverEditProfilePage from './page/driver/editProfile';
+import DriverEditInfoPage from './page/driver/editInfo';
+import UserEditInfoPage from './page/user/editInfo';
+import UserEditProfilePage from './page/user/editProfile';
 
 const router = createBrowserRouter([
   {
@@ -61,9 +67,20 @@ const router = createBrowserRouter([
         path: 'profile',
         element: <span>profile</span>,
       },
+      {
+        path: 'editProfile',
+        element: <UserEditProfilePage />,
+      },
+      {
+        path: 'editInfo',
+        element: <UserEditInfoPage />,
+      },
+      {
+        path: 'resister',
+        element: <UserResisterPage />,
+      },
     ],
   },
-
   {
     path: '/driver',
     element: <DriverLayout />,
@@ -79,6 +96,18 @@ const router = createBrowserRouter([
       {
         path: 'costCall',
         element: <DriverCallPage />,
+      },
+      {
+        path: 'resister',
+        element: <DriverResisterPage />,
+      },
+      {
+        path: 'editProfile',
+        element: <DriverEditProfilePage />,
+      },
+      {
+        path: 'editInfo',
+        element: <DriverEditInfoPage />,
       },
       {
         path: 'constHandler',
