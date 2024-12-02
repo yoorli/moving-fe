@@ -75,7 +75,7 @@ export default function DriverEditInfoPage() {
         <div className={style.bottom}>
           <CancelBtn />
           <TextBtn
-            text='시작하기'
+            text='수정하기'
             validation={
               !!values.name &&
               !!values.email &&

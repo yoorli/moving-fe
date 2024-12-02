@@ -124,7 +124,7 @@ export default function DriverEditProfilePage() {
         <div className={style.bottom}>
           <CancelBtn />
           <TextBtn
-            text='시작하기'
+            text='수정하기'
             validation={
               validation.name &&
               validation.history &&
