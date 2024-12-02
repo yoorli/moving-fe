@@ -15,6 +15,7 @@ import DriverResisterPage from './page/driver/resister';
 import DriverEditProfilePage from './page/driver/editProfile';
 import DriverEditInfoPage from './page/driver/editInfo';
 import UserEditInfoPage from './page/user/editInfo';
+import UserEditProfilePage from './page/user/editProfile';
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <span>profile</span>,
+      },
+      {
+        path: 'editProfile',
+        element: <UserEditProfilePage />,
       },
       {
         path: 'editInfo',
