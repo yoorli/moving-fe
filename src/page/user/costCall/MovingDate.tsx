@@ -72,7 +72,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
 
           <Button
             text='선택완료'
-            style='solid640pxBlue300'
+            btnStyle='solid640pxBlue300'
             disabled={!date}
             onClick={() => handleSelectClick(date)}
           />

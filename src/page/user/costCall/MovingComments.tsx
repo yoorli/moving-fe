@@ -43,7 +43,7 @@ export default function MovingComments({
           <Button
             className={style.submitButton}
             text='견적 확정하기'
-            style='solid640pxBlue300'
+            btnStyle='solid640pxBlue300'
             disabled={!disabled}
             onClick={() => handleSelectClick(comment)}
           />
