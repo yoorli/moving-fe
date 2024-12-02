@@ -34,7 +34,7 @@ export default function NoContents({
         {hasButton && buttonText && (
           <Button
             text={buttonText}
-            style='solid196pxBlue300'
+            btnStyle='solid196pxBlue300'
             onClick={buttonHandler}
           />
         )}
