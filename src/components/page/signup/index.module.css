@@ -1,64 +1,133 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: start;
+/* tablet, moblie 화면 */
+@media (max-width: 1199px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
 
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  box-sizing: border-box;
-  padding-top: 56px;
+    box-sizing: border-box;
+    padding-top: 56px;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    gap: 32px;
+
+    width: 100%;
+    max-width: 327px;
+    height: 100%;
+    max-height: 1268px;
+
+    background-color: white;
+  }
+
+  .mid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: inherit;
+    gap: 16px;
+  }
+
+  .mid > p {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .mid > p > a {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue-200);
+
+    box-sizing: border-box;
+    padding-left: 8px;
+  }
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    gap: 32px;
+  }
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
+/* pc 화면 */
+@media (min-width: 1200px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
 
-  gap: 56px;
+    width: 100%;
+    height: 100%;
 
-  width: 100%;
-  max-width: 640px;
-  height: 100%;
-  max-height: 1268px;
+    box-sizing: border-box;
+    padding-top: 56px;
+  }
 
-  background-color: white;
-}
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
 
-p {
-  font-size: 20px;
-  font-weight: 400;
-}
+    gap: 56px;
 
-.mid {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    max-width: 640px;
+    height: 100%;
+    max-height: 1268px;
 
-  width: inherit;
-  height: 966px;
-  gap: 56px;
-}
+    background-color: white;
+  }
 
-.mid > p > a {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--blue-200);
+  .mid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-  box-sizing: border-box;
-  padding-left: 8px;
-}
+    width: inherit;
+    gap: 56px;
+  }
 
-.loginForm {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  .mid > p {
+    font-size: 20px;
+    font-weight: 400;
+  }
 
-  width: 100%;
-  height: 100%;
+  .mid > p > a {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--blue-200);
 
-  gap: 32px;
+    box-sizing: border-box;
+    padding-left: 8px;
+  }
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    gap: 32px;
+  }
 }
