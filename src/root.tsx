@@ -10,6 +10,7 @@ import ReceivedCost from './page/user/receivedCost';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
+import UserCostCallPage from './page/user/costCall';
 import UserResisterPage from './page/user/resister';
 import DriverResisterPage from './page/driver/resister';
 import DriverEditProfilePage from './page/driver/editProfile';
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'costCall',
-        element: <span>견적 요청</span>,
+        element: <UserCostCallPage />,
       },
       {
         path: 'searchDriver',
