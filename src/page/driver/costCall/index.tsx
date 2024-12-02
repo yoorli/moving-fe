@@ -1,6 +1,6 @@
 import DriverCard from '../../../components/card/DriverCard';
 
-import styles from './index.module.css';
+import style from './index.module.css';
 
 import avatarPinkMedium from '../../../assets/images/img_avatar_pink_medium.svg';
 import avatarBlueMedium from '../../../assets/images/img_avatar_blue_medium.svg';
@@ -152,7 +152,7 @@ export default function DriverCallPage() {
   };
 
   return (
-      <div className={styles.container}>
+      <div className={style.container}>
         {/* {users.map((user) => (
           <DriverCard key={user.id} user={user} />
         ))} */}

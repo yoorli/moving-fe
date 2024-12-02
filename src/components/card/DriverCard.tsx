@@ -5,14 +5,15 @@ import { useIsPc } from '../../lib/function/useMediaQuery';
 import DriverProfile from './DriverProfile';
 import Button from '../btn/Button';
 
-import styles from './DriverCard.module.css';
+import style from './DriverCard.module.css';
 
 import writing from '../../assets/icons/ic_writing_medium.svg';
 import writingGray from '../../assets/icons/ic_writing_gray.svg';
 
+type ProfileType = 'profile' | 'cost' | 'waiting' | 'dibs' | 'review';
+
 type ProfileProps = {
-  type?: string;
-  size?: string;
+  type?: ProfileType;
   user: {
     label?: string[];
     called?: boolean;
@@ -33,30 +34,30 @@ type ProfileProps = {
   };
 };
 
-export default function Card({ type, user }: ProfileProps) {
+export default function DriverCard( { type, user }: ProfileProps) {
   const isPc = useIsPc();
   return (
     <div
-      className={classNames(styles.card, {
-        [styles.cardPType]: type === 'profile',
+      className={classNames(style.card, {
+        [style.cardPType]: type === 'profile',
       })}
     >
       {type === 'profile' ? (
-        <div className={styles.topPType}>
+        <div className={style.topPType}>
           {!isPc && (
-            <div className={styles.profileImage}>
+            <div className={style.profileImage}>
               <img
                 src={user.profileImage}
                 alt={`${user.nickname}'s profile`}
-                className={styles.avatar}
+                className={style.avatar}
               />
             </div>
           )}
-          <div className={styles.namePType}>
+          <div className={style.namePType}>
             {user.nickname}
-            <div className={styles.contentPType}>{user.description}</div>
+            <div className={style.contentPType}>{user.description}</div>
           </div>
-          <div className={styles.buttonBoxPType}>
+          <div className={style.buttonBoxPType}>
             <Button
               text='기본 정보 수정'
               src={writingGray}
@@ -76,54 +77,54 @@ export default function Card({ type, user }: ProfileProps) {
           </div>
         </div>
       ) : (
-        <div className={styles.label}>
+        <div className={style.label}>
           {user.label}
           {user.called ? ' 지정견적요청' : ''}
         </div>
       )}
       {(type === 'cost' || type === undefined) && (
         <>
-          <span className={styles.content}>{user.description}</span>
+          <span className={style.content}>{user.description}</span>
         </>
       )}
       <DriverProfile user={user} type={type} />
       {type === 'cost' && (
-        <div className={styles.cost}>
-          <span className={styles.text}>견적 금액</span>
+        <div className={style.cost}>
+          <span className={style.text}>견적 금액</span>
           {user.cost}원
         </div>
       )}
       {type === 'waiting' && (
-        <div className={styles.detailInfo}>
-          <div className={styles.schedule}>
+        <div className={style.detailInfo}>
+          <div className={style.schedule}>
             <span
-              className={classNames(styles.movingInfo, {
-                [styles.movingInfoNoPc]: !isPc,
+              className={classNames(style.movingInfo, {
+                [style.movingInfoNoPc]: !isPc,
               })}
             >
-              <span className={styles.movingLabel}>이사일</span>{' '}
+              <span className={style.movingLabel}>이사일</span>{' '}
               {user.movingDate}
             </span>
             <span
-              className={classNames(styles.separator, {
-                [styles.separatorHidden]: !isPc,
+              className={classNames(style.separator, {
+                [style.separatorHidden]: !isPc,
               })}
             >
               |
             </span>
-            <span className={styles.movingInfo}>
-              <span className={styles.movingLabel}>출발</span> {user.start}
+            <span className={style.movingInfo}>
+              <span className={style.movingLabel}>출발</span> {user.start}
             </span>
-            <span className={styles.separator}>|</span>
-            <span className={styles.movingInfo}>
-              <span className={styles.movingLabel}>도착</span> {user.end}
+            <span className={style.separator}>|</span>
+            <span className={style.movingInfo}>
+              <span className={style.movingLabel}>도착</span> {user.end}
             </span>
           </div>
-          <div className={styles.cost}>
-            <span className={styles.text}>견적 금액</span>
+          <div className={style.cost}>
+            <span className={style.text}>견적 금액</span>
             {user.cost}원
           </div>
-          <div className={styles.costBtn}>
+          <div className={style.costBtn}>
             <Button
               text='견적 확정하기'
               style='solid448pxBlue300'
@@ -142,7 +143,7 @@ export default function Card({ type, user }: ProfileProps) {
         </div>
       )}
       {type === 'review' && (
-        <div className={styles.reviewBtn}>
+        <div className={style.reviewBtn}>
           <Button
             text='리뷰 작성하기'
             style='solid640pxBlue300'
