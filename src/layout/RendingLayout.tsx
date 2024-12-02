@@ -5,11 +5,9 @@ import NonLoginNav from '../components/nav/NonLoginNav';
 export default function RendingLayout() {
   return (
     <div className={style.container}>
-      <div className={style.page_wrapper}>
+      <div className={style.wrapper}>
         <NonLoginNav />
-        <div className={style.page_container}>
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   );

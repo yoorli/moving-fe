@@ -16,12 +16,13 @@ import DriverEditProfilePage from './page/driver/editProfile';
 import DriverEditInfoPage from './page/driver/editInfo';
 import UserEditInfoPage from './page/user/editInfo';
 import UserEditProfilePage from './page/user/editProfile';
+import ServiceRandingPage from './page/root';
 
 const router = createBrowserRouter([
   {
     element: <RendingLayout />,
     children: [
-      { path: '/', element: <span>렌딩페이지 입니다.</span> },
+      { path: '/', element: <ServiceRandingPage /> },
       { path: '/searchDriver', element: <span>기사님 찾기</span> },
     ],
   },
