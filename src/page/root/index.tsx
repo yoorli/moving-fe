@@ -87,6 +87,6 @@ export default function ServiceRandingPage() {
       </div>
     );
   } else {
-    return <span>사랑해 이시온 언젠가 만나 네게 할 말이 많아.ㅣ</span>;
+    return <span>...</span>;
   }
 }

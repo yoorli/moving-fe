@@ -1,23 +1,23 @@
 import React from 'react';
-import ImgUpload from '../../../../components/page/resister/ImgUpload';
+import ImgUpload from '../../../../components/page/register/ImgUpload';
 import style from './Mid.module.css';
-import { DriverResisterFormValue, DriverResisterValidation } from '../type';
+import { DriverregisterFormValue, DriverregisterValidation } from '../type';
 import {
   NomalInputComponent,
   NomalTextAreaComponent,
 } from '../../../../components/input/AuthInput';
-import ServiceType from '../../../../components/page/resister/ServiceType';
-import { RegionArray } from '../../../../components/page/resister/Region';
+import ServiceType from '../../../../components/page/register/ServiceType';
+import { RegionArray } from '../../../../components/page/register/Region';
 
 type Props = {
-  values: DriverResisterFormValue;
-  validation: DriverResisterValidation;
+  values: DriverregisterFormValue;
+  validation: DriverregisterValidation;
   preview?: string;
   inputHeandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   textAreaHeandler: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
-export default function DriverResisterMid({
+export default function DriverregisterMid({
   preview,
   inputHeandler,
   textAreaHeandler,
