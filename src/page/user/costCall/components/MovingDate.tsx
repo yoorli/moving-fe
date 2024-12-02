@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Calendar } from 'react-calendar';
 import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
 import pageStyle from '../index.module.css';
 import Button from '../../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
@@ -19,15 +20,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
 
   const handleSelectClick = (date: Date | null) => {
     if (date) {
-      const formatDate = new Date(date)
-        .toLocaleDateString('ko-KR', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        })
-        .replace(/\//g, '.');
-
-      onClick(formatDate);
+      onClick(format(date, 'yyyy. MM. dd'));
     }
   };
 
@@ -41,11 +34,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
 
   const dateFormat = (value: string | null): string => {
     if (value) {
-      return new Date(value).toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
+      return format(value, 'yyyy. MM. dd EEEE', { locale: ko });
     }
     return '수정 버튼을 눌러 날짜를 다시 선택해 주세요.';
   };
