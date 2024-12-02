@@ -68,7 +68,7 @@ export const NomalTextAreaComponent = ({
     <div className={style.container_large}>
       <span className={style.text}>{title}</span>
       <textarea
-        className={`${style.input_large} ${
+        className={`${style.textArea} ${
           style[value && validation ? 'complete' : '']
         } ${style[value && !validation ? 'invalid' : '']} `}
         value={value ?? ''}

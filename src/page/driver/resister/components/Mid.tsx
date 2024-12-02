@@ -71,7 +71,7 @@ export default function DriverResisterMid({
         />
         <hr className={style.rightLine} />
         <ServiceType
-          title='이용 서비스'
+          title='제공 서비스'
           values={values}
           inputHeandler={inputHeandler}
           nomalMessage='*견적 요청 시 이용 서비스를 선택할 수 있어요.'
@@ -80,9 +80,9 @@ export default function DriverResisterMid({
         />
         <hr className={style.rightLine} />
         <RegionArray
-          title='내가 사는 지역'
+          title='서비스 가능 지역'
           nomalMessage='*견적 요청 시 지역을 설정할 수 있어요.'
-          errorMessage='* 1개만 선택해 주세요'
+          errorMessage='* 1개 이상 선택해 주세요'
           inputHeandler={inputHeandler}
           region={values.region}
           validation={validation.region}

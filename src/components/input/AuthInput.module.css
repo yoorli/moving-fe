@@ -47,7 +47,7 @@
   font-weight: 400;
   color: black;
 }
-.input_large {
+.textArea {
   width: 100%;
   height: 160px;
 
@@ -69,20 +69,20 @@
 }
 
 .input.complete,
-.input_large.complete {
+.textArea.complete {
   border: 1px solid var(--blue-300);
 }
 .input.invalid,
-.input_large.invalid {
+.textArea.invalid {
   border: 1px solid var(--red-200);
 }
 .input:focus.invalid,
-.input_large:focus.invalid {
+.textArea:focus.invalid {
   border: 1px solid var(--red-200);
 }
 
 .input:focus,
-.input_large:focus {
+.textArea:focus {
   border: 1px solid var(--blue-300);
 }
 
