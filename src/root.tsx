@@ -10,11 +10,11 @@ import ReceivedCost from './page/user/receivedCost';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
-import UserEditPage from './page/user/edit';
 import UserResisterPage from './page/user/resister';
 import DriverResisterPage from './page/driver/resister';
 import DriverEditProfilePage from './page/driver/editProfile';
 import DriverEditInfoPage from './page/driver/editInfo';
+import UserEditInfoPage from './page/user/editInfo';
 
 const router = createBrowserRouter([
   {
@@ -66,8 +66,8 @@ const router = createBrowserRouter([
         element: <span>profile</span>,
       },
       {
-        path: 'edit',
-        element: <UserEditPage />,
+        path: 'editInfo',
+        element: <UserEditInfoPage />,
       },
       {
         path: 'resister',

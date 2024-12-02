@@ -1,8 +1,7 @@
 import React from 'react';
-import { EditFormValues } from '../../../page/user/edit/type';
 import { TypeSelectItem } from './SelectItem';
 import style from './ServiceType.module.css';
-import { ResisterFormValues } from '../../../page/user/resister/type';
+import { UserResisterFormValues } from '../../../page/user/resister/type';
 import { DriverResisterFormValue } from '../../../page/driver/resister/type';
 
 export enum I_ServiceType {
@@ -20,7 +19,7 @@ export default function ServiceType({
   inputHeandler,
 }: {
   title: string;
-  values: EditFormValues | ResisterFormValues | DriverResisterFormValue;
+  values: UserResisterFormValues | DriverResisterFormValue;
   validation: boolean;
   errorMessage: string;
   nomalMessage: string;

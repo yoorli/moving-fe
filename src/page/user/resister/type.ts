@@ -1,7 +1,7 @@
 import { ServiceRegion } from '../../../components/page/resister/Region';
 import { I_ServiceType } from '../../../components/page/resister/ServiceType';
 
-export type ResisterFormValues = {
+export type UserResisterFormValues = {
   image: File | null;
   region: ServiceRegion | undefined;
   small: I_ServiceType | undefined;
@@ -9,7 +9,7 @@ export type ResisterFormValues = {
   office: I_ServiceType | undefined;
 };
 
-export type ResisterFormValidation = {
+export type UserResisterFormValidation = {
   image: boolean;
   region: boolean;
 };

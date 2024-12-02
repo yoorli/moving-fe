@@ -4,7 +4,7 @@ import style from './Mid.module.css';
 import ImgUpload from '../../../../components/page/resister/ImgUpload';
 import Region from '../../../../components/page/resister/Region';
 import ServiceType from '../../../../components/page/resister/ServiceType';
-import { ResisterFormValidation, ResisterFormValues } from '../type';
+import { UserResisterFormValidation, UserResisterFormValues } from '../type';
 
 export default function ResisterMidComponent({
   values,
@@ -12,8 +12,8 @@ export default function ResisterMidComponent({
   inputHeandler,
   preview,
 }: {
-  values: ResisterFormValues;
-  validation: ResisterFormValidation;
+  values: UserResisterFormValues;
+  validation: UserResisterFormValidation;
   inputHeandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   preview?: string;
 }) {

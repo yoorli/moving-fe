@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { TextBtn } from '../../../components/page/edit/EditBtn';
 import style from './index.module.css';
-import { ResisterFormValidation, ResisterFormValues } from './type';
+import { UserResisterFormValidation, UserResisterFormValues } from './type';
 import { ServiceRegion } from '../../../components/page/resister/Region';
 import ResisterMidComponent from './components/Mid';
 
 export default function UserResisterPage() {
   const [preview, setPreview] = useState<string | undefined>();
-  const [values, setValues] = useState<ResisterFormValues>({
+  const [values, setValues] = useState<UserResisterFormValues>({
     image: null,
     region: undefined,
     small: undefined,
@@ -15,7 +15,7 @@ export default function UserResisterPage() {
     office: undefined,
   });
 
-  const [validation, setValidation] = useState<ResisterFormValidation>({
+  const [validation, setValidation] = useState<UserResisterFormValidation>({
     image: true,
     region: false,
   });
