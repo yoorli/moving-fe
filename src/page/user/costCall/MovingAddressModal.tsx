@@ -6,6 +6,7 @@ import icSearchLarge from '../../../assets/icons/ic_search_large.svg';
 import icXCircleLarge from '../../../assets/icons/ic_x_circle_large.svg';
 import icXLarge from '../../../assets/icons/ic_x_large.svg';
 import Button from '../../../components/btn/Button';
+import Pagination from '../../../components/common/Pagination';
 
 interface AddressValues {
   road_address: {
@@ -18,11 +19,11 @@ interface AddressValues {
   };
 }
 
-// interface MetaValues {
-//   is_end: boolean;
-//   pageable_count: number;
-//   total_count: number;
-// }
+interface MetaValues {
+  is_end: boolean;
+  pageable_count: number;
+  total_count: number;
+}
 
 interface ModalProps {
   setValue(name: 'arrival' | 'departure', value: string | null): void;
@@ -32,10 +33,10 @@ interface ModalProps {
 
 export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   const [addressList, setAddressList] = useState<AddressValues[]>([]);
-  // const [meta, setMeta] = useState<MetaValues>();
+  const [meta, setMeta] = useState<MetaValues>();
   const [address, setAddress] = useState('');
   const [index, setIndex] = useState<null | number>(null);
-  // const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddress(e.target.value);
@@ -44,9 +45,9 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   const inputOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const fetchData = async () => {
-        const { addressList } = await fetchAddress(address);
+        const { addressList, meta } = await fetchAddress(address, currentPage);
         setAddressList(addressList);
-        // setMeta(meta);
+        setMeta(meta);
         setIndex(null);
       };
       fetchData();
@@ -71,6 +72,8 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
     setIndex(null);
     setAddressList([]);
   };
+
+  console.log(meta, currentPage);
 
   return (
     <div className={style.modalWrapper}>
@@ -138,6 +141,15 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
             </div>
           </li>
         ))}
+        {(meta?.total_count ?? 0) > 1 && (
+          <div className={style.pagination}>
+            <Pagination
+              onPageChange={setCurrentPage}
+              currentPage={currentPage}
+              itemsTotalPage={meta?.total_count}
+            />
+          </div>
+        )}
 
         <Button
           className={cn(style.submitButton, {

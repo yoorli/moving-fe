@@ -1,14 +1,26 @@
+import React from 'react';
 import styles from './Pagination.module.css';
 
 type PaginationProps = {
   currentPage: number;
-  data: any[]; // 데이터 배열
-  itemsPerPage: number; // 페이지당 아이템 수
+  data?: any[]; // 데이터 배열
+  itemsPerPage?: number; // 페이지당 아이템 수
+  itemsTotalPage?: number; //토탈페이지
   onPageChange: (page: number) => void;
 };
 
-const Pagination = ({ currentPage, data, itemsPerPage, onPageChange }: PaginationProps) => {
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+const Pagination = ({
+  currentPage,
+  data,
+  itemsPerPage,
+  onPageChange,
+  itemsTotalPage,
+}: PaginationProps) => {
+  const totalPages = itemsTotalPage
+    ? itemsTotalPage
+    : data && itemsPerPage
+      ? Math.ceil(data.length / itemsPerPage)
+      : 0;
 
   const handlePageClick = (page: number) => {
     if (page !== currentPage) {
@@ -30,17 +42,26 @@ const Pagination = ({ currentPage, data, itemsPerPage, onPageChange }: Paginatio
 
   const renderPages = () => {
     const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
+    const maxPagesToShow = 5;
+
+    const startPage =
+      Math.floor((currentPage - 1) / maxPagesToShow) * maxPagesToShow + 1;
+    const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
+
+    for (let i = startPage; i <= endPage; i++) {
       pages.push(
         <button
           key={i}
-          className={`${styles.pageButton} ${i === currentPage ? styles.active : ''}`}
+          className={`${styles.pageButton} ${
+            i === currentPage ? styles.active : ''
+          }`}
           onClick={() => handlePageClick(i)}
         >
           {i}
-        </button>
+        </button>,
       );
     }
+
     return pages;
   };
 
@@ -53,21 +74,21 @@ const Pagination = ({ currentPage, data, itemsPerPage, onPageChange }: Paginatio
         style={{ color: currentPage === 1 ? '#A3A3A3' : '#262626' }}
       >
         <svg
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          width='40'
+          height='40'
+          viewBox='0 0 40 40'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
           className={
             currentPage === 1 ? styles.disabledArrow : styles.enabledArrow
           }
         >
           <path
-            d="M23 14L17 20L23 26"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            d='M23 14L17 20L23 26'
+            stroke='currentColor'
+            strokeWidth='1.8'
+            strokeLinecap='round'
+            strokeLinejoin='round'
           />
         </svg>
       </button>
@@ -81,21 +102,23 @@ const Pagination = ({ currentPage, data, itemsPerPage, onPageChange }: Paginatio
         style={{ color: currentPage === totalPages ? '#A3A3A3' : '#262626' }}
       >
         <svg
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          width='40'
+          height='40'
+          viewBox='0 0 40 40'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
           className={
-            currentPage === totalPages ? styles.disabledArrow : styles.enabledArrow
+            currentPage === totalPages
+              ? styles.disabledArrow
+              : styles.enabledArrow
           }
         >
           <path
-            d="M17 14L23 20L17 26"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            d='M17 14L23 20L17 26'
+            stroke='currentColor'
+            strokeWidth='1.8'
+            strokeLinecap='round'
+            strokeLinejoin='round'
           />
         </svg>
       </button>
@@ -104,4 +127,3 @@ const Pagination = ({ currentPage, data, itemsPerPage, onPageChange }: Paginatio
 };
 
 export default Pagination;
-
