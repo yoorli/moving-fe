@@ -81,7 +81,7 @@ export default function UserEditProfilePage() {
         />
         <div className={style.bottom}>
           <TextBtn
-            text='시작하기'
+            text='수정하기'
             validation={
               validation.region &&
               !!values.region &&
