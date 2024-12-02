@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import styles from './Tab.module.css';
+import style from './Tab.module.css';
 
 interface TabProps {
   selectable?: boolean;
@@ -36,8 +36,8 @@ export default function Tab({
 
   const renderTab = (tab: 'first' | 'second', text: string | undefined) => (
     <div
-      className={classNames(styles.selectedContent, {
-        [styles.active]: selectedTab === tab,
+      className={classNames(style.selectedContent, {
+        [style.active]: selectedTab === tab,
       })}
       onClick={() => handleTabClick(tab)}
     >
@@ -46,15 +46,15 @@ export default function Tab({
   );
 
   return (
-    <div className={styles.container}>
+    <div className={style.container}>
       {selectable ? (
-        <div className={styles.select}>
+        <div className={style.select}>
           {renderTab('first', firstText)}
           {renderTab('second', secondText)}
         </div>
       ) : (
-        <div className={styles.nonSelect}>
-          <div className={styles.content}>{firstText}</div>
+        <div className={style.nonSelect}>
+          <div className={style.content}>{firstText}</div>
         </div>
       )}
     </div>

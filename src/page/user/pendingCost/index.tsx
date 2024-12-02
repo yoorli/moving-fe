@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Tab from '../../../components/tab/Tab';
-import styles from './index.module.css';
+import style from './index.module.css';
 import useDirection from '../../../lib/function/direction';
 
 export default function PendingCost() {
@@ -12,7 +12,7 @@ export default function PendingCost() {
 
   const { direction_pendingCost, direction_receivedCost } = useDirection();
   return (
-    <div className={styles.container}>
+    <div className={style.container}>
       <Tab
         selectable={true}
         firstText='대기 중인 견적'

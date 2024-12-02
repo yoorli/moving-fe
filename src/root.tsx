@@ -10,6 +10,7 @@ import ReceivedCost from './page/user/receivedCost';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
+import UserMovingReview from './page/user/movingReview';
 import UserCostCallPage from './page/user/costCall';
 import UserResisterPage from './page/user/resister';
 import DriverResisterPage from './page/driver/resister';
@@ -18,6 +19,7 @@ import DriverEditInfoPage from './page/driver/editInfo';
 import UserEditInfoPage from './page/user/editInfo';
 import UserEditProfilePage from './page/user/editProfile';
 import ServiceRandingPage from './page/root';
+
 
 const router = createBrowserRouter([
   {
@@ -78,8 +80,12 @@ const router = createBrowserRouter([
         element: <UserFavoriteMover />,
       },
       {
-        path: 'profile',
-        element: <span>profile</span>,
+        path: 'editProfile',
+        element: <span>editProfile</span>,
+      },
+      {
+        path: 'movingReview',
+        element: <UserMovingReview />,
       },
       {
         path: 'editProfile',
