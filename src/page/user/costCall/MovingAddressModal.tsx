@@ -66,7 +66,7 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   };
 
   return (
-    <div className={styles.modalWrapper}>
+    <div>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
           <div className={styles.modalTitle}>
