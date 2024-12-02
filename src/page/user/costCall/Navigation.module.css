@@ -1,0 +1,33 @@
+.navigation {
+  width: 100%;
+  background-color: var(--gray-50);
+}
+
+.navWrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.navTitle {
+  margin-bottom: 10px;
+  padding-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.navProgressBar {
+  height: 8px;
+  border: 1px solid var(--line-200);
+  border-radius: 30px;
+  width: 100%;
+  background-color: var(--line-200);
+}
+
+.navProgress {
+  max-height: 8px;
+  background-color: var(--blue-200);
+  border-radius: 30px;
+  height: 100%;
+  z-index: 100;
+}

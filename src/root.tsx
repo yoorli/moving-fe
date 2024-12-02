@@ -11,13 +11,43 @@ import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
 import UserMovingReview from './page/user/movingReview';
+import UserCostCallPage from './page/user/costCall';
+import UserResisterPage from './page/user/resister';
+import DriverResisterPage from './page/driver/resister';
+import DriverEditProfilePage from './page/driver/editProfile';
+import DriverEditInfoPage from './page/driver/editInfo';
+import UserEditInfoPage from './page/user/editInfo';
+import UserEditProfilePage from './page/user/editProfile';
+import ServiceRandingPage from './page/root';
+
 
 const router = createBrowserRouter([
   {
     element: <RendingLayout />,
     children: [
-      { path: '/', element: <span>렌딩페이지 입니다.</span> },
-      { path: '/searchDriver', element: <span>기사님 찾기</span> },
+      { path: '/', element: <ServiceRandingPage /> },
+      {
+        path: '/searchDriver',
+        element: (
+          <span style={{ width: '100%', minHeight: '100vh' }}>기사님 찾기</span>
+        ),
+      },
+      {
+        path: '/user/login',
+        element: <UserLoginPage />,
+      },
+      {
+        path: '/user/signup',
+        element: <UserSignupPage />,
+      },
+      {
+        path: '/driver/login',
+        element: <DriverLoginPage />,
+      },
+      {
+        path: '/driver/signup',
+        element: <DriverSignupPage />,
+      },
     ],
   },
   {
@@ -25,16 +55,8 @@ const router = createBrowserRouter([
     element: <UserLayout />,
     children: [
       {
-        path: 'login',
-        element: <UserLoginPage />,
-      },
-      {
-        path: 'signup',
-        element: <UserSignupPage />,
-      },
-      {
         path: 'costCall',
-        element: <span>견적 요청</span>,
+        element: <UserCostCallPage />,
       },
       {
         path: 'searchDriver',
@@ -65,24 +87,39 @@ const router = createBrowserRouter([
         path: 'movingReview',
         element: <UserMovingReview />,
       },
+      {
+        path: 'editProfile',
+        element: <UserEditProfilePage />,
+      },
+      {
+        path: 'editInfo',
+        element: <UserEditInfoPage />,
+      },
+      {
+        path: 'resister',
+        element: <UserResisterPage />,
+      },
     ],
   },
-
   {
     path: '/driver',
     element: <DriverLayout />,
     children: [
       {
-        path: 'login',
-        element: <DriverLoginPage />,
-      },
-      {
-        path: 'signup',
-        element: <DriverSignupPage />,
-      },
-      {
         path: 'costCall',
         element: <DriverCallPage />,
+      },
+      {
+        path: 'resister',
+        element: <DriverResisterPage />,
+      },
+      {
+        path: 'editProfile',
+        element: <DriverEditProfilePage />,
+      },
+      {
+        path: 'editInfo',
+        element: <DriverEditInfoPage />,
       },
       {
         path: 'constHandler',
