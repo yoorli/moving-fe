@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import pageStyles from './index.module.css';
-import styles from './MovingComments.module.css';
+import pageStyle from './index.module.css';
+import style from './MovingComments.module.css';
 import Button from '../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
 
@@ -27,21 +27,21 @@ export default function MovingComments({
 
   return (
     <div>
-      <div className={pageStyles.optionGuideBubble}>
+      <div className={pageStyle.optionGuideBubble}>
         요청 사항이 있으면 적어 주세요
       </div>
-      <div className={pageStyles.optionBubble}>
-        <div className={styles.formLayout}>
-          <div className={styles.inputLabel}>요청사항</div>
+      <div className={pageStyle.optionBubble}>
+        <div className={style.formLayout}>
+          <div className={style.inputLabel}>요청사항</div>
           <textarea
-            className={styles.textareaField}
+            className={style.textareaField}
             name='comment'
             placeholder='요청사항을 입력해 주세요'
             value={comment}
             onChange={handleChange}
           />
           <Button
-            className={styles.submitButton}
+            className={style.submitButton}
             text='견적 확정하기'
             style='solid640pxBlue300'
             disabled={!disabled}

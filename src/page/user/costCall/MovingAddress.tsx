@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AddressModal from './MovingAddressModal';
-import pageStyles from './index.module.css';
-import styles from './MovingAddress.module.css';
+import pageStyle from './index.module.css';
+import style from './MovingAddress.module.css';
 import Button from '../../../components/btn/Button';
 // import { createPortal } from 'react-dom';
 // import ModalContent from './modalTest';
@@ -64,10 +64,10 @@ export default function MovingAddress({
     isModalOpen: boolean,
     type: 'departure' | 'arrival',
   ) => (
-    <div className={styles.layout}>
-      <div className={styles.text}>{label}</div>
+    <div className={style.layout}>
+      <div className={style.text}>{label}</div>
       <Button
-        className={styles.button}
+        className={style.button}
         text={value || `${label} 선택하기`}
         style='outlined560pxBlue300'
         onClick={onClick}
@@ -88,12 +88,12 @@ export default function MovingAddress({
 
   return (
     <div>
-      <div className={pageStyles.optionGuideBubble}>
+      <div className={pageStyle.optionGuideBubble}>
         이사 지역을 선택해 주세요
       </div>
 
       {!isEdit && (
-        <div className={pageStyles.optionBubble}>
+        <div className={pageStyle.optionBubble}>
           {renderButton(
             '출발지',
             addressValues.departure,
@@ -120,18 +120,15 @@ export default function MovingAddress({
 
       {isEdit && (
         <div>
-          <div
-            className={pageStyles.selectOptionBubble}
-            style={{ gap: '10px' }}
-          >
+          <div className={pageStyle.selectOptionBubble} style={{ gap: '10px' }}>
             <div> 출발지</div>
             <div>{departure}</div>
-            <div className={styles.selectOption}> 도착지</div>
+            <div className={style.selectOption}> 도착지</div>
             <div>{arrival}</div>
           </div>
 
           <div
-            className={pageStyles.editButton}
+            className={pageStyle.editButton}
             onClick={() => handleEditClick()}
           >
             수정하기

@@ -12,6 +12,7 @@ export async function fetchAddress(address: string) {
     const res = await instance.get(`/address.json`, {
       params: {
         query: address,
+        // analyze_type: 'similar',
       },
     });
 

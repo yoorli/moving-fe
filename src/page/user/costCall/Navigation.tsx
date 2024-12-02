@@ -1,4 +1,4 @@
-import styles from './Navigation.module.css';
+import style from './Navigation.module.css';
 
 export interface SelectValues {
   isSelectOption: {
@@ -11,12 +11,12 @@ export interface SelectValues {
 
 export default function Navigation({ isSelectOption }: SelectValues) {
   return (
-    <div className={styles.navigation}>
-      <div className={styles.navWrapper}>
-        <div className={styles.navTitle}>견적요청</div>
-        <div className={styles.navProgressBar}>
+    <div className={style.navigation}>
+      <div className={style.navWrapper}>
+        <div className={style.navTitle}>견적요청</div>
+        <div className={style.navProgressBar}>
           <div
-            className={styles.navProgress}
+            className={style.navProgress}
             style={
               isSelectOption.arrival && isSelectOption.departure
                 ? { width: '100%' }

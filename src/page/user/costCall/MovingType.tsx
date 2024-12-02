@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import cn from 'classnames';
-import pageStyles from './index.module.css';
-import styles from './MovingType.module.css';
+import pageStyle from './index.module.css';
+import style from './MovingType.module.css';
 import icCheckCircleLarge from '../../../assets/icons/ic_check_circle_large.svg';
 import icCheckCircleEmptyLarge from '../../../assets/icons/ic_check_circle_empty_medium.svg';
 // import icCheckCircleMedium from '../../../../assets/icons/ic_check_circle_medium.svg';
@@ -42,25 +42,25 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
   return (
     <div>
       <div>
-        <div className={pageStyles.optionGuideBubble}>
+        <div className={pageStyle.optionGuideBubble}>
           몇 가지 정보만 알려 주시면 최대 5개의 견적을 받을 수 있어요 :)
         </div>
-        <div className={pageStyles.optionGuideBubble}>
+        <div className={pageStyle.optionGuideBubble}>
           이사 종류를 선택해 주세요
         </div>
       </div>
       {!value && (
-        <div className={pageStyles.optionBubble}>
+        <div className={pageStyle.optionBubble}>
           {['SMALL', 'HOUSE', 'OFFICE'].map((option) => (
             <div
               key={option}
-              className={cn(styles.option, {
-                [styles.selectOption]: type === option,
+              className={cn(style.option, {
+                [style.selectOption]: type === option,
               })}
               onClick={() => handleClick(option)}
             >
               <img
-                className={styles.checkBox}
+                className={style.checkBox}
                 src={
                   type === option ? icCheckCircleLarge : icCheckCircleEmptyLarge
                 }
@@ -68,7 +68,7 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
                 height={36}
                 alt=''
               />
-              <div className={styles.optionText}>{showText(option)}</div>
+              <div className={style.optionText}>{showText(option)}</div>
             </div>
           ))}
 
@@ -82,11 +82,11 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
       )}
       {value && (
         <div>
-          <div className={pageStyles.selectOptionBubble}>
+          <div className={pageStyle.selectOptionBubble}>
             <div>{showText(value)}</div>
           </div>
           <button
-            className={pageStyles.editButton}
+            className={pageStyle.editButton}
             onClick={() => onClick(null)}
           >
             수정하기

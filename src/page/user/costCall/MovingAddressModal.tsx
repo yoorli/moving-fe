@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import { fetchAddress } from '../../../lib/api/kakao';
-import styles from './MovingAddressModal.module.css';
+import style from './MovingAddressModal.module.css';
 import icSearchLarge from '../../../assets/icons/ic_search_large.svg';
 import icXCircleLarge from '../../../assets/icons/ic_x_circle_large.svg';
 import icXLarge from '../../../assets/icons/ic_x_large.svg';
@@ -66,26 +66,26 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   };
 
   return (
-    <div>
-      <div className={styles.modalContent}>
-        <div className={styles.modalHeader}>
-          <div className={styles.modalTitle}>
+    <div className={style.modalWrapper}>
+      <div className={style.modalContent}>
+        <div className={style.modalHeader}>
+          <div className={style.modalTitle}>
             {type === 'departure'
               ? '출발지를 선택해 주세요'
               : '도착지를 선택해 주세요'}
           </div>
           <img src={icXLarge} alt='' width={36} height={36} onClick={onClose} />
         </div>
-        <div className={styles.searchContainer}>
+        <div className={style.searchContainer}>
           <img
-            className={styles.searchIcon}
+            className={style.searchIcon}
             src={icSearchLarge}
             alt=''
             width={36}
             height={36}
           />
           <input
-            className={styles.searchInputField}
+            className={style.searchInputField}
             name='address'
             placeholder='주소를 입력해 주세요'
             value={address}
@@ -93,7 +93,7 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
             onKeyDown={inputOnKeyDown}
           />
           <img
-            className={styles.searchIconCancel}
+            className={style.searchIconCancel}
             src={icXCircleLarge}
             alt=''
             width={36}
@@ -105,22 +105,22 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
         {addressList?.map((address, i) => (
           <li key={i} onClick={() => handleClick(i, address)}>
             <div
-              className={cn(styles.addressItem, {
-                [styles.addressSelectLayout]: index === i,
+              className={cn(style.addressItem, {
+                [style.addressSelectLayout]: index === i,
               })}
             >
-              <div className={styles.addressPostalCode}>
+              <div className={style.addressPostalCode}>
                 {address?.road_address?.zone_no}
               </div>
-              <div className={styles.addressDetail}>
-                <span className={styles.addressLabel}>도로명</span> &nbsp;
+              <div className={style.addressDetail}>
+                <span className={style.addressLabel}>도로명</span> &nbsp;
                 {address?.road_address?.address_name}
                 &nbsp;
                 {address?.road_address?.building_name}
               </div>
-              <div className={styles.addressDetail}>
+              <div className={style.addressDetail}>
                 <span
-                  className={styles.addressLabel}
+                  className={style.addressLabel}
                   style={{ padding: '2px 14.5px' }}
                 >
                   지번
@@ -133,8 +133,8 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
         ))}
 
         <Button
-          className={cn(styles.submitButton, {
-            [styles.submitEmptyListButton]: addressList.length === 0,
+          className={cn(style.submitButton, {
+            [style.submitEmptyListButton]: addressList.length === 0,
           })}
           text='선택완료'
           style='solid640pxBlue300'

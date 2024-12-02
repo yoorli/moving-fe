@@ -4,7 +4,7 @@ import MovingDate from './MovingDate';
 import Navigation from './Navigation';
 import MovingAddress from './MovingAddress';
 import MovingComments from './MovingComments';
-import styles from './index.module.css';
+import style from './index.module.css';
 
 export interface FormValues {
   movingType: null | string;
@@ -59,11 +59,11 @@ export default function UserCostCallPage() {
   );
 
   return (
-    <div className={styles.container}>
-      <div className={styles.mainContent}>
+    <div className={style.container}>
+      <div className={style.mainContent}>
         <Navigation isSelectOption={isSelectOption} />
 
-        <div className={styles.contentSection}>
+        <div className={style.contentSection}>
           <MovingType
             onClick={(type) => handleSelectCompletion('movingType', type)}
             value={values.movingType}

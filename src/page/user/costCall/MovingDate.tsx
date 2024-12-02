@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Calendar } from 'react-calendar';
 import { format } from 'date-fns';
-import pageStyles from './index.module.css';
+import pageStyle from './index.module.css';
 import Button from '../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
 import './MovingDate.css';
@@ -52,11 +52,11 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
 
   return (
     <div>
-      <div className={pageStyles.optionGuideBubble}>
+      <div className={pageStyle.optionGuideBubble}>
         이사 예정일을 선택해 주세요
       </div>
       {!value && (
-        <div className={pageStyles.optionBubble}>
+        <div className={pageStyle.optionBubble}>
           <Calendar
             locale='ko'
             onChange={handleCalendarChange}
@@ -80,11 +80,11 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
       )}
       {value && (
         <div>
-          <div className={pageStyles.selectOptionBubble}>
+          <div className={pageStyle.selectOptionBubble}>
             {dateFormat(value)}
           </div>
           <button
-            className={pageStyles.editButton}
+            className={pageStyle.editButton}
             onClick={() => onClick(null)}
           >
             수정하기
