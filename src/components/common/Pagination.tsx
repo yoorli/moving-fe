@@ -16,11 +16,12 @@ const Pagination = ({
   onPageChange,
   itemsTotalCount,
 }: PaginationProps) => {
-  const totalPages = itemsTotalCount
-    ? Math.ceil(itemsTotalCount / 5)
-    : data && itemsPerPage
-      ? Math.ceil(data.length / itemsPerPage)
-      : 0;
+  const totalPages =
+    itemsTotalCount && itemsPerPage
+      ? Math.ceil(itemsTotalCount / itemsPerPage)
+      : data && itemsPerPage
+        ? Math.ceil(data.length / itemsPerPage)
+        : 0;
 
   const handlePageClick = (page: number) => {
     if (page !== currentPage) {

@@ -145,6 +145,7 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
               onPageChange={setCurrentPage}
               currentPage={currentPage}
               itemsTotalCount={meta?.total_count}
+              itemsPerPage={4}
             />
           </div>
         )}

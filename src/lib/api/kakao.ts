@@ -23,7 +23,7 @@ export async function fetchAddress(keyword: string, currentPage: number) {
       params: {
         query: keyword,
         page: currentPage,
-        size: 5,
+        size: 4,
         analyze_type: 'exact',
       },
     });
