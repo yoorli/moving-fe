@@ -3,10 +3,14 @@ import cn from 'classnames';
 import { useMovingAddressList } from '../../../../lib/api/kakao';
 import style from './MovingAddressModal.module.css';
 import icSearchLarge from '../../../../assets/icons/ic_search_large.svg';
+import icSearchMedium from '../../../../assets/icons/ic_search_medium.svg';
 import icXCircleLarge from '../../../../assets/icons/ic_x_circle_large.svg';
+import icXCircleMedium from '../../../../assets/icons/ic_x_circle_medium.svg';
 import icXLarge from '../../../../assets/icons/ic_x_large.svg';
+import icXLargeMedium from '../../../../assets/icons/ic_x_medium.svg';
 import Button from '../../../../components/btn/Button';
 import Pagination from '../../../../components/common/Pagination';
+import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 export interface AddressValues {
   road_address: {
@@ -32,6 +36,7 @@ interface ModalProps {
 }
 
 export default function AddressModal({ setValue, type, onClose }: ModalProps) {
+  const { pc } = useMedia();
   const [address, setAddress] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [index, setIndex] = useState<null | number>(null);
@@ -42,9 +47,12 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
     setInputValue(e.target.value);
   };
 
+  const size = pc ? 5 : 3;
+
   const { addressList, meta, isLoading, error } = useMovingAddressList(
     address,
     currentPage,
+    size,
   );
 
   const inputOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -82,15 +90,18 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
               ? '출발지를 선택해 주세요'
               : '도착지를 선택해 주세요'}
           </div>
-          <img src={icXLarge} alt='' width={36} height={36} onClick={onClose} />
+          <img
+            className={style.modalTitleCancel}
+            src={pc ? icXLarge : icXLargeMedium}
+            alt=''
+            onClick={onClose}
+          />
         </div>
         <div className={style.searchContainer}>
           <img
             className={style.searchIcon}
-            src={icSearchLarge}
+            src={pc ? icSearchLarge : icSearchMedium}
             alt=''
-            width={36}
-            height={36}
           />
           <input
             className={style.searchInputField}
@@ -102,10 +113,8 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
           />
           <img
             className={style.searchIconCancel}
-            src={icXCircleLarge}
+            src={pc ? icXCircleLarge : icXCircleMedium}
             alt=''
-            width={36}
-            height={36}
             onClick={() => handleInputCancel()}
           />
         </div>
@@ -120,21 +129,29 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
               <div className={style.addressPostalCode}>
                 {address?.road_address?.zone_no}
               </div>
+
               <div className={style.addressDetail}>
-                <span className={style.addressLabel}>도로명</span> &nbsp;
-                {address?.road_address?.address_name}
-                &nbsp;
-                {address?.road_address?.building_name}
+                <div className={style.addressLabel}>도로명</div>
+                <div className={style.addressItemLabel}>
+                  {address?.road_address?.address_name}
+                  &nbsp;
+                  {address?.road_address?.building_name}
+                </div>
               </div>
+
               <div className={style.addressDetail}>
-                <span
+                <div
                   className={style.addressLabel}
-                  style={{ padding: '2px 14.5px' }}
+                  style={
+                    pc ? { padding: '6px 14.5px' } : { padding: '6px 13.5px' }
+                  }
                 >
                   지번
-                </span>
-                {address.address?.address_name}&nbsp;
-                {address?.road_address?.building_name}
+                </div>
+                <div className={style.addressItemLabel}>
+                  {address.address?.address_name}&nbsp;
+                  {address?.road_address?.building_name}
+                </div>
               </div>
             </div>
           </li>
@@ -146,6 +163,7 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
               currentPage={currentPage}
               itemsTotalCount={meta?.total_count}
               itemsPerPage={4}
+              maxPagesToShow={pc ? 5 : 3}
             />
           </div>
         )}

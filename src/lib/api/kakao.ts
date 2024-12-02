@@ -17,13 +17,17 @@ const instance = axios.create({
   },
 });
 
-export async function fetchAddress(keyword: string, currentPage: number) {
+export async function fetchAddress(
+  keyword: string,
+  currentPage: number,
+  size: number,
+) {
   try {
     const res = await instance.get(`/address.json`, {
       params: {
         query: keyword,
         page: currentPage,
-        size: 4,
+        size: size,
         analyze_type: 'exact',
       },
     });
@@ -39,10 +43,14 @@ export async function fetchAddress(keyword: string, currentPage: number) {
   }
 }
 
-export function useMovingAddressList(address: string, currentPage: number) {
+export function useMovingAddressList(
+  address: string,
+  currentPage: number,
+  size: number,
+) {
   const { data, isLoading, error } = useQuery<AddressListData>({
-    queryKey: ['movingAddress', address, currentPage],
-    queryFn: () => fetchAddress(address, currentPage),
+    queryKey: ['movingAddress', address, currentPage, size],
+    queryFn: () => fetchAddress(address, currentPage, size),
     enabled: !!address,
   });
 

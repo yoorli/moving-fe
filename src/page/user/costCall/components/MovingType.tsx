@@ -4,9 +4,10 @@ import pageStyle from '../index.module.css';
 import style from './MovingType.module.css';
 import icCheckCircleLarge from '../../../../assets/icons/ic_check_circle_large.svg';
 import icCheckCircleEmptyLarge from '../../../../assets/icons/ic_check_circle_empty_medium.svg';
-// import icCheckCircleMedium from '../../../../assets/icons/ic_check_circle_medium.svg';
-// import icCheckCircleEmptyMedium from '../../../../assets/icons/ic_check_circle_empty_large.svg';
+import icCheckCircleMedium from '../../../../assets/icons/ic_check_circle_medium.svg';
+import icCheckCircleEmptyMedium from '../../../../assets/icons/ic_check_circle_empty_large.svg';
 import Button from '../../../../components/btn/Button';
+import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 type TypeValue = string | null;
 
@@ -16,6 +17,7 @@ interface MovingTypeProps {
 }
 
 export default function MovingType({ onClick, value }: MovingTypeProps) {
+  const { pc } = useMedia();
   const [type, setType] = useState<string | null>(null);
 
   const handleClick = (option: string) => {
@@ -62,7 +64,13 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
               <img
                 className={style.checkBox}
                 src={
-                  type === option ? icCheckCircleLarge : icCheckCircleEmptyLarge
+                  type === option
+                    ? pc
+                      ? icCheckCircleLarge
+                      : icCheckCircleMedium
+                    : pc
+                      ? icCheckCircleEmptyLarge
+                      : icCheckCircleEmptyMedium
                 }
                 width={36}
                 height={36}

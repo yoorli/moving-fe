@@ -41,6 +41,7 @@
   box-sizing: border-box;
   max-width: 624px;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .selectOptionBubble {
@@ -69,6 +70,7 @@
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
+  margin-bottom: 20px;
 }
 
 .editButton::after {
@@ -78,4 +80,33 @@
   width: 90%;
   height: 1px;
   background-color: var(--gray-500);
+}
+
+@media (max-width: 1199px) {
+  .contentSection {
+    max-width: 327px;
+  }
+
+  .optionGuideBubble {
+    padding: 12px 20px;
+    line-height: 1.5;
+    font-size: 14px;
+    max-width: 248px;
+  }
+
+  .optionBubble {
+    padding: 16px;
+    max-width: 327px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .selectOptionBubble {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .editButton {
+    font-size: 12px;
+  }
 }

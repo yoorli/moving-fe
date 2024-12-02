@@ -6,6 +6,7 @@ type PaginationProps = {
   data?: any[]; // 데이터 배열
   itemsPerPage?: number; // 페이지당 아이템 수
   itemsTotalCount?: number; //토탈갯수
+  maxPagesToShow?: number;
   onPageChange: (page: number) => void;
 };
 
@@ -15,6 +16,7 @@ const Pagination = ({
   itemsPerPage,
   onPageChange,
   itemsTotalCount,
+  maxPagesToShow = 5,
 }: PaginationProps) => {
   const totalPages =
     itemsTotalCount && itemsPerPage
@@ -41,9 +43,8 @@ const Pagination = ({
     }
   };
 
-  const renderPages = () => {
+  const renderPages = (maxPagesToShow: number) => {
     const pages = [];
-    const maxPagesToShow = 5;
 
     const startPage =
       Math.floor((currentPage - 1) / maxPagesToShow) * maxPagesToShow + 1;
@@ -94,7 +95,7 @@ const Pagination = ({
         </svg>
       </button>
 
-      {renderPages()}
+      {renderPages(maxPagesToShow)}
 
       <button
         className={styles.arrowButton}
