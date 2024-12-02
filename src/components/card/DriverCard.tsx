@@ -60,7 +60,7 @@ export default function Card({ type, user }: ProfileProps) {
             <Button
               text='기본 정보 수정'
               src={writingGray}
-              style='solid280pxBackground200'
+              btnStyle='solid280pxBackground200'
               onClick={() => {
                 console.log('onClick 성공');
               }}
@@ -68,7 +68,7 @@ export default function Card({ type, user }: ProfileProps) {
             <Button
               text='내 프로필 수정'
               src={writing}
-              style='solid280pxBlue300'
+              btnStyle='solid280pxBlue300'
               onClick={() => {
                 console.log('onClick 성공');
               }}
@@ -126,14 +126,14 @@ export default function Card({ type, user }: ProfileProps) {
           <div className={styles.costBtn}>
             <Button
               text='견적 확정하기'
-              style='solid448pxBlue300'
+              btnStyle='solid448pxBlue300'
               onClick={() => {
                 console.log('onClick 성공');
               }}
             />
             <Button
               text='상세보기'
-              style='outlined448pxBlue300'
+              btnStyle='outlined448pxBlue300'
               onClick={() => {
                 console.log('onClick 성공');
               }}
@@ -145,7 +145,7 @@ export default function Card({ type, user }: ProfileProps) {
         <div className={styles.reviewBtn}>
           <Button
             text='리뷰 작성하기'
-            style='solid640pxBlue300'
+            btnStyle='solid640pxBlue300'
             onClick={() => {
               console.log('onClick 성공');
             }}

@@ -74,7 +74,7 @@ export default function MovingType({ onClick, value }: MovingTypeProps) {
 
           <Button
             text='선택완료'
-            style='solid640pxBlue300'
+            btnStyle='solid640pxBlue300'
             disabled={!type}
             onClick={() => handleSelectClick(type)}
           />

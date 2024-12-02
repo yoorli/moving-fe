@@ -69,7 +69,7 @@ export default function MovingAddress({
       <Button
         className={style.button}
         text={value || `${label} 선택하기`}
-        style='outlined560pxBlue300'
+        btnStyle='outlined560pxBlue300'
         onClick={onClick}
       />
       {isModalOpen && (
@@ -111,7 +111,7 @@ export default function MovingAddress({
 
           <Button
             text='선택완료'
-            style='solid640pxBlue300'
+            btnStyle='solid640pxBlue300'
             onClick={handleSelectClick}
             disabled={!(addressValues.arrival && addressValues.departure)}
           />

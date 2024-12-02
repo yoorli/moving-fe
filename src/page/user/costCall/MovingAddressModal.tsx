@@ -144,7 +144,7 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
             [style.submitEmptyListButton]: addressList.length === 0,
           })}
           text='선택완료'
-          style='solid640pxBlue300'
+          btnStyle='solid640pxBlue300'
           disabled={index === null}
           onClick={() =>
             handleSelectClick(
