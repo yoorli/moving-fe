@@ -15,6 +15,10 @@ export default function useDirection() {
     nav('/user/login');
   };
 
+  const direction_userSignup = () => {
+    nav('/user/signup');
+  };
+
   const direction_pendingCost = () => {
     nav('/user/pendingCost');
   };
@@ -29,5 +33,6 @@ export default function useDirection() {
     direction_userLogin,
     direction_pendingCost,
     direction_receivedCost,
+    direction_userSignup,
   };
 }
