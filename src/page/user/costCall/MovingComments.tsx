@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import pageStyles from '../index.module.css';
-import styles from './Comment.module.css';
-import Button from '../../../../components/btn/Button';
+import pageStyles from './index.module.css';
+import styles from './MovingComments.module.css';
+import Button from '../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
 
 interface MovingCommentProps {
@@ -10,7 +10,7 @@ interface MovingCommentProps {
   disabled: boolean;
 }
 
-export default function Comments({
+export default function MovingComments({
   value,
   onClick,
   disabled,

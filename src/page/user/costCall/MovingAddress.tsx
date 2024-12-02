@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import AddressModal from './MovingAddressModal';
-import pageStyles from '../index.module.css';
+import pageStyles from './index.module.css';
 import styles from './MovingAddress.module.css';
-import Button from '../../../../components/btn/Button';
+import Button from '../../../components/btn/Button';
 // import { createPortal } from 'react-dom';
 // import ModalContent from './modalTest';
 

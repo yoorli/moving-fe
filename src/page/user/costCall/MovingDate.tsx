@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Calendar } from 'react-calendar';
 import { format } from 'date-fns';
-import pageStyles from '../index.module.css';
-import Button from '../../../../components/btn/Button';
+import pageStyles from './index.module.css';
+import Button from '../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
 import './MovingDate.css';
 

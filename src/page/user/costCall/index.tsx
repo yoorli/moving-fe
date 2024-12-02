@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import MovingType from './comments/MovingType';
-import MovingDate from './comments/MovingDate';
-import Navigation from './comments/Navigation';
-import MovingAddress from './comments/MovingAddress';
-import Comments from './comments/Comment';
+import MovingType from './MovingType';
+import MovingDate from './MovingDate';
+import Navigation from './Navigation';
+import MovingAddress from './MovingAddress';
+import MovingComments from './MovingComments';
 import styles from './index.module.css';
 
 export interface FormValues {
@@ -92,7 +92,7 @@ export default function UserCostCallPage() {
           </div>
           <div>
             {isSelectOption.arrival && isSelectOption.departure && (
-              <Comments
+              <MovingComments
                 value={values.comment}
                 onClick={(comment) =>
                   handleSelectCompletion('comment', comment)
