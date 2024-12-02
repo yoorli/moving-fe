@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import pageStyle from './index.module.css';
+import pageStyle from '../index.module.css';
 import style from './MovingComments.module.css';
-import Button from '../../../components/btn/Button';
+import Button from '../../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
 
 interface MovingCommentProps {

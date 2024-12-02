@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import AddressModal from './MovingAddressModal';
-import pageStyle from './index.module.css';
+import MovingAddressModal from './MovingAddressModal';
+import pageStyle from '../index.module.css';
 import style from './MovingAddress.module.css';
-import Button from '../../../components/btn/Button';
+import Button from '../../../../components/btn/Button';
 // import { createPortal } from 'react-dom';
 // import ModalContent from './modalTest';
 
@@ -73,7 +73,7 @@ export default function MovingAddress({
         onClick={onClick}
       />
       {isModalOpen && (
-        <AddressModal
+        <MovingAddressModal
           setValue={handleSetValue}
           type={type}
           onClose={() => {

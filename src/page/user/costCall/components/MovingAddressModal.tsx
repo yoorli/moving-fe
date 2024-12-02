@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
-import { fetchAddress } from '../../../lib/api/kakao';
+import { fetchAddress } from '../../../../lib/api/kakao';
 import style from './MovingAddressModal.module.css';
-import icSearchLarge from '../../../assets/icons/ic_search_large.svg';
-import icXCircleLarge from '../../../assets/icons/ic_x_circle_large.svg';
-import icXLarge from '../../../assets/icons/ic_x_large.svg';
-import Button from '../../../components/btn/Button';
-import Pagination from '../../../components/common/Pagination';
+import icSearchLarge from '../../../../assets/icons/ic_search_large.svg';
+import icXCircleLarge from '../../../../assets/icons/ic_x_circle_large.svg';
+import icXLarge from '../../../../assets/icons/ic_x_large.svg';
+import Button from '../../../../components/btn/Button';
+import Pagination from '../../../../components/common/Pagination';
 
 interface AddressValues {
   road_address: {
