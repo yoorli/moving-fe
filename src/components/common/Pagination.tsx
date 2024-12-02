@@ -5,7 +5,7 @@ type PaginationProps = {
   currentPage: number;
   data?: any[]; // 데이터 배열
   itemsPerPage?: number; // 페이지당 아이템 수
-  itemsTotalPage?: number; //토탈페이지
+  itemsTotalCount?: number; //토탈갯수
   onPageChange: (page: number) => void;
 };
 
@@ -14,10 +14,10 @@ const Pagination = ({
   data,
   itemsPerPage,
   onPageChange,
-  itemsTotalPage,
+  itemsTotalCount,
 }: PaginationProps) => {
-  const totalPages = itemsTotalPage
-    ? itemsTotalPage
+  const totalPages = itemsTotalCount
+    ? Math.ceil(itemsTotalCount / 5)
     : data && itemsPerPage
       ? Math.ceil(data.length / itemsPerPage)
       : 0;
