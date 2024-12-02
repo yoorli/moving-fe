@@ -10,6 +10,7 @@ import ReceivedCost from './page/user/receivedCost';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
+import UserMovingReview from './page/user/movingReview';
 
 const router = createBrowserRouter([
   {
@@ -57,8 +58,12 @@ const router = createBrowserRouter([
         element: <UserFavoriteMover />,
       },
       {
-        path: 'profile',
-        element: <span>profile</span>,
+        path: 'editProfile',
+        element: <span>editProfile</span>,
+      },
+      {
+        path: 'movingReview',
+        element: <UserMovingReview />,
       },
     ],
   },
