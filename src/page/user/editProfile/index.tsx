@@ -72,9 +72,6 @@ export default function UserEditProfilePage() {
       <div className={style.wrapper}>
         <header className={style.top}>
           <span className={style.firstText}>프로필 수정</span>
-          <span className={style.secoundText}>
-            추가 정보를 입력하여 회원가입을 완료해주세요.
-          </span>
         </header>
         <ResisterMidComponent
           values={values}
