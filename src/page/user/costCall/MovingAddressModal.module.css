@@ -68,6 +68,7 @@
   border: 1px solid var(--line-100);
   border-radius: 16px;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .addressSelectLayout {

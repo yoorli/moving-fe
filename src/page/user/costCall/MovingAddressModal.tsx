@@ -18,6 +18,12 @@ interface AddressValues {
   };
 }
 
+// interface MetaValues {
+//   is_end: boolean;
+//   pageable_count: number;
+//   total_count: number;
+// }
+
 interface ModalProps {
   setValue(name: 'arrival' | 'departure', value: string | null): void;
   type: 'arrival' | 'departure';
@@ -26,9 +32,10 @@ interface ModalProps {
 
 export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   const [addressList, setAddressList] = useState<AddressValues[]>([]);
-  // const [meta, setMeta] = useState<string[]>([]);
+  // const [meta, setMeta] = useState<MetaValues>();
   const [address, setAddress] = useState('');
   const [index, setIndex] = useState<null | number>(null);
+  // const [currentPage, setCurrentPage] = useState(1);
 
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddress(e.target.value);
