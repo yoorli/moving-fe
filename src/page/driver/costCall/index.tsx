@@ -5,9 +5,12 @@ import CallList from './components/CallList';
 import style from './index.module.css';
 import Pagination from '../../../components/pagination/Pagination';
 import { useState } from 'react';
+import { useMedia } from '../../../lib/function/useMediaQuery';
 
 export default function DriverCostCallPage() {
   const [currentPage, setCurrentPage] = useState(1);
+  const isPc = useMedia().pc;
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -23,9 +26,11 @@ export default function DriverCostCallPage() {
     <div className={style.container}>
       <nav className={style.navigation}>받은 요청</nav>
       <div className={style.mainContainer}>
-        <div className={style.filterBox}>
-          <Filter />
-        </div>
+        {isPc && (
+          <div className={style.filterBox}>
+            <Filter />
+          </div>
+        )}
         <div className={style.content}>
           <div className={style.filterBar}>
             <div className={style.searchBar}>searchBar</div>
