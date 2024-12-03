@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import cn from 'classnames';
 import { useMovingAddressList } from '../../../../lib/api/kakao';
 import style from './MovingAddressModal.module.css';
@@ -9,7 +9,7 @@ import icXCircleMedium from '../../../../assets/icons/ic_x_circle_medium.svg';
 import icXLarge from '../../../../assets/icons/ic_x_large.svg';
 import icXLargeMedium from '../../../../assets/icons/ic_x_medium.svg';
 import Button from '../../../../components/btn/Button';
-import Pagination from '../../../../components/common/Pagination';
+import Pagination from '../../../../components/pagination//Pagination';
 import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 export interface AddressValues {
@@ -37,6 +37,7 @@ interface ModalProps {
 
 export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   const { pc } = useMedia();
+  const outside = useRef<HTMLDivElement | null>(null);
   const [address, setAddress] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [index, setIndex] = useState<null | number>(null);
@@ -82,7 +83,15 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   };
 
   return (
-    <div className={style.modalWrapper}>
+    <div
+      className={style.modalWrapper}
+      ref={outside}
+      onClick={(e) => {
+        if (outside.current === e.target) {
+          onClose();
+        }
+      }}
+    >
       <div className={style.modalContent}>
         <div className={style.modalHeader}>
           <div className={style.modalTitle}>
