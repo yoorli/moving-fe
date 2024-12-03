@@ -1,17 +1,113 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  /* width: 400px;
-  width: 800px; */
-  width: 1100px;
-  padding: 50px;
+  background-color: #f7f7f7;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
 }
 
-/* 743px ~ 375px */
-/* @media (max-width: 743px) {
-} */
+.mainContent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
 
-/* 1119px ~ 744px */
-/* @media (max-width: 1199px) and (min-width: 744px) {
-} */
+.contentSection {
+  margin-top: 40px;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.optionGuideBubble {
+  margin-bottom: 24px;
+  background-color: var(--gray-50);
+  font-size: 18px;
+  font-weight: 500;
+  padding: 20px 40px;
+  width: fit-content;
+  border-radius: 0px 30px 30px 30px;
+}
+
+.optionBubble {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: auto;
+  width: fit-content;
+  background-color: var(--gray-50);
+  border-radius: 30px 0px 30px 30px;
+  padding: 20px 40px;
+  font-size: 18px;
+  font-weight: 500;
+  box-sizing: border-box;
+  max-width: 624px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.selectOptionBubble {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: auto;
+  width: fit-content;
+  background-color: var(--blue-300);
+  border-radius: 30px 0px 30px 30px;
+  padding: 24px 40px;
+  color: var(--gray-50);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.editButton {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: auto;
+  width: fit-content;
+  padding: 12px 8px 0px 0px;
+  position: relative;
+  color: var(--gray-500);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.editButton::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 90%;
+  height: 1px;
+  background-color: var(--gray-500);
+}
+
+@media (max-width: 1199px) {
+  .contentSection {
+    max-width: 327px;
+  }
+
+  .optionGuideBubble {
+    padding: 12px 20px;
+    line-height: 1.5;
+    font-size: 14px;
+    max-width: 248px;
+  }
+
+  .optionBubble {
+    padding: 16px;
+    max-width: 327px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .selectOptionBubble {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .editButton {
+    font-size: 12px;
+  }
+}

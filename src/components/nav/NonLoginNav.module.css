@@ -1,40 +1,96 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 82px;
+/* tablet, moblie 화면 */
+@media (max-width: 1199px) {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  width: 100%;
-  height: 88px;
+    width: 100%;
+    max-width: 1199px;
+    height: 54px;
+
+    box-sizing: border-box;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .logoImg {
+    width: 88px;
+    height: 34px;
+    cursor: pointer;
+  }
+
+  .navContainer {
+    display: flex;
+    justify-content: start;
+
+    width: 100%;
+    max-width: 1284px;
+  }
+
+  .navWrapper {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  .navItem {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+
+    cursor: pointer;
+  }
 }
 
-.logoImg {
-  width: 116px;
-  height: 44px;
-  cursor: pointer;
-}
+/* pc 화면 */
+@media (min-width: 1200px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 82px;
 
-.navContainer {
-  display: flex;
-  justify-content: start;
+    width: 100%;
+    max-width: 1920px;
+    height: 88px;
 
-  width: 100%;
-  max-width: 1284px;
-}
+    box-sizing: border-box;
+    padding-left: 120px;
+    padding-right: 120px;
+  }
 
-.navWrapper {
-  display: flex;
-  justify-content: start;
-  align-items: center;
+  .logoImg {
+    width: 116px;
+    height: 44px;
+    cursor: pointer;
+  }
 
-  width: 100%;
-  height: 100%;
-}
+  .navContainer {
+    display: flex;
+    justify-content: start;
 
-.navItem {
-  font-size: 18px;
-  font-weight: 700;
-  color: #000;
+    width: 100%;
+    max-width: 1284px;
+  }
 
-  cursor: pointer;
+  .navWrapper {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  .navItem {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+
+    cursor: pointer;
+  }
 }

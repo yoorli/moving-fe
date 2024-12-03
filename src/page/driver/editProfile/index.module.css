@@ -1,0 +1,135 @@
+@media (max-width: 1199px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    width: 100%;
+    height: 100%;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    gap: 40px;
+
+    box-sizing: border-box;
+    padding-top: 16px;
+    padding-right: 24px;
+    padding-left: 24px;
+
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    /* max-height: 1304px; */
+
+    background-color: white;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+
+    gap: 32px;
+
+    width: 100%;
+    height: 26px;
+
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--line-100);
+  }
+
+  .firstText {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black-400);
+  }
+
+  .secoundText {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--black-200);
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+    margin-top: 24px;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    gap: 40px;
+
+    box-sizing: border-box;
+    padding-top: 32px;
+    padding-right: 24px;
+    padding-left: 24px;
+
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    /* max-height: 1304px; */
+
+    background-color: white;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+
+    gap: 32px;
+
+    width: 100%;
+    height: 48px;
+
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--line-100);
+  }
+
+  .firstText {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--black-400);
+  }
+
+  .secoundText {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--black-200);
+  }
+
+  .bottom {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    align-items: center;
+    gap: 32px;
+  }
+}

@@ -1,0 +1,33 @@
+.option {
+  border: 1px solid var(--line-200);
+  border-radius: 16px;
+  padding: 24px 32px 24px 32px;
+  gap: 8px;
+  margin-bottom: 16px;
+  max-width: 560px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.selectOption {
+  border: 1px solid var(--blue-300);
+  box-shadow: inset 4px 4px 10px 0px #c3d9f233;
+  background-color: var(--blue-50);
+}
+
+.optionText {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media (max-width: 1199px) {
+  .option {
+    padding: 14px 20px;
+  }
+
+  .optionText {
+    font-size: 14px;
+  }
+}

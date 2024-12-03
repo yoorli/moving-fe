@@ -1,0 +1,18 @@
+.layout {
+  width: 100%;
+  padding: 12px 0;
+}
+
+.text {
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 16px;
+}
+
+.button {
+  margin-bottom: 12px;
+}
+
+.selectOption {
+  margin-top: 12px;
+}

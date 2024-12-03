@@ -1,4 +1,4 @@
-export const emailValidation = (email?: string) => {
+const emailValidation = (email?: string) => {
   const emailRegEx =
     /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
   //값이 있을 경우에만 유효성 검사 실행.
@@ -9,7 +9,7 @@ export const emailValidation = (email?: string) => {
   }
 };
 
-export const passwordValidation = (password?: string) => {
+const passwordValidation = (password?: string) => {
   const passwordRegEx = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
   //값이 있을 경우에만 유효성 검사 실행.
   if (password && !passwordRegEx.test(password)) {
@@ -19,17 +19,26 @@ export const passwordValidation = (password?: string) => {
   }
 };
 
-export const nameValidation = (name?: string) => {
+const upperLowerValidation = (name?: string, upper = 3, lower = 2) => {
   const length = name?.length;
   //값이 있을 경우에만 유효성 검사 실행.
-  if (length && (length < 2 || length >= 11)) {
+  if (length && (length > upper || length < lower)) {
+    return false;
+  } else {
+    return true;
+  }
+};
+const upperValidation = (value?: string, number = 8) => {
+  const length = value?.length;
+  //값이 있을 경우에만 유효성 검사 실행.
+  if (length && length < number) {
     return false;
   } else {
     return true;
   }
 };
 
-export const phoneValidation = (phoneNumber?: string) => {
+const phoneValidation = (phoneNumber?: string) => {
   const phoneRegEx = /^(01[016789]{1})[0-9]{4}[0-9]{4}$/;
   //값이 있을 경우에만 유효성 검사 실행.
   if (phoneNumber && !phoneRegEx.test(phoneNumber)) {
@@ -39,7 +48,7 @@ export const phoneValidation = (phoneNumber?: string) => {
   }
 };
 
-export const passwordEqualValidation = (
+const passwordEqualValidation = (
   confirmPassword?: string,
   password?: string,
 ) => {
@@ -75,7 +84,7 @@ export const signupValidation = (
   password?: string,
 ) => {
   if (name === 'name') {
-    return nameValidation(value);
+    return upperLowerValidation(value);
   }
   if (name === 'email') {
     return emailValidation(value);
@@ -88,6 +97,49 @@ export const signupValidation = (
   }
   if (name === 'confirmPassword') {
     return passwordEqualValidation(value, password);
+  }
+  return;
+};
+
+export const editValidation = (
+  name: string,
+  value?: string,
+  oldPassword?: string,
+  newPassword?: string,
+) => {
+  if (name === 'name') {
+    return upperLowerValidation(value);
+  }
+  if (name === 'email') {
+    return emailValidation(value);
+  }
+  if (name === 'phoneNumber') {
+    return phoneValidation(value);
+  }
+  if (name === 'currentPassword') {
+    return passwordEqualValidation(value, oldPassword);
+  }
+  if (name === 'newPassword') {
+    return passwordValidation(value);
+  }
+  if (name === 'confirmNewPassword') {
+    return passwordEqualValidation(value, newPassword);
+  }
+  return;
+};
+
+export const driverRegisterValidation = (name: string, value?: string) => {
+  if (name === 'name') {
+    return upperLowerValidation(value);
+  }
+  if (name === 'history') {
+    return upperValidation(value, 8);
+  }
+  if (name === 'introduce_simple') {
+    return upperValidation(value, 8);
+  }
+  if (name === 'introduce_detail') {
+    return upperValidation(value, 10);
   }
   return;
 };

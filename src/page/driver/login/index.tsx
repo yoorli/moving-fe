@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-
 import style from '../../../components/page/login/index.module.css';
 import { loginValidation } from '../../../lib/function/validation';
-
 import { Link } from 'react-router-dom';
 import {
-  EmailInputComponent,
-  PasswordInputComponent,
-} from '../../../components/page/login/LoginInput';
-import LoginBtn from '../../../components/page/login/LoginBtn';
-import { DriverLoginTop } from '../../../components/page/login/LoginTop';
-import { DriverLoginBottom } from '../../../components/page/login/LoginBottom';
+  InvisibleInputComponent,
+  NomalInputComponent,
+} from '../../../components/input/AuthInput';
+import AuthBtn from '../../../components/btn/AuthBtn';
+import { DriverLoginTop } from '../../../components/page/auth/AuthTop';
+import { DriverLoginBottom } from '../../../components/page/auth/AuthBottom';
 
 type FormLogin = {
   email: string;
@@ -61,17 +59,25 @@ export default function DriverLoginPage() {
         <DriverLoginTop />
         <div className={style.mid}>
           <form className={style.loginForm} onSubmit={loginSubmit}>
-            <EmailInputComponent
+            <NomalInputComponent
+              title='이메일'
+              placeholder='이메일을 입력해 주세요'
               value={values.email}
+              name='email'
               inputHeandler={inputHeandler}
               validation={validation.email}
+              errorMessage='이메일 형식이 아닙니다.'
             />
-            <PasswordInputComponent
+            <InvisibleInputComponent
+              title='비밀번호'
+              placeholder='비밀번호을 입력해 주세요'
               value={values.password}
+              name='password'
               inputHeandler={inputHeandler}
               validation={validation.password}
+              errorMessage='비밀번호가 올바르지 않습니다.'
             />
-            <LoginBtn
+            <AuthBtn
               context='로그인'
               validation={
                 !!values.email &&

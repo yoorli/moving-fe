@@ -128,14 +128,14 @@ export default function DriverCard( { type, user }: ProfileProps) {
           <div className={style.costBtn}>
             <Button
               text='견적 확정하기'
-              style='solid448pxBlue300'
+              btnStyle='solid448pxBlue300'
               onClick={() => {
                 console.log('onClick 성공');
               }}
             />
             <Button
               text='상세보기'
-              style='outlined448pxBlue300'
+              btnStyle='outlined448pxBlue300'
               onClick={() => {
                 console.log('onClick 성공');
               }}
@@ -147,7 +147,7 @@ export default function DriverCard( { type, user }: ProfileProps) {
         <div className={style.reviewBtn}>
           <Button
             text='리뷰 작성하기'
-            style='solid640pxBlue300'
+            btnStyle='solid640pxBlue300'
             onClick={() => {
               console.log('onClick 성공');
             }}

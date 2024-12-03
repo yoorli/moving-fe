@@ -64,10 +64,10 @@ export default function UserCard({ type, user }: ProfileProps) {
         <div className={style.btnBox}>
           <Button
             text='견적 보내기'
-            style='solid448pxBlue300'
+            btnStyle='solid448pxBlue300'
             src={writing}
           />
-          <Button text='반려' style='outlined448pxBlue300' />
+          <Button text='반려' btnStyle='outlined448pxBlue300' />
         </div>
       )}
 

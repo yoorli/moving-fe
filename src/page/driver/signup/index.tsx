@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import style from '../../../components/page/signup/index.module.css';
-import { DriverSignupBottom } from '../../../components/page/signup/SignupBottom';
-import { DriverSignupTop } from '../../../components/page/signup/SignupTop';
 import { Link } from 'react-router-dom';
-import {
-  EmailInputComponent,
-  PasswordInputComponent,
-} from '../../../components/page/login/LoginInput';
 import { signupValidation } from '../../../lib/function/validation';
 import {
-  ConfirmPasswordInputComponent,
-  NameInputComponent,
-  PhoneNumberInputComponent,
-} from '../../../components/page/signup/SignupInput';
-import SignupBtn from '../../../components/page/signup/SignupBtn';
+  InvisibleInputComponent,
+  NomalInputComponent,
+} from '../../../components/input/AuthInput';
+import AuthBtn from '../../../components/btn/AuthBtn';
+import { DriverSignupTop } from '../../../components/page/auth/AuthTop';
+import { DriverSignupBottom } from '../../../components/page/auth/AuthBottom';
 
 type FormLogin = {
   name: string;
@@ -88,32 +83,52 @@ export default function DriverSignupPage() {
         <DriverSignupTop />
         <div className={style.mid}>
           <form className={style.loginForm} onSubmit={loginSubmit}>
-            <NameInputComponent
+            <NomalInputComponent
+              title='이름'
+              placeholder='성함을 입력해 주세요'
               value={values.name}
+              name='name'
               inputHeandler={inputHeandler}
               validation={validation.name}
+              errorMessage='2글자 이상, 10자 이하로 입력해주세요.'
             />
-            <EmailInputComponent
+            <NomalInputComponent
+              title='이메일'
+              placeholder='이메일을 입력해 주세요'
               value={values.email}
+              name='email'
               inputHeandler={inputHeandler}
               validation={validation.email}
+              errorMessage='이메일 형식이 아닙니다.'
             />
-            <PhoneNumberInputComponent
+            <NomalInputComponent
+              title='전화번호'
+              placeholder='숫자만 입력해 주세요'
               value={values.phoneNumber}
+              name='phoneNumber'
               inputHeandler={inputHeandler}
               validation={validation.phoneNumber}
+              errorMessage='전화번호를 입력해 주세요'
             />
-            <PasswordInputComponent
+            <InvisibleInputComponent
+              title='비밀번호'
+              placeholder='비밀번호을 입력해 주세요'
               value={values.password}
+              name='password'
               inputHeandler={inputHeandler}
               validation={validation.password}
+              errorMessage='비밀번호가 올바르지 않습니다.'
             />
-            <ConfirmPasswordInputComponent
+            <InvisibleInputComponent
+              title='비밀번호 확인'
+              placeholder='비밀번호을 다시 한번 입력해 주세요'
               value={values.confirmPassword}
+              name='confirmPassword'
               inputHeandler={inputHeandler}
               validation={validation.confirmPassword}
+              errorMessage='비밀번호가 일치하지 않습니다.'
             />
-            <SignupBtn
+            <AuthBtn
               context='시작하기'
               validation={
                 !!values.email &&
