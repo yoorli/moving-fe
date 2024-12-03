@@ -128,7 +128,7 @@ export const editValidation = (
   return;
 };
 
-export const driverResisterValidation = (name: string, value?: string) => {
+export const driverRegisterValidation = (name: string, value?: string) => {
   if (name === 'name') {
     return upperLowerValidation(value);
   }

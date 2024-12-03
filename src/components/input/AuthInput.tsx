@@ -55,35 +55,6 @@ export const NomalInputComponent = ({
   );
 };
 
-export const NomalTextAreaComponent = ({
-  title,
-  placeholder,
-  value,
-  name,
-  textAreaHeandler,
-  validation,
-  errorMessage,
-}: NomalTextAreaType) => {
-  return (
-    <div className={style.container_large}>
-      <span className={style.text}>{title}</span>
-      <textarea
-        className={`${style.textArea} ${
-          style[value && validation ? 'complete' : '']
-        } ${style[value && !validation ? 'invalid' : '']} `}
-        value={value ?? ''}
-        placeholder={placeholder}
-        onChange={textAreaHeandler}
-        id={name}
-        name={name}
-      />
-      {!validation && value ? (
-        <span className={style.invaild_large}>{errorMessage}</span>
-      ) : null}
-    </div>
-  );
-};
-
 export const InvisibleInputComponent = ({
   title,
   placeholder,
@@ -133,6 +104,35 @@ export const InvisibleInputComponent = ({
       </div>
       {!validation && value ? (
         <span className={style.invaild}>{errorMessage}</span>
+      ) : null}
+    </div>
+  );
+};
+
+export const NomalTextAreaComponent = ({
+  title,
+  placeholder,
+  value,
+  name,
+  textAreaHeandler,
+  validation,
+  errorMessage,
+}: NomalTextAreaType) => {
+  return (
+    <div className={style.container_large}>
+      <span className={style.text}>{title}</span>
+      <textarea
+        className={`${style.textArea} ${
+          style[value && validation ? 'complete' : '']
+        } ${style[value && !validation ? 'invalid' : '']} `}
+        value={value ?? ''}
+        placeholder={placeholder}
+        onChange={textAreaHeandler}
+        id={name}
+        name={name}
+      />
+      {!validation && value ? (
+        <span className={style.invaild_large}>{errorMessage}</span>
       ) : null}
     </div>
   );

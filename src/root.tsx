@@ -19,6 +19,7 @@ import DriverEditInfoPage from './page/driver/editInfo';
 import UserEditInfoPage from './page/user/editInfo';
 import UserEditProfilePage from './page/user/editProfile';
 import ServiceRandingPage from './page/root';
+import DriverRegisterPage from './page/driver/register';
 
 
 const router = createBrowserRouter([
@@ -96,8 +97,8 @@ const router = createBrowserRouter([
         element: <UserEditInfoPage />,
       },
       {
-        path: 'resister',
-        element: <UserResisterPage />,
+        path: 'register',
+        element: <UserRegisterPage />,
       },
     ],
   },
@@ -110,8 +111,8 @@ const router = createBrowserRouter([
         element: <DriverCallPage />,
       },
       {
-        path: 'resister',
-        element: <DriverResisterPage />,
+        path: 'register',
+        element: <DriverRegisterPage />,
       },
       {
         path: 'editProfile',

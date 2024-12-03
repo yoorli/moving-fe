@@ -1,7 +1,7 @@
-import { ServiceRegion } from '../../../components/page/resister/Region';
-import { I_ServiceType } from '../../../components/page/resister/ServiceType';
+import { ServiceRegion } from '../../../components/page/register/Region';
+import { I_ServiceType } from '../../../components/page/register/ServiceType';
 
-export type DriverResisterFormValue = {
+export type DriverRegisterFormValue = {
   image: File | null;
   name: string;
   history: string;
@@ -13,7 +13,7 @@ export type DriverResisterFormValue = {
   region: Array<ServiceRegion | null>;
 };
 
-export type DriverResisterValidation = {
+export type DriverRegisterValidation = {
   image: boolean;
   name: boolean;
   history: boolean;
