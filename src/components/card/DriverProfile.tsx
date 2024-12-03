@@ -6,9 +6,10 @@ import { formatCurrency } from '../../lib/function/utils';
 import style from './DriverProfile.module.css';
 
 import fullHeartMedium from '../../assets/icons/ic_full_heart_medium.svg';
+import emptyHeartMedium from '../../assets/icons/ic_empty_heart_medium.svg';
 import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
 
-type ProfileProps = {
+interface ProfileProps {
   type?: string;
   user: {
     label?: string[];
@@ -21,6 +22,7 @@ type ProfileProps = {
     experience?: number;
     confirmedCases?: number;
     likes?: number;
+    isLiked?: boolean;
     movingDate?: string;
     start?: string;
     end?: string;
@@ -97,7 +99,7 @@ export default function DriverProfile({ type, user }: ProfileProps) {
             <span>{user.nickname} 기사님</span>
             {user.likes !== undefined && (
               <span className={style.likes}>
-                <img src={fullHeartMedium} alt='fullHeart' /> {user.likes}
+                <img src={user.isLiked ? fullHeartMedium : emptyHeartMedium} alt='fullHeart' /> {user.likes}
               </span>
             )}
           </div>

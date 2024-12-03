@@ -13,7 +13,7 @@ import writingGray from '../../assets/icons/ic_writing_gray.svg';
 
 type ProfileType = 'profile' | 'cost' | 'waiting' | 'dibs' | 'review';
 
-type ProfileProps = {
+interface ProfileProps {
   type?: ProfileType;
   user: {
     label?: string[];
@@ -26,6 +26,7 @@ type ProfileProps = {
     experience?: number;
     confirmedCases?: number;
     likes?: number;
+    isLiked?: boolean;
     movingDate?: string;
     start?: string;
     end?: string;

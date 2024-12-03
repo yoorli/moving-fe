@@ -81,6 +81,7 @@ export default function DriverCallPage() {
     experience: 1,
     confirmedCases: 50,
     likes: 12,
+    isLiked: true,
   };
 
   const driver2 = {
@@ -95,6 +96,7 @@ export default function DriverCallPage() {
     experience: 7,
     confirmedCases: 150,
     likes: 5,
+    isLiked: false,
     cost: 210000,
   };
 
@@ -110,6 +112,7 @@ export default function DriverCallPage() {
     experience: 7,
     confirmedCases: 150,
     likes: 5,
+    isLiked: false,
     cost: 210000,
     movingDate: '2024.07.01',
     start: '인천시 남동구',
@@ -127,6 +130,7 @@ export default function DriverCallPage() {
     experience: 7,
     confirmedCases: 150,
     likes: 5,
+    isLiked: true,
   };
 
   const driver5 = {
@@ -197,7 +201,7 @@ export default function DriverCallPage() {
     movingDate: '2024.07.01',
     start: '인천시 남동구',
     end: '경기도 고양시',
-    createAt: '2024.12.02 17:30:40',
+    createAt: '2024.12.03 13:20:40',
     review:
       '처음 견적 받아봤는데, 엄청 친절하시고 꼼꼼하세요! 귀찮게 이것저것 물어봤는데 잘 알려주셨습니다. 원룸 이사는 믿고 맡기세요! :)',
   };
