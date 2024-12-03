@@ -3,8 +3,22 @@ import Dropdown from './components/Dropdown';
 import CallList from './components/CallList';
 
 import style from './index.module.css';
+import Pagination from '../../../components/pagination/Pagination';
+import { useState } from 'react';
 
 export default function DriverCostCallPage() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const page = {
+    currentPage: currentPage,
+    itemsPerPage: 3,
+    itemsTotalCount: 9,
+    onPageChange: handlePageChange,
+  };
+
   return (
     <div className={style.container}>
       <nav className={style.navigation}>받은 요청</nav>
@@ -23,7 +37,7 @@ export default function DriverCostCallPage() {
             <CallList />
           </div>
           <div className={style.pagination}>
-            pagination
+            <Pagination {...page} />
           </div>
         </div>
       </div>

@@ -57,5 +57,9 @@
 .mainContent {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
 }
