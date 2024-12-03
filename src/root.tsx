@@ -11,6 +11,7 @@ import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
 import UserMovingReview from './page/user/movingReview';
+import UserCostCallPage from './page/user/costCall';
 import UserRegisterPage from './page/user/register';
 import DriverEditProfilePage from './page/driver/editProfile';
 import DriverEditInfoPage from './page/driver/editInfo';
@@ -54,11 +55,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'costCall',
-<<<<<<< HEAD
-        element: <UserCallPage />,
-=======
         element: <UserCostCallPage />,
->>>>>>> origin/main
       },
       {
         path: 'searchDriver',
