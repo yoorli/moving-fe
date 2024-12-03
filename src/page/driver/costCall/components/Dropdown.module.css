@@ -19,6 +19,7 @@
   border-radius: 8px;
   min-width: 127px;
   cursor: pointer;
+  background-color: var(--gray-50);
 }
 
 .text {

@@ -22,6 +22,9 @@ export default function DriverCostCallPage() {
           <div className={style.mainContent}>
             <CallList />
           </div>
+          <div className={style.pagination}>
+            pagination
+          </div>
         </div>
       </div>
     </div>

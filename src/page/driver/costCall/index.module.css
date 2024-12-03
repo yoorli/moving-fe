@@ -2,6 +2,8 @@
   width: 100% !important;
   height: 100% !important;
   max-width: none !important;
+
+  /* 반응형 추후 추가 시 min-width: 332px */
 }
 
 .navigation {
