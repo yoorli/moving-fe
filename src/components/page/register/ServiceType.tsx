@@ -1,8 +1,8 @@
 import React from 'react';
 import { TypeSelectItem } from './SelectItem';
 import style from './ServiceType.module.css';
-import { UserResisterFormValues } from '../../../page/user/resister/type';
-import { DriverResisterFormValue } from '../../../page/driver/resister/type';
+import { UserRegisterFormValues } from '../../../page/user/register/type';
+import { DriverRegisterFormValue } from '../../../page/driver/register/type';
 
 export enum I_ServiceType {
   SMALL = '소형이사',
@@ -19,7 +19,7 @@ export default function ServiceType({
   inputHeandler,
 }: {
   title: string;
-  values: UserResisterFormValues | DriverResisterFormValue;
+  values: UserRegisterFormValues | DriverRegisterFormValue;
   validation: boolean;
   errorMessage: string;
   nomalMessage: string;

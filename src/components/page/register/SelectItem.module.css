@@ -1,0 +1,99 @@
+@media (max-width: 1199px) {
+  .itemWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 100px;
+    border: 1px solid var(--gray-100);
+    background-color: var(--background-100);
+    width: 49px;
+    height: 36px;
+
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--blue-400);
+
+    cursor: pointer;
+  }
+
+  .itemLongWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 100px;
+    border: 1px solid var(--gray-100);
+    background-color: var(--background-100);
+    width: 73px;
+    height: 36px;
+
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--blue-400);
+
+    cursor: pointer;
+  }
+
+  .itemWrapper.selected {
+    border: 1px solid var(--blue-300);
+    color: var(--blue-300);
+    background-color: var(--blue-50);
+  }
+
+  .itemLongWrapper.selected {
+    border: 1px solid var(--blue-300);
+    color: var(--blue-300);
+    background-color: var(--blue-50);
+  }
+}
+
+@media (min-width: 1200px) {
+  .itemWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 100px;
+    border: 1px solid var(--gray-100);
+    background-color: var(--background-100);
+    width: 72px;
+    height: 46px;
+
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--blue-400);
+
+    cursor: pointer;
+  }
+
+  .itemLongWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 100px;
+    border: 1px solid var(--gray-100);
+    background-color: var(--background-100);
+    width: 130px;
+    height: 46px;
+
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--blue-400);
+
+    cursor: pointer;
+  }
+
+  .itemWrapper.selected {
+    border: 1px solid var(--blue-300);
+    color: var(--blue-300);
+    background-color: var(--blue-50);
+  }
+
+  .itemLongWrapper.selected {
+    border: 1px solid var(--blue-300);
+    color: var(--blue-300);
+    background-color: var(--blue-50);
+  }
+}

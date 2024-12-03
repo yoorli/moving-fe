@@ -1,19 +1,19 @@
 import React from 'react';
 
 import style from './Mid.module.css';
-import ImgUpload from '../../../../components/page/resister/ImgUpload';
-import Region from '../../../../components/page/resister/Region';
-import ServiceType from '../../../../components/page/resister/ServiceType';
-import { UserResisterFormValidation, UserResisterFormValues } from '../type';
+import ImgUpload from '../../../../components/page/register/ImgUpload';
+import Region from '../../../../components/page/register/Region';
+import ServiceType from '../../../../components/page/register/ServiceType';
+import { UserRegisterFormValidation, UserRegisterFormValues } from '../type';
 
-export default function ResisterMidComponent({
+export default function RegisterMidComponent({
   values,
   validation,
   inputHeandler,
   preview,
 }: {
-  values: UserResisterFormValues;
-  validation: UserResisterFormValidation;
+  values: UserRegisterFormValues;
+  validation: UserRegisterFormValidation;
   inputHeandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   preview?: string;
 }) {

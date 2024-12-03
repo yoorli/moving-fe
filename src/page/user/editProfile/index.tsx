@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { TextBtn } from '../../../components/page/edit/EditBtn';
 import style from './index.module.css';
-import { UserResisterFormValidation, UserResisterFormValues } from './type';
-import { ServiceRegion } from '../../../components/page/resister/Region';
-import ResisterMidComponent from './components/Mid';
+import { UserregisterFormValidation, UserregisterFormValues } from './type';
+import { ServiceRegion } from '../../../components/page/register/Region';
+import RegisterMidComponent from './components/Mid';
 
 export default function UserEditProfilePage() {
   const [preview, setPreview] = useState<string | undefined>();
-  const [values, setValues] = useState<UserResisterFormValues>({
+  const [values, setValues] = useState<UserregisterFormValues>({
     image: null,
     region: undefined,
     small: undefined,
@@ -15,7 +15,7 @@ export default function UserEditProfilePage() {
     office: undefined,
   });
 
-  const [validation, setValidation] = useState<UserResisterFormValidation>({
+  const [validation, setValidation] = useState<UserregisterFormValidation>({
     image: true,
     region: false,
   });
@@ -73,7 +73,7 @@ export default function UserEditProfilePage() {
         <header className={style.top}>
           <span className={style.firstText}>프로필 수정</span>
         </header>
-        <ResisterMidComponent
+        <RegisterMidComponent
           values={values}
           validation={validation}
           inputHeandler={inputHeandler}

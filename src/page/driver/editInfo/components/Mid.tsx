@@ -16,7 +16,7 @@ type Props = {
   inputHeandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function DriverResisterMid({
+export default function DriverregisterMid({
   inputHeandler,
   values,
   validation,

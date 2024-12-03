@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { CancelBtn, TextBtn } from '../../../components/page/edit/EditBtn';
-import DriverResisterMid from './components/Mid';
+import DriverregisterMid from './components/Mid';
 import style from './index.module.css';
-import { DriverResisterFormValue, DriverResisterValidation } from './type';
-import { driverResisterValidation } from '../../../lib/function/validation';
-import { ServiceRegion } from '../../../components/page/resister/Region';
+import { DriverregisterFormValue, DriverregisterValidation } from './type';
+import { driverRegisterValidation } from '../../../lib/function/validation';
+import { ServiceRegion } from '../../../components/page/register/Region';
 
 export default function DriverEditProfilePage() {
   const [preview, setPreview] = useState<string | undefined>();
-  const [values, setValues] = useState<DriverResisterFormValue>({
+  const [values, setValues] = useState<DriverregisterFormValue>({
     image: null,
     name: '',
     history: '',
@@ -20,7 +20,7 @@ export default function DriverEditProfilePage() {
     region: [],
   });
 
-  const [validation, setValidation] = useState<DriverResisterValidation>({
+  const [validation, setValidation] = useState<DriverregisterValidation>({
     image: true,
     name: true,
     history: true,
@@ -90,7 +90,7 @@ export default function DriverEditProfilePage() {
 
       setValidation({
         ...validation,
-        [name]: driverResisterValidation(name, value),
+        [name]: driverRegisterValidation(name, value),
       });
     }
   };
@@ -105,7 +105,7 @@ export default function DriverEditProfilePage() {
 
     setValidation({
       ...validation,
-      [name]: driverResisterValidation(name, value),
+      [name]: driverRegisterValidation(name, value),
     });
   };
   return (
@@ -114,7 +114,7 @@ export default function DriverEditProfilePage() {
         <header className={style.top}>
           <span className={style.firstText}>프로필 수정</span>
         </header>
-        <DriverResisterMid
+        <DriverregisterMid
           values={values}
           validation={validation}
           preview={preview}
