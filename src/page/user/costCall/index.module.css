@@ -1,15 +1,15 @@
 .container {
   background-color: #f7f7f7;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  min-height: 100vh;
 }
 
 .mainContent {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
 }
 
 .contentSection {
@@ -83,21 +83,26 @@
   background-color: var(--gray-500);
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 744px) {
+  .container {
+    min-width: 332px;
+  }
+
   .contentSection {
-    max-width: 327px;
+    min-width: 332px;
+    padding: 10px;
   }
 
   .optionGuideBubble {
     padding: 12px 20px;
     line-height: 1.5;
     font-size: 14px;
-    max-width: 248px;
+    /* min-width: 248px; */
   }
 
   .optionBubble {
     padding: 16px;
-    max-width: 327px;
+
     display: flex;
     justify-content: center;
   }
@@ -109,5 +114,11 @@
 
   .editButton {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 1481px) {
+  .contentSection {
+    padding: 32px 30px;
   }
 }
