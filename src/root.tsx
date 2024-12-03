@@ -12,15 +12,13 @@ import DriverSignupPage from './page/driver/signup';
 import DriverCallPage from './page/driver/costCall';
 import UserMovingReview from './page/user/movingReview';
 import UserCostCallPage from './page/user/costCall';
-import UserResisterPage from './page/user/resister';
-import DriverResisterPage from './page/driver/resister';
+import UserRegisterPage from './page/user/register';
 import DriverEditProfilePage from './page/driver/editProfile';
 import DriverEditInfoPage from './page/driver/editInfo';
 import UserEditInfoPage from './page/user/editInfo';
 import UserEditProfilePage from './page/user/editProfile';
 import ServiceRandingPage from './page/root';
 import DriverRegisterPage from './page/driver/register';
-
 
 const router = createBrowserRouter([
   {
