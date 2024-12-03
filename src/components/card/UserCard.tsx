@@ -6,6 +6,9 @@ import Button from '../btn/Button';
 import { getDate, formatCurrency } from '../../lib/function/utils';
 
 import style from './UserCard.module.css';
+import { useMedia } from '../../lib/function/useMediaQuery';
+
+import writing from '../../assets/icons/ic_writing_medium.svg';
 
 type ProfileType = 'receive' | 'review' | 'confirmedCost';
 
@@ -34,6 +37,7 @@ interface ProfileProps {
 }
 
 export default function UserCard({ type, user }: ProfileProps) {
+  const isPc = useMedia().pc;
   return (
     <div
       className={classNames(style.card, {
@@ -45,12 +49,12 @@ export default function UserCard({ type, user }: ProfileProps) {
           <div>{user.label}</div>
           <div>{user.called}</div>
         </div>
-        {type === 'review' ? (
+        {type !== 'review' ? (
           <div className={style.createAt}>
             {user.createAt && getDate(user.createAt)}
           </div>
         ) : (
-          <div className={style.createTime}>
+          <div className={style.createAtRType}>
             {user.createAt && getDate(user.createAt)}
           </div>
         )}
@@ -58,16 +62,32 @@ export default function UserCard({ type, user }: ProfileProps) {
       <UserProfile type={type} user={user} />
       {type === 'receive' && (
         <div className={style.btnBox}>
-          <Button text='견적 보내기' style='solid448pxBlue300' />
+          <Button
+            text='견적 보내기'
+            style='solid448pxBlue300'
+            src={writing}
+          />
           <Button text='반려' style='outlined448pxBlue300' />
         </div>
       )}
+
       {type === 'confirmedCost' && (
         <div className={style.cost}>
-          <span className={style.text}>견적 금액 </span> {user.cost && formatCurrency(user.cost)}
+          <span className={style.text}>견적 금액 </span>{' '}
+          {user.cost && formatCurrency(user.cost)}
         </div>
       )}
-      {type === 'review' && <div className={style.review}>{user.review}</div>}
+
+      {type === 'review' && (
+        <>
+          <div className={style.review}>{user.review}</div>
+          {!isPc && (
+            <div className={style.createAtRTypeNoPc}>
+              {user.createAt && getDate(user.createAt)}
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import style from './UserProfile.module.css';
 
 import fullStarsMedium from '../../assets/icons/ic_full_star_medium.svg';
 import emptyStarMedium from '../../assets/icons/ic_empty_star_medium.svg';
+import { useMedia } from '../../lib/function/useMediaQuery';
 
 interface ProfileProps {
   type?: string;
@@ -70,25 +71,36 @@ export function getStars(rating: number) {
 }
 
 export default function UserProfile({ type, user }: ProfileProps) {
+  const isPc = useMedia().pc;
   return (
     <>
       {type !== 'review' ? (
         <div
           className={classNames(style.profile, {
-            [style.profileNoPadding]: type === 'confirmedCost',
+            [style.profilePadding]: type !== 'confirmedCost' && isPc,
           })}
         >
           <div className={style.userInfo}>{user.name} 고객님</div>
           <div className={style.separator}></div>
           <div className={style.movingInfo}>
-            <span className={style.movingLabel}>이사일</span>
-            {user.movingDate}
+            <span className={style.text}>
+              <span className={style.movingLabel}>이사일</span>
+              {user.movingDate}
+            </span>
+            <span
+              className={classNames(style.separatorHorizon, {
+                [style.hidden]: !isPc,
+              })}
+            ></span>
+            <span className={style.text}>
+              <span className={style.movingLabel}>출발</span>
+              {user.start}
+            </span>
             <span className={style.separatorHorizon}></span>
-            <span className={style.movingLabel}>출발</span>
-            {user.start}
-            <span className={style.separatorHorizon}></span>
-            <span className={style.movingLabel}>도착</span>
-            {user.end}
+            <span className={style.text}>
+              <span className={style.movingLabel}>도착</span>
+              {user.end}
+            </span>
           </div>
         </div>
       ) : (
