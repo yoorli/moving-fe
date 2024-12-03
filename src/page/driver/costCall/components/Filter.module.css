@@ -1,0 +1,36 @@
+.filter {
+  width: 328px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.movingType {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.filterName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 10px;
+  border-bottom: 1px solid var(--line-200);
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--line-100);
+}
+
+
+
+.movingFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
