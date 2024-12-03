@@ -47,6 +47,7 @@
 
 .reviewProfile {
   display: flex;
+  align-items: center;
   gap: 24px;
   padding: 16px 18px;
   border: 1px solid var(--line-100);
@@ -94,4 +95,8 @@
   font-size: 20px;
   font-weight: 400;
   color: var(--gray-500);
+}
+
+.stars {
+  display: flex;
 }

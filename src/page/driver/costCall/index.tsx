@@ -171,7 +171,7 @@ export default function DriverCallPage() {
     movingDate: '2024.07.01',
     start: '인천시 남동구',
     end: '경기도 고양시',
-    createAt: '2024.07.01 12:30:40',
+    createAt: '2024.12.02 20:56:40',
     cost: 210000,
   };
 
@@ -183,7 +183,7 @@ export default function DriverCallPage() {
     movingDate: '2024.07.01',
     start: '인천시 남동구',
     end: '경기도 고양시',
-    createAt: '2024.07.01 12:30:40',
+    createAt: '2024.12.02 20:30:40',
   };
 
   const user4 = {
@@ -192,12 +192,12 @@ export default function DriverCallPage() {
     called: false,
     profileImage: avatarGreenLarge,
     name: 'user4',
-    rating: 4.3,
+    rating: 3.5,
     cost: 210000,
     movingDate: '2024.07.01',
     start: '인천시 남동구',
     end: '경기도 고양시',
-    createAt: '2024.07.01 12:30:40',
+    createAt: '2024.12.02 17:30:40',
     review:
       '처음 견적 받아봤는데, 엄청 친절하시고 꼼꼼하세요! 귀찮게 이것저것 물어봤는데 잘 알려주셨습니다. 원룸 이사는 믿고 맡기세요! :)',
   };

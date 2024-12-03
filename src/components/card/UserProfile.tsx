@@ -1,5 +1,9 @@
 import classNames from 'classnames';
+
 import style from './UserProfile.module.css';
+
+import fullStarsMedium from '../../assets/icons/ic_full_star_medium.svg';
+import emptyStarMedium from '../../assets/icons/ic_empty_star_medium.svg';
 
 interface ProfileProps {
   type?: string;
@@ -22,6 +26,46 @@ interface ProfileProps {
     service?: string[];
     serviceRegion?: string[];
   };
+}
+
+export function getStars(rating: number) {
+  const stars = [];
+  const remainder = Number((rating % 1).toFixed(1));
+
+  for (let i = 1; i <= rating; i++) {
+    stars.push(<img key={i} src={fullStarsMedium} alt='star' />);
+  }
+  if (remainder > 0) {
+    stars.push(
+      <div style={{ position: 'relative', width: '24px', height: '24px' }}>
+        <img
+          src={emptyStarMedium}
+          alt='empty star'
+          style={{ position: 'absolute', top: 0, left: 0 }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: `${remainder * 100}%`,
+            height: '100%',
+            backgroundImage: `url(${fullStarsMedium})`,
+            backgroundSize: 'cover',
+            WebkitMaskImage: `url(${fullStarsMedium})`,
+            maskImage: `url(${fullStarsMedium})`,
+          }}
+        />
+      </div>,
+    );
+  }
+  if (rating < 4) {
+    for (let i = 1; i <= 5 - rating; i++) {
+      stars.push(<img src={emptyStarMedium} alt='empty star' />);
+    }
+  }
+
+  return stars;
 }
 
 export default function UserProfile({ type, user }: ProfileProps) {
@@ -63,7 +107,9 @@ export default function UserProfile({ type, user }: ProfileProps) {
               <span className={style.separatorHorizon}></span>
               <span className={style.movingLabelRType}>견적가</span>
             </div>
-            <div className={style.stars}>{user.rating}</div>
+            <div className={style.stars}>
+              {user.rating && getStars(user.rating)}
+            </div>
           </div>
         </div>
       )}
