@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { TextBtn } from '../../../components/page/edit/EditBtn';
 import style from './index.module.css';
-import { UserResisterFormValidation, UserResisterFormValues } from './type';
-import { ServiceRegion } from '../../../components/page/resister/Region';
-import ResisterMidComponent from './components/Mid';
+import { UserRegisterFormValidation, UserRegisterFormValues } from './type';
+import { ServiceRegion } from '../../../components/page/register/Region';
+import RegisterMidComponent from './components/Mid';
 
-export default function UserResisterPage() {
+export default function UserRegisterPage() {
   const [preview, setPreview] = useState<string | undefined>();
-  const [values, setValues] = useState<UserResisterFormValues>({
+  const [values, setValues] = useState<UserRegisterFormValues>({
     image: null,
     region: undefined,
     small: undefined,
@@ -15,7 +15,7 @@ export default function UserResisterPage() {
     office: undefined,
   });
 
-  const [validation, setValidation] = useState<UserResisterFormValidation>({
+  const [validation, setValidation] = useState<UserRegisterFormValidation>({
     image: true,
     region: false,
   });
@@ -76,7 +76,7 @@ export default function UserResisterPage() {
             추가 정보를 입력하여 회원가입을 완료해주세요.
           </span>
         </header>
-        <ResisterMidComponent
+        <RegisterMidComponent
           values={values}
           validation={validation}
           inputHeandler={inputHeandler}

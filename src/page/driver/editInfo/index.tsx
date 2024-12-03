@@ -4,7 +4,7 @@ import { CancelBtn, TextBtn } from '../../../components/page/edit/EditBtn';
 import style from './index.module.css';
 
 import { editValidation } from '../../../lib/function/validation';
-import DriverResisterMid from './components/Mid';
+import DriverregisterMid from './components/Mid';
 import { DriverEditInfoForm, DriverEditInfoValidation } from './type';
 
 export default function DriverEditInfoPage() {
@@ -67,7 +67,7 @@ export default function DriverEditInfoPage() {
         <header className={style.top}>
           <span className={style.firstText}>기본정보 수정</span>
         </header>
-        <DriverResisterMid
+        <DriverregisterMid
           values={values}
           validation={validation}
           inputHeandler={inputHeandler}

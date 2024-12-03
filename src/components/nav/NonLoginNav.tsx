@@ -1,5 +1,5 @@
 import style from './NonLoginNav.module.css';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/images/img_logo_icon_text_medium.svg';
 import menu from '../../assets/icons/ic_menu_medium.svg';
 import useDirection from '../../lib/function/direction';
 import LoginBtn from '../btn/LoginBtn';
