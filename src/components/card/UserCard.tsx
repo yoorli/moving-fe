@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import UserProfile from './UserProfile';
 import Button from '../btn/Button';
 
+import { getDate, formatCurrency } from '../../lib/function/utils';
+
 import style from './UserCard.module.css';
 
 type ProfileType = 'receive' | 'review' | 'confirmedCost';
@@ -29,26 +31,6 @@ interface ProfileProps {
     serviceRegion?: string[];
     review?: string;
   };
-}
-
-export function getDate(inputDate: string | Date) {
-  const now = new Date();
-  const date = new Date(inputDate);
-  const difference = now.getTime() - date.getTime();
-  const seconds = Math.floor(difference / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-
-  if (difference < 24 * 60 * 60 * 1000) {
-    if (hours > 0) return `${hours}시간 전`;
-    if (minutes > 0) return `${minutes}분 전`;
-    return `${seconds}초 전`;
-  } else {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `작성일 ${year}. ${month}. ${day}`;
-  }
 }
 
 export default function UserCard({ type, user }: ProfileProps) {
@@ -82,7 +64,7 @@ export default function UserCard({ type, user }: ProfileProps) {
       )}
       {type === 'confirmedCost' && (
         <div className={style.cost}>
-          <span className={style.text}>견적 금액 </span> {user.cost}원
+          <span className={style.text}>견적 금액 </span> {user.cost && formatCurrency(user.cost)}
         </div>
       )}
       {type === 'review' && <div className={style.review}>{user.review}</div>}

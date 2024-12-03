@@ -229,13 +229,13 @@ export default function DriverCallPage() {
         *Card-list/확정견적 &lt;Card user=&#123;user1&#125;&gt;
         <UserCard user={user1} />
         *Card-list/확정 견적 &lt;Card user=&#123;user2&#125;
-        type=&apos;confirm&apos;&gt;
+        type=&apos;confirmedCost&apos;&gt;
         <UserCard user={user2} type='confirmedCost' />
         *Card-list/받은 요청 &lt;Card user=&#123;user3&#125;
         type=&apos;receive&apos;&gt;
         <UserCard user={user3} type='receive' />
         *Card-list/내가 작성한 리뷰 &lt;Card user=&#123;user4&#125;
-        type=&apos;confirm&apos;&gt;
+        type=&apos;review&apos;&gt;
         <UserCard user={user4} type='review' />
       </div>
     </>

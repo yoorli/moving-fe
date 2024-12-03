@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 
+import { formatCurrency } from '../../lib/function/utils';
+
 import style from './UserProfile.module.css';
 
 import fullStarsMedium from '../../assets/icons/ic_full_star_medium.svg';
@@ -64,7 +66,6 @@ export function getStars(rating: number) {
       stars.push(<img src={emptyStarMedium} alt='empty star' />);
     }
   }
-
   return stars;
 }
 
@@ -106,6 +107,7 @@ export default function UserProfile({ type, user }: ProfileProps) {
               {user.movingDate}
               <span className={style.separatorHorizon}></span>
               <span className={style.movingLabelRType}>견적가</span>
+              {user.cost && formatCurrency(user.cost)}
             </div>
             <div className={style.stars}>
               {user.rating && getStars(user.rating)}
