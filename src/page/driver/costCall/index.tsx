@@ -206,7 +206,7 @@ export default function DriverCallPage() {
       '처음 견적 받아봤는데, 엄청 친절하시고 꼼꼼하세요! 귀찮게 이것저것 물어봤는데 잘 알려주셨습니다. 원룸 이사는 믿고 맡기세요! :)',
   };
   return (
-    <>
+    <div className={style.main}>
       <div className={style.container}>
         {/* {users.map((user) => (
           <DriverCard key={user.id} user={user} />
@@ -242,6 +242,6 @@ export default function DriverCallPage() {
         type=&apos;review&apos;&gt;
         <UserCard user={user4} type='review' />
       </div>
-    </>
+    </div>
   );
 }
