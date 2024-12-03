@@ -21,3 +21,13 @@
   font-size: 18px;
   font-weight: 600;
 }
+
+@media (max-width: 1199px) {
+  .option {
+    padding: 14px 20px;
+  }
+
+  .optionText {
+    font-size: 14px;
+  }
+}
