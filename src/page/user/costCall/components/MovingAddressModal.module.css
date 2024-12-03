@@ -118,9 +118,46 @@
   margin-top: 100px;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 528px) {
   .modalContent {
-    max-width: 292px;
+    margin: 0px 20px;
+  }
+
+  .addressDetail {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    margin-bottom: 7px;
+  }
+
+  .addressLabel {
+    min-width: 60px;
+    height: 26px;
+    max-width: 60px;
+  }
+
+  .modalTitle {
+    font-size: 18px;
+    font-weight: 700;
+    padding-top: 4px;
+  }
+}
+
+@media (max-width: 580px) and (min-width: 527px) {
+  .modalTitle {
+    font-size: 18px;
+    font-weight: 700;
+    padding-top: 4px;
+  }
+
+  .modalContent {
+    margin: 0px 20px;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 581px) {
+  .modalContent {
+    min-width: 292px;
+    margin: 0px 20px;
   }
 
   .modalTitle {
@@ -148,7 +185,7 @@
 
   .addressDetail {
     display: grid;
-    grid-template-columns: 1.3fr 4fr;
+    grid-template-columns: 0.5fr 4fr;
     margin-bottom: 7px;
   }
 
@@ -157,6 +194,7 @@
     font-weight: 600;
     height: fit-content;
     margin-top: 10px;
+    max-width: 50px;
   }
 
   .addressItemLabel {
@@ -167,5 +205,11 @@
 
   .pagination {
     max-width: 100%;
+  }
+}
+
+@media (max-width: 1481px) {
+  .contentSection {
+    padding: 32px 30px;
   }
 }
