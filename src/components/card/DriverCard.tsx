@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 
-import { useIsPc } from '../../lib/function/useMediaQuery';
-
 import DriverProfile from './DriverProfile';
 import Button from '../btn/Button';
+
+import { useMedia } from '../../lib/function/useMediaQuery';
+import { formatCurrency } from '../../lib/function/utils';
 
 import style from './DriverCard.module.css';
 
@@ -35,7 +36,7 @@ type ProfileProps = {
 };
 
 export default function DriverCard( { type, user }: ProfileProps) {
-  const isPc = useIsPc();
+  const isPc = useMedia().pc;
   return (
     <div
       className={classNames(style.card, {
@@ -61,7 +62,7 @@ export default function DriverCard( { type, user }: ProfileProps) {
             <Button
               text='기본 정보 수정'
               src={writingGray}
-              style='solid280pxBackground200'
+              btnStyle='solid280pxBackground200'
               onClick={() => {
                 console.log('onClick 성공');
               }}
@@ -69,7 +70,7 @@ export default function DriverCard( { type, user }: ProfileProps) {
             <Button
               text='내 프로필 수정'
               src={writing}
-              style='solid280pxBlue300'
+              btnStyle='solid280pxBlue300'
               onClick={() => {
                 console.log('onClick 성공');
               }}
@@ -91,7 +92,7 @@ export default function DriverCard( { type, user }: ProfileProps) {
       {type === 'cost' && (
         <div className={style.cost}>
           <span className={style.text}>견적 금액</span>
-          {user.cost}원
+          {user.cost && formatCurrency(user.cost)}
         </div>
       )}
       {type === 'waiting' && (
@@ -122,7 +123,7 @@ export default function DriverCard( { type, user }: ProfileProps) {
           </div>
           <div className={style.cost}>
             <span className={style.text}>견적 금액</span>
-            {user.cost}원
+            {user.cost && formatCurrency(user.cost)}
           </div>
           <div className={style.costBtn}>
             <Button

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 
-import { useIsPc } from '../../lib/function/useMediaQuery';
+import { useMedia } from '../../lib/function/useMediaQuery';
+import { formatCurrency } from '../../lib/function/utils';
 
 import style from './DriverProfile.module.css';
 
@@ -30,7 +31,7 @@ type ProfileProps = {
 };
 
 export default function DriverProfile({ type, user }: ProfileProps) {
-  const isPc = useIsPc();
+  const isPc = useMedia().pc;
   return (
     <div
       className={classNames(style.profile, {
@@ -141,10 +142,10 @@ export default function DriverProfile({ type, user }: ProfileProps) {
                   <span style={{ color: 'var(--gray-300)' }}>이사일</span>
                   {user.movingDate}
                 </span>
-                <span className={style.profile}>|</span>
+                <span className={style.separator}>|</span>
                 <span className={style.text}>
                   <span style={{ color: 'var(--gray-300)' }}>견적가</span>
-                  {user.cost}원
+                  {user.cost && formatCurrency(user.cost)}
                 </span>
               </>
             )}
