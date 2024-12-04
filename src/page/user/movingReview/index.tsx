@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Tab from '../../../components/tab/Tab';
 import style from './index.module.css';
-import NoContents from '../../../components/nocontents/NoContents';
+import NoContents from '../../../components/testContents/NoContents';
 import ModalContainer from '../../../components/modal/ModalContainer';
 import WritingReview from './components/WritingReview';
 

@@ -5,7 +5,7 @@ import Navigation from './components/Navigation';
 import MovingAddress from './components/MovingAddress';
 import MovingComments from './components/MovingComments';
 import ModalContainer from '../../../components/modal/ModalContainer';
-import NoContents from '../../../components/nocontents/NoContents';
+import NoContents from '../../../components/testContents/NoContents';
 import style from './index.module.css';
 
 export interface FormValues {
