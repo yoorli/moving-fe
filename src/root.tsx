@@ -19,6 +19,7 @@ import UserEditInfoPage from './page/user/editInfo';
 import UserEditProfilePage from './page/user/editProfile';
 import ServiceRandingPage from './page/root';
 import DriverRegisterPage from './page/driver/register';
+import MyPage from './page/driver/myPage';
 
 const router = createBrowserRouter([
   {
@@ -126,7 +127,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'myPage',
-        element: <span>myPage</span>,
+        element: <MyPage />,
       },
     ],
   },
