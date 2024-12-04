@@ -9,198 +9,149 @@ import avatarGreenLarge from '../../../assets/images/img_avatar_green_large.svg'
 import avatarPurpleLarge from '../../../assets/images/img_avatar_purple_large.svg';
 import avatarYellowLarge from '../../../assets/images/img_avatar_yellow_large.svg';
 
-// interface UserData {
-//   users: {
-//     id: number;
-//     label: string;
-//     called?: boolean;
-//     description: string;
-//     profileImage: string;
-//     nickname: string;
-//     rating?: number;
-//     reviews?: number;
-//     experience?: number;
-//     confirmedCases?: number;
-//     likes?: number;
-//     movingDate?: string;
-//     cost?: number;
-//     serviceRegion?: string[];
-//   }[];
-// }
-
-// const mockData: UserData = {
-//   users: [
-//     {
-//       id: 1,
-//       label: '소형이사',
-//       called: true,
-//       description: '고객님의 물품을 운송해 드립니다.',
-//       profileImage: avatarPinkMedium,
-//       nickname: 'test1',
-//       rating: 4.0,
-//       reviews: 20,
-//       experience: 1,
-//       confirmedCases: 50,
-//       likes: 12,
-//       cost: 350000,
-//     },
-//     {
-//       id: 2,
-//       label: '포장이사',
-//       called: true,
-//       description: '고객님의 물품을 운송해 드립니다.',
-//       profileImage: avatarBlueMedium,
-//       nickname: 'test2',
-//       movingDate: '2024.07.01',
-//       cost: 210000,
-//     },
-//     {
-//       id: 3,
-//       label: '대형이사',
-//       called: false,
-//       description: '고객님의 물품을 운송해 드립니다.',
-//       profileImage: avatarGreenLarge,
-//       nickname: 'test3',
-//       movingDate: '2024.07.01',
-//       cost: 210000,
-//     },
-//   ],
-// };
-
 export default function DriverCallPage() {
-  // const { users } = mockData;
   const driver1 = {
     id: 1,
-    label: ['소형이사', '대형이사'],
-    called: true,
-    description: '고객님의 물품을 운송해 드립니다.',
+    serviceType: ['소형이사', '대형이사'],
+    isAssigned: true,
+    summary: '고객님의 물품을 운송해 드립니다.',
     profileImage: avatarPinkMedium,
     nickname: 'test1',
-    rating: 4.0,
-    reviews: 20,
-    experience: 1,
-    confirmedCases: 50,
-    likes: 12,
+    reviewStats: {
+      averageScore: 4.0,
+      totalReviews: 20
+    },
+    career: 1,
+    confirmationCount: 50,
+    favoriteCount: 12,
     isLiked: true,
   };
 
   const driver2 = {
     id: 2,
-    label: ['소형이사', '포장이사'],
-    called: true,
-    description: '고객님의 물품을 운송해 드립니다.',
+    serviceType: ['소형이사', '포장이사'],
+    isAssigned: true,
+    summary: '고객님의 물품을 운송해 드립니다.',
     profileImage: avatarBlueMedium,
     nickname: 'test2',
-    rating: 4.3,
-    reviews: 70,
-    experience: 7,
-    confirmedCases: 150,
-    likes: 5,
+    reviewStats: {
+      averageScore: 4.3,
+      totalReviews: 70
+    },
+    career: 7,
+    confirmationCount: 150,
+    favoriteCount: 5,
     isLiked: false,
-    cost: 210000,
+    price: 210000,
   };
 
   const driver3 = {
     id: 3,
-    label: ['대형이사'],
-    called: false,
-    description: '고객님의 물품을 운송해 드립니다.',
+    serviceType: ['대형이사'],
+    isAssigned: false,
+    summary: '고객님의 물품을 운송해 드립니다.',
     profileImage: avatarGreenLarge,
     nickname: 'test3',
-    rating: 4.3,
-    reviews: 70,
-    experience: 7,
-    confirmedCases: 150,
-    likes: 5,
+    reviewStats: {
+      averageScore: 4.3,
+      totalReviews: 70
+    },
+    career: 7,
+    confirmationCount: 150,
+    favoriteCount: 5,
     isLiked: false,
-    cost: 210000,
+    price: 210000,
     movingDate: '2024.07.01',
-    start: '인천시 남동구',
-    end: '경기도 고양시',
+    departure: '인천시 남동구',
+    arrival: '경기도 고양시',
   };
 
   const driver4 = {
     id: 4,
-    label: ['대형이사', '포장이사'],
-    called: false,
+    serviceType: ['대형이사', '포장이사'],
+    isAssigned: false,
     profileImage: avatarPurpleLarge,
     nickname: 'test4',
-    rating: 4.3,
-    reviews: 70,
-    experience: 7,
-    confirmedCases: 150,
-    likes: 5,
+    reviewStats: {
+      averageScore: 4.3,
+      totalReviews: 70
+    },
+    career: 7,
+    confirmationCount: 150,
+    favoriteCount: 5,
     isLiked: true,
   };
 
   const driver5 = {
     id: 5,
-    description: '고객님의 물품을 운송해 드립니다.',
+    summary: '고객님의 물품을 운송해 드립니다.',
     profileImage: avatarPurpleLarge,
     nickname: 'test5',
-    rating: 4.3,
-    reviews: 70,
-    experience: 7,
-    confirmedCases: 150,
+    reviewStats: {
+      averageScore: 4.3,
+      totalReviews: 70
+    },
+    career: 7,
+    confirmationCount: 150,
     service: ['소형이사', '포장이사'],
     serviceRegion: ['서울', '경기'],
   };
 
   const driver6 = {
     id: 6,
-    label: ['소형이사', '대형이사', '포장이사'],
-    called: true,
+    serviceType: ['소형이사', '대형이사', '포장이사'],
+    isAssigned: true,
     profileImage: avatarYellowLarge,
     nickname: 'test6',
-    cost: 210000,
+    price: 210000,
     movingDate: '2024.07.01',
   };
 
   const user1 = {
     id: 1,
-    label: ['소형이사'],
-    called: true,
+    serviceType: ['소형이사'],
+    isAssigned: true,
     name: 'user1',
     movingDate: '2024.07.01',
-    start: '인천시 남동구',
-    end: '경기도 고양시',
+    departure: '인천시 남동구',
+    arrival: '경기도 고양시',
     createAt: '2024.07.01 12:30:40',
   };
 
   const user2 = {
     id: 2,
-    label: ['포장이사'],
-    called: true,
+    serviceType: ['포장이사'],
+    isAssigned: true,
     name: 'user2',
     movingDate: '2024.07.01',
-    start: '인천시 남동구',
-    end: '경기도 고양시',
+    departure: '인천시 남동구',
+    arrival: '경기도 고양시',
     createAt: '2024.12.02 20:56:40',
-    cost: 210000,
+    price: 210000,
   };
 
   const user3 = {
     id: 3,
-    label: ['대형이사'],
-    called: false,
+    serviceType: ['대형이사'],
+    isAssigned: false,
     name: 'user3',
     movingDate: '2024.07.01',
-    start: '인천시 남동구',
-    end: '경기도 고양시',
+    departure: '인천시 남동구',
+    arrival: '경기도 고양시',
     createAt: '2024.12.02 20:30:40',
   };
 
   const user4 = {
     id: 3,
-    label: ['소형이사', '대형이사'],
-    called: false,
+    serviceType: ['소형이사', '대형이사'],
+    isAssigned: false,
     profileImage: avatarGreenLarge,
     name: 'user4',
     rating: 3.5,
-    cost: 210000,
+    price: 210000,
     movingDate: '2024.07.01',
-    start: '인천시 남동구',
-    end: '경기도 고양시',
+    departure: '인천시 남동구',
+    arrival: '경기도 고양시',
     createAt: '2024.12.03 13:20:40',
     review:
       '처음 견적 받아봤는데, 엄청 친절하시고 꼼꼼하세요! 귀찮게 이것저것 물어봤는데 잘 알려주셨습니다. 원룸 이사는 믿고 맡기세요! :)',
@@ -208,9 +159,6 @@ export default function DriverCallPage() {
   return (
     <div className={style.main}>
       <div className={style.container}>
-        {/* {users.map((user) => (
-          <DriverCard key={user.id} user={user} />
-          ))} */}
         *Card-list/기사님 찾기 &lt;Card user=&#123;driver1&#125;&gt;
         <DriverCard user={driver1} />
         *Card-list/견적내역 &lt;Card user=&#123;driver2&#125;
