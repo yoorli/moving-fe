@@ -19,7 +19,7 @@ export default function DriverCallPage() {
     nickname: 'test1',
     reviewStats: {
       averageScore: 4.0,
-      totalReviews: 20
+      totalReviews: 20,
     },
     career: 1,
     confirmationCount: 50,
@@ -36,7 +36,7 @@ export default function DriverCallPage() {
     nickname: 'test2',
     reviewStats: {
       averageScore: 4.3,
-      totalReviews: 70
+      totalReviews: 70,
     },
     career: 7,
     confirmationCount: 150,
@@ -54,7 +54,7 @@ export default function DriverCallPage() {
     nickname: 'test3',
     reviewStats: {
       averageScore: 4.3,
-      totalReviews: 70
+      totalReviews: 70,
     },
     career: 7,
     confirmationCount: 150,
@@ -74,7 +74,7 @@ export default function DriverCallPage() {
     nickname: 'test4',
     reviewStats: {
       averageScore: 4.3,
-      totalReviews: 70
+      totalReviews: 70,
     },
     career: 7,
     confirmationCount: 150,
@@ -89,7 +89,7 @@ export default function DriverCallPage() {
     nickname: 'test5',
     reviewStats: {
       averageScore: 4.3,
-      totalReviews: 70
+      totalReviews: 70,
     },
     career: 7,
     confirmationCount: 150,
@@ -109,9 +109,9 @@ export default function DriverCallPage() {
 
   const user1 = {
     id: 1,
-    serviceType: ['소형이사'],
+    movingType: ['소형이사'],
     isAssigned: true,
-    name: 'user1',
+    customer: 'user1',
     movingDate: '2024.07.01',
     departure: '인천시 남동구',
     arrival: '경기도 고양시',
@@ -120,9 +120,9 @@ export default function DriverCallPage() {
 
   const user2 = {
     id: 2,
-    serviceType: ['포장이사'],
+    movingType: ['포장이사'],
     isAssigned: true,
-    name: 'user2',
+    customer: 'user2',
     movingDate: '2024.07.01',
     departure: '인천시 남동구',
     arrival: '경기도 고양시',
@@ -132,9 +132,9 @@ export default function DriverCallPage() {
 
   const user3 = {
     id: 3,
-    serviceType: ['대형이사'],
+    movingType: ['대형이사'],
     isAssigned: false,
-    name: 'user3',
+    customer: 'user3',
     movingDate: '2024.07.01',
     departure: '인천시 남동구',
     arrival: '경기도 고양시',
@@ -143,17 +143,17 @@ export default function DriverCallPage() {
 
   const user4 = {
     id: 3,
-    serviceType: ['소형이사', '대형이사'],
-    isAssigned: false,
-    profileImage: avatarGreenLarge,
-    name: 'user4',
+    movingType: ['소형이사', '대형이사'],
+    isAssigned: true,
+    profileImg: avatarGreenLarge,
+    moverName: 'user4',
     rating: 3.5,
     price: 210000,
     movingDate: '2024.07.01',
     departure: '인천시 남동구',
     arrival: '경기도 고양시',
     createAt: '2024.12.03 13:20:40',
-    review:
+    content:
       '처음 견적 받아봤는데, 엄청 친절하시고 꼼꼼하세요! 귀찮게 이것저것 물어봤는데 잘 알려주셨습니다. 원룸 이사는 믿고 맡기세요! :)',
   };
   return (

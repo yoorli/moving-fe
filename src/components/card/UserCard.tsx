@@ -15,24 +15,20 @@ type ProfileType = 'receive' | 'review' | 'confirmedCost';
 interface ProfileProps {
   type?: ProfileType;
   user: {
-    label?: string[];
-    called?: boolean;
-    name: string;
-    movingDate?: string;
-    start?: string;
-    end?: string;
-    createAt?: string;
-    description?: string;
-    profileImage?: string;
-    rating?: number;
-    reviews?: number;
-    experience?: number;
-    confirmedCases?: number;
-    likes?: number;
-    cost?: number;
-    service?: string[];
-    serviceRegion?: string[];
-    review?: string;
+    movingType?: string[]; // 이사 서비스 유형
+    isAssigned?: boolean;// 지정견적 여부
+    customer?: string;// 고객 이름
+    moverName?: string; //기사 닉네임
+    movingDate?: string;// 이사 날짜
+    departure?: string;// 출발지
+    arrival?: string;// 도착지
+    price?: number;// 견적가
+    createAt?: string;// 작성일
+    profileImg?: string;// 기사 프로필 이미지
+    reviewStats?: {
+      averageScore: number;// 평점
+    };
+    content?: string;// 리뷰 내용
   };
 }
 
@@ -46,8 +42,8 @@ export default function UserCard({ type, user }: ProfileProps) {
     >
       <div className={style.top}>
         <div>
-          <div>{user.label}</div>
-          <div>{user.called}</div>
+          <div>{user.movingType}</div>
+          <div>{user.isAssigned}</div>
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
@@ -74,13 +70,13 @@ export default function UserCard({ type, user }: ProfileProps) {
       {type === 'confirmedCost' && (
         <div className={style.cost}>
           <span className={style.text}>견적 금액 </span>{' '}
-          {user.cost && formatCurrency(user.cost)}
+          {user.price && formatCurrency(user.price)}
         </div>
       )}
 
       {type === 'review' && (
         <>
-          <div className={style.review}>{user.review}</div>
+          <div className={style.review}>{user.content}</div>
           {!isPc && (
             <div className={style.createAtRTypeNoPc}>
               {user.createAt && getDate(user.createAt)}
