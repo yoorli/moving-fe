@@ -2,6 +2,7 @@ import classNames from 'classnames';
 
 import DriverProfile from './DriverProfile';
 import Button from '../btn/Button';
+import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { formatCurrency } from '../../lib/function/utils';
@@ -16,27 +17,47 @@ type ProfileType = 'profile' | 'cost' | 'waiting' | 'dibs' | 'review';
 interface ProfileProps {
   type?: ProfileType;
   user: {
-    label?: string[];
-    called?: boolean;
-    profileImage: string;
-    nickname: string;
-    description?: string;
-    rating?: number;
-    reviews?: number;
-    experience?: number;
-    confirmedCases?: number;
-    likes?: number;
-    isLiked?: boolean;
-    movingDate?: string;
-    start?: string;
-    end?: string;
-    cost?: number;
-    service?: string[];
-    serviceRegion?: string[];
+    id: number; // 기사 아이디
+    serviceType?: string[]; // 서비스 유형
+    isAssigned?: boolean; // 지정경적 여부
+    profileImage: string; // 프로필 이미지
+    nickname: string; // 기사 닉네임
+    career?: number; // 경력
+    summary?: string; // 한 줄 소개
+    serviceRegion?: string[]; // 서비스 지역
+    comment?: string; //요구사항
+    reviewStats?: {
+      averageScore?: number; // 평점
+      totalReviews?: number; // 리뷰 갯수
+    };
+    favoriteCount?: number; // 찜 갯수
+    confirmationCount?: number; // 확정 건 수
+    movingDate?: string; // 이사 날짜
+    departure?: string; // 출발지
+    arrival?: string; // 도착지
+    isLiked?: boolean; // 찜 여부
+    price?: number; //견적가
   };
+}
+
+type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
+
+const chipText = (type: string): ChipType => {
+  switch (type) {
+    case '소형이사':
+      return 'SMALL';
+    case '가정이사':
+      return 'HOME';
+    case '사무실이사':
+      return 'COMPANY';
+    case '확정 견적':
+      return 'CONFIRM';
+    default:
+      return 'WAITING';
+  }
 };
 
-export default function DriverCard( { type, user }: ProfileProps) {
+export default function DriverCard({ type, user }: ProfileProps) {
   const isPc = useMedia().pc;
   return (
     <div
@@ -57,7 +78,7 @@ export default function DriverCard( { type, user }: ProfileProps) {
           )}
           <div className={style.namePType}>
             {user.nickname}
-            <div className={style.contentPType}>{user.description}</div>
+            <div className={style.contentPType}>{user.summary}</div>
           </div>
           <div className={style.buttonBoxPType}>
             <Button
@@ -80,20 +101,22 @@ export default function DriverCard( { type, user }: ProfileProps) {
         </div>
       ) : (
         <div className={style.label}>
-          {user.label}
-          {user.called ? ' 지정견적요청' : ''}
-        </div>
+            {user.serviceType?.map((type, index) => (
+              <Chip key={index} type={chipText(type)} />
+            ))}
+            {user.isAssigned && <Chip type='ASSIGN' />}
+          </div>
       )}
       {(type === 'cost' || type === undefined) && (
         <>
-          <span className={style.content}>{user.description}</span>
+          <span className={style.content}>{user.summary}</span>
         </>
       )}
       <DriverProfile user={user} type={type} />
       {type === 'cost' && (
         <div className={style.cost}>
           <span className={style.text}>견적 금액</span>
-          {user.cost && formatCurrency(user.cost)}
+          {user.price && formatCurrency(user.price)}
         </div>
       )}
       {type === 'waiting' && (
@@ -115,16 +138,16 @@ export default function DriverCard( { type, user }: ProfileProps) {
               |
             </span>
             <span className={style.movingInfo}>
-              <span className={style.movingLabel}>출발</span> {user.start}
+              <span className={style.movingLabel}>출발</span> {user.departure}
             </span>
             <span className={style.separator}>|</span>
             <span className={style.movingInfo}>
-              <span className={style.movingLabel}>도착</span> {user.end}
+              <span className={style.movingLabel}>도착</span> {user.arrival}
             </span>
           </div>
           <div className={style.cost}>
             <span className={style.text}>견적 금액</span>
-            {user.cost && formatCurrency(user.cost)}
+            {user.price && formatCurrency(user.price)}
           </div>
           <div className={style.costBtn}>
             <Button
