@@ -52,7 +52,7 @@
   height: 100%;
 }
 
-.likes {
+.favoriteCount {
   min-width: 49px;
   display: flex;
   justify-content: end;

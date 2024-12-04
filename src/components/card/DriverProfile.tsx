@@ -12,25 +12,28 @@ import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
 interface ProfileProps {
   type?: string;
   user: {
-    label?: string[];
-    called?: boolean;
-    description?: string;
-    profileImage: string;
-    nickname: string;
-    rating?: number;
-    reviews?: number;
-    experience?: number;
-    confirmedCases?: number;
-    likes?: number;
-    isLiked?: boolean;
-    movingDate?: string;
-    start?: string;
-    end?: string;
-    cost?: number;
-    service?: string[];
-    serviceRegion?: string[];
+    id: number; // 기사 아이디
+    serviceType?: string[]; // 서비스 유형
+    isAssigned?: boolean; // 지정경적 여부
+    profileImage: string; // 프로필 이미지
+    nickname: string; // 기사 닉네임
+    career?: number; // 경력
+    summary?: string; // 한 줄 소개
+    serviceRegion?: string[]; // 서비스 지역
+    comment?: string; //요구사항
+    reviewStats?: {
+      averageScore?: number; // 평점
+      totalReviews?: number; // 리뷰 갯수
+    };
+    favoriteCount?: number; // 찜 갯수
+    confirmationCount?: number; // 확정 건 수
+    movingDate?: string; // 이사 날짜
+    departure?: string; // 출발지
+    arrival?: string; // 도착지
+    isLiked?: boolean; // 찜 여부
+    price?: number; //견적가
   };
-};
+}
 
 export default function DriverProfile({ type, user }: ProfileProps) {
   const isPc = useMedia().pc;
@@ -55,30 +58,31 @@ export default function DriverProfile({ type, user }: ProfileProps) {
         {type === 'profile' ? (
           <>
             <div className={style.details}>
-              {user.rating !== undefined && user.reviews !== undefined && (
-                <span className={style.stars}>
-                  <img src={yellowStarSmall} alt='yellowStar' />
-                  {user.rating.toFixed(1)}
-                  <span style={{ color: 'var(--gray-300)' }}>
-                    ({user.reviews})
+              {user.reviewStats?.averageScore !== undefined &&
+                user.reviewStats.totalReviews !== undefined && (
+                  <span className={style.stars}>
+                    <img src={yellowStarSmall} alt='yellowStar' />
+                    {user.reviewStats.averageScore.toFixed(1)}
+                    <span style={{ color: 'var(--gray-300)' }}>
+                      ({user.reviewStats.totalReviews})
+                    </span>
                   </span>
-                </span>
-              )}
+                )}
               <span className={style.separator}>|</span>
               <span className={style.text}>
                 <span style={{ color: 'var(--gray-300)' }}>경력</span>
-                {user.experience}년
+                {user.career}년
               </span>
               <span className={style.separator}>|</span>
               <span className={style.text}>
-                {user.confirmedCases}건
+                {user.confirmationCount}건
                 <span style={{ color: 'var(--gray-300)' }}>확정</span>
               </span>
             </div>
             <div className={style.detailsPType}>
               <span className={style.textPType}>
                 <span className={style.movingLabel}>제공 서비스</span>
-                {user.service?.join(', ')}
+                {user.serviceType?.join(', ')}
               </span>
               <span
                 className={classNames(style.separator, {
@@ -97,9 +101,13 @@ export default function DriverProfile({ type, user }: ProfileProps) {
           // 기본 프로필
           <div className={style.name}>
             <span>{user.nickname} 기사님</span>
-            {user.likes !== undefined && (
-              <span className={style.likes}>
-                <img src={user.isLiked ? fullHeartMedium : emptyHeartMedium} alt='fullHeart' /> {user.likes}
+            {user.favoriteCount !== undefined && (
+              <span className={style.favoriteCount}>
+                <img
+                  src={user.isLiked ? fullHeartMedium : emptyHeartMedium}
+                  alt='fullHeart'
+                />{' '}
+                {user.favoriteCount}
               </span>
             )}
           </div>
@@ -107,28 +115,29 @@ export default function DriverProfile({ type, user }: ProfileProps) {
         {/* 기본 프로필 */}
         {!(type === 'review' || type === 'profile') && (
           <div className={style.details}>
-            {user.rating !== undefined && user.reviews !== undefined && (
-              <>
-                <span className={style.stars}>
-                  <img src={yellowStarSmall} alt='yellowStar' />
-                  {user.rating.toFixed(1)}
-                  <span style={{ color: 'var(--gray-300)' }}>
-                    ({user.reviews})
+            {user.reviewStats?.averageScore !== undefined &&
+              user.reviewStats.totalReviews !== undefined && (
+                <>
+                  <span className={style.stars}>
+                    <img src={yellowStarSmall} alt='yellowStar' />
+                    {user.reviewStats.averageScore.toFixed(1)}
+                    <span style={{ color: 'var(--gray-300)' }}>
+                      ({user.reviewStats.totalReviews})
+                    </span>
                   </span>
-                </span>
-                <span className={style.separator}>|</span>
-              </>
-            )}
-            {user.experience !== undefined &&
-              user.confirmedCases !== undefined && (
+                  <span className={style.separator}>|</span>
+                </>
+              )}
+            {user.career !== undefined &&
+              user.confirmationCount !== undefined && (
                 <>
                   <span className={style.text}>
                     <span style={{ color: 'var(--gray-300)' }}>경력</span>
-                    {user.experience}년
+                    {user.career}년
                   </span>
                   <span className={style.separator}>|</span>
                   <span className={style.text}>
-                    {user.confirmedCases}건
+                    {user.confirmationCount}건
                     <span style={{ color: 'var(--gray-300)' }}>확정</span>
                   </span>
                 </>
@@ -138,7 +147,7 @@ export default function DriverProfile({ type, user }: ProfileProps) {
         {/* review 타입, 이사일, 견적가 표시 */}
         {type === 'review' && (
           <div className={style.details}>
-            {user.movingDate !== undefined && user.cost !== undefined && (
+            {user.movingDate !== undefined && user.price !== undefined && (
               <>
                 <span className={style.text}>
                   <span style={{ color: 'var(--gray-300)' }}>이사일</span>
@@ -147,7 +156,7 @@ export default function DriverProfile({ type, user }: ProfileProps) {
                 <span className={style.separator}>|</span>
                 <span className={style.text}>
                   <span style={{ color: 'var(--gray-300)' }}>견적가</span>
-                  {user.cost && formatCurrency(user.cost)}
+                  {user.price && formatCurrency(user.price)}
                 </span>
               </>
             )}
