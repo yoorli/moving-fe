@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Tab from '../../../components/tab/Tab';
 import style from './index.module.css';
-// import NoContents from '../../../components/nocontents/NoContents';
+import NoContents from '../../../components/nocontents/NoContents';
 import ModalContainer from '../../../components/modal/ModalContainer';
 import WritingReview from './components/WritingReview';
 
@@ -30,20 +30,20 @@ export default function UserMovingReview() {
       />
       {isModalOpen && (
         <ModalContainer
-          title='지정 견적 요청하기'
-          isText={false}
-          buttonText='일반 견적 요청하기'
+          title='리뷰 쓰기'
+          buttonText='리뷰 등록'
           closeBtnClick={() => setIsModalOpen(!isModalOpen)}
           buttonClick={modalBtnClick}
         >
           <WritingReview />
         </ModalContainer>
       )}
-      {/* <NoContents
+      <NoContents
+        image='file'
         hasButton={true}
         buttonText='리뷰 작성하러 가기'
         buttonHandler={() => handleTabChange('first')}
-      /> */}
+      />
     </div>
   );
 }

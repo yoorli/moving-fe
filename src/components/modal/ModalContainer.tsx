@@ -2,11 +2,16 @@ import Button from '../btn/Button';
 import style from './ModalContainer.module.css';
 import closeButton from '../../assets/icons/ic_x_large.svg';
 import { ReactNode } from 'react';
+import classNames from 'classnames';
 
 interface modalProps {
   title: string;
-  isText: boolean; // 모달 안에 넣을 것이 컴포넌트인지 단순 텍스트인지 확인
+  isText?: boolean; // 모달 안에 넣을 것이 컴포넌트인지 단순 텍스트인지 확인
   text?: string;
+  isFilter?: boolean; // 예외적으로 filter 모달은 스타일이 달라서 추가
+  secondTitle?: string;
+  selectedTab?: 'modalFirstTab' | 'modalSecondTab';
+  onTabChange?: (selectedTab: 'modalFirstTab' | 'modalSecondTab') => void;
   children?: ReactNode;
   buttonText: string;
   closeBtnClick: () => void;
@@ -15,18 +20,59 @@ interface modalProps {
 
 export default function ModalContainer({
   title,
-  isText,
+  isText = false,
   text,
+  isFilter = false,
+  secondTitle,
+  selectedTab,
+  onTabChange,
   children,
   buttonText,
   closeBtnClick,
   buttonClick,
 }: modalProps) {
+  const containerStyle = classNames({
+    [style.container]: !isText && !isFilter,
+    [style.textContainer]: isText,
+    [style.filterContainer]: isFilter,
+  });
+
+  const titleStyle = classNames({
+    [style.title]: !isFilter,
+    [style.filterTitle]: isFilter,
+  });
+
+  const handleTabClick = (modalTab: 'modalFirstTab' | 'modalSecondTab') => {
+    onTabChange?.(modalTab);
+  };
+
+  const activeModalTab = (
+    modalTab: 'modalFirstTab' | 'modalSecondTab',
+    text: string | undefined,
+  ) => (
+    <div
+      className={classNames(style.filterContent, {
+        [style.active]: selectedTab === modalTab,
+      })}
+      onClick={() => handleTabClick(modalTab)}
+    >
+      {text}
+    </div>
+  );
+
   return (
     <div className={style.overlay}>
-      <div className={style.container}>
+      <div className={containerStyle}>
         <div className={style.header}>
-          <div className={style.title}>{title}</div>
+          {isFilter ? (
+            <div className={style.filterTitle}>
+              {activeModalTab('modalFirstTab', title)}
+              {activeModalTab('modalSecondTab', secondTitle)}
+            </div>
+          ) : (
+            <div className={titleStyle}>{title}</div>
+          )}
+
           <img
             className={style.close}
             src={closeButton}
