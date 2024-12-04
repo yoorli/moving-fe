@@ -2,6 +2,7 @@ import classNames from 'classnames';
 
 import DriverProfile from './DriverProfile';
 import Button from '../btn/Button';
+import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { formatCurrency } from '../../lib/function/utils';
@@ -38,6 +39,23 @@ interface ProfileProps {
     price?: number; //견적가
   };
 }
+
+type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
+
+const chipText = (type: string): ChipType => {
+  switch (type) {
+    case '소형이사':
+      return 'SMALL';
+    case '가정이사':
+      return 'HOME';
+    case '사무실이사':
+      return 'COMPANY';
+    case '확정 견적':
+      return 'CONFIRM';
+    default:
+      return 'WAITING';
+  }
+};
 
 export default function DriverCard({ type, user }: ProfileProps) {
   const isPc = useMedia().pc;
@@ -83,9 +101,11 @@ export default function DriverCard({ type, user }: ProfileProps) {
         </div>
       ) : (
         <div className={style.label}>
-          {user.serviceType}
-          {user.isAssigned ? ' 지정견적요청' : ''}
-        </div>
+            {user.serviceType?.map((type, index) => (
+              <Chip key={index} type={chipText(type)} />
+            ))}
+            {user.isAssigned && <Chip type='ASSIGN' />}
+          </div>
       )}
       {(type === 'cost' || type === undefined) && (
         <>

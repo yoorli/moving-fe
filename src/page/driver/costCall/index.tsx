@@ -12,7 +12,7 @@ import avatarYellowLarge from '../../../assets/images/img_avatar_yellow_large.sv
 export default function DriverCallPage() {
   const driver1 = {
     id: 1,
-    serviceType: ['소형이사', '대형이사'],
+    serviceType: ['소형이사', '가정이사'],
     isAssigned: true,
     summary: '고객님의 물품을 운송해 드립니다.',
     profileImage: avatarPinkMedium,
@@ -29,7 +29,7 @@ export default function DriverCallPage() {
 
   const driver2 = {
     id: 2,
-    serviceType: ['소형이사', '포장이사'],
+    serviceType: ['소형이사', '사무실이사'],
     isAssigned: true,
     summary: '고객님의 물품을 운송해 드립니다.',
     profileImage: avatarBlueMedium,
@@ -47,7 +47,7 @@ export default function DriverCallPage() {
 
   const driver3 = {
     id: 3,
-    serviceType: ['대형이사'],
+    serviceType: ['가정이사'],
     isAssigned: false,
     summary: '고객님의 물품을 운송해 드립니다.',
     profileImage: avatarGreenLarge,
@@ -68,7 +68,7 @@ export default function DriverCallPage() {
 
   const driver4 = {
     id: 4,
-    serviceType: ['대형이사', '포장이사'],
+    serviceType: ['가정이사', '사무실이사'],
     isAssigned: false,
     profileImage: avatarPurpleLarge,
     nickname: 'test4',
@@ -93,13 +93,13 @@ export default function DriverCallPage() {
     },
     career: 7,
     confirmationCount: 150,
-    service: ['소형이사', '포장이사'],
+    service: ['소형이사', '사무실이사'],
     serviceRegion: ['서울', '경기'],
   };
 
   const driver6 = {
     id: 6,
-    serviceType: ['소형이사', '대형이사', '포장이사'],
+    serviceType: ['소형이사', '가정이사', '사무실이사'],
     isAssigned: true,
     profileImage: avatarYellowLarge,
     nickname: 'test6',
@@ -120,7 +120,7 @@ export default function DriverCallPage() {
 
   const user2 = {
     id: 2,
-    movingType: ['포장이사'],
+    movingType: ['사무실이사'],
     isAssigned: true,
     customer: 'user2',
     movingDate: '2024.07.01',
@@ -132,7 +132,7 @@ export default function DriverCallPage() {
 
   const user3 = {
     id: 3,
-    movingType: ['대형이사'],
+    movingType: ['가정이사'],
     isAssigned: false,
     customer: 'user3',
     movingDate: '2024.07.01',
@@ -143,7 +143,7 @@ export default function DriverCallPage() {
 
   const user4 = {
     id: 3,
-    movingType: ['소형이사', '대형이사'],
+    movingType: ['소형이사', '가정이사'],
     isAssigned: true,
     profileImg: avatarGreenLarge,
     moverName: 'user4',
