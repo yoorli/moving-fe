@@ -1,5 +1,10 @@
 .container {
   border-bottom: 1px solid #f2f2f2;
+
+  width: 100%;
+  max-width: 1920px;
+
+  padding: 0 260px;
 }
 
 .select {
@@ -8,10 +13,7 @@
   gap: 32px;
 
   width: 100%;
-  max-width: 1400px;
-  height: 88px;
-
-  margin: 0 auto;
+  height: 80px;
 }
 
 .selectedContent {
@@ -36,10 +38,7 @@
   align-items: center;
 
   width: 100%;
-  max-width: 1400px;
   height: 96px;
-
-  margin: 0 auto;
 }
 
 .content {
@@ -48,3 +47,64 @@
   color: var(--black-400);
 }
 
+/* 1119px ~ 744px */
+@media (max-width: 1199px) and (min-width: 744px) {
+  .container {
+    max-width: 1199px;
+    /* padding 수정 확정되면 이 부분 수정 */
+    padding: 0 72px;
+  }
+
+  .select {
+    gap: 24px;
+
+    height: 54px;
+  }
+
+  .selectedContent {
+    font-size: 14px;
+  }
+
+  .active {
+    font-weight: 700;
+  }
+
+  .nonSelect {
+    height: 54px;
+  }
+
+  .content {
+    font-size: 18px;
+  }
+}
+
+/* 743px ~ 375px */
+@media (max-width: 743px) {
+  .container {
+    max-width: 1199px;
+
+    padding: 0 24px;
+  }
+
+  .select {
+    gap: 24px;
+
+    height: 54px;
+  }
+
+  .selectedContent {
+    font-size: 14px;
+  }
+
+  .active {
+    font-weight: 700;
+  }
+
+  .nonSelect {
+    height: 54px;
+  }
+
+  .content {
+    font-size: 18px;
+  }
+}
