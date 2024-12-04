@@ -28,6 +28,12 @@ export default function useDirection() {
     nav('/user/costCall');
   };
 
+  const direction_driverEditProfile = () => {
+    nav('/driver/editProfile');
+  };
+  const direction_driverEditInfo = () => {
+    nav('/driver/editInfo');
+  };
   const direction_pendingCost = () => {
     nav('/user/pendingCost');
   };
@@ -61,5 +67,7 @@ export default function useDirection() {
     direction_driverCostCall,
     direction_costHandler,
     direction_myPgae,
+    direction_driverEditProfile,
+    direction_driverEditInfo,
   };
 }

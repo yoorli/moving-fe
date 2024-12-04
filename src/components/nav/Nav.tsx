@@ -10,7 +10,7 @@ import alarm from '../../assets/icons/ic_alarm_large.svg';
 import profile from '../../assets/icons/ic_profile_large.svg';
 import alarmMobile from '../../assets/icons/ic_alarm_medium.svg';
 import profileMobile from '../../assets/icons/ic_profile_medium.svg';
-import { UserProfileModal } from './ProfileModal';
+import { DriverProfileModal, UserProfileModal } from './ProfileModal';
 
 type Props = {
   modalController?: () => void;
@@ -213,12 +213,12 @@ export function UserNav({ modalController }: Props) {
 }
 
 export function DriverNav({ modalController }: Props) {
-  const {
-    direction_root,
-    direction_myPgae,
-    direction_driverCostCall,
-    direction_costHandler,
-  } = useDirection();
+  const { direction_root, direction_driverCostCall, direction_costHandler } =
+    useDirection();
+  const [profileModal, setProfileModal] = useState<boolean>(false);
+  const profileController = () => {
+    setProfileModal((prev) => !prev);
+  };
   const { pc, tablet, mobile } = useMedia();
   const { pathname } = useLocation();
 
@@ -257,12 +257,15 @@ export function DriverNav({ modalController }: Props) {
         <div className={style.navIcons}>
           <img className={style.navIcon} src={alarm} alt='' />
           <img
-            onClick={direction_myPgae}
+            onClick={profileController}
             className={style.navIconProfile}
             src={profile}
             alt=''
           />
           <span className={style.navIconText}>김기사</span>
+          {profileModal ? (
+            <DriverProfileModal modalController={profileController} />
+          ) : null}
         </div>
       </div>
     );
@@ -278,7 +281,7 @@ export function DriverNav({ modalController }: Props) {
         <div className={style.navIcons}>
           <img className={style.navIcon} src={alarmMobile} alt='' />
           <img
-            onClick={direction_myPgae}
+            onClick={profileController}
             className={style.navIcon}
             src={profileMobile}
             alt=''
@@ -289,6 +292,9 @@ export function DriverNav({ modalController }: Props) {
             src={menu}
             alt=''
           />
+          {profileModal ? (
+            <DriverProfileModal modalController={profileController} />
+          ) : null}
         </div>
       </div>
     );
@@ -304,7 +310,7 @@ export function DriverNav({ modalController }: Props) {
         <div className={style.navIcons}>
           <img className={style.navIcon} src={alarm} alt='' />
           <img
-            onClick={direction_myPgae}
+            onClick={profileController}
             className={style.navIcon}
             src={profile}
             alt=''
@@ -315,6 +321,9 @@ export function DriverNav({ modalController }: Props) {
             src={menu}
             alt=''
           />
+          {profileModal ? (
+            <DriverProfileModal modalController={profileController} />
+          ) : null}
         </div>
       </div>
     );
