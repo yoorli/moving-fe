@@ -36,6 +36,18 @@ export default function useDirection() {
     nav('/user/receivedCost');
   };
 
+  const direction_driverCostCall = () => {
+    nav('/driver/costCall');
+  };
+
+  const direction_costHandler = () => {
+    nav('/driver/costHandler');
+  };
+
+  const direction_myPgae = () => {
+    nav('/driver/myPage');
+  };
+
   return {
     direction_root,
     direction_searchDriver,
@@ -46,5 +58,8 @@ export default function useDirection() {
     direction_userSignup,
     direction_userEditProfile,
     direction_userEditInfo,
+    direction_driverCostCall,
+    direction_costHandler,
+    direction_myPgae,
   };
 }

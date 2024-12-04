@@ -3,7 +3,7 @@ import style from './UserLayout.module.css';
 import '../style/globals.css';
 import { useState } from 'react';
 
-import { NonLoginMenuModal } from '../components/nav/NavMenuModal';
+import { UserMenuModal } from '../components/nav/NavMenuModal';
 import { UserNav } from '../components/nav/Nav';
 
 export default function UserLayout() {
@@ -20,7 +20,7 @@ export default function UserLayout() {
           <Outlet />
         </div>
       </div>
-      {modal ? <NonLoginMenuModal modalController={modalController} /> : null}
+      {modal ? <UserMenuModal modalController={modalController} /> : null}
     </>
   );
 }

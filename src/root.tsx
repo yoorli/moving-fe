@@ -121,7 +121,7 @@ const router = createBrowserRouter([
         element: <DriverEditInfoPage />,
       },
       {
-        path: 'constHandler',
+        path: 'costHandler',
         element: <span>내 견적 관리</span>,
       },
       {

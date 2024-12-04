@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import style from './RendingLayout.module.css';
 import { useState } from 'react';
 
-import { NonLoginMenuModal } from '../components/nav/NavMenuModal';
+import { UserMenuModal } from '../components/nav/NavMenuModal';
 import { NonLoginNav, UserNav } from '../components/nav/Nav';
 
 export default function RendingLayout() {
@@ -28,7 +28,9 @@ export default function RendingLayout() {
           <Outlet />
         </div>
       </div>
-      {modal ? <NonLoginMenuModal modalController={modalController} /> : null}
+      {modal && user ? (
+        <UserMenuModal modalController={modalController} />
+      ) : null}
     </>
   );
 }

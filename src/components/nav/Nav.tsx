@@ -211,3 +211,114 @@ export function UserNav({ modalController }: Props) {
     return <></>;
   }
 }
+
+export function DriverNav({ modalController }: Props) {
+  const {
+    direction_root,
+    direction_myPgae,
+    direction_driverCostCall,
+    direction_costHandler,
+  } = useDirection();
+  const { pc, tablet, mobile } = useMedia();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    return;
+  }, [pathname]);
+
+  //pc size
+  if (pc) {
+    return (
+      <div className={style.container}>
+        <img
+          onClick={direction_root}
+          className={style.logoImg}
+          src={logo}
+          alt=''
+        />
+        <div className={style.navContainer}>
+          <nav>
+            <ul className={style.navWrapper}>
+              <li
+                onClick={direction_driverCostCall}
+                className={`${style.navItem} ${style[pathname === '/driver/costCall' ? 'location' : '']}`}
+              >
+                받은 요청
+              </li>
+              <li
+                onClick={direction_costHandler}
+                className={`${style.navItem} ${style[pathname === '/driver/costHandler' ? 'location' : '']}`}
+              >
+                내 견적 관리
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className={style.navIcons}>
+          <img className={style.navIcon} src={alarm} alt='' />
+          <img
+            onClick={direction_myPgae}
+            className={style.navIconProfile}
+            src={profile}
+            alt=''
+          />
+          <span className={style.navIconText}>김기사</span>
+        </div>
+      </div>
+    );
+  } else if (tablet) {
+    return (
+      <div className={style.container}>
+        <img
+          onClick={direction_root}
+          className={style.logoImg}
+          src={logo}
+          alt=''
+        />
+        <div className={style.navIcons}>
+          <img className={style.navIcon} src={alarmMobile} alt='' />
+          <img
+            onClick={direction_myPgae}
+            className={style.navIcon}
+            src={profileMobile}
+            alt=''
+          />
+          <img
+            onClick={modalController}
+            className={style.navIcon}
+            src={menu}
+            alt=''
+          />
+        </div>
+      </div>
+    );
+  } else if (mobile) {
+    return (
+      <div className={style.container}>
+        <img
+          onClick={direction_root}
+          className={style.logoImg}
+          src={logo}
+          alt=''
+        />
+        <div className={style.navIcons}>
+          <img className={style.navIcon} src={alarm} alt='' />
+          <img
+            onClick={direction_myPgae}
+            className={style.navIcon}
+            src={profile}
+            alt=''
+          />
+          <img
+            onClick={modalController}
+            className={style.menu}
+            src={menu}
+            alt=''
+          />
+        </div>
+      </div>
+    );
+  } else {
+    return <></>;
+  }
+}
