@@ -1,4 +1,14 @@
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import {
+  AddressValues,
+  MetaValues,
+} from '../../page/user/costCall/components/MovingAddressModal';
+
+interface AddressListData {
+  documents: AddressValues[];
+  meta: MetaValues;
+}
 
 const instance = axios.create({
   baseURL: 'https://dapi.kakao.com/v2/local/search',
@@ -7,19 +17,22 @@ const instance = axios.create({
   },
 });
 
-export async function fetchAddress(address: string) {
+export async function fetchAddress(
+  keyword: string,
+  currentPage: number,
+  size: number,
+) {
   try {
     const res = await instance.get(`/address.json`, {
       params: {
-        query: address,
-        // analyze_type: 'similar',
+        query: keyword,
+        page: currentPage,
+        size: size,
+        analyze_type: 'exact',
       },
     });
 
-    return {
-      addressList: res.data.documents || [],
-      meta: res.data.meta || 0,
-    };
+    return res.data;
   } catch (error) {
     console.error('Error fetching data:', error);
 
@@ -28,4 +41,23 @@ export async function fetchAddress(address: string) {
       meta: '',
     };
   }
+}
+
+export function useMovingAddressList(
+  address: string,
+  currentPage: number,
+  size: number,
+) {
+  const { data, isLoading, error } = useQuery<AddressListData>({
+    queryKey: ['movingAddress', address, currentPage, size],
+    queryFn: () => fetchAddress(address, currentPage, size),
+    enabled: !!address,
+  });
+
+  return {
+    addressList: data?.documents || [],
+    meta: data?.meta,
+    isLoading,
+    error,
+  };
 }

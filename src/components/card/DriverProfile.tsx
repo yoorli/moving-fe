@@ -1,15 +1,16 @@
 import classNames from 'classnames';
 
-import { useIsPc } from '../../lib/function/useMediaQuery';
+import { useMedia } from '../../lib/function/useMediaQuery';
+import { formatCurrency } from '../../lib/function/utils';
 
-import styles from './DriverProfile.module.css';
+import style from './DriverProfile.module.css';
 
 import fullHeartMedium from '../../assets/icons/ic_full_heart_medium.svg';
+import emptyHeartMedium from '../../assets/icons/ic_empty_heart_medium.svg';
 import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
 
-type ProfileProps = {
+interface ProfileProps {
   type?: string;
-  size?: string;
   user: {
     label?: string[];
     called?: boolean;
@@ -21,6 +22,7 @@ type ProfileProps = {
     experience?: number;
     confirmedCases?: number;
     likes?: number;
+    isLiked?: boolean;
     movingDate?: string;
     start?: string;
     end?: string;
@@ -30,31 +32,31 @@ type ProfileProps = {
   };
 };
 
-export default function Profile({ type, user }: ProfileProps) {
-  const isPc = useIsPc();
+export default function DriverProfile({ type, user }: ProfileProps) {
+  const isPc = useMedia().pc;
   return (
     <div
-      className={classNames(styles.profile, {
-        [styles.profilePType]: type === 'profile',
+      className={classNames(style.profile, {
+        [style.profilePType]: type === 'profile',
       })}
     >
       <div
-        className={classNames(styles.profileImage, {
-          [styles.profileImagePType]: type === 'profile' && !isPc,
+        className={classNames(style.profileImage, {
+          [style.profileImagePType]: type === 'profile' && !isPc,
         })}
       >
         <img
           src={user.profileImage}
           alt={`${user.nickname}'s profile`}
-          className={styles.avatar}
+          className={style.avatar}
         />
       </div>
-      <div className={styles.info}>
+      <div className={style.info}>
         {type === 'profile' ? (
           <>
-            <div className={styles.details}>
+            <div className={style.details}>
               {user.rating !== undefined && user.reviews !== undefined && (
-                <span className={styles.stars}>
+                <span className={style.stars}>
                   <img src={yellowStarSmall} alt='yellowStar' />
                   {user.rating.toFixed(1)}
                   <span style={{ color: 'var(--gray-300)' }}>
@@ -62,70 +64,70 @@ export default function Profile({ type, user }: ProfileProps) {
                   </span>
                 </span>
               )}
-              <span className={styles.separator}>|</span>
-              <span className={styles.text}>
+              <span className={style.separator}>|</span>
+              <span className={style.text}>
                 <span style={{ color: 'var(--gray-300)' }}>경력</span>
                 {user.experience}년
               </span>
-              <span className={styles.separator}>|</span>
-              <span className={styles.text}>
+              <span className={style.separator}>|</span>
+              <span className={style.text}>
                 {user.confirmedCases}건
                 <span style={{ color: 'var(--gray-300)' }}>확정</span>
               </span>
             </div>
-            <div className={styles.detailsPType}>
-              <span className={styles.textPType}>
-                <span className={styles.movingLabel}>제공 서비스</span>
+            <div className={style.detailsPType}>
+              <span className={style.textPType}>
+                <span className={style.movingLabel}>제공 서비스</span>
                 {user.service?.join(', ')}
               </span>
               <span
-                className={classNames(styles.separator, {
-                  [styles.separatorHidden]: !isPc,
+                className={classNames(style.separator, {
+                  [style.separatorHidden]: !isPc,
                 })}
               >
                 |
               </span>
-              <span className={styles.textPType}>
-                <span className={styles.movingLabel}>지역</span>
+              <span className={style.textPType}>
+                <span className={style.movingLabel}>지역</span>
                 {user.serviceRegion?.join(', ')}
               </span>
             </div>
           </>
         ) : (
           // 기본 프로필
-          <div className={styles.name}>
+          <div className={style.name}>
             <span>{user.nickname} 기사님</span>
             {user.likes !== undefined && (
-              <span className={styles.likes}>
-                <img src={fullHeartMedium} alt='fullHeart' /> {user.likes}
+              <span className={style.likes}>
+                <img src={user.isLiked ? fullHeartMedium : emptyHeartMedium} alt='fullHeart' /> {user.likes}
               </span>
             )}
           </div>
         )}
         {/* 기본 프로필 */}
         {!(type === 'review' || type === 'profile') && (
-          <div className={styles.details}>
+          <div className={style.details}>
             {user.rating !== undefined && user.reviews !== undefined && (
               <>
-                <span className={styles.stars}>
+                <span className={style.stars}>
                   <img src={yellowStarSmall} alt='yellowStar' />
                   {user.rating.toFixed(1)}
                   <span style={{ color: 'var(--gray-300)' }}>
                     ({user.reviews})
                   </span>
                 </span>
-                <span className={styles.separator}>|</span>
+                <span className={style.separator}>|</span>
               </>
             )}
             {user.experience !== undefined &&
               user.confirmedCases !== undefined && (
                 <>
-                  <span className={styles.text}>
+                  <span className={style.text}>
                     <span style={{ color: 'var(--gray-300)' }}>경력</span>
                     {user.experience}년
                   </span>
-                  <span className={styles.separator}>|</span>
-                  <span className={styles.text}>
+                  <span className={style.separator}>|</span>
+                  <span className={style.text}>
                     {user.confirmedCases}건
                     <span style={{ color: 'var(--gray-300)' }}>확정</span>
                   </span>
@@ -135,17 +137,17 @@ export default function Profile({ type, user }: ProfileProps) {
         )}
         {/* review 타입, 이사일, 견적가 표시 */}
         {type === 'review' && (
-          <div className={styles.details}>
+          <div className={style.details}>
             {user.movingDate !== undefined && user.cost !== undefined && (
               <>
-                <span className={styles.text}>
+                <span className={style.text}>
                   <span style={{ color: 'var(--gray-300)' }}>이사일</span>
                   {user.movingDate}
                 </span>
-                <span className={styles.separator}>|</span>
-                <span className={styles.text}>
+                <span className={style.separator}>|</span>
+                <span className={style.text}>
                   <span style={{ color: 'var(--gray-300)' }}>견적가</span>
-                  {user.cost}원
+                  {user.cost && formatCurrency(user.cost)}
                 </span>
               </>
             )}

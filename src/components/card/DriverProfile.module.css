@@ -38,7 +38,7 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   width: 100%;
 }
 
@@ -56,6 +56,7 @@
   min-width: 49px;
   display: flex;
   justify-content: end;
+  align-items: center;
   gap: 10px;
   color: var(--blue-400);
 }
@@ -151,11 +152,6 @@
   .profileImage {
     width: 60px;
     height: 50px;
-  }
-
-  .avatar {
-    width: 70px;
-    height: 64px;
   }
 
   .info {
