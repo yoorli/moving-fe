@@ -27,7 +27,7 @@ export default function NoContents({
       return (
         <>
           현재 진행 중인 이사 견적이 있어요! <br />
-          진행 중인 이사 완료 후 새로운 견적을 받아 보세요.
+          진행 중인 견적 완료 후 새로운 견적을 받아 보세요.
         </>
       );
     else if (hasButton) return '아직 등록된 리뷰가 없어요!';

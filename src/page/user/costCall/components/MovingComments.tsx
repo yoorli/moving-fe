@@ -8,12 +8,14 @@ interface MovingCommentProps {
   value: string | null | undefined;
   onClick: (value: string) => void;
   disabled: boolean;
+  isModalOpen: (value: boolean) => void;
 }
 
 export default function MovingComments({
   value,
   onClick,
   disabled,
+  isModalOpen,
 }: MovingCommentProps) {
   const [comment, setComment] = useState<string>(value || '');
   const [inputCount, setInputCount] = useState(0);
@@ -25,6 +27,7 @@ export default function MovingComments({
 
   const handleSelectClick = (comment: string) => {
     onClick(comment);
+    isModalOpen(true);
   };
 
   return (
