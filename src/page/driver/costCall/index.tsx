@@ -8,18 +8,25 @@ import Pagination from '../../../components/pagination/Pagination';
 
 import style from './index.module.css';
 
+import { mockData } from './components/mockData';
+
 export default function DriverCostCallPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const isPc = useMedia().pc;
+  const itemsPerPage = 3;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentUsers = mockData.users.slice(startIndex, endIndex);
+
   const page = {
     currentPage: currentPage,
-    itemsPerPage: 3,
-    itemsTotalCount: 9,
+    itemsPerPage: itemsPerPage,
+    itemsTotalCount: mockData.total,
     onPageChange: handlePageChange,
   };
 
@@ -36,11 +43,11 @@ export default function DriverCostCallPage() {
           <div className={style.filterBar}>
             <div className={style.searchBar}>searchBar</div>
             <div className={style.sortBar}>
-              전체 8건 <Dropdown />
+              전체 {mockData.total}건 <Dropdown />
             </div>
           </div>
           <div className={style.mainContent}>
-            <CallList />
+            <CallList list={currentUsers}/>
           </div>
           <div className={style.pagination}>
             <Pagination {...page} />
