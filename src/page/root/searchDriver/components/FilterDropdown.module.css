@@ -1,0 +1,96 @@
+.container {
+  width: 100%;
+  max-width: 328px;
+  position: relative;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin-bottom: 16px;
+}
+
+.filterBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 328px;
+  height: 64px;
+  padding: 16px 24px;
+  border: 1px solid #dedede;
+  border-radius: 16px;
+  background-color: #fff;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+}
+
+.filterBox.active {
+  border: 1px solid #1b92ff;
+  background-color: #f5faff;
+}
+
+.selectedText {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 500;
+  color: #1f1f1f;
+}
+
+.filterBox.active .selectedText {
+  color: #1b92ff;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 8px;
+  border: 1px solid #dedede;
+  border-radius: 16px;
+  background-color: #fff;
+  padding: 8px 0;
+  z-index: 10;
+}
+
+.regionDropdown {
+  max-height: 320px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: auto;
+  overflow-y: auto;
+}
+
+.serviceDropdown {
+  height: 276px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 19px 24px;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 500;
+  color: #1f1f1f;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+  background-color: #f5faff;
+}
+
