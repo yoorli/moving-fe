@@ -1,3 +1,7 @@
+.main {
+  padding: 0 260px;  
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -10,9 +14,15 @@
 }
 
 /* 743px ~ 375px */
-/* @media (max-width: 743px) {
-} */
+@media (max-width: 743px) {
+  .main {
+    padding: 0 30px;  
+  } 
+}
 
 /* 1119px ~ 744px */
-/* @media (max-width: 1199px) and (min-width: 744px) {
-} */
+@media (max-width: 1199px) and (min-width: 744px) {
+  .main {
+    padding: 0 72px;  
+  }
+}

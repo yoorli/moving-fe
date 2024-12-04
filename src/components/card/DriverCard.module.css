@@ -40,8 +40,8 @@
 }
 
 .label {
-  min-height: 26px;
-  max-height: 34px;
+  display: flex;
+  gap: 12px;
 }
 
 .content {
