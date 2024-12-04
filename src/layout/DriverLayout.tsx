@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import style from './DriverLayout.module.css';
-import NonLoginNav from '../components/nav/NonLoginNav';
+import { NonLoginNav } from '../components/nav/Nav';
 
 export default function DriverLayout() {
   return (

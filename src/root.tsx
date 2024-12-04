@@ -80,7 +80,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'editProfile',
-        element: <span>editProfile</span>,
+        element: <UserEditProfilePage />,
       },
       {
         path: 'movingReview',

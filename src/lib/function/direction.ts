@@ -18,6 +18,15 @@ export default function useDirection() {
   const direction_userSignup = () => {
     nav('/user/signup');
   };
+  const direction_userEditProfile = () => {
+    nav('/user/editProfile');
+  };
+  const direction_userEditInfo = () => {
+    nav('/user/editInfo');
+  };
+  const direction_costCall = () => {
+    nav('/user/costCall');
+  };
 
   const direction_pendingCost = () => {
     nav('/user/pendingCost');
@@ -31,8 +40,11 @@ export default function useDirection() {
     direction_root,
     direction_searchDriver,
     direction_userLogin,
+    direction_costCall,
     direction_pendingCost,
     direction_receivedCost,
     direction_userSignup,
+    direction_userEditProfile,
+    direction_userEditInfo,
   };
 }
