@@ -47,7 +47,7 @@ export default function NonLoginNav({ modalController }: Props) {
         />
         <img
           onClick={modalController}
-          className={style.logoImg}
+          className={style.menu}
           src={menu}
           alt=''
         />
@@ -64,7 +64,7 @@ export default function NonLoginNav({ modalController }: Props) {
         />
         <img
           onClick={modalController}
-          className={style.logoImg}
+          className={style.menu}
           src={menu}
           alt=''
         />

@@ -10,8 +10,8 @@
     height: 54px;
 
     box-sizing: border-box;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 72px;
+    padding-right: 72px;
   }
 
   .logoImg {
@@ -44,6 +44,11 @@
 
     cursor: pointer;
   }
+
+  .menu {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 /* pc 화면 */
@@ -59,8 +64,8 @@
     height: 88px;
 
     box-sizing: border-box;
-    padding-left: 120px;
-    padding-right: 120px;
+    padding-left: 260px;
+    padding-right: 260px;
   }
 
   .logoImg {
