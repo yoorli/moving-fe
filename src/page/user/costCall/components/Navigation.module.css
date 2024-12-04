@@ -32,28 +32,15 @@
   z-index: 100;
 }
 
-@media (max-width: 743px) {
-  .profile {
-    gap: 14px;
-  }
-
-  .detailsPType {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-  }
-}
-
-@media (max-width: 1199px) and (min-width: 744px) {
-}
-
-@media (max-width: 1199px) {
-  .navWrapper {
-    max-width: 327px;
-  }
-
+@media (max-width: 744px) {
   .navTitle {
     padding-bottom: 16px;
     font-size: 18px;
+  }
+}
+
+@media (max-width: 1481px) {
+  .navWrapper {
+    padding: 32px 30px;
   }
 }

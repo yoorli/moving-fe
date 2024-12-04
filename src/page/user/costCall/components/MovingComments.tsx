@@ -16,14 +16,18 @@ export default function MovingComments({
   disabled,
 }: MovingCommentProps) {
   const [comment, setComment] = useState<string>(value || '');
+  const [inputCount, setInputCount] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
+    setInputCount(e.target.value.length);
   };
 
   const handleSelectClick = (comment: string) => {
     onClick(comment);
   };
+
+  console.log(!(inputCount < 250), !disabled);
 
   return (
     <div>
@@ -39,7 +43,12 @@ export default function MovingComments({
             placeholder='요청사항을 입력해 주세요'
             value={comment}
             onChange={handleChange}
+            maxLength={250}
           />
+          <p className={style.inputLabelLength}>
+            <span>{inputCount}</span>
+            <span>/250</span>
+          </p>
           <Button
             className={style.submitButton}
             text='견적 확정하기'
