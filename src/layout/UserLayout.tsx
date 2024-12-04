@@ -5,9 +5,11 @@ import { useState } from 'react';
 
 import { UserMenuModal } from '../components/nav/NavMenuModal';
 import { UserNav } from '../components/nav/Nav';
+import { useMedia } from '../lib/function/useMediaQuery';
 
 export default function UserLayout() {
   const [modal, setModal] = useState<boolean>(false);
+  const { pc } = useMedia();
 
   const modalController = () => {
     setModal((prev) => !prev);
@@ -20,7 +22,9 @@ export default function UserLayout() {
           <Outlet />
         </div>
       </div>
-      {modal ? <UserMenuModal modalController={modalController} /> : null}
+      {!pc && modal ? (
+        <UserMenuModal modalController={modalController} />
+      ) : null}
     </>
   );
 }

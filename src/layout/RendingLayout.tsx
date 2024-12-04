@@ -4,9 +4,11 @@ import { useState } from 'react';
 
 import { UserMenuModal } from '../components/nav/NavMenuModal';
 import { NonLoginNav, UserNav } from '../components/nav/Nav';
+import { useMedia } from '../lib/function/useMediaQuery';
 
 export default function RendingLayout() {
   const [modal, setModal] = useState<boolean>(false);
+  const { pc } = useMedia();
 
   const user = {
     name: '김대건',
@@ -28,7 +30,7 @@ export default function RendingLayout() {
           <Outlet />
         </div>
       </div>
-      {modal && user ? (
+      {!pc && modal && user ? (
         <UserMenuModal modalController={modalController} />
       ) : null}
     </>

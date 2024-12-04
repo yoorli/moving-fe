@@ -3,9 +3,11 @@ import style from './DriverLayout.module.css';
 import { DriverNav } from '../components/nav/Nav';
 import { DriverMenuModal } from '../components/nav/NavMenuModal';
 import { useState } from 'react';
+import { useMedia } from '../lib/function/useMediaQuery';
 
 export default function DriverLayout() {
   const [modal, setModal] = useState<boolean>(false);
+  const { pc } = useMedia();
 
   const modalController = () => {
     setModal((prev) => !prev);
@@ -18,7 +20,9 @@ export default function DriverLayout() {
           <Outlet />
         </div>
       </div>
-      {modal ? <DriverMenuModal modalController={modalController} /> : null}
+      {!pc && modal ? (
+        <DriverMenuModal modalController={modalController} />
+      ) : null}
     </>
   );
 }
