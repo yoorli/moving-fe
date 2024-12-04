@@ -27,8 +27,6 @@ export default function MovingComments({
     onClick(comment);
   };
 
-  console.log(!(inputCount < 250), !disabled);
-
   return (
     <div>
       <div className={pageStyle.optionGuideBubble}>
