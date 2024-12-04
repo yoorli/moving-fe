@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import style from './Filter.module.css';
 
 interface FilterOption {
@@ -59,7 +60,7 @@ export default function Filter() {
       <div className={style.movingFilter}>
         <div className={style.filterName}>필터</div>
         <label className={style.checkboxLabel}>
-          <span>
+          <span className={style.text}>
             {filters.label} ({filters.count})
           </span>
           <input type='checkbox' onChange={() => toggleCheckbox(1, false)} />

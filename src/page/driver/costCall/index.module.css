@@ -1,36 +1,41 @@
 .container {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-
+  width: 100%;
+  height: 100%;
+  max-width: 1400px;
+  padding: 0 120px;
   /* 반응형 추후 추가 시 min-width: 332px */
 }
 
 .navigation {
   text-align: left;
   height: 96px;
-  padding: 32px 260px;
+  padding: 32px;
   background-color: var(--gray-50);
   font-size: 24px;
   font-weight: 600;
 }
 
 .mainContainer {
-  padding: 24px 260px;
+  padding: 24px;
   display: flex;
-  justify-content: space-between;
-  gap: 107px;
+  gap: 100px;
 }
 
 .filterBox {
   padding-right: 10px;
+  max-width: 328px;
+  width: 100%;
+  flex: 0 1 328px;
 }
 
 .content {
-  width: 100%;
   display: flex;
   flex-direction: column;
+  flex: 1 1 auto;
   gap: 32px;
+  max-width: 955px;
+  min-width: 600px;
+  width: 100%;
 }
 
 .filterBar {
@@ -62,4 +67,14 @@
 .pagination {
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 743px) {
+}
+
+@media (max-width: 1199px) and (min-width: 744px) {
+}
+
+@media (min-width: 1200px) {
+
 }
