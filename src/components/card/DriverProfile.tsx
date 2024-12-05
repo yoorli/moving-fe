@@ -2,6 +2,7 @@ import classNames from 'classnames';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { formatCurrency } from '../../lib/function/utils';
+import { DriverProfileProps } from './type';
 
 import style from './DriverProfile.module.css';
 
@@ -9,38 +10,17 @@ import fullHeartMedium from '../../assets/icons/ic_full_heart_medium.svg';
 import emptyHeartMedium from '../../assets/icons/ic_empty_heart_medium.svg';
 import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
 
-interface ProfileProps {
-  type?: string;
-  user: {
-    id: number; // 기사 아이디
-    serviceType?: string[]; // 서비스 유형
-    isAssigned?: boolean; // 지정경적 여부
-    profileImage: string; // 프로필 이미지
-    nickname: string; // 기사 닉네임
-    career?: number; // 경력
-    summary?: string; // 한 줄 소개
-    serviceRegion?: string[]; // 서비스 지역
-    comment?: string; //요구사항
-    reviewStats?: {
-      averageScore?: number; // 평점
-      totalReviews?: number; // 리뷰 갯수
-    };
-    favoriteCount?: number; // 찜 갯수
-    confirmationCount?: number; // 확정 건 수
-    movingDate?: string; // 이사 날짜
-    departure?: string; // 출발지
-    arrival?: string; // 도착지
-    isLiked?: boolean; // 찜 여부
-    price?: number; //견적가
-  };
-}
-
-export default function DriverProfile({ type, user }: ProfileProps) {
+export default function DriverProfile({
+  styles,
+  type,
+  user,
+}: DriverProfileProps) {
   const isPc = useMedia().pc;
   return (
     <div
       className={classNames(style.profile, {
         [style.profilePType]: type === 'profile',
+        [style.profileWType]: type === 'waiting' || type === 'confirm',
       })}
     >
       <div
@@ -150,12 +130,26 @@ export default function DriverProfile({ type, user }: ProfileProps) {
             {user.movingDate !== undefined && user.price !== undefined && (
               <>
                 <span className={style.text}>
-                  <span style={{ color: 'var(--gray-300)' }}>이사일</span>
+                  <span
+                    className={classNames(
+                      style.textLabel,
+                      styles && style[styles],
+                    )}
+                  >
+                    이사일
+                  </span>
                   {user.movingDate}
                 </span>
                 <span className={style.separator}>|</span>
                 <span className={style.text}>
-                  <span style={{ color: 'var(--gray-300)' }}>견적가</span>
+                  <span
+                    className={classNames(
+                      style.textLabel,
+                      styles && style[styles],
+                    )}
+                  >
+                    견적가
+                  </span>
                   {user.price && formatCurrency(user.price)}
                 </span>
               </>

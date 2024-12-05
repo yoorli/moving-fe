@@ -6,32 +6,11 @@ import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { getDate, formatCurrency } from '../../lib/function/utils';
+import { UserProfileProps } from './type';
 
 import style from './UserCard.module.css';
 
 import writing from '../../assets/icons/ic_writing_medium.svg';
-
-type ProfileType = 'receive' | 'review' | 'confirmedCost';
-
-interface ProfileProps {
-  type?: ProfileType;
-  user: {
-    movingType?: string[]; // 이사 서비스 유형
-    isAssigned?: boolean; // 지정견적 여부
-    customer?: string; // 고객 이름
-    moverName?: string; //기사 닉네임
-    movingDate?: string; // 이사 날짜
-    departure?: string; // 출발지
-    arrival?: string; // 도착지
-    price?: number; // 견적가
-    createAt?: string; // 작성일
-    profileImg?: string; // 기사 프로필 이미지
-    reviewStats?: {
-      averageScore: number; // 평점
-    };
-    content?: string; // 리뷰 내용
-  };
-}
 
 type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
 
@@ -50,7 +29,12 @@ const chipText = (type: string): ChipType => {
   }
 };
 
-export default function UserCard({ type, user }: ProfileProps) {
+export default function UserCard({
+  sendCostBtn: sendCost,
+  rejectCostBtn: rejectCost,
+  type,
+  user,
+}: UserProfileProps) {
   const isPc = useMedia().pc;
   return (
     <div
@@ -84,8 +68,13 @@ export default function UserCard({ type, user }: ProfileProps) {
             text='견적 보내기'
             btnStyle='solid448pxBlue300'
             src={writing}
+            onClick={sendCost}
           />
-          <Button text='반려' btnStyle='outlined448pxBlue300' />
+          <Button
+            text='반려'
+            btnStyle='outlined448pxBlue300'
+            onClick={rejectCost}
+          />
         </div>
       )}
 
