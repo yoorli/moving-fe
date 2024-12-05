@@ -4,6 +4,11 @@ type DriverProfileType = 'profile' | 'cost' | 'waiting' | 'dibs' | 'review';
 export interface DriverProfileProps {
   type?: DriverProfileType;
   styles?: string;
+  editInfoBtn?: () => void; //기본 정보 수정 버튼
+  editProfileBtn?: () => void; //기본 정보 내 프로필 수정
+  confirmCostBtn?: () => void; //견적 확정하기 버튼
+  detailBtn?: () => void; //상세보기 버튼
+  reviewBtn?: () => void; //리뷰 작성하기 버튼
   user: {
     id: number; // 기사 아이디
     serviceType?: string[]; // 서비스 유형
@@ -33,6 +38,8 @@ type UserProfileType = 'receive' | 'review' | 'confirmedCost' | 'modal';
 
 export interface UserProfileProps {
   type?: UserProfileType;
+  sendCostBtn?: () => void;
+  rejectCostBtn?: () => void;
   user: {
     movingType?: string[]; // 이사 서비스 유형
     isAssigned?: boolean; // 지정견적 여부

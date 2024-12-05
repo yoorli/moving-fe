@@ -29,7 +29,12 @@ const chipText = (type: string): ChipType => {
   }
 };
 
-export default function UserCard({ type, user }: UserProfileProps) {
+export default function UserCard({
+  sendCostBtn: sendCost,
+  rejectCostBtn: rejectCost,
+  type,
+  user,
+}: UserProfileProps) {
   const isPc = useMedia().pc;
   return (
     <div
@@ -63,8 +68,13 @@ export default function UserCard({ type, user }: UserProfileProps) {
             text='견적 보내기'
             btnStyle='solid448pxBlue300'
             src={writing}
+            onClick={sendCost}
           />
-          <Button text='반려' btnStyle='outlined448pxBlue300' />
+          <Button
+            text='반려'
+            btnStyle='outlined448pxBlue300'
+            onClick={rejectCost}
+          />
         </div>
       )}
 

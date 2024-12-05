@@ -48,7 +48,7 @@ export function getStars(rating: number) {
   return stars;
 }
 
-export default function UserProfile({type, user }: UserProfileProps) {
+export default function UserProfile({ type, user }: UserProfileProps) {
   const isPc = useMedia().pc;
   return (
     <>

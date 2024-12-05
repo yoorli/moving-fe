@@ -30,8 +30,17 @@ const chipText = (type: string): ChipType => {
   }
 };
 
-export default function DriverCard({ type, user }: DriverProfileProps) {
+export default function DriverCard({
+  editInfoBtn, //기본 정보 수정 버튼
+  editProfileBtn, //기본 정보 내 프로필 수정
+  confirmCostBtn, //견적 확정하기 버튼
+  detailBtn, //상세보기 버튼
+  reviewBtn, //리뷰 작성하기 버튼
+  type,
+  user,
+}: DriverProfileProps) {
   const isPc = useMedia().pc;
+
   return (
     <div
       className={classNames(style.card, {
@@ -58,17 +67,13 @@ export default function DriverCard({ type, user }: DriverProfileProps) {
               text='기본 정보 수정'
               src={writingGray}
               btnStyle='solid280pxBackground200'
-              onClick={() => {
-                console.log('onClick 성공');
-              }}
+              onClick={editInfoBtn}
             />
             <Button
               text='내 프로필 수정'
               src={writing}
               btnStyle='solid280pxBlue300'
-              onClick={() => {
-                console.log('onClick 성공');
-              }}
+              onClick={editProfileBtn}
             />
           </div>
         </div>
@@ -126,16 +131,12 @@ export default function DriverCard({ type, user }: DriverProfileProps) {
             <Button
               text='견적 확정하기'
               btnStyle='solid448pxBlue300'
-              onClick={() => {
-                console.log('onClick 성공');
-              }}
+              onClick={confirmCostBtn}
             />
             <Button
               text='상세보기'
               btnStyle='outlined448pxBlue300'
-              onClick={() => {
-                console.log('onClick 성공');
-              }}
+              onClick={detailBtn}
             />
           </div>
         </div>
@@ -145,9 +146,7 @@ export default function DriverCard({ type, user }: DriverProfileProps) {
           <Button
             text='리뷰 작성하기'
             btnStyle='solid640pxBlue300'
-            onClick={() => {
-              console.log('onClick 성공');
-            }}
+            onClick={reviewBtn}
           />
         </div>
       )}
