@@ -83,7 +83,7 @@ export default function DriverCard({
           {user.serviceType?.map((type, index) => (
             <Chip key={index} type={chipText(type)} />
           ))}
-          {(user.isAssigned || type === 'confirm') && <Chip type='ASSIGN' />}
+          {(user.isAssigned) && <Chip type='ASSIGN' />}
         </div>
       )}
       {(type === 'cost' || type === undefined) && (

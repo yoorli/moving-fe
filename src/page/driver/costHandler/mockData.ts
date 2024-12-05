@@ -4,6 +4,7 @@ export interface DriverData {
     serviceType?: string[]; // 서비스 유형
     isConfirmed?: boolean; // 확정된 요청인지 확인(true)
     isCancelled?: boolean; // 취소 여부 (false)
+    isAssigned?: boolean; // 지정경적 여부
     profileImage: string; // 프로필 이미지
     nickname: string; // 기사 닉네임
     career?: number; // 경력
@@ -29,6 +30,7 @@ export const mockData: DriverData = {
       serviceType: ['소형이사', '사무실이사'],
       isConfirmed: true,
       isCancelled: false,
+      isAssigned: true,
       profileImage: 'image1',
       nickname: 'driver1',
       career: 7,
@@ -50,6 +52,7 @@ export const mockData: DriverData = {
       serviceType: ['가정이사'],
       isConfirmed: false,
       isCancelled: false,
+      isAssigned: true,
       profileImage: 'image2',
       nickname: 'driver2',
       career: 20,
@@ -65,12 +68,13 @@ export const mockData: DriverData = {
       isLiked: false,
       price: 500000,
     },
-    // 취소된 견적 요청일 때
+    // 확정된 견적 요청일 때
     {
       id: 3,
       serviceType: ['사무실이사'],
       isConfirmed: true,
       isCancelled: false,
+      isAssigned: false,
       profileImage: 'image3',
       nickname: 'driver3',
       career: 10,
@@ -86,6 +90,7 @@ export const mockData: DriverData = {
       isLiked: true,
       price: 650000,
     },
+    // 취소된 견적 요청일 때
     {
       id: 4,
       serviceType: ['소형이사'],
