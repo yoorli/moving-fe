@@ -6,28 +6,24 @@
 .container {
   display: flex;
   justify-content: center;
-
   margin-top: 24px;
-  padding: 0 120px;
 }
 
 .cardContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 48px 24px;
-
+  max-width: 1920px;
   width: 100%;
+  padding: 0 120px;
 }
 
 /* 1119px ~ 744px */
 @media (max-width: 1199px) and (min-width: 744px) {
-  .container {
-    padding: 0 72px;
-  }
-
   .cardContainer {
     grid-template-columns: repeat(1, 1fr);
     gap: 32px;
+    padding: 0 72px;
   }
 }
 
@@ -35,11 +31,11 @@
 @media (max-width: 743px) {
   .container {
     margin-top: 16px;
-    padding: 0 24px;
   }
 
   .cardContainer {
     grid-template-columns: repeat(1, 1fr);
     gap: 24px;
+    padding: 0 24px;
   }
 }
