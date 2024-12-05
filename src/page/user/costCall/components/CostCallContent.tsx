@@ -8,7 +8,7 @@ import pageStyle from '../index.module.css';
 
 export interface FormValues {
   movingType: null | string;
-  movingDate: null | Date;
+  movingDate: null | string;
   departure: null | string;
   arrival: null | string;
   comment?: undefined | string | null;
@@ -34,11 +34,11 @@ export default function UserCostCallPage({
 }: CostCallContentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [values, setValues] = useState<FormValues>({
-    movingType: null,
+    movingType: '',
     movingDate: null,
-    departure: null,
-    arrival: null,
-    comment: null,
+    departure: '',
+    arrival: '',
+    comment: '',
   });
 
   const handleSelectCompletion = (

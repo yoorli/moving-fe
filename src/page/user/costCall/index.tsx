@@ -4,14 +4,6 @@ import NoContents from '../../../components/noContents/NoContents';
 import style from './index.module.css';
 import CostCallContent from './components/CostCallContent';
 
-export interface FormValues {
-  movingType: null | string;
-  movingDate: null | string;
-  departure: null | string;
-  arrival: null | string;
-  comment?: undefined | string | null;
-}
-
 export interface SelectValues {
   movingType: boolean;
   movingDate: boolean;
