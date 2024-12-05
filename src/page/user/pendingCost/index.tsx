@@ -12,7 +12,7 @@ export default function PendingCost() {
 
   const { direction_pendingCost, direction_receivedCost } = useDirection();
   return (
-    <div className={style.container}>
+    <>
       <Tab
         selectable={true}
         firstText='대기 중인 견적'
@@ -23,7 +23,9 @@ export default function PendingCost() {
         firstTabRoute={direction_pendingCost}
         secondTabRoute={direction_receivedCost}
       />
-      <div>대기 중인 견적</div>
-    </div>
+      <div className={style.container}>
+        <div>대기 중인 견적</div>
+      </div>
+    </>
   );
 }
