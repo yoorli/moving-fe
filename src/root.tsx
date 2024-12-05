@@ -9,7 +9,7 @@ import PendingCost from './page/user/pendingCost';
 import ReceivedCost from './page/user/receivedCost';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
-import DriverCallPage from './page/driver/costCall';
+import DriverCostCallPage from './page/driver/costCall';
 import UserMovingReview from './page/user/movingReview';
 import UserCostCallPage from './page/user/costCall';
 import UserRegisterPage from './page/user/register';
@@ -106,7 +106,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'costCall',
-        element: <DriverCallPage />,
+        element: <DriverCostCallPage />,
       },
       {
         path: 'register',
