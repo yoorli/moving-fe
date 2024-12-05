@@ -4,6 +4,7 @@ import style from './index.module.css';
 import NoContents from '../../../components/nocontents/NoContents';
 import ModalContainer from '../../../components/modal/ModalContainer';
 import WritingReview from './components/WritingReview';
+import WritableReviews from './components/WritableReviews';
 
 export default function UserMovingReview() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('first');
@@ -16,11 +17,15 @@ export default function UserMovingReview() {
 
   const modalBtnClick = () => {
     setIsModalOpen(false);
-    console.log('you clicked modal button :) ');
+    console.log('you post review :) '); // 리뷰 등록 버튼
   };
 
+  // const handleModalOpen = () => {
+  //   setIsModalOpen(true); // onClick prop 뚫리면 사용
+  // }
+
   return (
-    <div className={style.container}>
+    <>
       <Tab
         selectable={true}
         firstText='작성 가능한 리뷰'
@@ -28,22 +33,26 @@ export default function UserMovingReview() {
         selectedTab={currentTab}
         onTabChange={handleTabChange}
       />
-      {isModalOpen && (
-        <ModalContainer
-          title='리뷰 쓰기'
-          buttonText='리뷰 등록'
-          closeBtnClick={() => setIsModalOpen(!isModalOpen)}
-          buttonClick={modalBtnClick}
-        >
-          <WritingReview />
-        </ModalContainer>
-      )}
-      <NoContents
-        image='file'
-        hasButton={true}
-        buttonText='리뷰 작성하러 가기'
-        buttonHandler={() => handleTabChange('first')}
-      />
-    </div>
+      <div className={style.overlay}>
+        <div className={style.container}>
+          {currentTab === 'first' ? (
+            <WritableReviews />
+          ) : (
+            <NoContents image='file' emptyWritableReviews={true} />
+          )}
+        </div>
+        {isModalOpen && (
+          <ModalContainer
+            title='리뷰 쓰기'
+            buttonText='리뷰 등록'
+            closeBtnClick={() => setIsModalOpen(!isModalOpen)}
+            buttonClick={modalBtnClick}
+          >
+            <WritingReview />
+          </ModalContainer>
+        )}
+        {/* <NoContents image='file' emptyWritableReviews={true} /> */}
+      </div>
+    </>
   );
 }
