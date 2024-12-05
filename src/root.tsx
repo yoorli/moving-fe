@@ -19,6 +19,7 @@ import UserEditInfoPage from './page/user/editInfo';
 import UserEditProfilePage from './page/user/editProfile';
 import ServiceRandingPage from './page/root';
 import DriverRegisterPage from './page/driver/register';
+import DriverCostHandlerPage from './page/driver/costHandler';
 
 const router = createBrowserRouter([
   {
@@ -122,7 +123,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'costHandler',
-        element: <span>내 견적 관리</span>,
+        element: <span><DriverCostHandlerPage /></span>,
       },
       {
         path: 'myPage',
