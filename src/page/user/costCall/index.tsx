@@ -34,24 +34,26 @@ export default function UserCostCallPage() {
   };
 
   return (
-    <div className={style.container}>
-      <div className={style.mainContent}>
-        <Navigation isSelectOption={isSelectOption} isSubmitted={isSubmitted} />
-        {!isSubmitted ? (
-          <CostCallContent
-            isSelectOption={isSelectOption}
-            setIsSelectOption={setIsSelectOption}
-            setIsSubmitted={setIsSubmitted}
-          />
-        ) : (
-          <NoContents
-            image='car'
-            hasButton={true}
-            buttonText='받은 견적 보러가기'
-            buttonHandler={() => handleTabChange()}
-          />
-        )}
+    <>
+      <Navigation isSelectOption={isSelectOption} isSubmitted={isSubmitted} />
+      <div className={style.container}>
+        <div className={style.mainContent}>
+          {!isSubmitted ? (
+            <CostCallContent
+              isSelectOption={isSelectOption}
+              setIsSelectOption={setIsSelectOption}
+              setIsSubmitted={setIsSubmitted}
+            />
+          ) : (
+            <NoContents
+              image='car'
+              hasButton={true}
+              buttonText='받은 견적 보러가기'
+              buttonHandler={() => handleTabChange()}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
