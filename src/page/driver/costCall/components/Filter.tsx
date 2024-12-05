@@ -8,16 +8,26 @@ interface FilterOption {
   isChecked: boolean;
 }
 
-export default function Filter() {
+type FilterProps = {
+  count: {
+    total: number;
+    small: number;
+    medium: number;
+    large: number;
+    assign: number;
+  };
+};
+
+export default function Filter({ count }: FilterProps) {
   const [moveTypes, setMoveTypes] = useState<FilterOption[]>([
-    { label: '소형이사', count: 10, isChecked: true },
-    { label: '가정이사', count: 2, isChecked: true },
-    { label: '사무실이사', count: 8, isChecked: true },
+    { label: '소형이사', count: count.small, isChecked: true },
+    { label: '가정이사', count: count.medium, isChecked: true },
+    { label: '사무실이사', count: count.large, isChecked: true },
   ]);
 
   const [filters, setFilters] = useState<FilterOption>({
     label: '지정 견적 요청',
-    count: 10,
+    count: count.large,
     isChecked: true,
   });
 
