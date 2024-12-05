@@ -2,31 +2,12 @@ import classNames from 'classnames';
 
 import { formatCurrency } from '../../lib/function/utils';
 import { useMedia } from '../../lib/function/useMediaQuery';
+import { UserProfileProps } from './type';
 
 import style from './UserProfile.module.css';
 
 import fullStarsMedium from '../../assets/icons/ic_full_star_medium.svg';
 import emptyStarMedium from '../../assets/icons/ic_empty_star_medium.svg';
-
-interface ProfileProps {
-  type?: string;
-  user: {
-    movingType?: string[]; // 서비스 유형
-    isAssigned?: boolean; // 지정견적 여부
-    customer?: string; // 고객 이름
-    moverName?: string; //기사 닉네임
-    movingDate?: string; // 이사 날짜
-    departure?: string; // 출발지
-    arrival?: string; // 도착지
-    price?: number; // 견적가
-    createAt?: string; // 작성일
-    profileImg?: string; // 기사 프로필 이미지
-    reviewStats?: {
-      averageScore: number; // 평점
-    };
-    content?: string; // 리뷰 내용
-  };
-}
 
 export function getStars(rating: number) {
   const stars = [];
@@ -67,7 +48,7 @@ export function getStars(rating: number) {
   return stars;
 }
 
-export default function UserProfile({type, user }: ProfileProps) {
+export default function UserProfile({type, user }: UserProfileProps) {
   const isPc = useMedia().pc;
   return (
     <>
