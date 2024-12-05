@@ -38,7 +38,7 @@
   width: 100%;
 }
 
-.filterBar {
+.filter {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -59,6 +59,11 @@
   z-index: 10;
 }
 
+.filterBar {
+  display: flex;
+  justify-content: space-between;
+}
+
 .mainContent {
   display: flex;
   flex-direction: column;
@@ -77,11 +82,59 @@
 }
 
 @media (max-width: 743px) {
+  .container {
+    padding: 0 24px;
+  }
+
+  .content {
+    gap: 12px;
+    min-width: 328px;
+  }
 }
 
 @media (max-width: 1199px) and (min-width: 744px) {
+  .container {
+    padding: 0 72px;
+  }
+
+  .content {
+    gap: 16px;
+  }
 }
 
-@media (min-width: 1200px) {
-  
+@media (max-width: 1200px) {
+  .navigation {
+    height: 54px;
+    padding: 10px;
+    font-size: 18px;
+  }
+
+  .mainContainer {
+    padding: 0;
+    gap: 0;
+  }
+
+  .filter {
+    gap: 0;
+  }
+
+  .searchBar {
+    height: 76px;
+    padding: 12px 10px;
+  }
+
+  .sortBar {
+    font-size: 13px;
+    font-weight: 600;
+    height: 32px;
+    padding: 4px 10px;
+  }
+
+  .filterBar {
+    gap: 4px;
+  }
+
+  .noContent {
+    height: 290px;
+  }
 }

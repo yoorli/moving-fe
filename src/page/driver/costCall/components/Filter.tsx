@@ -9,6 +9,7 @@ interface FilterOption {
 }
 
 type FilterProps = {
+  type?: 'moving' | 'filter';
   count: {
     total: number;
     small: number;
@@ -18,7 +19,7 @@ type FilterProps = {
   };
 };
 
-export default function Filter({ count }: FilterProps) {
+export default function Filter({ type, count }: FilterProps) {
   const [moveTypes, setMoveTypes] = useState<FilterOption[]>([
     { label: '소형이사', count: count.small, isChecked: true },
     { label: '가정이사', count: count.medium, isChecked: true },
@@ -48,34 +49,40 @@ export default function Filter({ count }: FilterProps) {
 
   return (
     <div className={style.filter}>
-      <div className={style.movingType}>
-        <div className={style.filterName}>
-          이사유형
-          <span>
-            <input type='checkbox' /> 전체선택
-          </span>
+      {(type === 'moving' || type === undefined) && (
+        <div className={style.movingType}>
+          <div className={style.filterName}>
+            이사유형
+            <span>
+              <input type='checkbox' /> 전체선택
+            </span>
+          </div>
+          <div>
+            {moveTypes.map((moveType) => (
+              <label key={moveType.label} className={style.checkboxLabel}>
+                <span>
+                  {moveType.label} ({moveType.count})
+                </span>
+                <input
+                  type='checkbox'
+                  onChange={() => toggleCheckbox(1, true)}
+                />
+              </label>
+            ))}
+          </div>
         </div>
-        <div>
-          {moveTypes.map((moveType) => (
-            <label key={moveType.label} className={style.checkboxLabel}>
-              <span>
-                {moveType.label} ({moveType.count})
-              </span>
-              <input type='checkbox' onChange={() => toggleCheckbox(1, true)} />
-            </label>
-          ))}
+      )}
+      {(type === 'filter' || type === undefined) && (
+        <div className={style.movingFilter}>
+          <div className={style.filterName}>필터</div>
+          <label className={style.checkboxLabel}>
+            <span className={style.text}>
+              {filters.label} ({filters.count})
+            </span>
+            <input type='checkbox' onChange={() => toggleCheckbox(1, false)} />
+          </label>
         </div>
-      </div>
-
-      <div className={style.movingFilter}>
-        <div className={style.filterName}>필터</div>
-        <label className={style.checkboxLabel}>
-          <span className={style.text}>
-            {filters.label} ({filters.count})
-          </span>
-          <input type='checkbox' onChange={() => toggleCheckbox(1, false)} />
-        </label>
-      </div>
+      )}
     </div>
   );
 }
