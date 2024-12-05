@@ -5,7 +5,7 @@ import Dropdown from './components/Dropdown';
 import CallList from './components/CallList';
 import Pagination from '../../../components/pagination/Pagination';
 import Search from '../../../components/search/Search';
-import NoContents from '../../../components/nocontents/NoContents';
+import NoContents from '../../../components/noContents/NoContents';
 import ModalContainer from '../../../components/modal/ModalContainer';
 
 import { useMedia } from '../../../lib/function/useMediaQuery';
