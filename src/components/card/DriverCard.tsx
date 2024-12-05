@@ -80,11 +80,10 @@ export default function DriverCard({
         </div>
       ) : (
         <div className={style.label}>
-          {user.isAssigned && <Chip type='ASSIGN' />}
           {user.serviceType?.map((type, index) => (
             <Chip key={index} type={chipText(type)} />
           ))}
-          {user.isAssigned && <Chip type='ASSIGN' />}
+          {(user.isAssigned || type === 'confirm') && <Chip type='ASSIGN' />}
         </div>
       )}
       {(type === 'cost' || type === undefined) && (
