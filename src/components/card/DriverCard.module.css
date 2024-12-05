@@ -50,6 +50,17 @@
   font-weight: 600;
 }
 
+.noProfile {
+  height: 92px;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--line-100);
+  padding: 16px 18px;
+}
+
 .cost {
   display: flex;
   justify-content: end;

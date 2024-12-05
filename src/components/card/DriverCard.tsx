@@ -79,6 +79,7 @@ export default function DriverCard({
         </div>
       ) : (
         <div className={style.label}>
+          {user.isAssigned && <Chip type='ASSIGN' />}
           {user.serviceType?.map((type, index) => (
             <Chip key={index} type={chipText(type)} />
           ))}
@@ -90,14 +91,23 @@ export default function DriverCard({
           <span className={style.content}>{user.summary}</span>
         </>
       )}
-      <DriverProfile user={user} type={type} />
+      {type === 'notConfirm' ? (
+        <span className={style.noProfile}>미확정 견적</span>
+      ) : type === 'cancel' ? (
+        <span className={style.noProfile}>취소된 견적</span>
+      ) : (
+        <DriverProfile user={user} type={type} />
+      )}
       {type === 'cost' && (
         <div className={style.cost}>
           <span className={style.text}>견적 금액</span>
           {user.price && formatCurrency(user.price)}
         </div>
       )}
-      {type === 'waiting' && (
+      {(type === 'waiting' ||
+        type === 'confirm' ||
+        type === 'notConfirm' ||
+        type === 'cancel') && (
         <div className={style.detailInfo}>
           <div className={style.schedule}>
             <span
@@ -125,19 +135,34 @@ export default function DriverCard({
           </div>
           <div className={style.cost}>
             <span className={style.text}>견적 금액</span>
-            {user.price && formatCurrency(user.price)}
+            {type === 'notConfirm'
+              ? '미확정'
+              : type === 'cancel'
+                ? '취소'
+                : user.price && formatCurrency(user.price)}
           </div>
           <div className={style.costBtn}>
-            <Button
-              text='견적 확정하기'
-              btnStyle='solid448pxBlue300'
-              onClick={confirmCostBtn}
-            />
-            <Button
-              text='상세보기'
-              btnStyle='outlined448pxBlue300'
-              onClick={detailBtn}
-            />
+            {type === 'waiting' && (
+              <>
+                <Button
+                  text='견적 확정하기'
+                  btnStyle='solid448pxBlue300'
+                  onClick={confirmCostBtn}
+                />
+                <Button
+                  text='상세보기'
+                  btnStyle='outlined448pxBlue300'
+                  onClick={detailBtn}
+                />
+              </>
+            )}
+            {type !== 'waiting' && (
+              <Button
+                text='견적 목록보기'
+                btnStyle='solid448pxBlue300'
+                onClick={confirmCostBtn}
+              />
+            )}
           </div>
         </div>
       )}

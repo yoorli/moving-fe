@@ -1,5 +1,13 @@
 // DriverCard, DriverProfile
-type DriverProfileType = 'profile' | 'cost' | 'waiting' | 'dibs' | 'review';
+export type DriverProfileType =
+  | 'profile'
+  | 'cost'
+  | 'waiting'
+  | 'dibs'
+  | 'review'
+  | 'confirm'
+  | 'notConfirm'
+  | 'cancel';
 
 export interface DriverProfileProps {
   type?: DriverProfileType;
@@ -13,6 +21,8 @@ export interface DriverProfileProps {
     id: number; // 기사 아이디
     serviceType?: string[]; // 서비스 유형
     isAssigned?: boolean; // 지정경적 여부
+    isConfirmed?: boolean; // 확정된 요청인지 확인(true)
+    isCancelled?: boolean; // 취소 여부 (false)
     profileImage: string; // 프로필 이미지
     nickname: string; // 기사 닉네임
     career?: number; // 경력
