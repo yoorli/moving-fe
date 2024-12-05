@@ -9,6 +9,10 @@
   gap: 16px;
 }
 
+.img {
+  cursor: pointer;
+}
+
 @media (max-width: 1199px) and (min-width: 744px) {
   .text {
     font-size: 14px;

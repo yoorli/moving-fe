@@ -25,7 +25,11 @@ const SnsShare = ({ nickname }: SnsShareProps) => {
       <div>
         <div className={style.text}>나만 알기 아쉬운 기사님인가요?</div>
         <div className={style.imgs}>
-          <img src={pc ? icShareLarge : icShareMedium} alt='링크 복사' />
+          <img
+            src={pc ? icShareLarge : icShareMedium}
+            alt='링크 복사'
+            className={style.img}
+          />
           <img
             src={pc ? icShareFacebookLarge : icShareFacebookMedium}
             onClick={() => {
@@ -36,6 +40,7 @@ const SnsShare = ({ nickname }: SnsShareProps) => {
               );
             }}
             alt='페이스북 공유'
+            className={style.img}
           />
           <img
             src={pc ? icShareKakaoLarge : icShareKakaoMedium}
@@ -43,6 +48,7 @@ const SnsShare = ({ nickname }: SnsShareProps) => {
               ShareKakao(url, nickname);
             }}
             alt='카카오톡 공유'
+            className={style.img}
           />
         </div>
       </div>
