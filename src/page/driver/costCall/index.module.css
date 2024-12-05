@@ -64,6 +64,13 @@
   flex-direction: column;
 }
 
+.noContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 560px;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -76,5 +83,5 @@
 }
 
 @media (min-width: 1200px) {
-
+  
 }

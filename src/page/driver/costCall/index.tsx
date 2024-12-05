@@ -59,16 +59,20 @@ export default function DriverCostCallPage() {
               전체 {mockData.total}건 <Dropdown />
             </div>
           </div>
-          <div className={style.mainContent}>
-            {currentUsers.length > 0 ? (
+          {currentUsers.length > 0 ? (
+            <div className={style.mainContent}>
               <CallList list={currentUsers} />
-            ) : (
+            </div>
+          ) : (
+            <div className={style.noContent}>
               <NoContents image='file' />
-            )}
-          </div>
-          <div className={style.pagination}>
-            <Pagination {...page} />
-          </div>
+            </div>
+          )}
+          {currentUsers.length > 0 && (
+            <div className={style.pagination}>
+              <Pagination {...page} />
+            </div>
+          )}
         </div>
       </div>
     </div>
