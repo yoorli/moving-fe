@@ -11,6 +11,7 @@ import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
 
 interface ProfileProps {
   type?: string;
+  styles?: string;
   user: {
     id: number; // 기사 아이디
     serviceType?: string[]; // 서비스 유형
@@ -35,7 +36,7 @@ interface ProfileProps {
   };
 }
 
-export default function DriverProfile({ type, user }: ProfileProps) {
+export default function DriverProfile({ styles, type, user }: ProfileProps) {
   const isPc = useMedia().pc;
   return (
     <div
@@ -150,12 +151,20 @@ export default function DriverProfile({ type, user }: ProfileProps) {
             {user.movingDate !== undefined && user.price !== undefined && (
               <>
                 <span className={style.text}>
-                  <span style={{ color: 'var(--gray-300)' }}>이사일</span>
+                <span
+                    className={classNames(style.textLabel, styles && style[styles])}
+                  >
+                    이사일
+                  </span>
                   {user.movingDate}
                 </span>
                 <span className={style.separator}>|</span>
                 <span className={style.text}>
-                  <span style={{ color: 'var(--gray-300)' }}>견적가</span>
+                  <span
+                    className={classNames(style.textLabel, styles && style[styles])}
+                  >
+                    견적가
+                  </span>
                   {user.price && formatCurrency(user.price)}
                 </span>
               </>

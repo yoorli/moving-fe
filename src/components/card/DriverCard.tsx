@@ -47,8 +47,8 @@ const chipText = (type: string): ChipType => {
     case '소형이사':
       return 'SMALL';
     case '가정이사':
+      case '사무실이사':
       return 'HOME';
-    case '사무실이사':
       return 'COMPANY';
     case '확정 견적':
       return 'CONFIRM';
