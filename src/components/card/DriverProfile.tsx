@@ -20,6 +20,7 @@ export default function DriverProfile({
     <div
       className={classNames(style.profile, {
         [style.profilePType]: type === 'profile',
+        [style.profileWType]: type === 'waiting' || type === 'confirm',
       })}
     >
       <div
