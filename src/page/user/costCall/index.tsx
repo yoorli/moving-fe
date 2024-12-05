@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import MovingType from './components/MovingType';
-import MovingDate from './components/MovingDate';
 import Navigation from './components/Navigation';
-import MovingAddress from './components/MovingAddress';
-import MovingComments from './components/MovingComments';
+import NoContents from '../../../components/noContents/NoContents';
 import style from './index.module.css';
+import CostCallContent from './components/CostCallContent';
 
 export interface FormValues {
   movingType: null | string;
@@ -22,13 +20,7 @@ export interface SelectValues {
 }
 
 export default function UserCostCallPage() {
-  const [values, setValues] = useState<FormValues>({
-    movingType: null,
-    movingDate: null,
-    departure: null,
-    arrival: null,
-    comment: null,
-  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [isSelectOption, setIsSelectOption] = useState<SelectValues>({
     movingType: false,
@@ -37,71 +29,28 @@ export default function UserCostCallPage() {
     arrival: false,
   });
 
-  const handleSelectCompletion = (
-    name: keyof FormValues,
-    value: string | Date | null,
-  ) => {
-    setValues((prev: FormValues) => ({
-      ...prev,
-      [name]: value,
-    }));
-    setIsSelectOption((prev: SelectValues) => ({
-      ...prev,
-      [name]: true,
-    }));
+  const handleTabChange = () => {
+    alert('받은요청 페이지로 가자!');
   };
-
-  const isButtonEnabled = !!(
-    values.movingType &&
-    values.movingDate &&
-    values.arrival &&
-    values.departure !== null
-  );
 
   return (
     <div className={style.container}>
       <div className={style.mainContent}>
-        <Navigation isSelectOption={isSelectOption} />
-
-        <div className={style.contentSection}>
-          <MovingType
-            onClick={(type) => handleSelectCompletion('movingType', type)}
-            value={values.movingType}
+        <Navigation isSelectOption={isSelectOption} isSubmitted={isSubmitted} />
+        {!isSubmitted ? (
+          <CostCallContent
+            isSelectOption={isSelectOption}
+            setIsSelectOption={setIsSelectOption}
+            setIsSubmitted={setIsSubmitted}
           />
-          <div>
-            {isSelectOption.movingType && (
-              <MovingDate
-                onClick={(date) => handleSelectCompletion('movingDate', date)}
-                value={values.movingDate}
-              />
-            )}
-          </div>
-          <div>
-            {isSelectOption.movingDate && (
-              <MovingAddress
-                arrival={values.arrival}
-                departure={values.departure}
-                arrivalClick={(arrival) =>
-                  handleSelectCompletion('arrival', arrival)
-                }
-                departureClick={(departure) =>
-                  handleSelectCompletion('departure', departure)
-                }
-              />
-            )}
-          </div>
-          <div>
-            {isSelectOption.arrival && isSelectOption.departure && (
-              <MovingComments
-                value={values.comment}
-                onClick={(comment) =>
-                  handleSelectCompletion('comment', comment)
-                }
-                disabled={isButtonEnabled}
-              />
-            )}
-          </div>
-        </div>
+        ) : (
+          <NoContents
+            image='car'
+            hasButton={true}
+            buttonText='받은 견적 보러가기'
+            buttonHandler={() => handleTabChange()}
+          />
+        )}
       </div>
     </div>
   );
