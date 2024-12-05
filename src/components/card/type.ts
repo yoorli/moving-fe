@@ -17,6 +17,7 @@ export interface DriverProfileProps {
   confirmCostBtn?: () => void; //견적 확정하기 버튼
   detailBtn?: () => void; //상세보기 버튼
   reviewBtn?: () => void; //리뷰 작성하기 버튼
+  costListBtn?: () => void; //견적 목록보기 버튼
   user: {
     id: number; // 기사 아이디
     serviceType?: string[]; // 서비스 유형

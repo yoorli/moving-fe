@@ -36,6 +36,7 @@ export default function DriverCard({
   confirmCostBtn, //견적 확정하기 버튼
   detailBtn, //상세보기 버튼
   reviewBtn, //리뷰 작성하기 버튼
+  costListBtn, //견적 목록보기 버튼
   type,
   user,
 }: DriverProfileProps) {
@@ -160,7 +161,7 @@ export default function DriverCard({
               <Button
                 text='견적 목록보기'
                 btnStyle='solid448pxBlue300'
-                onClick={confirmCostBtn}
+                onClick={costListBtn}
               />
             )}
           </div>
