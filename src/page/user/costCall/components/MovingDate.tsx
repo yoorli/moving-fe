@@ -9,8 +9,8 @@ import './MovingDate.css';
 
 type DateValue = Date | null;
 interface CalendarTestProps {
-  onClick: (newDate: string | null) => void;
-  value: string | null;
+  onClick: (newDate: Date | null) => void;
+  value: Date | null;
 }
 
 export default function CalenderTest({ onClick, value }: CalendarTestProps) {
@@ -20,7 +20,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
 
   const handleSelectClick = (date: Date | null) => {
     if (date) {
-      onClick(format(date, 'yyyy. MM. dd'));
+      onClick(date);
     }
   };
 
@@ -32,7 +32,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
     }
   };
 
-  const dateFormat = (value: string | null): string => {
+  const dateFormat = (value: Date | null): string => {
     if (value) {
       return format(value, 'yyyy. MM. dd EEEE', { locale: ko });
     }

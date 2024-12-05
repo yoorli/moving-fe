@@ -8,7 +8,7 @@ import pageStyle from '../index.module.css';
 
 export interface FormValues {
   movingType: null | string;
-  movingDate: null | string;
+  movingDate: null | Date;
   departure: null | string;
   arrival: null | string;
   comment?: undefined | string | null;
