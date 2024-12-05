@@ -1,13 +1,12 @@
-import style from "./FilterDropdown.module.css";
-import activeIcon from "../../../../assets/icons/ic_active_filter.svg";
-import inactiveIcon from "../../../../assets/icons/ic_inactive_filter.svg";
+import style from "./FilterDropdownMedium.module.css";
+import activeIconMedium from "../../../../assets/icons/ic_active_filter_medium.svg";
+import inactiveIconMedium from "../../../../assets/icons/ic_inactive_filter_medium.svg";
 
 interface DropdownItem {
   label: string;
 }
 
-interface FilterDropdownProps {
-  title: string;
+interface FilterDropdownMediumProps {
   placeholder: string;
   items: DropdownItem[];
   onSelect: (value: string) => void;
@@ -16,15 +15,14 @@ interface FilterDropdownProps {
   isRegion?: boolean;
 }
 
-const FilterDropdown = ({
-  title,
+const FilterDropdownMedium = ({
   placeholder,
   items,
   onSelect,
   onToggle,
   isOpen,
   isRegion = false,
-}: FilterDropdownProps) => {
+}: FilterDropdownMediumProps) => {
   const handleSelect = (item: DropdownItem) => {
     onSelect(item.label);
     onToggle();
@@ -32,16 +30,17 @@ const FilterDropdown = ({
 
   return (
     <div className={style.container}>
-      <p className={style.title}>{title}</p>
       <div
-        className={`${style.filterBox} ${isOpen ? style.active : ""}`}
+        className={`${style.filterBox} ${isOpen ? style.active : ""} ${
+          isRegion ? style.region : style.service
+        }`}
         onClick={onToggle}
       >
         <span className={`${style.selectedText} ${isOpen ? style.activeText : ""}`}>
           {placeholder}
         </span>
         <img
-          src={isOpen ? activeIcon : inactiveIcon}
+          src={isOpen ? activeIconMedium : inactiveIconMedium}
           alt="Toggle"
           className={style.icon}
         />
@@ -67,5 +66,5 @@ const FilterDropdown = ({
   );
 };
 
-export default FilterDropdown;
+export default FilterDropdownMedium;
 
