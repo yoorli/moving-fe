@@ -7,6 +7,9 @@ import './style/globals.css';
 
 import router from './root';
 
+window.Kakao.init(process.env.REACT_APP_JAVASCRIPT_API_KEY);
+window.Kakao.isInitialized();
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );

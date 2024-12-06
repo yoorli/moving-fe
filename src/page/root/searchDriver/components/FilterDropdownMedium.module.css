@@ -1,0 +1,96 @@
+.container {
+    width: 100%;
+    position: relative;
+    margin-top: 16px;
+}
+
+.filterBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.filterBox.region {
+    width: 80px;
+    height: 36px;
+    padding: 6px 10px;
+}
+
+.filterBox.service {
+    width: 100px;
+    height: 36px;
+    padding: 6px 10px;
+}
+
+.selectedText {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #1f1f1f;
+    text-align: flex-start;
+    transition: color 0.2s;
+}
+
+.selectedText.activeText {
+    color: #1b92ff;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+}
+
+.filterBox.active {
+    border: 1px solid #1b92ff;
+    background-color: #f5faff;
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #dedede;
+    border-radius: 16px;
+    z-index: 10;
+}
+
+.regionDropdown {
+    width: 150px;
+    height: 179px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow-y: auto;
+    margin-top: 8px;
+}
+
+.serviceDropdown {
+    width: 115px;
+    height: 144px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    margin-top: 8px;
+}
+
+.dropdownItem {
+    padding: 6px 14px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #1f1f1f;
+    text-align: flex-start;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdownItem:hover {
+    background-color: #f5faff;
+    color: #1b92ff;
+}
+
