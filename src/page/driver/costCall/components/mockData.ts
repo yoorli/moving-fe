@@ -1,12 +1,14 @@
+import { ChipType } from "../../../../components/card/type";
+
 export interface UserData {
   total: number; //리스트 총 갯수
-  small: number; //소형이사 갯수
+  small: number; //SMALL 갯수
   medium: number; //중형이사 총 갯수
   large: number; //대형이사 총 갯수
   assign: number; //지정 견적 요청 총 갯수
   users: {
     id: number;
-    movingType: string[];
+    movingType: ChipType[];
     isAssigned: boolean;
     customer: string;
     movingDate: string;
@@ -25,7 +27,7 @@ export const mockData: UserData = {
   users: [
     {
       id: 1,
-      movingType: ['소형이사'],
+      movingType: ['SMALL'],
       isAssigned: false,
       customer: 'user1',
       movingDate: '2024.07.01',
@@ -35,7 +37,7 @@ export const mockData: UserData = {
     },
     {
       id: 2,
-      movingType: ['가정이사'],
+      movingType: ['HOME'],
       isAssigned: true,
       customer: 'user2',
       movingDate: '2024.07.15',
@@ -45,7 +47,7 @@ export const mockData: UserData = {
     },
     {
       id: 3,
-      movingType: ['사무실이사'],
+      movingType: ['COMPANY'],
       isAssigned: false,
       customer: 'user3',
       movingDate: '2024.08.01',
@@ -55,7 +57,7 @@ export const mockData: UserData = {
     },
     {
       id: 4,
-      movingType: ['소형이사'],
+      movingType: ['SMALL'],
       isAssigned: true,
       customer: 'user4',
       movingDate: '2024.09.01',
@@ -65,7 +67,7 @@ export const mockData: UserData = {
     },
     {
       id: 5,
-      movingType: ['가정이사'],
+      movingType: ['HOME'],
       isAssigned: false,
       customer: 'user5',
       movingDate: '2024.07.25',
@@ -75,7 +77,7 @@ export const mockData: UserData = {
     },
     {
       id: 6,
-      movingType: ['사무실이사'],
+      movingType: ['COMPANY'],
       isAssigned: true,
       customer: 'user6',
       movingDate: '2024.08.10',
@@ -85,7 +87,7 @@ export const mockData: UserData = {
     },
     {
       id: 7,
-      movingType: ['소형이사'],
+      movingType: ['SMALL'],
       isAssigned: false,
       customer: 'user7',
       movingDate: '2024.10.01',
@@ -95,7 +97,7 @@ export const mockData: UserData = {
     },
     {
       id: 8,
-      movingType: ['가정이사'],
+      movingType: ['HOME'],
       isAssigned: false,
       customer: 'user8',
       movingDate: '2024.08.20',
@@ -105,7 +107,7 @@ export const mockData: UserData = {
     },
     {
       id: 9,
-      movingType: ['사무실이사'],
+      movingType: ['COMPANY'],
       isAssigned: true,
       customer: 'user9',
       movingDate: '2024.09.05',
@@ -115,7 +117,7 @@ export const mockData: UserData = {
     },
     {
       id: 10,
-      movingType: ['소형이사'],
+      movingType: ['SMALL'],
       isAssigned: false,
       customer: 'user10',
       movingDate: '2024.10.10',

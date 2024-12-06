@@ -12,23 +12,6 @@ import style from './UserCard.module.css';
 
 import writing from '../../assets/icons/ic_writing_medium.svg';
 
-type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
-
-const chipText = (type: string): ChipType => {
-  switch (type) {
-    case '소형이사':
-      return 'SMALL';
-    case '가정이사':
-      return 'HOME';
-    case '사무실이사':
-      return 'COMPANY';
-    case '확정 견적':
-      return 'CONFIRM';
-    default:
-      return 'WAITING';
-  }
-};
-
 export default function UserCard({
   sendCostBtn: sendCost,
   rejectCostBtn: rejectCost,
@@ -46,7 +29,7 @@ export default function UserCard({
         <div>
           <div className={style.label}>
             {user.movingType?.map((type, index) => (
-              <Chip key={index} type={chipText(type)} />
+              <Chip key={index} type={type} />
             ))}
             {user.isAssigned && <Chip type='ASSIGN' />}
           </div>
