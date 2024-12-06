@@ -31,6 +31,14 @@ const SnsShare = ({ nickname }: SnsShareProps) => {
             className={style.img}
           />
           <img
+            src={pc ? icShareKakaoLarge : icShareKakaoMedium}
+            onClick={() => {
+              ShareKakao(url, nickname);
+            }}
+            alt='카카오톡 공유'
+            className={style.img}
+          />
+          <img
             src={pc ? icShareFacebookLarge : icShareFacebookMedium}
             onClick={() => {
               window.open(
@@ -40,14 +48,6 @@ const SnsShare = ({ nickname }: SnsShareProps) => {
               );
             }}
             alt='페이스북 공유'
-            className={style.img}
-          />
-          <img
-            src={pc ? icShareKakaoLarge : icShareKakaoMedium}
-            onClick={() => {
-              ShareKakao(url, nickname);
-            }}
-            alt='카카오톡 공유'
             className={style.img}
           />
         </div>
