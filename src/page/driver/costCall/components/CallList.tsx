@@ -65,7 +65,7 @@ export default function CallList({ list }: CallListProps) {
         >
           {modalContent ? (
             <div className={style.container}>
-              <div style={{ display: 'flex' }}>
+              <div className={style.chipBar}>
                 {list[userIndex].movingType.map((type, idx) => (
                   <Chip key={idx} type={type} />
                 ))}

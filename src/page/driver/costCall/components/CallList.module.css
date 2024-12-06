@@ -9,3 +9,8 @@
   flex-direction: column;
   gap: 32px;
 }
+
+.chipBar {
+  display: flex;
+  gap: 14px;
+}
