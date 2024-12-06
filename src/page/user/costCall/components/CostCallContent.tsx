@@ -34,11 +34,11 @@ export default function UserCostCallPage({
 }: CostCallContentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [values, setValues] = useState<FormValues>({
-    movingType: null,
+    movingType: '',
     movingDate: null,
-    departure: null,
-    arrival: null,
-    comment: null,
+    departure: '',
+    arrival: '',
+    comment: '',
   });
 
   const handleSelectCompletion = (
