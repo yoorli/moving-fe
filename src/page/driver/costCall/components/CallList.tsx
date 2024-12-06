@@ -1,10 +1,12 @@
 import UserCard from '../../../../components/card/UserCard';
 
+import { ChipType } from '../../../../components/card/type';
+
 import style from './CallList.module.css';
 
 interface User {
   id: number;
-  movingType: string[];
+  movingType: ChipType[];
   isAssigned: boolean;
   customer: string;
   movingDate: string;
