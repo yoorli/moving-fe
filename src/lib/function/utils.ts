@@ -20,10 +20,8 @@ export function getDate(inputDate: string | Date) {
 }
 
 // 한국기준 금액 형식 출력
-export function formatCurrency(cost: number) {
-  return (
-    cost
-      .toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })
-      .replace('₩', '') + '원'
-  );
+export function formatCurrency(cost: number, onlyNum?: boolean) {
+  const price = cost.toLocaleString('ko-KR')
+
+  return onlyNum ? price : price + '원';
 }
