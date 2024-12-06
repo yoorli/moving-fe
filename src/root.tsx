@@ -7,6 +7,7 @@ import UserLoginPage from './page/user/login';
 import UserFavoriteMover from './page/user/favoriteMover';
 import PendingCost from './page/user/pendingCost';
 import ReceivedCost from './page/user/receivedCost';
+import ReceivedCostDetail from './page/user/receivedCostDetail';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
 import DriverCostCallPage from './page/driver/costCall';
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
             path: 'receivedCost',
             element: <ReceivedCost />,
           },
+          {
+            path: 'receivedCost/:id',
+            element: <ReceivedCostDetail />,
+          },
         ],
       },
       {
@@ -123,7 +128,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'costHandler',
-        element: <span><DriverCostHandlerPage /></span>,
+        element: (
+          <span>
+            <DriverCostHandlerPage />
+          </span>
+        ),
       },
       {
         path: 'myPage',
