@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import style from './Filter.module.css';
 
@@ -26,26 +26,41 @@ export default function Filter({ type, count }: FilterProps) {
     { label: '사무실이사', count: count.large, isChecked: true },
   ]);
 
-  const [filters, setFilters] = useState<FilterOption>({
+  const [isAssigned, setIsAssigned] = useState<FilterOption>({
     label: '지정 견적 요청',
     count: count.large,
     isChecked: true,
   });
 
-  const toggleCheckbox = (index: number, isMoveType: boolean) => {
-    if (isMoveType) {
+  const allCheckHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setMoveTypes((prev) =>
+      prev.map((moveType) => ({
+        ...moveType,
+        isChecked: checked,
+      })),
+    );
+  };
+
+  const toggleCheckbox = (isMoveType: boolean, index?: number) => {
+    if (isMoveType && typeof index === 'number') {
       setMoveTypes((prev) => {
         const updated = [...prev];
-        updated[index].isChecked = !updated[index].isChecked;
+        updated[index] = {
+          ...updated[index],
+          isChecked: !updated[index].isChecked,
+        };
         return updated;
       });
     } else {
-      setFilters((prev) => {
-        prev.isChecked = !prev;
-        return prev;
-      });
+      setIsAssigned((prev) => ({
+        ...prev,
+        isChecked: !prev.isChecked,
+      }));
     }
   };
+
+  const allChecked = moveTypes.every((moveType) => moveType.isChecked);
 
   return (
     <div className={style.filter}>
@@ -54,18 +69,26 @@ export default function Filter({ type, count }: FilterProps) {
           <div className={style.filterName}>
             이사유형
             <span>
-              <input type='checkbox' /> 전체선택
+              <input
+                type='checkbox'
+                checked={allChecked}
+                onChange={allCheckHandler}
+              />
+              전체선택
             </span>
           </div>
           <div>
-            {moveTypes.map((moveType) => (
+            {moveTypes.map((moveType, index) => (
               <label key={moveType.label} className={style.checkboxLabel}>
                 <span>
                   {moveType.label} ({moveType.count})
                 </span>
                 <input
                   type='checkbox'
-                  onChange={() => toggleCheckbox(1, true)}
+                  checked={moveType.isChecked}
+                  onChange={() => {
+                    toggleCheckbox(true, index);
+                  }}
                 />
               </label>
             ))}
@@ -77,9 +100,13 @@ export default function Filter({ type, count }: FilterProps) {
           <div className={style.filterName}>필터</div>
           <label className={style.checkboxLabel}>
             <span className={style.text}>
-              {filters.label} ({filters.count})
+              {isAssigned.label} ({isAssigned.count})
             </span>
-            <input type='checkbox' onChange={() => toggleCheckbox(1, false)} />
+            <input
+              type='checkbox'
+              checked={isAssigned.isChecked}
+              onChange={() => toggleCheckbox(false)}
+            />
           </label>
         </div>
       )}
