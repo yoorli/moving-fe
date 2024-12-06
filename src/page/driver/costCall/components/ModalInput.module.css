@@ -1,0 +1,33 @@
+.textInput {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.input {
+  background-color: var(--background-200);
+  border: none;
+  border-radius: 16px;
+  height: 54px;
+  padding: 14px;
+  font-family:
+  'Pretendard Variable',
+  Pretendard;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+input::placeholder {
+  color: var(--gray-300);
+}
+
+.textArea {
+  height: 160px;
+  padding-inline: 24px;
+}
+
+textArea::placeholder {
+  color: var(--gray-300);
+}
