@@ -6,6 +6,8 @@ import Chip from '../../../../components/chip/Chip';
 import UserProfile from '../../../../components/card/UserProfile';
 import ModalInput from './ModalInput';
 
+import { ChipType } from '../../../../components/card/type';
+
 import style from './CallList.module.css';
 import { ChipType } from '../../../../components/card/type';
 

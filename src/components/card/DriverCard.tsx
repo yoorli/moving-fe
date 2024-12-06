@@ -13,23 +13,6 @@ import style from './DriverCard.module.css';
 import writing from '../../assets/icons/ic_writing_medium.svg';
 import writingGray from '../../assets/icons/ic_writing_gray.svg';
 
-type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
-
-const chipText = (type: string): ChipType => {
-  switch (type) {
-    case '소형이사':
-      return 'SMALL';
-    case '가정이사':
-      return 'HOME';
-    case '사무실이사':
-      return 'COMPANY';
-    case '확정 견적':
-      return 'CONFIRM';
-    default:
-      return 'WAITING';
-  }
-};
-
 export default function DriverCard({
   editInfoBtn, //기본 정보 수정 버튼
   editProfileBtn, //기본 정보 내 프로필 수정
@@ -81,7 +64,7 @@ export default function DriverCard({
       ) : (
         <div className={style.label}>
           {user.serviceType?.map((type, index) => (
-            <Chip key={index} type={chipText(type)} />
+            <Chip key={index} type={type} />
           ))}
           {(user.isAssigned) && <Chip type='ASSIGN' />}
         </div>

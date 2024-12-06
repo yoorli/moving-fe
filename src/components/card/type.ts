@@ -1,3 +1,5 @@
+export type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
+
 // DriverCard, DriverProfile
 export type DriverProfileType =
   | 'profile'
@@ -20,7 +22,7 @@ export interface DriverProfileProps {
   costListBtn?: () => void; //견적 목록보기 버튼
   user: {
     id: number; // 기사 아이디
-    serviceType?: string[]; // 서비스 유형
+    serviceType?: ChipType[]; // 서비스 유형
     isAssigned?: boolean; // 지정경적 여부
     isConfirmed?: boolean; // 확정된 요청인지 확인(true)
     isCancelled?: boolean; // 취소 여부 (false)
@@ -52,7 +54,7 @@ export interface UserProfileProps {
   sendCostBtn?: () => void;
   rejectCostBtn?: () => void;
   user: {
-    movingType?: string[]; // 이사 서비스 유형
+    movingType?: ChipType[]; // 이사 서비스 유형
     isAssigned?: boolean; // 지정견적 여부
     customer?: string; // 고객 이름
     moverName?: string; //기사 닉네임
