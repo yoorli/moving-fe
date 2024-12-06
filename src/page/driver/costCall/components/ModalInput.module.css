@@ -12,9 +12,7 @@
   border-radius: 16px;
   height: 54px;
   padding: 14px;
-  font-family:
-  'Pretendard Variable',
-  Pretendard;
+  font-family: 'Pretendard Variable', Pretendard;
   font-weight: 400;
   font-size: 20px;
 }
@@ -26,6 +24,7 @@ input::placeholder {
 .textArea {
   height: 160px;
   padding-inline: 24px;
+  resize: none;
 }
 
 textArea::placeholder {

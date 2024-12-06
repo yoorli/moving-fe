@@ -26,9 +26,9 @@ interface CallListProps {
 }
 
 export default function CallList({ list }: CallListProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(true);
-  const [userIndex, setUserIndex] = useState<number>();
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달
+  const [modalContent, setModalContent] = useState(true); // true : 견적보내기 / false : 반려
+  const [userIndex, setUserIndex] = useState<number>(); // 선택된 카드 index
 
   const sendBtnHandler = (index: number) => {
     setIsModalOpen(!isModalOpen);
@@ -42,7 +42,7 @@ export default function CallList({ list }: CallListProps) {
     setUserIndex(index);
   };
 
-  const sendCost = () => {
+  const btnHandler = () => {
     setIsModalOpen(false);
   };
 
@@ -59,35 +59,41 @@ export default function CallList({ list }: CallListProps) {
       ))}
       {isModalOpen && userIndex !== undefined && (
         <ModalContainer
-          title='견적 보내기'
-          buttonText='견적 보내기'
+          title= {modalContent ? '견적 보내기' : '요청 반려'}
+          buttonText= {modalContent ? '견적 보내기' : '반려하기'}
           closeBtnClick={() => setIsModalOpen(!isModalOpen)}
-          buttonClick={sendCost}
+          buttonClick={btnHandler}
         >
-          {modalContent ? (
-            <div className={style.container}>
-              <div className={style.chipBar}>
-                {list[userIndex].movingType.map((type, idx) => (
-                  <Chip key={idx} type={type} />
-                ))}
-                {list[userIndex].isAssigned && <Chip type='ASSIGN' />}
-              </div>
-              <div>
-                <UserProfile user={list[userIndex]} type='modal' />
-              </div>
+          <div className={style.container}>
+            <div className={style.chipBar}>
+              {list[userIndex].movingType.map((type, idx) => (
+                <Chip key={idx} type={type} />
+              ))}
+              {list[userIndex].isAssigned && <Chip type='ASSIGN' />}
+            </div>
+            <div>
+              <UserProfile user={list[userIndex]} type='modal' />
+            </div>
+            {modalContent ? (
+              <>
+                <ModalInput
+                  text='견적가를 입력해 주세요'
+                  basicText='견적가 입력'
+                />
+                <ModalInput
+                  text='코멘트를 입력해 주세요'
+                  basicText='최소 10자 이상 입력해주세요'
+                  isTextArea={true}
+                />
+              </>
+            ) : (
               <ModalInput
-                text='견적가를 입력해 주세요'
-                basicText='견적가 입력'
-              />
-              <ModalInput
-                text='코멘트를 입력해 주세요'
+                text='반려 사유를 입력해 주세요'
                 basicText='최소 10자 이상 입력해주세요'
                 isTextArea={true}
               />
-            </div>
-          ) : (
-            <div></div>
-          )}
+            )}
+          </div>
         </ModalContainer>
       )}
     </div>
