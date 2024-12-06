@@ -25,14 +25,14 @@ export default function ReceivedCostInfo({ info }: infoProps) {
               className={style.infoMenuOrder}
               style={{ marginRight: '32px' }}
             >
-              견적요청일
+              견적 요청일
             </div>
-            <div>24.08.26</div>
+            <div>{info.movingRequest}</div>
           </div>
           <div className={style.infoMenu}>
             <div
               className={style.infoMenuOrder}
-              style={{ marginRight: '58px' }}
+              style={{ marginRight: '70px' }}
             >
               서비스
             </div>
@@ -43,7 +43,17 @@ export default function ReceivedCostInfo({ info }: infoProps) {
           <div className={style.infoMenu}>
             <div
               className={style.infoMenuOrder}
-              style={{ marginRight: '58px' }}
+              style={{ marginRight: '70px' }}
+            >
+              이용일
+            </div>
+            <div>{info.movingDate}</div>
+          </div>
+
+          <div className={style.infoMenu}>
+            <div
+              className={style.infoMenuOrder}
+              style={{ marginRight: '70px' }}
             >
               이용일
             </div>
@@ -52,7 +62,7 @@ export default function ReceivedCostInfo({ info }: infoProps) {
           <div className={style.infoMenu}>
             <div
               className={style.infoMenuOrder}
-              style={{ marginRight: '56px' }}
+              style={{ marginRight: '70px' }}
             >
               출발지
             </div>
@@ -61,7 +71,7 @@ export default function ReceivedCostInfo({ info }: infoProps) {
           <div className={style.infoMenu}>
             <div
               className={style.infoMenuOrder}
-              style={{ marginRight: '56px' }}
+              style={{ marginRight: '70px' }}
             >
               도착지
             </div>
@@ -70,7 +80,7 @@ export default function ReceivedCostInfo({ info }: infoProps) {
           <div className={style.infoMenu}>
             <div
               className={style.infoMenuOrder}
-              style={{ marginRight: '42px' }}
+              style={{ marginRight: '55px' }}
             >
               요청사항
             </div>

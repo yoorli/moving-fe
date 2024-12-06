@@ -4,6 +4,7 @@ export interface infoProps {
   info: {
     id: number;
     movingType: string;
+    movingRequest: string;
     movingDate: string;
     departure: string;
     arrival: string;
@@ -29,6 +30,7 @@ export interface Mover {
   totalConfirmed: number;
   favoriteCount: number;
   price: number;
+  isLiked: boolean;
 }
 
 export interface MoverList {
@@ -40,6 +42,7 @@ export interface mockDataProps {
   info: {
     id: number;
     movingType: string;
+    movingRequest: string;
     movingDate: string;
     departure: string;
     arrival: string;
@@ -54,6 +57,7 @@ export const mockData: mockDataProps = {
   info: {
     id: 1,
     movingType: 'SMALL',
+    movingRequest: '2024.07.01',
     movingDate: '2024.07.01',
     departure: '서울특별시 강남구',
     arrival: '서울특별시 마포구',
@@ -79,6 +83,7 @@ export const mockData: mockDataProps = {
       totalConfirmed: 200,
       favoriteCount: 160,
       price: 190000,
+      isLiked: true,
     },
     {
       id: 1,
@@ -97,6 +102,7 @@ export const mockData: mockDataProps = {
       totalConfirmed: 100,
       favoriteCount: 160,
       price: 190000,
+      isLiked: false,
     },
   ],
 };
