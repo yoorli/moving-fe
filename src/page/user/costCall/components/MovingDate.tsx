@@ -20,7 +20,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
 
   const handleSelectClick = (date: Date | null) => {
     if (date) {
-      onClick(format(date, 'yyyy. MM. dd'));
+      onClick(date.toString());
     }
   };
 
@@ -32,7 +32,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
     }
   };
 
-  const dateFormat = (value: string | null): string => {
+  const dateFormat = (value: Date | null): string => {
     if (value) {
       return format(value, 'yyyy. MM. dd EEEE', { locale: ko });
     }
@@ -70,7 +70,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
       {value && (
         <div>
           <div className={pageStyle.selectOptionBubble}>
-            {dateFormat(value)}
+            {dateFormat(new Date(value))}
           </div>
           <button
             className={pageStyle.editButton}
