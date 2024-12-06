@@ -50,6 +50,8 @@ export function getStars(rating: number) {
 
 export default function UserProfile({ type, user }: UserProfileProps) {
   const isPc = useMedia().pc;
+  // const isTablet = useMedia().tablet;
+  const isMobile = useMedia().mobile;
   return (
     <>
       {type !== 'review' ? (
@@ -60,19 +62,27 @@ export default function UserProfile({ type, user }: UserProfileProps) {
         >
           <div className={style.userInfo}>{user.customer} 고객님</div>
           <div
-            className={classNames(style.separator, {
-              [style.hidden]: type === 'modal',
-            })}
+            className={
+              type === 'modal' || isMobile ? style.hidden : style.separator
+            }
           ></div>
-          <div className={style.movingInfo}>
+          <div
+            className={classNames(style.movingInfo, {
+              [style.movingInfoMType]: type == 'modal',
+            })}
+          >
             <span className={style.text}>
               <span className={style.movingLabel}>이사일</span>
               {user.movingDate}
             </span>
             <span
-              className={classNames(style.separatorHorizon, {
-                [style.hidden]: !isPc || type === 'modal',
-              })}
+              className={
+                type === 'modal'
+                  ? style.hidden
+                  : !isMobile
+                    ? style.separatorHorizon
+                    : style.separator
+              }
             ></span>
             <span className={style.text}>
               <span className={style.movingLabel}>출발</span>
