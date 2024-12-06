@@ -6,6 +6,7 @@ import pageStyle from '../index.module.css';
 import Button from '../../../../components/btn/Button';
 import 'react-calendar/dist/Calendar.css';
 import './MovingDate.css';
+import holidayKR from 'holiday-kr';
 
 type DateValue = Date | null;
 interface CalendarTestProps {
@@ -39,6 +40,33 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
     return '수정 버튼을 눌러 날짜를 다시 선택해 주세요.';
   };
 
+  const addContent = ({ date }: any) => {
+    const contents = [];
+    const daysToCheck = [9, 10, 19, 20, 29, 30];
+
+    const lunarDate: any = holidayKR.getLunar(new Date(date));
+    const { day } = lunarDate;
+
+    if (daysToCheck.includes(day)) {
+      contents.push(
+        <>
+          <div
+            style={{
+              position: 'relative',
+              width: '10px',
+              height: '10px',
+              borderRadius: '50%',
+              backgroundColor: 'var(  --red-200)',
+              marginTop: '5px',
+            }}
+          />
+        </>,
+      );
+    }
+
+    return <div>{contents}</div>; // 각 날짜마다 해당 요소가 들어감
+  };
+
   return (
     <div>
       <div className={pageStyle.optionGuideBubble}>
@@ -55,10 +83,14 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
             prev2Label={null}
             next2Label={null}
             minDate={today}
+            tileContent={addContent}
             formatDay={(locale, date) => format(date, 'd')}
             formatMonthYear={(locale, date) => format(date, 'yyyy. MM')}
           />
-
+          <div className='noticeText'>
+            ※손없는 날(표시된 날)과 금요일을 피하시면 비교적 저렴하게 이사가
+            가능합니다.
+          </div>
           <Button
             text='선택완료'
             btnStyle='solid640pxBlue300'
