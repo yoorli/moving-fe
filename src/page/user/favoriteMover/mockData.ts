@@ -1,7 +1,9 @@
+type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
+
 // 데이터 연결을 위한 임시 mockData (지울 예정)
 export interface Mover {
   id: number;
-  serviceType: string[];
+  serviceType: ChipType[];
   isAssigned: boolean;
   nickname: string;
   profileImage: string;
@@ -25,7 +27,7 @@ export const mockData: ApiResponse = {
   list: [
     {
       id: 1,
-      serviceType: ['소형이사', '사무실이사'],
+      serviceType: ['SMALL', 'COMPANY'],
       isAssigned: true,
       nickname: '김기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -40,7 +42,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 2,
-      serviceType: ['가정이사'],
+      serviceType: ['HOME'],
       isAssigned: false,
       nickname: '이기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -55,7 +57,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 3,
-      serviceType: ['사무실이사', '소형이사'],
+      serviceType: ['COMPANY', 'SMALL'],
       isAssigned: true,
       nickname: '박기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -70,7 +72,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 4,
-      serviceType: ['소형이사'],
+      serviceType: ['SMALL'],
       isAssigned: false,
       nickname: '최기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -85,7 +87,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 5,
-      serviceType: ['가정이사', '사무실이사'],
+      serviceType: ['HOME', 'COMPANY'],
       isAssigned: true,
       nickname: '송기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -100,7 +102,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 6,
-      serviceType: ['소형이사'],
+      serviceType: ['SMALL'],
       isAssigned: false,
       nickname: '이기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -115,7 +117,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 7,
-      serviceType: ['사무실이사'],
+      serviceType: ['COMPANY'],
       isAssigned: true,
       nickname: '박기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -130,7 +132,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 8,
-      serviceType: ['가정이사'],
+      serviceType: ['HOME'],
       isAssigned: false,
       nickname: '정기사',
       profileImage: 'https://via.placeholder.com/150',
