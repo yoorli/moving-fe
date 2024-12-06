@@ -1,7 +1,8 @@
-import style from './Dropdown.module.css';
+import { useState } from 'react';
 
 import vectorDownSmall from '../../../../assets/icons/ic_vector_down_small.svg';
-import { useState } from 'react';
+
+import style from './Dropdown.module.css';
 
 export default function Dropdown() {
   const [isOpen, setIsOpen] = useState(false);

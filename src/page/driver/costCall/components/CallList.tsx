@@ -8,10 +8,7 @@ import ModalInput from './ModalInput';
 
 import { ChipType } from '../../../../components/card/type';
 
-import { ChipType } from '../../../../components/card/type';
-
 import style from './CallList.module.css';
-import { ChipType } from '../../../../components/card/type';
 
 interface User {
   id: number;

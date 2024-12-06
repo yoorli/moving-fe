@@ -1,7 +1,9 @@
-import classNames from 'classnames';
-import style from './ModalInput.module.css';
 import { ChangeEvent, useState } from 'react';
+import classNames from 'classnames';
+
 import { formatCurrency } from '../../../../lib/function/utils';
+
+import style from './ModalInput.module.css';
 
 interface ModalInputProps {
   text: string;

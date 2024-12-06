@@ -1,9 +1,10 @@
 import DriverCard from '../../../components/card/DriverCard';
 
-import { mockData } from './mockData';
+import { DriverProfileType } from '../../../components/card/type';
 
 import style from './index.module.css';
-import { DriverProfileType } from '../../../components/card/type';
+
+import { mockData } from './mockData';
 
 export default function DriverCostHandlerPage() {
   const getType = (isConfirmed: boolean, isCancelled: boolean):DriverProfileType => {
