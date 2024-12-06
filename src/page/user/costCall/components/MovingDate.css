@@ -52,12 +52,22 @@
   background-color: transparent !important;
 }
 
+.react-calendar__tile {
+  text-align: center;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .react-calendar__tile--active {
   background-color: var(--blue-300);
   border-radius: 100px;
   width: 100%;
-  max-width: 40px;
-  max-height: 40px;
+  min-width: 60px;
+  min-height: 60.5px;
+  max-width: 60px;
   height: 100%;
   color: white;
   flex: unset !important;
@@ -87,4 +97,19 @@
 
 .react-calendar button {
   margin-bottom: 10px;
+}
+
+.noticeText {
+  font-size: 15px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  color: var(--red-200);
+}
+
+@media (max-width: 500px) {
+  .react-calendar__tile--active {
+    min-width: 30px;
+    max-width: 30px;
+    min-height: 55.25px;
+  }
 }
