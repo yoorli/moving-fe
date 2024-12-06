@@ -1,5 +1,6 @@
 /// <reference types="react-scripts" />
 
+
 declare module 'holiday-kr' {
   interface HolidayKR {
     isHoliday(date: string): boolean;
@@ -9,3 +10,12 @@ declare module 'holiday-kr' {
   const holidayKR: HolidayKR;
   export = holidayKR;
 }
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
+export {};
+

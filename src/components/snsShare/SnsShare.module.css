@@ -1,0 +1,21 @@
+.text {
+  font-size: 20px;
+  font-weight: 600;
+  padding-bottom: 22px;
+}
+
+.imgs {
+  display: flex;
+  gap: 16px;
+}
+
+.img {
+  cursor: pointer;
+}
+
+@media (max-width: 1199px) and (min-width: 744px) {
+  .text {
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+}
