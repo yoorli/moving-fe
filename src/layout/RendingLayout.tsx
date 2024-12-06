@@ -1,12 +1,18 @@
 import { Outlet } from 'react-router-dom';
 import style from './RendingLayout.module.css';
 import { useState } from 'react';
-import NonLoginNav from '../components/nav/NonLoginNav';
-import modalClose from '../assets/icons/ic_x_large.svg';
-import useDirection from '../lib/function/direction';
+
+import { UserMenuModal } from '../components/nav/NavMenuModal';
+import { NonLoginNav, UserNav } from '../components/nav/Nav';
+import { useMedia } from '../lib/function/useMediaQuery';
 
 export default function RendingLayout() {
   const [modal, setModal] = useState<boolean>(false);
+  const { pc } = useMedia();
+
+  const user = {
+    name: '김대건',
+  };
 
   const modalController = () => {
     setModal((prev) => !prev);
@@ -16,48 +22,17 @@ export default function RendingLayout() {
     <>
       <div className={style.container}>
         <div className={style.wrapper}>
-          <NonLoginNav modalController={modalController} />
+          {user ? (
+            <UserNav modalController={modalController} />
+          ) : (
+            <NonLoginNav modalController={modalController} />
+          )}
           <Outlet />
         </div>
       </div>
-      {modal ? <NonLoginMenuModal modalController={modalController} /> : null}
+      {!pc && modal && user ? (
+        <UserMenuModal modalController={modalController} />
+      ) : null}
     </>
-  );
-}
-
-function NonLoginMenuModal({
-  modalController,
-}: {
-  modalController: () => void;
-}) {
-  const { direction_userLogin, direction_searchDriver } = useDirection();
-  return (
-    <div className={style.modalContainer}>
-      <div className={style.modalWrapper}>
-        <div className={style.modalHeader}>
-          <div className={style.pill}>
-            <img onClick={modalController} src={modalClose} alt='' />
-          </div>
-        </div>
-        <div
-          onClick={() => {
-            modalController();
-            direction_searchDriver();
-          }}
-          className={style.modalItem}
-        >
-          기사님 찾기
-        </div>
-        <div
-          onClick={() => {
-            modalController();
-            direction_userLogin();
-          }}
-          className={style.modalItem}
-        >
-          로그인
-        </div>
-      </div>
-    </div>
   );
 }

@@ -2,41 +2,39 @@ import classNames from 'classnames';
 
 import UserProfile from './UserProfile';
 import Button from '../btn/Button';
+import Chip from '../chip/Chip';
 
+import { useMedia } from '../../lib/function/useMediaQuery';
 import { getDate, formatCurrency } from '../../lib/function/utils';
+import { UserProfileProps } from './type';
 
 import style from './UserCard.module.css';
-import { useMedia } from '../../lib/function/useMediaQuery';
 
 import writing from '../../assets/icons/ic_writing_medium.svg';
 
-type ProfileType = 'receive' | 'review' | 'confirmedCost';
+type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
 
-interface ProfileProps {
-  type?: ProfileType;
-  user: {
-    label?: string[];
-    called?: boolean;
-    name: string;
-    movingDate?: string;
-    start?: string;
-    end?: string;
-    createAt?: string;
-    description?: string;
-    profileImage?: string;
-    rating?: number;
-    reviews?: number;
-    experience?: number;
-    confirmedCases?: number;
-    likes?: number;
-    cost?: number;
-    service?: string[];
-    serviceRegion?: string[];
-    review?: string;
-  };
-}
+const chipText = (type: string): ChipType => {
+  switch (type) {
+    case '소형이사':
+      return 'SMALL';
+    case '가정이사':
+      return 'HOME';
+    case '사무실이사':
+      return 'COMPANY';
+    case '확정 견적':
+      return 'CONFIRM';
+    default:
+      return 'WAITING';
+  }
+};
 
-export default function UserCard({ type, user }: ProfileProps) {
+export default function UserCard({
+  sendCostBtn: sendCost,
+  rejectCostBtn: rejectCost,
+  type,
+  user,
+}: UserProfileProps) {
   const isPc = useMedia().pc;
   return (
     <div
@@ -46,8 +44,12 @@ export default function UserCard({ type, user }: ProfileProps) {
     >
       <div className={style.top}>
         <div>
-          <div>{user.label}</div>
-          <div>{user.called}</div>
+          <div className={style.label}>
+            {user.movingType?.map((type, index) => (
+              <Chip key={index} type={chipText(type)} />
+            ))}
+            {user.isAssigned && <Chip type='ASSIGN' />}
+          </div>
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
@@ -66,21 +68,26 @@ export default function UserCard({ type, user }: ProfileProps) {
             text='견적 보내기'
             btnStyle='solid448pxBlue300'
             src={writing}
+            onClick={sendCost}
           />
-          <Button text='반려' btnStyle='outlined448pxBlue300' />
+          <Button
+            text='반려'
+            btnStyle='outlined448pxBlue300'
+            onClick={rejectCost}
+          />
         </div>
       )}
 
       {type === 'confirmedCost' && (
         <div className={style.cost}>
           <span className={style.text}>견적 금액 </span>{' '}
-          {user.cost && formatCurrency(user.cost)}
+          {user.price && formatCurrency(user.price)}
         </div>
       )}
 
       {type === 'review' && (
         <>
-          <div className={style.review}>{user.review}</div>
+          <div className={style.review}>{user.content}</div>
           {!isPc && (
             <div className={style.createAtRTypeNoPc}>
               {user.createAt && getDate(user.createAt)}

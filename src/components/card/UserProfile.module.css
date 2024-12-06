@@ -24,11 +24,15 @@
   display: flex;
   gap: 16px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .text {
   font-size: 18px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .movingLabel {

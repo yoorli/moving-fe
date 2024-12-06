@@ -14,8 +14,9 @@
 
 .contentSection {
   margin-top: 40px;
-  max-width: 1400px;
+  max-width: 1980px;
   width: 100%;
+  padding: 32px 120px;
 }
 
 .optionGuideBubble {
@@ -32,17 +33,18 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: auto;
   width: fit-content;
   background-color: var(--gray-50);
   border-radius: 30px 0px 30px 30px;
-  padding: 20px 40px;
+  padding: 30px 40px;
   font-size: 18px;
   font-weight: 500;
   box-sizing: border-box;
   max-width: 624px;
   width: 100%;
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-top: 50px;
 }
 
 .selectOptionBubble {
@@ -57,6 +59,7 @@
   color: var(--gray-50);
   font-size: 18px;
   font-weight: 500;
+  margin-top: 50px;
 }
 
 .editButton {
@@ -90,7 +93,7 @@
 
   .contentSection {
     min-width: 332px;
-    padding: 10px;
+    padding: 32px 24px;
   }
 
   .optionGuideBubble {
@@ -102,7 +105,6 @@
 
   .optionBubble {
     padding: 16px;
-
     display: flex;
     justify-content: center;
   }
@@ -117,8 +119,8 @@
   }
 }
 
-@media (max-width: 1481px) {
+@media (max-width: 1199px) and (min-width: 744px) {
   .contentSection {
-    padding: 32px 30px;
+    padding: 32px 72px;
   }
 }

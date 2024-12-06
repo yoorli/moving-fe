@@ -1,35 +1,13 @@
 import classNames from 'classnames';
 
 import { formatCurrency } from '../../lib/function/utils';
+import { useMedia } from '../../lib/function/useMediaQuery';
+import { UserProfileProps } from './type';
 
 import style from './UserProfile.module.css';
 
 import fullStarsMedium from '../../assets/icons/ic_full_star_medium.svg';
 import emptyStarMedium from '../../assets/icons/ic_empty_star_medium.svg';
-import { useMedia } from '../../lib/function/useMediaQuery';
-
-interface ProfileProps {
-  type?: string;
-  user: {
-    label?: string[];
-    called?: boolean;
-    name: string;
-    movingDate?: string;
-    start?: string;
-    end?: string;
-    createAt?: string;
-    description?: string;
-    profileImage?: string;
-    rating?: number;
-    reviews?: number;
-    experience?: number;
-    confirmedCases?: number;
-    likes?: number;
-    cost?: number;
-    service?: string[];
-    serviceRegion?: string[];
-  };
-}
 
 export function getStars(rating: number) {
   const stars = [];
@@ -70,7 +48,7 @@ export function getStars(rating: number) {
   return stars;
 }
 
-export default function UserProfile({ type, user }: ProfileProps) {
+export default function UserProfile({ type, user }: UserProfileProps) {
   const isPc = useMedia().pc;
   return (
     <>
@@ -80,8 +58,12 @@ export default function UserProfile({ type, user }: ProfileProps) {
             [style.profilePadding]: type !== 'confirmedCost' && isPc,
           })}
         >
-          <div className={style.userInfo}>{user.name} 고객님</div>
-          <div className={style.separator}></div>
+          <div className={style.userInfo}>{user.customer} 고객님</div>
+          <div
+            className={classNames(style.separator, {
+              [style.hidden]: type === 'modal',
+            })}
+          ></div>
           <div className={style.movingInfo}>
             <span className={style.text}>
               <span className={style.movingLabel}>이사일</span>
@@ -89,17 +71,17 @@ export default function UserProfile({ type, user }: ProfileProps) {
             </span>
             <span
               className={classNames(style.separatorHorizon, {
-                [style.hidden]: !isPc,
+                [style.hidden]: !isPc || type === 'modal',
               })}
             ></span>
             <span className={style.text}>
               <span className={style.movingLabel}>출발</span>
-              {user.start}
+              {user.departure}
             </span>
             <span className={style.separatorHorizon}></span>
             <span className={style.text}>
               <span className={style.movingLabel}>도착</span>
-              {user.end}
+              {user.arrival}
             </span>
           </div>
         </div>
@@ -107,22 +89,23 @@ export default function UserProfile({ type, user }: ProfileProps) {
         <div className={style.reviewProfile}>
           <div className={style.profileImage}>
             <img
-              src={user.profileImage}
-              alt={`${user.name}'s profile`}
+              src={user.profileImg}
+              alt={`${user.moverName}'s profile`}
               className={style.avatar}
             />
           </div>
           <div className={style.driverInfo}>
-            <div className={style.driverName}>{user.name} 기사님</div>
+            <div className={style.driverName}>{user.moverName} 기사님</div>
             <div className={style.movingInfoRType}>
               <span className={style.movingLabelRType}>이사일</span>
               {user.movingDate}
               <span className={style.separatorHorizon}></span>
               <span className={style.movingLabelRType}>견적가</span>
-              {user.cost && formatCurrency(user.cost)}
+              {user.price && formatCurrency(user.price)}
             </div>
             <div className={style.stars}>
-              {user.rating && getStars(user.rating)}
+              {user.reviewStats?.averageScore &&
+                getStars(user.reviewStats.averageScore)}
             </div>
           </div>
         </div>

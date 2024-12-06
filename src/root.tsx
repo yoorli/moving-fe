@@ -9,7 +9,7 @@ import PendingCost from './page/user/pendingCost';
 import ReceivedCost from './page/user/receivedCost';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
-import DriverCallPage from './page/driver/costCall';
+import DriverCostCallPage from './page/driver/costCall';
 import UserMovingReview from './page/user/movingReview';
 import UserCostCallPage from './page/user/costCall';
 import UserRegisterPage from './page/user/register';
@@ -19,6 +19,7 @@ import UserEditInfoPage from './page/user/editInfo';
 import UserEditProfilePage from './page/user/editProfile';
 import ServiceRandingPage from './page/root';
 import DriverRegisterPage from './page/driver/register';
+import DriverCostHandlerPage from './page/driver/costHandler';
 import SearchDriverForGuest from './page/root/searchDriver';
 
 const router = createBrowserRouter([
@@ -79,7 +80,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'editProfile',
-        element: <span>editProfile</span>,
+        element: <UserEditProfilePage />,
       },
       {
         path: 'movingReview',
@@ -105,7 +106,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'costCall',
-        element: <DriverCallPage />,
+        element: <DriverCostCallPage />,
       },
       {
         path: 'register',
@@ -120,8 +121,8 @@ const router = createBrowserRouter([
         element: <DriverEditInfoPage />,
       },
       {
-        path: 'constHandler',
-        element: <span>내 견적 관리</span>,
+        path: 'costHandler',
+        element: <span><DriverCostHandlerPage /></span>,
       },
       {
         path: 'myPage',

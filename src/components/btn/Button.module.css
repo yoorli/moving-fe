@@ -1,9 +1,3 @@
-/* .button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
 /* 이미지와 함께 있는 텍스트 */
 .buttonImg {
   display: flex;
@@ -58,7 +52,6 @@
 /* 로그인 및 회원가입 페이지 및 프로필 등록 - 로그인(활성화) */
 /* 작성 가능한 리뷰 - 리뷰 작성하기 */
 .solid640pxBlue300 {
-  max-width: 640px;
   width: 100%;
   height: 64px;
   border-radius: 16px;
@@ -74,7 +67,6 @@
 /* 작성 가능한 리뷰 - 리뷰 등록 */
 /* 받은 요청 - 견적 보내기 | 반려하기 */
 .solid560pxBlue300 {
-  max-width: 560px;
   width: 100%;
   height: 64px;
   border-radius: 16px;
@@ -113,7 +105,6 @@
 
 /* 기사님 상세페이지 - 기사님 찜하기 */
 .outlined354pxLine200 {
-  max-width: 354px;
   width: 100%;
   height: 64px;
   border-radius: 16px;
@@ -125,9 +116,8 @@
 }
 
 /* 기사님 상세페이지 - 지정 견적 요청하기 */
-/* 내 견적 관리 - 견적 확정하기 */
+/* 내 견적 관리 - 견적 확정하기 (328에서 354로 디자인 수정) */
 .solid354pxBlue300 {
-  max-width: 354px;
   width: 100%;
   height: 64px;
   border-radius: 16px;
@@ -138,21 +128,19 @@
 }
 
 /* 내 견적 관리_대기 중인 견적 - 견적 확정하기 */
-.outlined314pxLine200 {
-  max-width: 314.5px;
+.outlined314pxBlue300 {
   width: 100%;
   height: 64px;
   border-radius: 16px;
   background-color: var(--gray-50);
   color: var(--black-500);
-  border: 1px solid var(--line-200);
+  border: 1px solid var(--blue-300);
   font-weight: 600;
   font-size: 20px;
 }
 
-/* 기사님 상세페이지 - 지정 견적 요청하기 */
+/* 내 견적 관리_대기 중인 견적 - 견적 확정하기 */
 .solid314pxBlue300 {
-  max-width: 314.5px;
   width: 100%;
   height: 64px;
   border-radius: 16px;
@@ -204,7 +192,6 @@
 /* 기사님 */
 /* 받은 요청 - 견적 보내기 */
 .solid448pxBlue300 {
-  max-width: 448px;
   width: 100%;
   height: 64px;
   border-radius: 16px;
@@ -216,7 +203,6 @@
 
 /* 받은 요청 - 반려 */
 .outlined448pxBlue300 {
-  max-width: 448px;
   width: 100%;
   height: 64px;
   border-radius: 16px;
@@ -263,4 +249,38 @@
   color: var(--gray-50);
   font-weight: 600;
   font-size: 20px;
+}
+
+/* tablet, moblie 화면 */
+@media (max-width: 1199px) {
+  .solid340pxBlue300,
+  .outlined340pxBlue300,
+  .solid640pxBlue300,
+  .solid560pxBlue300,
+  .outlined560pxBlue300,
+  .solid196pxBlue300,
+  .outlined354pxLine200,
+  .solid354pxBlue300,
+  .outlined314pxLine200,
+  .solid314pxBlue300,
+  .solid180pxBlue300,
+  .solid660pxBlue300,
+  .outlined660pxBlue300,
+  .solid448pxBlue300,
+  .outlined448pxBlue300,
+  .solid280pxBackground200,
+  .solid280pxBlue300 {
+    height: 54px;
+    font-size: 16px;
+  }
+
+.solid280pxBackground200,
+.solid280pxBlue300 {
+  max-width: unset;
+}
+
+  .solid123pxBlue100 {
+    height: 40px;
+    font-size: 14px;
+  }
 }
