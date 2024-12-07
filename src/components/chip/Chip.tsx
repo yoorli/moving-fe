@@ -15,7 +15,7 @@ interface ChipProps {
 }
 
 export default function Chip({ type }: ChipProps) {
-  const { pc, mobile } = useMedia();
+  const { pc } = useMedia();
 
   const chipImg = (type: string): string => {
     switch (type) {
@@ -57,7 +57,7 @@ export default function Chip({ type }: ChipProps) {
       })}
     >
       <img src={chipImg(type)} alt='' />
-      {!mobile && <div>{chipText(type)}</div>}
+      <div>{chipText(type)}</div>
     </div>
   );
 }
