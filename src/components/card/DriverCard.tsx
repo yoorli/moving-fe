@@ -28,12 +28,12 @@ const chipText = (type: string): ChipType => {
 };
 
 export default function DriverCard({
-  editInfoBtn,
-  editProfileBtn,
-  confirmCostBtn,
-  detailBtn,
-  reviewBtn,
-  costListBtn,
+  editInfoBtn, // 기본 정보 수정 버튼
+  editProfileBtn, // 기본 정보 내 프로필 수정
+  confirmCostBtn, // 견적 확정하기 버튼
+  detailBtn, // 상세보기 버튼
+  reviewBtn, // 리뷰 작성하기 버튼
+  costListBtn, // 견적 목록하기 버튼
   type,
   user,
   onClick, // onClick prop 추가
