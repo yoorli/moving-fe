@@ -1,0 +1,140 @@
+.container {
+    width: 100%;
+    max-width: 328px;
+    position: relative;
+}
+
+.title {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+    color: #1f1f1f;
+    margin-bottom: 16px;
+}
+
+.filterBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 64px;
+    padding: 16px 24px;
+    border: 1px solid #dedede;
+    border-radius: 16px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.filterBox.active {
+    border: 1px solid #1b92ff;
+    background-color: #f5faff;
+}
+
+.selectedText {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 500;
+    color: #1f1f1f;
+    transition: color 0.2s;
+}
+
+.selectedText.activeText {
+    color: #1b92ff;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 8px;
+    border: 1px solid #dedede;
+    border-radius: 16px;
+    background-color: #fff;
+    padding: 8px 0;
+    z-index: 10;
+}
+
+.regionDropdown {
+    max-height: 320px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow-y: auto;
+}
+
+.serviceDropdown {
+    height: 276px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+}
+
+.dropdownItem {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 19px 24px;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 500;
+    color: #1f1f1f;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdownItem:hover {
+    background-color: #f5faff;
+    color: #1b92ff;
+}
+
+@media (max-width: 1119px) {
+    .title {
+        display: none !important;
+    }
+
+    .filterBox {
+        width: 75px;
+        height: 36px;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+
+    .selectedText {
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .regionDropdown {
+        width: 150px;
+        height: 179px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        overflow-y: auto;
+        margin-top: 8px;
+    }
+
+    .serviceDropdown {
+        width: 89px;
+        height: 144px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dropdownItem {
+        padding: 6px 14px;
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+

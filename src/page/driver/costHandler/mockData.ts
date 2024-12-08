@@ -1,7 +1,9 @@
+import { ChipType } from "../../../components/card/type";
+
 export interface DriverData {
   users: {
     id: number; // 기사 아이디
-    serviceType?: string[]; // 서비스 유형
+    serviceType?: ChipType[]; // 서비스 유형
     isConfirmed?: boolean; // 확정된 요청인지 확인(true)
     isCancelled?: boolean; // 취소 여부 (false)
     isAssigned?: boolean; // 지정경적 여부
@@ -27,7 +29,7 @@ export const mockData: DriverData = {
     // 확정된 견적 요청일 때
     {
       id: 1,
-      serviceType: ['소형이사', '사무실이사'],
+      serviceType: ['SMALL', 'COMPANY'],
       isConfirmed: true,
       isCancelled: false,
       isAssigned: true,
@@ -49,7 +51,7 @@ export const mockData: DriverData = {
     // 확정되지 않은 견적 요청일 때
     {
       id: 2,
-      serviceType: ['가정이사'],
+      serviceType: ['HOME'],
       isConfirmed: false,
       isCancelled: false,
       isAssigned: true,
@@ -71,7 +73,7 @@ export const mockData: DriverData = {
     // 확정된 견적 요청일 때
     {
       id: 3,
-      serviceType: ['사무실이사'],
+      serviceType: ['COMPANY'],
       isConfirmed: true,
       isCancelled: false,
       isAssigned: false,
@@ -93,7 +95,7 @@ export const mockData: DriverData = {
     // 취소된 견적 요청일 때
     {
       id: 4,
-      serviceType: ['소형이사'],
+      serviceType: ['SMALL'],
       isConfirmed: false,
       isCancelled: true,
       profileImage: 'image4',
