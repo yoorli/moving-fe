@@ -1,5 +1,5 @@
 import { useMedia } from '../../lib/function/useMediaQuery';
-import style from './Thip.module.css';
+import style from './Chip.module.css';
 import cn from 'classnames';
 import icHomeLarge from '../../assets/icons/ic_home_large.svg';
 import icHomeMedium from '../../assets/icons/ic_home_medium.svg';
