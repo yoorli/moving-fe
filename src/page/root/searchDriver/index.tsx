@@ -9,6 +9,7 @@ import DriverCard from '../../../components/card/DriverCard';
 import style from './index.module.css';
 import { translations, REGION_ITEMS, SERVICE_ITEMS } from '../searchDriver/utils/Constants';
 import { MOCK_DATA } from '../searchDriver/mockData';
+import { translateServiceRegion, translateServiceType } from './EnumMapper';
 
 const FILTER_TYPES = {
   REGION: 'region',
@@ -22,7 +23,6 @@ const SORT_OPTIONS = [
   { label: '경력 높은순', value: 'career' },
   { label: '확정 많은순', value: 'confirmationCount' },
 ];
-
 
 const SearchDriverForGuest = () => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
@@ -139,7 +139,15 @@ const SearchDriverForGuest = () => {
       }`}
     >
       {filteredData.map((user) => (
-        <DriverCard key={user.id} user={user} onClick={() => handleCardClick(user.id)} />
+        <DriverCard
+          key={user.id}
+          user={{
+            ...user,
+            serviceRegion: user.serviceRegion.map(translateServiceRegion),
+            serviceType: user.serviceType.map(translateServiceType),
+          }}
+          onClick={() => handleCardClick(user.id)}
+        />
       ))}
     </div>
   );
@@ -147,7 +155,16 @@ const SearchDriverForGuest = () => {
   const renderFavoriteDrivers = () => (
     <div className={style.favoriteDriversContainer}>
       {MOCK_DATA.map((user) => (
-        <DriverCard key={user.id} user={user} type="dibs" onClick={() => handleCardClick(user.id)} />
+        <DriverCard
+          key={user.id}
+          user={{
+            ...user,
+            serviceRegion: user.serviceRegion.map(translateServiceRegion),
+            serviceType: user.serviceType.map(translateServiceType),
+          }}
+          type="dibs"
+          onClick={() => handleCardClick(user.id)}
+        />
       ))}
     </div>
   );
