@@ -35,6 +35,60 @@
   color: #1f1f1f;
 }
 
+.section {
+  margin-top: 40px;
+}
+
+.border {
+  margin: 40px 0;
+  border-top: 1px solid #f2f2f2;
+}
+
+.sectionTitle {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #1f1f1f;
+  margin-bottom: 32px;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  color: #1f1f1f;
+  margin-bottom: 40px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.serviceChip {
+  padding: 10px 20px;
+  border: 1px solid #1b92ff;
+  background-color: #f5faff;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  color: #1b92ff;
+}
+
+.regionChip {
+  padding: 10px 20px;
+  border: 1px solid #dedede;
+  background-color: #fafafa;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  color: #242945;
+}
+
 @media (max-width: 1199px) {
   .container {
     flex-direction: column;
@@ -50,6 +104,33 @@
 
   .rightFilters {
     display: none; /* 태블릿/모바일에서 숨김 */
+  }
+
+  .sectionTitle {
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 16px;
+  }
+
+  .description {
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 34px;
+  }
+
+  .chips {
+    gap: 10px;
+  }
+
+  .serviceChip,
+  .regionChip {
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .border {
+    margin: 24px 0;
   }
 }
 
