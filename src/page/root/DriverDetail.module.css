@@ -1,0 +1,61 @@
+.outerContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.noPadding {
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 120px;
+  gap: 60px;
+}
+
+.leftFilters {
+  max-width: 955px;
+  flex: 1;
+  margin-top: 56px;
+}
+
+.rightFilters {
+  max-width: 354px;
+  flex: 1;
+  margin-top: 56px;
+}
+
+.rightFilters h2 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  color: #1f1f1f;
+}
+
+@media (max-width: 1199px) {
+  .container {
+    flex-direction: column;
+    padding: 20px 72px;
+    gap: 0;
+  }
+
+  .leftFilters {
+    max-width: 100%;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .rightFilters {
+    display: none; /* 태블릿/모바일에서 숨김 */
+  }
+}
+
+@media (max-width: 743px) {
+  .container {
+    padding: 20px 24px;
+  }
+}
+
