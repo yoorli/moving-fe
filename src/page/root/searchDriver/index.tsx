@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Tab from '../../../components/tab/Tab';
 import FilterDropdown from './components/FilterDropdown';
 import FilterDropdownMedium from './components/FilterDropdownMedium';
@@ -7,6 +8,7 @@ import DriverSearch from './components/DriverSearch';
 import DriverCard from '../../../components/card/DriverCard';
 import style from './index.module.css';
 import { translations, REGION_ITEMS, SERVICE_ITEMS } from '../searchDriver/utils/Constants';
+import { MOCK_DATA } from '../searchDriver/mockData';
 
 const FILTER_TYPES = {
   REGION: 'region',
@@ -21,83 +23,6 @@ const SORT_OPTIONS = [
   { label: '확정 많은순', value: 'confirmationCount' },
 ];
 
-const MOCK_DATA = [
-    {
-      id: 1,
-      nickname: '유재석',
-      profileImage: 'https://via.placeholder.com/150',
-      summary: '유쾌함과 전문성을 갖춘 15년 경력의 이사 전문가입니다.',
-      reviewStats: { averageScore: 4.9, totalReviews: 80 },
-      price: 140000,
-      serviceRegion: ['서울', '경기'],
-      serviceType: ['가정이사'],
-      isAssigned: false,
-      career: 15,
-      confirmationCount: 55,
-      favoriteCount: 200,
-      isLiked: true,
-    },
-    {
-      id: 2,
-      nickname: '강호동',
-      profileImage: 'https://via.placeholder.com/150',
-      summary: '강력한 체력과 노련함으로 20년간 사무실 이사를 책임졌습니다.',
-      reviewStats: { averageScore: 4.7, totalReviews: 60 },
-      price: 180000,
-      serviceRegion: ['부산', '울산'],
-      serviceType: ['사무실이사'],
-      isAssigned: false,
-      career: 20,
-      confirmationCount: 90,
-      favoriteCount: 150,
-      isLiked: false,
-    },
-    {
-      id: 3,
-      nickname: '손예진',
-      profileImage: 'https://via.placeholder.com/150',
-      summary: '세심함이 강점인 12년 경력의 소형 이사 전문가입니다.',
-      reviewStats: { averageScore: 4.8, totalReviews: 50 },
-      price: 130000,
-      serviceRegion: ['인천', '서울'],
-      serviceType: ['소형이사'],
-      isAssigned: true,
-      career: 12,
-      confirmationCount: 30,
-      favoriteCount: 250,
-      isLiked: true,
-    },
-    {
-      id: 4,
-      nickname: '현빈',
-      profileImage: 'https://via.placeholder.com/150',
-      summary: '8년 경력으로 전국 어디든 빠르고 안전하게 이사합니다.',
-      reviewStats: { averageScore: 4.5, totalReviews: 40 },
-      price: 100000,
-      serviceRegion: ['전국'],
-      serviceType: ['가정이사', '소형이사'],
-      isAssigned: false,
-      career: 8,
-      confirmationCount: 15,
-      favoriteCount: 120,
-      isLiked: false,
-    },
-    {
-      id: 5,
-      nickname: '차은우',
-      profileImage: 'https://via.placeholder.com/150',
-      summary: '고객 만족을 최우선으로 하는 5년 경력의 이사 전문가입니다.',
-      reviewStats: { averageScore: 4.6, totalReviews: 30 },
-      price: 110000,
-      serviceRegion: ['대구', '경북'],
-      serviceType: ['가정이사'],
-      isAssigned: true,
-      career: 5,
-      confirmationCount: 75,
-      favoriteCount: 300,
-      isLiked: true,
-    },
-  ];
 
 const SearchDriverForGuest = () => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
@@ -108,6 +33,7 @@ const SearchDriverForGuest = () => {
   const [filteredData, setFilteredData] = useState(MOCK_DATA); // 필터링된 데이터 상태
   const [isMediumScreen, setIsMediumScreen] = useState<boolean>(window.innerWidth <= 1199);
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth <= 744);
+  const navigate = useNavigate(); // 라우터 네비게이션 훅
 
   useEffect(() => {
     const handleResize = () => {
@@ -172,6 +98,10 @@ const SearchDriverForGuest = () => {
     setOpenFilter((prev) => (prev === filterName ? null : filterName));
   };
 
+  const handleCardClick = (id: number) => {
+    navigate(`/driver/${id}`);
+  };
+
   const renderFilters = () => (
     <>
       <div className={style.compactFilters}>
@@ -209,7 +139,7 @@ const SearchDriverForGuest = () => {
       }`}
     >
       {filteredData.map((user) => (
-        <DriverCard key={user.id} user={user} />
+        <DriverCard key={user.id} user={user} onClick={() => handleCardClick(user.id)} />
       ))}
     </div>
   );
@@ -217,7 +147,7 @@ const SearchDriverForGuest = () => {
   const renderFavoriteDrivers = () => (
     <div className={style.favoriteDriversContainer}>
       {MOCK_DATA.map((user) => (
-        <DriverCard key={user.id} user={user} type="dibs" />
+        <DriverCard key={user.id} user={user} type="dibs" onClick={() => handleCardClick(user.id)} />
       ))}
     </div>
   );
