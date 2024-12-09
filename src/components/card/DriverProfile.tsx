@@ -26,14 +26,20 @@ export default function DriverProfile({
     >
       <div
         className={classNames(style.profileImage, {
-          [style.profileImagePType]: type === 'profile' && !isPc,
+          [style.hidden]: type === 'profile' && !isPc,
+          [style.profileImgDType]: type === 'dibs',
+          [style.profileImgPType]: type === 'profile',
+          [style.profileImgRType]: type === 'review',
           [style.profileImageSmall]: styles === 'small',
         })}
       >
         <img
           src={user.profileImage}
           alt={`${user.nickname}'s profile`}
-          className={style.avatar}
+          className={classNames(style.avatar, {
+            [style.avatarLarge]:
+              (type === 'profile' || type === 'dibs' || type === 'review') && isPc,
+          })}
         />
       </div>
       <div className={style.info}>
@@ -111,9 +117,11 @@ export default function DriverProfile({
           >
             {user.reviewStats?.averageScore !== undefined &&
               user.reviewStats.totalReviews !== undefined && (
-                <div className={classNames(style.starBox, {
-                  [style.starBoxSmall]: styles === 'small',
-                })}>
+                <div
+                  className={classNames(style.starBox, {
+                    [style.starBoxSmall]: styles === 'small',
+                  })}
+                >
                   <span
                     className={classNames(style.stars, {
                       [style.starsSmall]: styles === 'small',
