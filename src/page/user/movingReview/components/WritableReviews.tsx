@@ -54,7 +54,9 @@ export default function WritableReviews({
           />
         </div>
       ) : (
-        <NoContents image='file' emptyWritableReviews={true} />
+        <div className={style.noContents}>
+          <NoContents image='file' emptyWritableReviews={true} />
+        </div>
       )}
     </>
   );
