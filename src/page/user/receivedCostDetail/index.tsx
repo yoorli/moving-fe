@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 // import { useParams } from 'react-router-dom';
 import Tab from '../../../components/tab/Tab';
-// import style from './index.module.css';
+import style from './index.module.css';
 import ReceivedCostInfo from './components/ReceivedCostInfo';
+import ReceivedList from './components/ReceivedList';
+import { mockData } from './mockData';
 
 export default function ReceivedCostDetail() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('second');
@@ -17,12 +19,19 @@ export default function ReceivedCostDetail() {
     <>
       <Tab
         selectable={true}
-        firstText='작성 가능한 리뷰'
-        secondText='내가 작성한 리뷰'
+        firstText='대기중인 견적'
+        secondText='받았던 견적'
         selectedTab={currentTab}
         onTabChange={handleTabChange}
       />
-      <ReceivedCostInfo />
+      <div className={style.container}>
+        <div className={style.layout}>
+          <div className={style.main}>
+            <ReceivedCostInfo info={mockData.info} />
+            <ReceivedList list={mockData.list} count={mockData.total} />
+          </div>
+        </div>
+      </div>
     </>
   );
 }

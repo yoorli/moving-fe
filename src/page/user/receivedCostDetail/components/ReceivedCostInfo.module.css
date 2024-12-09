@@ -22,25 +22,40 @@
   margin-bottom: 48px;
 }
 
-.info {
+.infoTitle {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 40px;
 }
 
-.infoTest {
+.infoMain {
   display: flex;
   flex-direction: column;
   background-color: var(--background-100);
   padding: 32px 40px;
   border-radius: 16px;
   gap: 12px;
+  min-height: 192px;
+  height: 100%;
 }
 
 .infoMenu {
   display: flex;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .infoMenuOrder {
   color: var(--gray-300);
+}
+
+@media (max-width: 1199px) {
+  .infoTitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .infoMenu {
+    font-size: 14px;
+  }
 }
