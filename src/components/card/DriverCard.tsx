@@ -32,6 +32,9 @@ export default function DriverCard({
     <div
       className={classNames(style.card, {
         [style.cardPType]: type === 'profile',
+        [style.cardCDType]: type === 'cost' || type === 'dibs',
+        [style.cardPRType]: type === 'review',
+        [style.cardPSmall]: styles === 'small',
       })}
       onClick={onClick} // 최상단 div에 onClick 이벤트 추가
     >

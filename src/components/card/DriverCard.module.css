@@ -12,6 +12,18 @@
   background-color: var(--background-200);
 }
 
+.cardCDType {
+  gap: 16px;
+}
+
+.cardPRType {
+  gap: 32px;
+}
+
+.cardPSmall {
+  gap: 14px;
+}
+
 .topPType {
   display: flex;
   justify-content: space-between;
@@ -177,6 +189,15 @@
 
   .cardPType {
     position: relative;
+    gap: 16px;
+  }
+
+  .cardCDType {
+    gap: 14px;
+  }
+  
+  .cardPRType {
+    gap: 14px;
   }
   
   .topPType {
