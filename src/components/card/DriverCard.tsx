@@ -1,28 +1,26 @@
+import React from 'react';
 import classNames from 'classnames';
-
 import DriverProfile from './DriverProfile';
 import Button from '../btn/Button';
 import Chip from '../chip/Chip';
-
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { formatCurrency } from '../../lib/function/utils';
 import { DriverProfileProps } from './type';
-
 import style from './DriverCard.module.css';
-
 import writing from '../../assets/icons/ic_writing_medium.svg';
 import writingGray from '../../assets/icons/ic_writing_gray.svg';
 
 export default function DriverCard({
-  editInfoBtn, //기본 정보 수정 버튼
-  editProfileBtn, //기본 정보 내 프로필 수정
-  confirmCostBtn, //견적 확정하기 버튼
-  detailBtn, //상세보기 버튼
-  reviewBtn, //리뷰 작성하기 버튼
-  costListBtn, //견적 목록보기 버튼
+  editInfoBtn, // 기본 정보 수정 버튼
+  editProfileBtn, // 기본 정보 내 프로필 수정
+  confirmCostBtn, // 견적 확정하기 버튼
+  detailBtn, // 상세보기 버튼
+  reviewBtn, // 리뷰 작성하기 버튼
+  costListBtn, // 견적 목록하기 버튼
   type,
   user,
-}: DriverProfileProps) {
+  onClick, // onClick prop 추가
+}: DriverProfileProps & { onClick?: () => void }) {
   const isPc = useMedia().pc;
 
   return (
@@ -30,6 +28,7 @@ export default function DriverCard({
       className={classNames(style.card, {
         [style.cardPType]: type === 'profile',
       })}
+      onClick={onClick} // 최상단 div에 onClick 이벤트 추가
     >
       {type === 'profile' ? (
         <div className={style.topPType}>
@@ -66,7 +65,7 @@ export default function DriverCard({
           {user.serviceType?.map((type, index) => (
             <Chip key={index} type={type} />
           ))}
-          {(user.isAssigned) && <Chip type='ASSIGN' />}
+          {user.isAssigned && <Chip type='ASSIGN' />}
         </div>
       )}
       {(type === 'cost' || type === undefined) && (
@@ -121,8 +120,8 @@ export default function DriverCard({
             {type === 'notConfirm'
               ? '미확정'
               : type === 'cancel'
-                ? '취소'
-                : user.price && formatCurrency(user.price)}
+              ? '취소'
+              : user.price && formatCurrency(user.price)}
           </div>
           <div className={style.costBtn}>
             {type === 'waiting' && (
@@ -161,3 +160,4 @@ export default function DriverCard({
     </div>
   );
 }
+

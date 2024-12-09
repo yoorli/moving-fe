@@ -56,13 +56,20 @@
   line-height: 32px;
   color: #1f1f1f;
   margin-top: 46px;
-  margin-bottom: 16px;
+}
+
+.favoriteDriversContainer {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .rightFilters {
   align-items: flex-end;
   max-width: 955px;
   flex: 1;
+  position: relative;
 }
 
 .sortDropdown {
@@ -78,7 +85,34 @@
   border-radius: 8px;
 }
 
-@media (max-width: 1199px) and (min-width: 745px) {
+.cardContainer {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+}
+
+.cardContainer.rightFilters {
+  margin-top: 0;
+  gap: 48px;
+}
+
+.cardContainer.compact {
+  margin-top: 24px;
+  gap: 30px;
+}
+
+.cardContainer.smallScreen {
+  margin-top: 24px;
+  gap: 24px;
+}
+
+.cardSpacing {
+  margin-top: 48px;
+}
+
+@media (max-width: 1199px) and (min-width: 744px) {
   .container {
     padding: 20px 72px;
   }
@@ -86,15 +120,33 @@
   .filterRow {
     gap: 20px;
   }
+
+  .cardContainer.compact {
+    margin-top: 24px;
+    gap: 30px;
+  }
+
+  .cardSpacing {
+    margin-top: 32px;
+  }
 }
 
-@media (max-width: 744px) and (min-width: 375px) {
+@media (max-width: 743px) and (min-width: 375px) {
   .container {
     padding: 20px 24px;
   }
 
   .filterRow {
     gap: 20px;
+  }
+
+  .cardContainer.smallScreen {
+    margin-top: 24px;
+    gap: 24px;
+  }
+
+  .cardSpacing {
+    margin-top: 24px;
   }
 }
 
