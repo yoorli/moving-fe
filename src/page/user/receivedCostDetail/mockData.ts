@@ -1,4 +1,4 @@
-type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
+type ChipType = 'SMALL' | 'HOME' | 'OFFICE' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
 
 export interface infoProps {
   info: {
@@ -70,7 +70,7 @@ export const mockData: mockDataProps = {
       id: 1,
       moverId: 2,
       isConfirmed: true,
-      serviceType: ['SMALL', 'COMPANY'],
+      serviceType: ['SMALL', 'OFFICE'],
       summary: '맡겨만 주세요!',
       isAssigned: false,
       profileImage: 'https://via.placeholder.com/150',

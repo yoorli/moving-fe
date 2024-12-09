@@ -57,7 +57,7 @@ export const mockData: DriverData = {
     // 확정된 견적 요청일 때
     {
       id: 1,
-      serviceType: ['SMALL', 'COMPANY'],
+      serviceType: ['SMALL', 'OFFICE'],
       isConfirmed: true, // 확정
       isCancelled: false, //취소
       isAssigned: true, //지정
@@ -101,7 +101,7 @@ export const mockData: DriverData = {
     // 확정된 견적 요청일 때
     {
       id: 3,
-      serviceType: ['COMPANY'],
+      serviceType: ['OFFICE'],
       isConfirmed: true,
       isCancelled: false,
       isAssigned: false,
