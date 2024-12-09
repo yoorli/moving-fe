@@ -6,10 +6,9 @@
 
 .container {
   width: 955px;
-  height: 656px;
+  height: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 104px;
 }
 
 .contents {

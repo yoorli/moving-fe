@@ -21,11 +21,13 @@ export default function DriverProfile({
       className={classNames(style.profile, {
         [style.profilePType]: type === 'profile',
         [style.profileWType]: type === 'waiting' || type === 'confirm',
+        [style.profileSmall]: styles === 'small',
       })}
     >
       <div
         className={classNames(style.profileImage, {
           [style.profileImagePType]: type === 'profile' && !isPc,
+          [style.profileImageSmall]: styles === 'small',
         })}
       >
         <img
@@ -79,44 +81,70 @@ export default function DriverProfile({
           </>
         ) : (
           // 기본 프로필
-          <div className={style.name}>
+          <div
+            className={classNames(style.name, {
+              [style.nameRType]: type === 'review',
+              [style.nameSmall]: styles === 'small',
+            })}
+          >
             <span>{user.nickname} 기사님</span>
             {user.favoriteCount !== undefined && (
-              <span className={style.favoriteCount}>
+              <span
+                className={classNames(style.favoriteCount, {
+                  [style.favoriteCountSmall]: styles === 'small',
+                })}
+              >
                 <img
                   src={user.isLiked ? fullHeartMedium : emptyHeartMedium}
                   alt='fullHeart'
-                />{' '}
+                />
                 {user.favoriteCount}
               </span>
             )}
           </div>
         )}
-        {/* 기본 프로필 */}
         {!(type === 'review' || type === 'profile') && (
-          <div className={style.details}>
+          <div
+            className={classNames(style.details, {
+              [style.detailsSmall]: styles === 'small',
+            })}
+          >
             {user.reviewStats?.averageScore !== undefined &&
               user.reviewStats.totalReviews !== undefined && (
-                <>
-                  <span className={style.stars}>
+                <div className={classNames(style.starBox, {
+                  [style.starBoxSmall]: styles === 'small',
+                })}>
+                  <span
+                    className={classNames(style.stars, {
+                      [style.starsSmall]: styles === 'small',
+                    })}
+                  >
                     <img src={yellowStarSmall} alt='yellowStar' />
                     {user.reviewStats.averageScore.toFixed(1)}
                     <span style={{ color: 'var(--gray-300)' }}>
                       ({user.reviewStats.totalReviews})
                     </span>
                   </span>
-                  <span className={style.separator}>|</span>
-                </>
+                  <span className={style.separator}> | </span>
+                </div>
               )}
             {user.career !== undefined &&
               user.confirmationCount !== undefined && (
                 <>
-                  <span className={style.text}>
+                  <span
+                    className={classNames(style.text, {
+                      [style.textSmall]: styles === 'small',
+                    })}
+                  >
                     <span style={{ color: 'var(--gray-300)' }}>경력</span>
                     {user.career}년
                   </span>
                   <span className={style.separator}>|</span>
-                  <span className={style.text}>
+                  <span
+                    className={classNames(style.text, {
+                      [style.textSmall]: styles === 'small',
+                    })}
+                  >
                     {user.confirmationCount}건
                     <span style={{ color: 'var(--gray-300)' }}>확정</span>
                   </span>

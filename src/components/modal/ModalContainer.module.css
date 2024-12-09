@@ -52,6 +52,10 @@
   font-size: 24px;
 }
 
+.close {
+  cursor: pointer;
+}
+
 .text {
   font-weight: 500;
   font-size: 18px;

@@ -2,17 +2,22 @@ import { useState } from 'react';
 import Tab from '../../../components/tab/Tab';
 import style from './index.module.css';
 import useDirection from '../../../lib/function/direction';
+import ReceivedCostCard from './components/ReceivedCostCard';
+import { mockData } from './mock';
+import Pagination from '../../../components/pagination/Pagination';
 
 export default function ReceivedCost() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('second');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleTabChange = (selectedTab: 'first' | 'second') => {
     setCurrentTab(selectedTab);
   };
 
   const { direction_pendingCost, direction_receivedCost } = useDirection();
+
   return (
-    <div className={style.container}>
+    <>
       <Tab
         selectable={true}
         firstText='대기 중인 견적'
@@ -23,7 +28,21 @@ export default function ReceivedCost() {
         firstTabRoute={direction_pendingCost}
         secondTabRoute={direction_receivedCost}
       />
-      <div>받았던 견적</div>
-    </div>
+      {mockData.total > 0 ? (
+        <div>
+          <ReceivedCostCard />
+          <div className={style.pagination}>
+            <Pagination
+              currentPage={currentPage}
+              data={mockData.total}
+              itemsPerPage={6}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+        </div>
+      ) : (
+        <div>받은 견적이 없습니다</div>
+      )}
+    </>
   );
 }

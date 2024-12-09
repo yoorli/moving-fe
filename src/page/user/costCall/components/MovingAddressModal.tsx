@@ -170,8 +170,8 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
             <Pagination
               onPageChange={setCurrentPage}
               currentPage={currentPage}
-              itemsTotalCount={meta?.total_count}
-              itemsPerPage={4}
+              data={meta?.total_count}
+              itemsPerPage={pc ? 5 : 3}
               maxPagesToShow={pc ? 5 : 3}
             />
           </div>

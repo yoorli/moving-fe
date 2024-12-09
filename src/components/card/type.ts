@@ -1,4 +1,4 @@
-export type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
+export type ChipType = 'SMALL' | 'HOUSE' | 'OFFICE' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
 
 // DriverCard, DriverProfile
 export type DriverProfileType =

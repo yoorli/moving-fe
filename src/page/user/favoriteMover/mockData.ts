@@ -1,4 +1,4 @@
-type ChipType = 'SMALL' | 'HOME' | 'COMPANY' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
+type ChipType = 'SMALL' | 'HOUSE' | 'OFFICE' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
 
 // 데이터 연결을 위한 임시 mockData (지울 예정)
 export interface Mover {
@@ -27,7 +27,7 @@ export const mockData: ApiResponse = {
   list: [
     {
       id: 1,
-      serviceType: ['SMALL', 'COMPANY'],
+      serviceType: ['SMALL', 'OFFICE'],
       isAssigned: true,
       nickname: '김기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -42,7 +42,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 2,
-      serviceType: ['HOME'],
+      serviceType: ['HOUSE'],
       isAssigned: false,
       nickname: '이기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -57,7 +57,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 3,
-      serviceType: ['COMPANY', 'SMALL'],
+      serviceType: ['OFFICE', 'SMALL'],
       isAssigned: true,
       nickname: '박기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -87,7 +87,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 5,
-      serviceType: ['HOME', 'COMPANY'],
+      serviceType: ['HOUSE', 'OFFICE'],
       isAssigned: true,
       nickname: '송기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -117,7 +117,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 7,
-      serviceType: ['COMPANY'],
+      serviceType: ['OFFICE'],
       isAssigned: true,
       nickname: '박기사',
       profileImage: 'https://via.placeholder.com/150',
@@ -132,7 +132,7 @@ export const mockData: ApiResponse = {
     },
     {
       id: 8,
-      serviceType: ['HOME'],
+      serviceType: ['HOUSE'],
       isAssigned: false,
       nickname: '정기사',
       profileImage: 'https://via.placeholder.com/150',

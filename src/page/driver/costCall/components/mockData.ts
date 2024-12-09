@@ -37,7 +37,7 @@ export const mockData: UserData = {
     },
     {
       id: 2,
-      movingType: ['HOME'],
+      movingType: ['HOUSE'],
       isAssigned: true,
       customer: 'user2',
       movingDate: '2024.07.15',
@@ -47,7 +47,7 @@ export const mockData: UserData = {
     },
     {
       id: 3,
-      movingType: ['COMPANY'],
+      movingType: ['OFFICE'],
       isAssigned: false,
       customer: 'user3',
       movingDate: '2024.08.01',
@@ -67,7 +67,7 @@ export const mockData: UserData = {
     },
     {
       id: 5,
-      movingType: ['HOME'],
+      movingType: ['HOUSE'],
       isAssigned: false,
       customer: 'user5',
       movingDate: '2024.07.25',
@@ -77,7 +77,7 @@ export const mockData: UserData = {
     },
     {
       id: 6,
-      movingType: ['COMPANY'],
+      movingType: ['OFFICE'],
       isAssigned: true,
       customer: 'user6',
       movingDate: '2024.08.10',
@@ -97,7 +97,7 @@ export const mockData: UserData = {
     },
     {
       id: 8,
-      movingType: ['HOME'],
+      movingType: ['HOUSE'],
       isAssigned: false,
       customer: 'user8',
       movingDate: '2024.08.20',
@@ -107,7 +107,7 @@ export const mockData: UserData = {
     },
     {
       id: 9,
-      movingType: ['COMPANY'],
+      movingType: ['OFFICE'],
       isAssigned: true,
       customer: 'user9',
       movingDate: '2024.09.05',

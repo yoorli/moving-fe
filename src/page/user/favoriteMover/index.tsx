@@ -5,15 +5,21 @@ import { mockData } from './mockData'; // 데이터 연결을 위한 임시 mock
 
 export default function UserFavoriteMover() {
   return (
-    <div className={style.overlay}>
+    <>
       <Tab firstText='찜한 기사님' />
-      <div className={style.container}>
-        <div className={style.cardContainer}>
-          {mockData.list.map((mover, index) => (
-            <DriverCard key={index} user={{ ...mover, isLiked: true }} type='dibs' />
-          ))}
+      <div className={style.overlay}>
+        <div className={style.container}>
+          <div className={style.cardContainer}>
+            {mockData.list.map((mover, index) => (
+              <DriverCard
+                key={index}
+                user={{ ...mover, isLiked: true }}
+                type='dibs'
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

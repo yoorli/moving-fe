@@ -1,5 +1,6 @@
-import classNames from 'classnames';
+import React from 'react';
 
+import classNames from 'classnames';
 import DriverProfile from './DriverProfile';
 import Button from '../btn/Button';
 import Chip from '../chip/Chip';
@@ -14,22 +15,28 @@ import writing from '../../assets/icons/ic_writing_medium.svg';
 import writingGray from '../../assets/icons/ic_writing_gray.svg';
 
 export default function DriverCard({
-  editInfoBtn, //기본 정보 수정 버튼
-  editProfileBtn, //기본 정보 내 프로필 수정
-  confirmCostBtn, //견적 확정하기 버튼
-  detailBtn, //상세보기 버튼
-  reviewBtn, //리뷰 작성하기 버튼
-  costListBtn, //견적 목록보기 버튼
+  editInfoBtn, // 기본 정보 수정 버튼
+  editProfileBtn, // 기본 정보 내 프로필 수정
+  confirmCostBtn, // 견적 확정하기 버튼
+  detailBtn, // 상세보기 버튼
+  reviewBtn, // 리뷰 작성하기 버튼
+  costListBtn, // 견적 목록하기 버튼
+  onClick, // onClick prop 추가
   type,
+  styles,
   user,
-}: DriverProfileProps) {
+}: DriverProfileProps & { onClick?: () => void }) {
   const isPc = useMedia().pc;
 
   return (
     <div
       className={classNames(style.card, {
         [style.cardPType]: type === 'profile',
+        [style.cardCDType]: type === 'cost' || type === 'dibs',
+        [style.cardPRType]: type === 'review',
+        [style.cardPSmall]: styles === 'small',
       })}
+      onClick={onClick} // 최상단 div에 onClick 이벤트 추가
     >
       {type === 'profile' ? (
         <div className={style.topPType}>
@@ -66,12 +73,19 @@ export default function DriverCard({
           {user.serviceType?.map((type, index) => (
             <Chip key={index} type={type} />
           ))}
-          {(user.isAssigned) && <Chip type='ASSIGN' />}
+          {user.isAssigned && <Chip type='ASSIGN' />}
         </div>
       )}
       {(type === 'cost' || type === undefined) && (
         <>
-          <span className={style.content}>{user.summary}</span>
+          <span
+            className={classNames(style.content, {
+              [style.contentSmall]: styles === 'small',
+              [style.contentCType]: type === 'cost',
+            })}
+          >
+            {user.summary}
+          </span>
         </>
       )}
       {type === 'notConfirm' ? (
@@ -79,7 +93,7 @@ export default function DriverCard({
       ) : type === 'cancel' ? (
         <span className={style.noProfile}>취소된 견적</span>
       ) : (
-        <DriverProfile user={user} type={type} />
+        <DriverProfile user={user} type={type} styles={styles} />
       )}
       {type === 'cost' && (
         <div className={style.cost}>

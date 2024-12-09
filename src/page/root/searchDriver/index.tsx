@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Tab from '../../../components/tab/Tab';
 import FilterDropdown from './components/FilterDropdown';
 import FilterDropdownMedium from './components/FilterDropdownMedium';
 import SortDropdown from './components/SortDropdown';
 import DriverSearch from './components/DriverSearch';
+import DriverCard from '../../../components/card/DriverCard';
 import style from './index.module.css';
 import { translations, REGION_ITEMS, SERVICE_ITEMS } from '../searchDriver/utils/Constants';
+import { MOCK_DATA } from '../searchDriver/mockData';
+import { ChipProps } from '../../../components/chip/Chip';
+
 
 const FILTER_TYPES = {
   REGION: 'region',
@@ -24,40 +29,78 @@ const SearchDriverForGuest = () => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
   const [selectedRegionLabel, setSelectedRegionLabel] = useState<string>('지역');
   const [selectedServiceLabel, setSelectedServiceLabel] = useState<string>('서비스');
-  const [selectedServiceRegion, setSelectedServiceRegion] = useState<string>('');
-  const [selectedServiceType, setSelectedServiceType] = useState<string>('');
+  const [searchKeyword, setSearchKeyword] = useState<string>(''); // 검색 상태
+  const [sortOption, setSortOption] = useState<string>('reviewCount'); // 정렬 상태
+  const [filteredData, setFilteredData] = useState(MOCK_DATA); // 필터링된 데이터 상태
   const [isMediumScreen, setIsMediumScreen] = useState<boolean>(window.innerWidth <= 1199);
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth <= 744);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleResize = () => setIsMediumScreen(window.innerWidth <= 1199);
+    const handleResize = () => {
+      setIsMediumScreen(window.innerWidth <= 1199);
+      setIsSmallScreen(window.innerWidth <= 744);
+    };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const sendToServer = (region: string, service: string, sort: string) => {
-    const payload = { selectedServiceRegion: region, selectedServiceType: service, sortBy: sort };
-    console.log('서버로 전송할 데이터:', payload);
+  useEffect(() => {
+    let data = MOCK_DATA;
+
+    if (selectedRegionLabel !== '지역') {
+      data = data.filter((driver) =>
+        driver.serviceRegion.includes(translations[selectedRegionLabel])
+      );
+    }
+
+    if (selectedServiceLabel !== '서비스') {
+      data = data.filter((driver) =>
+        driver.serviceType.includes(translations[selectedServiceLabel])
+      );
+    }
+
+    if (searchKeyword) {
+      data = data.filter((driver) =>
+        driver.nickname.includes(searchKeyword) || driver.summary.includes(searchKeyword)
+      );
+    }
+
+    if (sortOption) {
+      data = [...data].sort((a, b) => {
+        if (sortOption === 'reviewCount') return b.reviewStats.totalReviews - a.reviewStats.totalReviews;
+        if (sortOption === 'averageScore') return b.reviewStats.averageScore - a.reviewStats.averageScore;
+        if (sortOption === 'career') return b.career - a.career;
+        if (sortOption === 'confirmationCount') return b.confirmationCount - a.confirmationCount;
+        return 0;
+      });
+    }
+
+    setFilteredData(data);
+  }, [selectedRegionLabel, selectedServiceLabel, searchKeyword, sortOption]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(e.target.value);
   };
 
   const handleSelect = (type: string, label: string) => {
-    const value = translations[label] || '';
     if (type === FILTER_TYPES.REGION) {
       setSelectedRegionLabel(label);
-      setSelectedServiceRegion(value);
-      sendToServer(value, selectedServiceType, 'reviewCount');
     } else if (type === FILTER_TYPES.SERVICE) {
       setSelectedServiceLabel(label);
-      setSelectedServiceType(value);
-      sendToServer(selectedServiceRegion, value, 'reviewCount');
     }
   };
 
   const handleSortSelect = (value: string) => {
-    sendToServer(selectedServiceRegion, selectedServiceType, value);
+    setSortOption(value);
   };
 
   const handleToggleFilter = (filterName: string) => {
     setOpenFilter((prev) => (prev === filterName ? null : filterName));
+  };
+
+  const handleCardClick = (id: number) => {
+    navigate(`/driver/${id}`);
   };
 
   const renderFilters = () => (
@@ -90,6 +133,41 @@ const SearchDriverForGuest = () => {
     </>
   );
 
+  const renderDriverCards = () => (
+    <div
+      className={`${style.cardContainer} ${
+        isMediumScreen ? (isSmallScreen ? style.smallScreen : style.compact) : style.rightFilters
+      }`}
+    >
+      {filteredData.map((user) => (
+        <DriverCard
+        key={user.id}
+        user={{
+          ...user,
+          serviceType: user.serviceType.map((type) => type as ChipProps["type"]),
+        }}
+        onClick={() => handleCardClick(user.id)}
+      />
+      ))}
+    </div>
+  );
+
+  const renderFavoriteDrivers = () => (
+    <div className={style.favoriteDriversContainer}>
+      {MOCK_DATA.map((user) => (
+        <DriverCard
+        key={user.id}
+        user={{
+          ...user,
+          serviceType: user.serviceType.map((type) => type as ChipProps["type"]),
+        }}
+        styles='small'
+        onClick={() => handleCardClick(user.id)}
+      />
+      ))}
+    </div>
+  );
+
   return (
     <div className={style.outerContainer}>
       <div className={style.noPadding}>
@@ -120,6 +198,7 @@ const SearchDriverForGuest = () => {
                   onToggle={() => handleToggleFilter(FILTER_TYPES.SERVICE)}
                 />
                 <div className={style.favoriteDrivers}>찜한 기사님</div>
+                {renderFavoriteDrivers()}
               </div>
               <div className={style.rightFilters}>
                 <SortDropdown
@@ -129,16 +208,18 @@ const SearchDriverForGuest = () => {
                   onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
                   onSelect={handleSortSelect}
                 />
-                {!isMediumScreen && <DriverSearch placeholder="검색어를 입력하세요" />}
+                {!isMediumScreen && <DriverSearch placeholder="검색어를 입력하세요" onChange={handleSearchChange} />}
+                {!isMediumScreen && renderDriverCards()}
               </div>
             </>
           )}
         </div>
         {isMediumScreen && (
           <div className={style.searchBarCompact}>
-            <DriverSearch placeholder="검색어를 입력하세요" />
+            <DriverSearch placeholder="검색어를 입력하세요" onChange={handleSearchChange} />
           </div>
         )}
+        {isMediumScreen && renderDriverCards()}
       </div>
     </div>
   );

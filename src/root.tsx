@@ -22,6 +22,7 @@ import ServiceRandingPage from './page/root';
 import DriverRegisterPage from './page/driver/register';
 import DriverCostHandlerPage from './page/driver/costHandler';
 import SearchDriverForGuest from './page/root/searchDriver';
+import DriverDetailPage from './page/root/DriverDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/searchDriver',
         element: <SearchDriverForGuest />, // 비회원용 기사님 찾기 페이지
+      },
+      {
+        path: '/driver/:id',
+        element: <DriverDetailPage />, // 기사님 상세 페이지
       },
       {
         path: '/user/login',
