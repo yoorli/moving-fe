@@ -4,13 +4,18 @@ import vectorDownSmall from '../../../../assets/icons/ic_vector_down_small.svg';
 
 import style from './Dropdown.module.css';
 
-export default function Dropdown() {
+interface DropdownProps {
+  setItem: (items: string) => void;
+}
+
+export default function Dropdown({ setItem: setItem }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('이사 빠른순');
 
   const selectOption = (option: string) => {
     setSelectedOption(option);
     setIsOpen(!isOpen);
+    setItem(option);
   };
 
   const dropdownHandler = () => {

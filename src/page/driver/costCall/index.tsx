@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Filter from './components/Filter';
 import Dropdown from './components/Dropdown';
@@ -18,6 +18,8 @@ import { mockData } from './components/mockData';
 
 export default function DriverCostCallPage() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [item, setItem] = useState('');
+  const [items, setItems] = useState({ small: true });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTab, setModalTab] = useState<'modalFirstTab' | 'modalSecondTab'>(
     'modalFirstTab',
@@ -60,13 +62,18 @@ export default function DriverCostCallPage() {
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    console.log(items);
+    console.log(item);
+  }, [item, items]);
+
   return (
     <div className={style.container}>
       <nav className={style.navigation}>받은 요청</nav>
       <div className={style.mainContainer}>
         {isPc && (
           <div className={style.filterBox}>
-            <Filter count={count} />
+            <Filter count={count} setItems={setItems} />
           </div>
         )}
         <div className={style.content}>
@@ -77,7 +84,7 @@ export default function DriverCostCallPage() {
             <div className={style.sortBar}>
               전체 {mockData.total}건
               <div className={style.filterBar}>
-                <Dropdown />
+                <Dropdown setItem={setItem} />
                 {!isPc && <img src={filter} alt='filter' onClick={getFilter} />}
               </div>
             </div>
@@ -109,7 +116,11 @@ export default function DriverCostCallPage() {
           closeBtnClick={() => setIsModalOpen(!isModalOpen)}
           buttonClick={modalBtnClick}
         >
-          {modalTab === 'modalFirstTab' ? <Filter count={count} type='moving'/> : <Filter count={count} type='filter'/>}
+          {modalTab === 'modalFirstTab' ? (
+            <Filter count={count} type='moving' setItems={setItems} />
+          ) : (
+            <Filter count={count} type='filter' setItems={setItems} />
+          )}
         </ModalContainer>
       )}
     </div>

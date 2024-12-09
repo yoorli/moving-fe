@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import style from './Filter.module.css';
 
@@ -10,6 +10,7 @@ interface FilterOption {
 
 type FilterProps = {
   type?: 'moving' | 'filter';
+  setItems: (items: any) => void;
   count: {
     total: number;
     small: number;
@@ -19,7 +20,7 @@ type FilterProps = {
   };
 };
 
-export default function Filter({ type, count }: FilterProps) {
+export default function Filter({ type, setItems, count }: FilterProps) {
   const [moveTypes, setMoveTypes] = useState<FilterOption[]>([
     { label: '소형이사', count: count.small, isChecked: true },
     { label: '가정이사', count: count.medium, isChecked: true },
@@ -61,6 +62,10 @@ export default function Filter({ type, count }: FilterProps) {
   };
 
   const allChecked = moveTypes.every((moveType) => moveType.isChecked);
+
+  useEffect(() => {
+    setItems({ small: moveTypes[0].isChecked });
+  }, [moveTypes]);
 
   return (
     <div className={style.filter}>
