@@ -1,12 +1,16 @@
 import React from 'react';
+
 import classNames from 'classnames';
 import DriverProfile from './DriverProfile';
 import Button from '../btn/Button';
 import Chip from '../chip/Chip';
+
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { formatCurrency } from '../../lib/function/utils';
 import { DriverProfileProps } from './type';
+
 import style from './DriverCard.module.css';
+
 import writing from '../../assets/icons/ic_writing_medium.svg';
 import writingGray from '../../assets/icons/ic_writing_gray.svg';
 
@@ -17,9 +21,10 @@ export default function DriverCard({
   detailBtn, // 상세보기 버튼
   reviewBtn, // 리뷰 작성하기 버튼
   costListBtn, // 견적 목록하기 버튼
-  type,
-  user,
   onClick, // onClick prop 추가
+  type,
+  styles,
+  user,
 }: DriverProfileProps & { onClick?: () => void }) {
   const isPc = useMedia().pc;
 
@@ -78,7 +83,7 @@ export default function DriverCard({
       ) : type === 'cancel' ? (
         <span className={style.noProfile}>취소된 견적</span>
       ) : (
-        <DriverProfile user={user} type={type} />
+        <DriverProfile user={user} type={type} styles={styles} />
       )}
       {type === 'cost' && (
         <div className={style.cost}>

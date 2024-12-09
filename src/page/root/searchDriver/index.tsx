@@ -163,6 +163,7 @@ const SearchDriverForGuest = () => {
             serviceType: user.serviceType.map(translateServiceType),
           }}
           type="dibs"
+          styles='small'
           onClick={() => handleCardClick(user.id)}
         />
       ))}
