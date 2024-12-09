@@ -161,6 +161,7 @@ const SearchDriverForGuest = () => {
           ...user,
           serviceType: user.serviceType.map((type) => type as ChipProps["type"]),
         }}
+        styles='small'
         onClick={() => handleCardClick(user.id)}
       />
       ))}
