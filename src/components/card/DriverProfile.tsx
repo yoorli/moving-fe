@@ -111,26 +111,40 @@ export default function DriverProfile({
           >
             {user.reviewStats?.averageScore !== undefined &&
               user.reviewStats.totalReviews !== undefined && (
-                <>
-                  <span className={style.stars}>
+                <div className={classNames(style.starBox, {
+                  [style.starBoxSmall]: styles === 'small',
+                })}>
+                  <span
+                    className={classNames(style.stars, {
+                      [style.starsSmall]: styles === 'small',
+                    })}
+                  >
                     <img src={yellowStarSmall} alt='yellowStar' />
                     {user.reviewStats.averageScore.toFixed(1)}
                     <span style={{ color: 'var(--gray-300)' }}>
                       ({user.reviewStats.totalReviews})
                     </span>
                   </span>
-                  <span className={style.separator}>|</span>
-                </>
+                  <span className={style.separator}> | </span>
+                </div>
               )}
             {user.career !== undefined &&
               user.confirmationCount !== undefined && (
                 <>
-                  <span className={style.text}>
+                  <span
+                    className={classNames(style.text, {
+                      [style.textSmall]: styles === 'small',
+                    })}
+                  >
                     <span style={{ color: 'var(--gray-300)' }}>경력</span>
                     {user.career}년
                   </span>
                   <span className={style.separator}>|</span>
-                  <span className={style.text}>
+                  <span
+                    className={classNames(style.text, {
+                      [style.textSmall]: styles === 'small',
+                    })}
+                  >
                     {user.confirmationCount}건
                     <span style={{ color: 'var(--gray-300)' }}>확정</span>
                   </span>

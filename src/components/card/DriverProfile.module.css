@@ -100,7 +100,7 @@
 }
 
 .detailsSmall {
-  gap: 2px;
+  gap: 4px;
   font-size: 13px;
 }
 
@@ -120,6 +120,10 @@
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+}
+
+.textSmall {
+  gap: 4px;
 }
 
 .textLabel {
@@ -146,11 +150,24 @@
   line-height: 24px;
 }
 
+.starBox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.starBoxSmall {
+  gap: 4px;
+}
+
 .stars {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 6px;
+}
+
+.starsSmall {
+  gap: 4px;
 }
 
 .separator {
