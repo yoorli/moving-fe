@@ -34,4 +34,12 @@
     max-width: 1199px;
     padding: 0 24px;
   }
+
+  .container {
+    background-color: transparent;
+  }
+
+  .main {
+    padding: 0px 0px;
+  }
 }

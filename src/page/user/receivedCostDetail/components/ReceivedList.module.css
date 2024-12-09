@@ -25,9 +25,29 @@
   border-radius: 16px;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1199px) and (min-width: 744px) {
   .info {
     font-size: 16px;
     margin-bottom: 20px;
+  }
+
+  .infoTitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 743px) {
+  .infoMain {
+    padding: 0px 0px;
+  }
+
+  .infoTitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    margin-bottom: 30px;
   }
 }
