@@ -45,6 +45,7 @@ export default function UserCard({
         )}
       </div>
       <UserProfile type={type} user={user} />
+      {user.comment && <span>요청사항 : {user.comment}</span>}
       {type === 'receive' && (
         <div className={style.btnBox}>
           <Button
@@ -53,11 +54,13 @@ export default function UserCard({
             src={writing}
             onClick={sendCost}
           />
-          <Button
-            text='반려'
-            btnStyle='outlined448pxBlue300'
-            onClick={rejectCost}
-          />
+          {user.isAssigned && (
+            <Button
+              text='반려'
+              btnStyle='outlined448pxBlue300'
+              onClick={rejectCost}
+            />
+          )}
         </div>
       )}
 
