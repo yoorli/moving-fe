@@ -153,8 +153,18 @@
 }
 
 @media (max-width: 743px) {
+  .card {
+    width: 100%;
+    padding: 16px 14px;
+    gap: 14px;
+  }
+
   .cardPType {
     margin-bottom: 126px;
+  }
+
+  .cardPRType {
+    padding: 14px;
   }
 
   .buttonBoxPType {
@@ -174,6 +184,12 @@
 }
 
 @media (max-width: 1199px) and (min-width: 744px) {
+  .card {
+    width: 100%;
+    padding: 16px 14px;
+    gap: 14px;
+  }
+
   .cardPType {
     margin-bottom: 70px;
   }
@@ -193,22 +209,12 @@
 }
 
 @media (max-width: 1199px) {
-  .card {
-    width: 100%;
-    padding: 16px 14px;
-    gap: 14px;
-  }
-
   .cardPType {
     position: relative;
     gap: 16px;
   }
 
   .cardCDType {
-    gap: 14px;
-  }
-  
-  .cardPRType {
     gap: 14px;
   }
   

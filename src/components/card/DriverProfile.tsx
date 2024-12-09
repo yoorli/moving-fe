@@ -20,6 +20,7 @@ export default function DriverProfile({
     <div
       className={classNames(style.profile, {
         [style.profilePType]: type === 'profile',
+        [style.profileRType]: type === 'review',
         [style.profileWType]: type === 'waiting' || type === 'confirm',
         [style.profileSmall]: styles === 'small',
       })}

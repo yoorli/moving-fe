@@ -13,6 +13,10 @@
   border: 1px solid var(--line-200);
 }
 
+.profileRType {
+  border: none;
+}
+
 .profileWType {
   height: 92px;
 }
@@ -52,7 +56,6 @@
   height: 90px;
 }
 
-
 .profileImageSmall {
   width: 60px;
   height: 50px;
@@ -74,7 +77,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
 }
 
 .name {
@@ -213,7 +215,8 @@
 
 @media (max-width: 743px) {
   .profile {
-    gap: 14px;
+    gap: 12px;
+    padding: 10px 0;
   }
 
   .detailsPType {
@@ -225,20 +228,20 @@
 
 @media (max-width: 1199px) and (min-width: 744px) {
   .profile {
+    max-width: 907px;
+    padding: 10px 8px;
+  }
+
+  .profile {
     gap: 12px;
   }
 }
 
 @media (max-width: 1199px) {
-  .profile {
-    max-width: 907px;
-    padding: 10px;
-  }
-
   .profileWType {
     height: 94px;
   }
-  
+
   .profileImage {
     width: 50px;
     height: 46px;
@@ -248,12 +251,12 @@
     width: 50px;
     height: 46px;
   }
-  
+
   .profileImgRType {
-    width: 50px;
+    width: 46px;
     height: 46px;
   }
-  
+
   .info {
     gap: 14px;
   }
@@ -274,12 +277,18 @@
   }
 
   .details {
+    min-width: 237px;
     gap: 8px;
   }
 
   .detailsPType {
     gap: 14px;
     font-size: 14px;
+  }
+
+  .text {
+    font-size: 13px;
+    gap: 6px;
   }
 
   .textPType {
@@ -293,13 +302,12 @@
     font-weight: 500;
   }
 
+  .starBox {
+    gap: 8px;
+  }
+
   .stars {
     font-size: 13px;
     gap: 2px;
-  }
-
-  .text {
-    font-size: 13px;
-    gap: 6px;
   }
 }
