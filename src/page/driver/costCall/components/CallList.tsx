@@ -71,7 +71,7 @@ export default function CallList({ list }: CallListProps) {
               ))}
               {list[userIndex].isAssigned && <Chip type='ASSIGN' />}
             </div>
-            <div>
+            <div className={style.profile}>
               <UserProfile user={list[userIndex]} type='modal' />
             </div>
             {modalContent ? (
