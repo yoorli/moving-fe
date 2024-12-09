@@ -9,7 +9,8 @@ import DriverCard from '../../../components/card/DriverCard';
 import style from './index.module.css';
 import { translations, REGION_ITEMS, SERVICE_ITEMS } from '../searchDriver/utils/Constants';
 import { MOCK_DATA } from '../searchDriver/mockData';
-import { translateServiceRegion, translateServiceType } from './EnumMapper';
+import { ChipProps } from '../../../components/chip/Chip';
+
 
 const FILTER_TYPES = {
   REGION: 'region',
@@ -33,7 +34,7 @@ const SearchDriverForGuest = () => {
   const [filteredData, setFilteredData] = useState(MOCK_DATA); // 필터링된 데이터 상태
   const [isMediumScreen, setIsMediumScreen] = useState<boolean>(window.innerWidth <= 1199);
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth <= 744);
-  const navigate = useNavigate(); // 라우터 네비게이션 훅
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -140,14 +141,13 @@ const SearchDriverForGuest = () => {
     >
       {filteredData.map((user) => (
         <DriverCard
-          key={user.id}
-          user={{
-            ...user,
-            serviceRegion: user.serviceRegion.map(translateServiceRegion),
-            serviceType: user.serviceType.map(translateServiceType),
-          }}
-          onClick={() => handleCardClick(user.id)}
-        />
+        key={user.id}
+        user={{
+          ...user,
+          serviceType: user.serviceType.map((type) => type as ChipProps["type"]),
+        }}
+        onClick={() => handleCardClick(user.id)}
+      />
       ))}
     </div>
   );
@@ -156,16 +156,13 @@ const SearchDriverForGuest = () => {
     <div className={style.favoriteDriversContainer}>
       {MOCK_DATA.map((user) => (
         <DriverCard
-          key={user.id}
-          user={{
-            ...user,
-            serviceRegion: user.serviceRegion.map(translateServiceRegion),
-            serviceType: user.serviceType.map(translateServiceType),
-          }}
-          type="dibs"
-          styles='small'
-          onClick={() => handleCardClick(user.id)}
-        />
+        key={user.id}
+        user={{
+          ...user,
+          serviceType: user.serviceType.map((type) => type as ChipProps["type"]),
+        }}
+        onClick={() => handleCardClick(user.id)}
+      />
       ))}
     </div>
   );

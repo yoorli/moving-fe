@@ -1,3 +1,23 @@
+.container {
+  background-color: var(--background-200);
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  padding: 0 72px;
+}
+
+.main {
+  max-width: 1400px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  max-height: 100vh;
+  background-color: var(--gray-50);
+  margin-top: 64px;
+  border-radius: 40px;
+  padding: 48px 40px;
+}
+
 .infoContainer {
   margin-bottom: 48px;
 }

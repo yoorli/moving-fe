@@ -6,9 +6,9 @@ export default function ReceivedCostInfo({ info }: infoProps) {
     switch (type) {
       case 'SMALL':
         return '소형이사';
-      case 'HOME':
+      case 'HOUSE':
         return '가정이사';
-      case 'COMPANY':
+      case 'OFFICE':
         return '사무실 이사';
       default:
         return '';
