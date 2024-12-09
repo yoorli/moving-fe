@@ -17,7 +17,7 @@ export default function ReceivedCost() {
   const { direction_pendingCost, direction_receivedCost } = useDirection();
 
   return (
-    <div className={style.container}>
+    <>
       <Tab
         selectable={true}
         firstText='대기 중인 견적'
@@ -43,6 +43,6 @@ export default function ReceivedCost() {
       ) : (
         <div>받은 견적이 없습니다</div>
       )}
-    </div>
+    </>
   );
 }

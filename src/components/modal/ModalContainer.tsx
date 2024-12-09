@@ -14,6 +14,7 @@ interface modalProps {
   onTabChange?: (selectedTab: 'modalFirstTab' | 'modalSecondTab') => void;
   children?: ReactNode;
   buttonText: string;
+  disabled?: boolean;
   closeBtnClick: () => void;
   buttonClick: () => void;
 }
@@ -28,6 +29,7 @@ export default function ModalContainer({
   onTabChange,
   children,
   buttonText,
+  disabled,
   closeBtnClick,
   buttonClick,
 }: modalProps) {
@@ -83,6 +85,7 @@ export default function ModalContainer({
         {isText ? <div className={style.content}>{text}</div> : children}
         <Button
           text={buttonText}
+          disabled={disabled}
           btnStyle='solid560pxBlue300'
           onClick={buttonClick}
         />
