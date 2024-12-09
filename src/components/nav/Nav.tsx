@@ -11,6 +11,7 @@ import profile from '../../assets/icons/ic_profile_large.svg';
 import alarmMobile from '../../assets/icons/ic_alarm_medium.svg';
 import profileMobile from '../../assets/icons/ic_profile_medium.svg';
 import { DriverProfileModal, UserProfileModal } from './ProfileModal';
+import { NotificationModal } from './NotificationModal';
 
 type Props = {
   modalController?: () => void;
@@ -92,8 +93,19 @@ export function UserNav({ modalController }: Props) {
   const { pc, tablet, mobile } = useMedia();
   const { pathname } = useLocation();
   const [profileModal, setProfileModal] = useState<boolean>(false);
+  const [notificationModal, setNotificationModal] = useState<boolean>(false);
   const profileController = () => {
     setProfileModal((prev) => !prev);
+    if (notificationModal === true) {
+      setNotificationModal((prev) => !prev);
+    }
+  };
+
+  const notificationController = () => {
+    setNotificationModal((prev) => !prev);
+    if (profileModal === true) {
+      setProfileModal((prev) => !prev);
+    }
   };
 
   useEffect(() => {
@@ -135,7 +147,16 @@ export function UserNav({ modalController }: Props) {
           </nav>
         </div>
         <div className={style.navIcons}>
-          <img className={style.navIcon} src={alarm} alt='' />
+          <img
+            className={style.navIcon}
+            src={alarm}
+            alt=''
+            onClick={notificationController}
+          />
+          {notificationModal ? (
+            <NotificationModal modalController={notificationController} />
+          ) : null}
+
           <img
             onClick={profileController}
             className={style.navIconProfile}
@@ -159,7 +180,16 @@ export function UserNav({ modalController }: Props) {
           alt=''
         />
         <div className={style.navIcons}>
-          <img className={style.navIcon} src={alarmMobile} alt='' />
+          <img
+            className={style.navIcon}
+            src={alarmMobile}
+            alt=''
+            onClick={notificationController}
+          />
+          {notificationModal ? (
+            <NotificationModal modalController={notificationController} />
+          ) : null}
+
           <img
             onClick={profileController}
             className={style.navIcon}
@@ -188,7 +218,16 @@ export function UserNav({ modalController }: Props) {
           alt=''
         />
         <div className={style.navIcons}>
-          <img className={style.navIcon} src={alarm} alt='' />
+          <img
+            className={style.navIcon}
+            src={alarmMobile}
+            alt=''
+            onClick={notificationController}
+          />
+          {notificationModal ? (
+            <NotificationModal modalController={notificationController} />
+          ) : null}
+
           <img
             onClick={profileController}
             className={style.navIcon}
