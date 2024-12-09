@@ -26,17 +26,7 @@
   height: 34px;
 }
 
-@media (max-width: 743px) {
-  .layout {
-    padding: 2px;
-  }
-
-  .blackLayout {
-    display: none;
-  }
-}
-
-@media (max-width: 1199px) and (min-width: 744px) {
+@media (max-width: 1199px) {
   .layout {
     padding: 2px 6px 2px 2px;
     font-size: 13px;
