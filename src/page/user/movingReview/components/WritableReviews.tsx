@@ -3,7 +3,7 @@ import DriverCard from '../../../../components/card/DriverCard';
 import NoContents from '../../../../components/noContents/NoContents';
 import Pagination from '../../../../components/pagination/Pagination';
 import style from './WritableReviews.module.css';
-import { mockData } from './mockData';
+import { mockData } from './moverMockData';
 import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 interface WritableReviewsProps {
