@@ -3,11 +3,17 @@ import { useParams } from 'react-router-dom';
 import style from './DriverDetail.module.css';
 import DriverCard from '../../components/card/DriverCard';
 import { MOCK_DATA } from '../root/searchDriver/mockData';
-import { translateServiceRegion, translateServiceType } from '../root/searchDriver/EnumMapper';
+import { ChipProps } from '../../components/chip/Chip';
+import {
+  translateServiceRegion,
+  translateServiceType,
+} from './searchDriver/EnumMapper';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>(); // URL에서 기사님 ID 가져오기
-  const driver = MOCK_DATA.find((driver) => driver.id === parseInt(id || '', 10)); // ID로 기사 찾기
+  const driver = MOCK_DATA.find(
+    (driver) => driver.id === parseInt(id || '', 10),
+  ); // ID로 기사 찾기
 
   if (!driver) {
     return (
@@ -17,11 +23,9 @@ const DriverDetailPage = () => {
     );
   }
 
-  // EnumMapper를 이용해 데이터를 한글로 변환
   const transformedDriver = {
     ...driver,
-    serviceRegion: driver.serviceRegion.map(translateServiceRegion),
-    serviceType: driver.serviceType.map(translateServiceType),
+    serviceType: driver.serviceType.map((type) => type as ChipProps['type']),
   };
 
   return (
@@ -33,22 +37,22 @@ const DriverDetailPage = () => {
           <div className={style.section}>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>상세설명</h2>
-            <p className={style.description}>{transformedDriver.description}</p>
+            <p className={style.description}>{driver.description}</p>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>제공 서비스</h2>
             <div className={style.chips}>
-              {transformedDriver.serviceType.map((type, index) => (
+              {driver.serviceType.map((type, index) => (
                 <span key={index} className={style.serviceChip}>
-                  {type}
+                  {translateServiceType(type)}
                 </span>
               ))}
             </div>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>서비스 가능 지역</h2>
             <div className={style.chips}>
-              {transformedDriver.serviceRegion.map((region, index) => (
+              {driver.serviceRegion.map((region, index) => (
                 <span key={index} className={style.regionChip}>
-                  {region}
+                  {translateServiceRegion(region)}
                 </span>
               ))}
             </div>
@@ -56,7 +60,7 @@ const DriverDetailPage = () => {
           </div>
         </div>
         <div className={style.rightFilters}>
-          <h2>{transformedDriver.nickname} 기사님에게 지정 견적을 요청해보세요!</h2>
+          <h2>{driver.nickname} 기사님에게 지정 견적을 요청해보세요!</h2>
         </div>
       </div>
     </div>
@@ -64,4 +68,3 @@ const DriverDetailPage = () => {
 };
 
 export default DriverDetailPage;
-
