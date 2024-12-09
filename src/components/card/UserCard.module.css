@@ -6,6 +6,7 @@
   border: 1px solid var(--line-200);
   border-radius: 16px;
   min-width: 327px;
+  background-color: var(--gray-50);
 }
 
 .cardRType {

@@ -10,6 +10,8 @@ import { ChipType } from '../../../../components/card/type';
 
 import style from './CallList.module.css';
 
+import document from '../../../../assets/icons/ic_document_medium.svg';
+
 interface User {
   id: number;
   movingType: ChipType[];
@@ -19,6 +21,7 @@ interface User {
   departure: string;
   arrival: string;
   createAt: string;
+  comment?: string;
 }
 
 interface CallListProps {
@@ -28,6 +31,7 @@ interface CallListProps {
 export default function CallList({ list }: CallListProps) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달
   const [modalContent, setModalContent] = useState(true); // true : 견적보내기 / false : 반려
+  const [isCommentOpen, setIsCommentOpen] = useState(false); // 요구사항
   const [userIndex, setUserIndex] = useState<number>(); // 선택된 카드 index
 
   const sendBtnHandler = (index: number) => {
@@ -46,6 +50,14 @@ export default function CallList({ list }: CallListProps) {
     setIsModalOpen(false);
   };
 
+  const handleMouseEnter = () => {
+    setIsCommentOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsCommentOpen(false);
+  };
+
   return (
     <div className={style.callList}>
       {list.map((user, index) => (
@@ -59,8 +71,8 @@ export default function CallList({ list }: CallListProps) {
       ))}
       {isModalOpen && userIndex !== undefined && (
         <ModalContainer
-          title= {modalContent ? '견적 보내기' : '요청 반려'}
-          buttonText= {modalContent ? '견적 보내기' : '반려하기'}
+          title={modalContent ? '견적 보내기' : '요청 반려'}
+          buttonText={modalContent ? '견적 보내기' : '반려하기'}
           closeBtnClick={() => setIsModalOpen(!isModalOpen)}
           buttonClick={btnHandler}
         >
@@ -73,6 +85,22 @@ export default function CallList({ list }: CallListProps) {
             </div>
             <div className={style.profile}>
               <UserProfile user={list[userIndex]} type='modal' />
+              {list[userIndex].comment && (
+                <>
+                  <img
+                    src={document}
+                    alt='document'
+                    className={style.commentImg}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  />
+                  {isCommentOpen && (
+                    <div className={style.comment}>
+                      {list[userIndex].comment}
+                    </div>
+                  )}
+                </>
+              )}
             </div>
             {modalContent ? (
               <>
