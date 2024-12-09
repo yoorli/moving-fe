@@ -79,7 +79,7 @@ export const mockData: DriverData = {
     // 확정되지 않은 견적 요청일 때
     {
       id: 2,
-      serviceType: ['HOME'],
+      serviceType: ['HOUSE'],
       isConfirmed: false,
       isCancelled: false,
       isAssigned: true,
