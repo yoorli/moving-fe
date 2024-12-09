@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Tab from '../../../components/tab/Tab';
 import style from './index.module.css';
-import NoContents from '../../../components/noContents/NoContents';
 import ModalContainer from '../../../components/modal/ModalContainer';
 import WritingReview from './components/WritingReview';
 import WritableReviews from './components/WritableReviews';
@@ -9,20 +8,23 @@ import WritableReviews from './components/WritableReviews';
 export default function UserMovingReview() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('first');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMover, setSelectedMover] = useState(null);
+  const [review, setReview] = useState('');
+  const [rating, setRating] = useState(0);
 
-  const handleTabChange = (tab: 'first' | 'second') => {
-    setCurrentTab(tab);
-    setIsModalOpen(true); // 임시로 모달 열리는 거 테스트하게끔 설정
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setReview('');
+    setRating(0);
   };
 
   const modalBtnClick = () => {
     setIsModalOpen(false);
-    console.log('you post review :) '); // 리뷰 등록 버튼
+    setReview('');
+    setRating(0);
+    // 리뷰 등록 버튼 누르면 review값을 post / 그리고 내가 작성한 리뷰로 리다이렉트??
+    console.log('you post your review :) '); // 리뷰 등록 버튼
   };
-
-  // const handleModalOpen = () => {
-  //   setIsModalOpen(true); // onClick prop 뚫리면 사용
-  // }
 
   return (
     <>
@@ -31,27 +33,35 @@ export default function UserMovingReview() {
         firstText='작성 가능한 리뷰'
         secondText='내가 작성한 리뷰'
         selectedTab={currentTab}
-        onTabChange={handleTabChange}
+        onTabChange={(tab) => setCurrentTab(tab)}
       />
       <div className={style.overlay}>
         <div className={style.container}>
           {currentTab === 'first' ? (
-            <WritableReviews />
+            <WritableReviews
+              setIsModalOpen={setIsModalOpen}
+              setSelectedMover={setSelectedMover}
+            />
           ) : (
-            <NoContents image='file' emptyWritableReviews={true} />
+            'MyReview 컴포넌트'
           )}
         </div>
         {isModalOpen && (
           <ModalContainer
             title='리뷰 쓰기'
             buttonText='리뷰 등록'
-            closeBtnClick={() => setIsModalOpen(!isModalOpen)}
+            closeBtnClick={handleModalClose}
             buttonClick={modalBtnClick}
+            disabled={review.length < 10 || rating === 0}
           >
-            <WritingReview />
+            <WritingReview
+              setReview={setReview}
+              rating={rating}
+              setRating={setRating}
+              mover={selectedMover}
+            />
           </ModalContainer>
         )}
-        {/* <NoContents image='file' emptyWritableReviews={true} /> */}
       </div>
     </>
   );
