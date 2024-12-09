@@ -38,7 +38,7 @@ export default function DriverCostCallPage() {
   const page = {
     currentPage: currentPage,
     itemsPerPage: itemsPerPage,
-    itemsTotalCount: mockData.total,
+    data: mockData.total,
     onPageChange: handlePageChange,
   };
 
