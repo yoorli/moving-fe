@@ -75,7 +75,14 @@ export default function DriverCard({
       )}
       {(type === 'cost' || type === undefined) && (
         <>
-          <span className={style.content}>{user.summary}</span>
+          <span
+            className={classNames(style.content, {
+              [style.contentSmall]: styles === 'small',
+              [style.contentCType]: type === 'cost',
+            })}
+          >
+            {user.summary}
+          </span>
         </>
       )}
       {type === 'notConfirm' ? (
@@ -125,8 +132,8 @@ export default function DriverCard({
             {type === 'notConfirm'
               ? '미확정'
               : type === 'cancel'
-              ? '취소'
-              : user.price && formatCurrency(user.price)}
+                ? '취소'
+                : user.price && formatCurrency(user.price)}
           </div>
           <div className={style.costBtn}>
             {type === 'waiting' && (
@@ -165,4 +172,3 @@ export default function DriverCard({
     </div>
   );
 }
-

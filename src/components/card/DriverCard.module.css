@@ -46,8 +46,16 @@
 
 .content {
   color: var(--black-300);
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
+}
+
+.contentSmall {
+  font-size: 14px;
+}
+
+.contentCType {
+  font-size: 20px;
 }
 
 .noProfile {
