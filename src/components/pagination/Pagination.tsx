@@ -3,7 +3,7 @@ import styles from './Pagination.module.css';
 
 type PaginationProps = {
   currentPage: number;
-  data?: any[]; // 데이터 배열
+  data?: number; // 데이터 배열
   itemsPerPage?: number; // 페이지당 아이템 수
   itemsTotalCount?: number; //토탈갯수
   maxPagesToShow?: number;
@@ -22,7 +22,7 @@ const Pagination = ({
     itemsTotalCount && itemsPerPage
       ? Math.ceil(itemsTotalCount / itemsPerPage)
       : data && itemsPerPage
-        ? Math.ceil(data.length / itemsPerPage)
+        ? Math.ceil(data / itemsPerPage)
         : 0;
 
   const handlePageClick = (page: number) => {
