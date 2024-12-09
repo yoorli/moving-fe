@@ -1,19 +1,18 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import style from './DriverDetail.module.css';
-import DriverCard from '../../components/card/DriverCard';
-import { MOCK_DATA } from '../root/searchDriver/mockData';
-import { ChipProps } from '../../components/chip/Chip';
+import React from "react";
+import { useParams } from "react-router-dom";
+import style from "./DriverDetail.module.css";
+import DriverCard from "../../components/card/DriverCard";
+import Review from "../../components/review/Review";
+import { MOCK_DATA } from "../root/searchDriver/mockData";
+import { ChipProps } from "../../components/chip/Chip";
 import {
   translateServiceRegion,
   translateServiceType,
-} from './searchDriver/EnumMapper';
+} from "./searchDriver/EnumMapper";
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>(); // URL에서 기사님 ID 가져오기
-  const driver = MOCK_DATA.find(
-    (driver) => driver.id === parseInt(id || '', 10),
-  ); // ID로 기사 찾기
+  const driver = MOCK_DATA.find((driver) => driver.id === parseInt(id || "", 10)); // ID로 기사 찾기
 
   if (!driver) {
     return (
@@ -25,7 +24,7 @@ const DriverDetailPage = () => {
 
   const transformedDriver = {
     ...driver,
-    serviceType: driver.serviceType.map((type) => type as ChipProps['type']),
+    serviceType: driver.serviceType.map((type) => type as ChipProps["type"]),
   };
 
   return (
@@ -56,7 +55,10 @@ const DriverDetailPage = () => {
                 </span>
               ))}
             </div>
-            <div className={style.border}></div>
+            <div className={style.reviewSeparator}></div>
+            <div className={style.reviewSection}>
+              <Review />
+            </div>
           </div>
         </div>
         <div className={style.rightFilters}>
@@ -68,3 +70,4 @@ const DriverDetailPage = () => {
 };
 
 export default DriverDetailPage;
+
