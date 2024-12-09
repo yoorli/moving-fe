@@ -4,6 +4,7 @@ import style from './index.module.css';
 import ModalContainer from '../../../components/modal/ModalContainer';
 import WritingReview from './components/WritingReview';
 import WritableReviews from './components/WritableReviews';
+import MyReview from './components/MyReview';
 
 export default function UserMovingReview() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('first');
@@ -43,7 +44,7 @@ export default function UserMovingReview() {
               setSelectedMover={setSelectedMover}
             />
           ) : (
-            'MyReview 컴포넌트'
+            <MyReview />
           )}
         </div>
         {isModalOpen && (
