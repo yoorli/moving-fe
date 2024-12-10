@@ -8,9 +8,9 @@ export interface UserData {
   assign: number; //지정 견적 요청 총 갯수
   users: {
     id: number;
-    movingType: ChipType[];
+    movingType: ChipType;
     isAssigned: boolean;
-    customer: string;
+    customerName: string;
     movingDate: string;
     departure: string;
     arrival: string;
@@ -28,9 +28,9 @@ export const mockData: UserData = {
   users: [
     {
       id: 1,
-      movingType: ['SMALL'],
+      movingType: 'SMALL',
       isAssigned: false,
-      customer: 'user1',
+      customerName: 'user1',
       movingDate: '2024.07.01',
       departure: '서울특별시 강남구',
       arrival: '서울특별시 마포구',
@@ -39,9 +39,9 @@ export const mockData: UserData = {
     },
     {
       id: 2,
-      movingType: ['HOUSE'],
+      movingType: 'HOUSE',
       isAssigned: true,
-      customer: 'user2',
+      customerName: 'user2',
       movingDate: '2024.07.15',
       departure: '서울특별시 은평구',
       arrival: '서울특별시 종로구',
@@ -49,9 +49,9 @@ export const mockData: UserData = {
     },
     {
       id: 3,
-      movingType: ['OFFICE'],
+      movingType: 'OFFICE',
       isAssigned: false,
-      customer: 'user3',
+      customerName: 'user3',
       movingDate: '2024.08.01',
       departure: '경기도 성남시',
       arrival: '경기도 부천시',
@@ -60,9 +60,9 @@ export const mockData: UserData = {
     },
     {
       id: 4,
-      movingType: ['SMALL'],
+      movingType: 'SMALL',
       isAssigned: true,
-      customer: 'user4',
+      customerName: 'user4',
       movingDate: '2024.09.01',
       departure: '인천광역시 연수구',
       arrival: '인천광역시 계양구',
@@ -70,9 +70,9 @@ export const mockData: UserData = {
     },
     {
       id: 5,
-      movingType: ['HOUSE'],
+      movingType: 'HOUSE',
       isAssigned: false,
-      customer: 'user5',
+      customerName: 'user5',
       movingDate: '2024.07.25',
       departure: '경기도 광주시',
       arrival: '경기도 고양시',
@@ -80,9 +80,9 @@ export const mockData: UserData = {
     },
     {
       id: 6,
-      movingType: ['OFFICE'],
+      movingType: 'OFFICE',
       isAssigned: true,
-      customer: 'user6',
+      customerName: 'user6',
       movingDate: '2024.08.10',
       departure: '서울특별시 동대문구',
       arrival: '서울특별시 강동구',
@@ -91,9 +91,9 @@ export const mockData: UserData = {
     },
     {
       id: 7,
-      movingType: ['SMALL'],
+      movingType: 'SMALL',
       isAssigned: false,
-      customer: 'user7',
+      customerName: 'user7',
       movingDate: '2024.10.01',
       departure: '경기도 평택시',
       arrival: '경기도 안산시',
@@ -101,9 +101,9 @@ export const mockData: UserData = {
     },
     {
       id: 8,
-      movingType: ['HOUSE'],
+      movingType: 'HOUSE',
       isAssigned: false,
-      customer: 'user8',
+      customerName: 'user8',
       movingDate: '2024.08.20',
       departure: '인천광역시 남동구',
       arrival: '경기도 파주시',
@@ -111,9 +111,9 @@ export const mockData: UserData = {
     },
     {
       id: 9,
-      movingType: ['OFFICE'],
+      movingType: 'OFFICE',
       isAssigned: true,
-      customer: 'user9',
+      customerName: 'user9',
       movingDate: '2024.09.05',
       departure: '서울특별시 강서구',
       arrival: '서울특별시 영등포구',
@@ -121,9 +121,9 @@ export const mockData: UserData = {
     },
     {
       id: 10,
-      movingType: ['SMALL'],
+      movingType: 'SMALL',
       isAssigned: false,
-      customer: 'user10',
+      customerName: 'user10',
       movingDate: '2024.10.10',
       departure: '경기도 용인시',
       arrival: '서울특별시 서대문구',

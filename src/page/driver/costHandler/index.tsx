@@ -15,17 +15,17 @@ export default function DriverCostHandlerPage() {
   );
   const [list, setList] = useState(mockData.users);
 
-    const handleTabChange = (tab: 'first' | 'second' | 'third') => {
-      setCurrentTab(tab);
-      if(tab === 'first'){
-        setList(mockData.users)
-      } else if(tab === 'second'){
-        setList(mockData.users.filter((list) => list.isConfirmed))
-      } else {
-        setList(mockData.users.filter((list) => list.isCancelled))
-      }
-      setCurrentPage(1)
-    };
+  const handleTabChange = (tab: 'first' | 'second' | 'third') => {
+    setCurrentTab(tab);
+    if (tab === 'first') {
+      setList(mockData.users);
+    } else if (tab === 'second') {
+      setList(mockData.users.filter((list) => list.isConfirmed));
+    } else {
+      setList(mockData.users.filter((list) => list.isCancelled));
+    }
+    setCurrentPage(1);
+  };
 
   const itemsPerPage = 6;
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -59,7 +59,7 @@ export default function DriverCostHandlerPage() {
           <div className={style.cardList}>
             {selectedPage.map((user, index) => (
               <div key={index} className={style.card}>
-                <UserCard user={user} type='confirmedCost' />
+                <UserCard list={user} type='confirmedCost' />
               </div>
             ))}
           </div>
