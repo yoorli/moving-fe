@@ -68,5 +68,6 @@ export interface UserProfileProps {
       averageScore: number; // 평점
     };
     content?: string; // 리뷰 내용
+    comment?: string //요구사항
   };
 }

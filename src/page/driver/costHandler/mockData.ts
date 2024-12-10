@@ -1,4 +1,5 @@
 import { ChipType } from "../../../components/card/type";
+import avatar from '../../../assets/images/img_avatar_pink_medium.svg'
 
 export interface DriverData {
   users: {
@@ -33,7 +34,7 @@ export const mockData: DriverData = {
       isConfirmed: true,
       isCancelled: false,
       isAssigned: true,
-      profileImage: 'image1',
+      profileImage: avatar,
       nickname: 'driver1',
       career: 7,
       reviewStats: {
@@ -55,7 +56,7 @@ export const mockData: DriverData = {
       isConfirmed: false,
       isCancelled: false,
       isAssigned: true,
-      profileImage: 'image2',
+      profileImage: avatar,
       nickname: 'driver2',
       career: 20,
       reviewStats: {
@@ -70,48 +71,48 @@ export const mockData: DriverData = {
       isLiked: false,
       price: 500000,
     },
-    // 확정된 견적 요청일 때
-    {
-      id: 3,
-      serviceType: ['OFFICE'],
-      isConfirmed: true,
-      isCancelled: false,
-      isAssigned: false,
-      profileImage: 'image3',
-      nickname: 'driver3',
-      career: 10,
-      reviewStats: {
-        averageScore: 3.8,
-        totalReviews: 40,
-      },
-      favoriteCount: 15,
-      confirmationCount: 25,
-      movingDate: '2024.08.01',
-      departure: '경기도 성남시',
-      arrival: '경기도 부천시',
-      isLiked: true,
-      price: 650000,
-    },
-    // 취소된 견적 요청일 때
-    {
-      id: 4,
-      serviceType: ['SMALL'],
-      isConfirmed: false,
-      isCancelled: true,
-      profileImage: 'image4',
-      nickname: 'driver4',
-      career: 12,
-      reviewStats: {
-        averageScore: 4.7,
-        totalReviews: 50,
-      },
-      favoriteCount: 35,
-      confirmationCount: 45,
-      movingDate: '2024.09.01',
-      departure: '인천광역시 연수구',
-      arrival: '인천광역시 계양구',
-      isLiked: false,
-      price: 720000,
-    },
+    // // 확정된 견적 요청일 때
+    // {
+    //   id: 3,
+    //   serviceType: ['OFFICE'],
+    //   isConfirmed: true,
+    //   isCancelled: false,
+    //   isAssigned: false,
+    //   profileImage: 'image3',
+    //   nickname: 'driver3',
+    //   career: 10,
+    //   reviewStats: {
+    //     averageScore: 3.8,
+    //     totalReviews: 40,
+    //   },
+    //   favoriteCount: 15,
+    //   confirmationCount: 25,
+    //   movingDate: '2024.08.01',
+    //   departure: '경기도 성남시',
+    //   arrival: '경기도 부천시',
+    //   isLiked: true,
+    //   price: 650000,
+    // },
+    // // 취소된 견적 요청일 때
+    // {
+    //   id: 4,
+    //   serviceType: ['SMALL'],
+    //   isConfirmed: false,
+    //   isCancelled: true,
+    //   profileImage: 'image4',
+    //   nickname: 'driver4',
+    //   career: 12,
+    //   reviewStats: {
+    //     averageScore: 4.7,
+    //     totalReviews: 50,
+    //   },
+    //   favoriteCount: 35,
+    //   confirmationCount: 45,
+    //   movingDate: '2024.09.01',
+    //   departure: '인천광역시 연수구',
+    //   arrival: '인천광역시 계양구',
+    //   isLiked: false,
+    //   price: 720000,
+    // },
   ],
 };

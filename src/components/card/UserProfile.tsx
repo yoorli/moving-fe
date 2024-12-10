@@ -40,7 +40,7 @@ export function getStars(rating: number) {
       </div>,
     );
   }
-  if (rating < 4) {
+  if (rating <= 4) {
     for (let i = 1; i <= 5 - rating; i++) {
       stars.push(<img src={emptyStarMedium} alt='empty star' />);
     }
