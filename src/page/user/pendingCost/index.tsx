@@ -3,6 +3,7 @@ import Tab from '../../../components/tab/Tab';
 import style from './index.module.css';
 import useDirection from '../../../lib/function/direction';
 import CostInfo from '../../../components/costInfo/CostInfo';
+import PendingList from './components/PendingList';
 
 interface infoProps {
   id: number; // 견적 요청 ID
@@ -48,16 +49,18 @@ export default function PendingCost() {
         firstTabRoute={direction_pendingCost}
         secondTabRoute={direction_receivedCost}
       />
-      <div className={style.container}>
-        <CostInfo
-          movingRequest={mockData.movingRequest}
-          movingType={mockData.movingType}
-          movingDate={mockData.movingDate}
-          departure={mockData.departure}
-          arrival={mockData.arrival}
-          comment={mockData.comment}
-        />
-        <div>카드 나열</div>
+      <div className={style.overlay}>
+        <div className={style.container}>
+          <CostInfo
+            movingRequest={mockData.movingRequest}
+            movingType={mockData.movingType}
+            movingDate={mockData.movingDate}
+            departure={mockData.departure}
+            arrival={mockData.arrival}
+            comment={mockData.comment}
+          />
+          <PendingList />
+        </div>
       </div>
     </>
   );
