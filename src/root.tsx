@@ -132,11 +132,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'costHandler',
-        element: (
-          <span>
-            <DriverCostHandlerPage />
-          </span>
-        ),
+        element: <DriverCostHandlerPage />,
       },
       {
         path: 'myPage',

@@ -27,13 +27,13 @@ export default function DriverCostCallPage() {
   const isPc = useMedia().pc;
   const itemsPerPage = 3;
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentUsers = mockData.users.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   const page = {
     currentPage: currentPage,
