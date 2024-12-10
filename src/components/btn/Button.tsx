@@ -34,7 +34,7 @@ const BUTTON_STYLES = {
 type ButtonStyle = keyof typeof BUTTON_STYLES;
 
 interface ButtonProps {
-  text: string;
+  text?: string;
   btnStyle: ButtonStyle;
   src?: string;
   srcLocationFront?: boolean;

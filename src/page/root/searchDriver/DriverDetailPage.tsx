@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import style from "./DriverDetail.module.css";
-import DriverCard from "../../components/card/DriverCard";
-import Review from "../../components/review/Review";
-import { MOCK_DATA } from "../root/searchDriver/mockData";
-import { ChipProps } from "../../components/chip/Chip";
+import DriverCard from "../../../components/card/DriverCard";
+import Review from "../../../components/review/Review";
+import FixedBottomTab from "./components/FixedBottomTab";
+import Button from "../../../components/btn/Button";
+import { MOCK_DATA } from "./mockData";
+import { ChipProps } from "../../../components/chip/Chip";
 import {
   translateServiceRegion,
   translateServiceType,
-} from "./searchDriver/EnumMapper";
+} from "./EnumMapper";
+import HeartIcon from "../../../assets/icons/ic_full_heart_small.svg";
 
 const DriverDetailPage = () => {
-  const { id } = useParams<{ id: string }>(); // URL에서 기사님 ID 가져오기
-  const driver = MOCK_DATA.find((driver) => driver.id === parseInt(id || "", 10)); // ID로 기사 찾기
+  const { id } = useParams<{ id: string }>();
+  const driver = MOCK_DATA.find((driver) => driver.id === parseInt(id || "", 10));
+
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   if (!driver) {
     return (
@@ -61,13 +72,30 @@ const DriverDetailPage = () => {
             </div>
           </div>
         </div>
-        <div className={style.rightFilters}>
-          <h2>{driver.nickname} 기사님에게 지정 견적을 요청해보세요!</h2>
-        </div>
+        {!isMobileView && (
+          <div className={style.rightFilters}>
+            <h2>{driver.nickname} 기사님에게 지정 견적을 요청해보세요!</h2>
+            <div className={style.rightButtons}>
+              <Button
+                text="기사님 찜하기"
+                btnStyle="outlined354pxLine200"
+                src={HeartIcon}
+                srcLocationFront
+                alt="찜하기 아이콘"
+                className={style.heartButton}
+              />
+              <Button
+                text="지정 견적 요청하기"
+                btnStyle="solid354pxBlue300"
+                className={style.requestButton}
+              />
+            </div>
+          </div>
+        )}
       </div>
+      {isMobileView && <FixedBottomTab />}
     </div>
   );
 };
 
 export default DriverDetailPage;
-

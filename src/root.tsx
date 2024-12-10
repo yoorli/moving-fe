@@ -22,7 +22,7 @@ import ServiceRandingPage from './page/root';
 import DriverRegisterPage from './page/driver/register';
 import DriverCostHandlerPage from './page/driver/costHandler';
 import SearchDriverForGuest from './page/root/searchDriver';
-import DriverDetailPage from './page/root/DriverDetailPage';
+import DriverDetailPage from './page/root/searchDriver/DriverDetailPage';
 
 const router = createBrowserRouter([
   {
