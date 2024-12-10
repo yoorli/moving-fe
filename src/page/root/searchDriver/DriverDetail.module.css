@@ -37,6 +37,10 @@
   max-width: 354px;
   flex: 1;
   margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .rightFilters h2 {
@@ -44,6 +48,42 @@
   font-size: 20px;
   line-height: 32px;
   color: #1f1f1f;
+  margin-bottom: 32px; /* 글자와 첫 번째 버튼 사이 간격 */
+}
+
+.rightButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* 버튼 간 간격 */
+  width: 100%;
+}
+
+.heartButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  border: 1px solid #e6e6e6;
+  background-color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.requestButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .section {
@@ -121,43 +161,10 @@
     max-width: 100%;
     width: 100%;
     margin-top: 0;
-    position: relative;
-  }
-
-  .leftFilters::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1px;
-    background-color: #f2f2f2;
-    position: absolute;
-    bottom: -34px;
   }
 
   .rightFilters {
     display: none;
-  }
-
-  .reviewSection {
-    margin-top: 34px;
-  }
-
-  .reviewSeparator {
-    margin-top: 34px;
-    margin-bottom: 34px;
-    border-top: 1px solid #f2f2f2;
-  }
-
-  .sectionTitle {
-    font-size: 16px;
-    line-height: 26px;
-    margin-bottom: 16px;
-  }
-
-  .description {
-    font-size: 14px;
-    line-height: 24px;
-    margin-bottom: 34px;
   }
 
   .chips {
@@ -169,10 +176,6 @@
     padding: 6px 12px;
     font-size: 14px;
     line-height: 24px;
-  }
-
-  .border {
-    margin: 24px 0;
   }
 }
 
@@ -181,61 +184,7 @@
     padding: 20px 24px;
   }
 
-  .leftFilters {
-    max-width: 100%;
-    width: 100%;
-    margin-top: 0;
-    position: relative;
-  }
-
-  .leftFilters::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1px;
-    background-color: #f2f2f2;
-    position: absolute;
-    bottom: -34px;
-  }
-
   .rightFilters {
     display: none;
-  }
-
-  .reviewSection {
-    margin-top: 34px;
-  }
-
-  .reviewSeparator {
-    margin-top: 34px;
-    margin-bottom: 34px;
-    border-top: 1px solid #f2f2f2;
-  }
-
-  .sectionTitle {
-    font-size: 16px;
-    line-height: 26px;
-    margin-bottom: 16px;
-  }
-
-  .description {
-    font-size: 14px;
-    line-height: 24px;
-    margin-bottom: 34px;
-  }
-
-  .chips {
-    gap: 10px;
-  }
-
-  .serviceChip,
-  .regionChip {
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 24px;
-  }
-
-  .border {
-    margin: 24px 0;
   }
 }
