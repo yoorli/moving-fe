@@ -10,9 +10,11 @@ export default function RendingLayout() {
   const [modal, setModal] = useState<boolean>(false);
   const { pc } = useMedia();
 
-  const user = {
-    name: '김대건',
-  };
+  // const user = {
+  //   name: '김대건',
+  // };
+
+  const user = undefined;
 
   const modalController = () => {
     setModal((prev) => !prev);
