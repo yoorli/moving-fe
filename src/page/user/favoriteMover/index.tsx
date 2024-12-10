@@ -13,7 +13,7 @@ export default function UserFavoriteMover() {
             {mockData.list.map((mover, index) => (
               <DriverCard
                 key={index}
-                user={{ ...mover, isLiked: true }}
+                list={{ ...mover, isFavorite: true }}
                 type='dibs'
               />
             ))}

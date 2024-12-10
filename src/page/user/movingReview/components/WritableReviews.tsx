@@ -40,7 +40,7 @@ export default function WritableReviews({
             {paginatedData.map((mover, index) => (
               <DriverCard
                 key={index}
-                user={mover}
+                list={mover}
                 type='review'
                 reviewBtn={() => handleModalOpen(mover)}
               />

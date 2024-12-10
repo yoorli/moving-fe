@@ -38,7 +38,7 @@ export default function WritingReview({
           ))}
           {mover.isAssigned && <Chip type='ASSIGN' />}
         </div>
-        <DriverProfile user={mover} type='review' />
+        <DriverProfile list={mover} type='review' />
       </div>
       <div className={`${style.smallContainer} ${style.rating}`}>
         <div>평점을 선택해 주세요</div>
