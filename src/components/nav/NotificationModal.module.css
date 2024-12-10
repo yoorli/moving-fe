@@ -4,7 +4,7 @@
     flex-direction: column;
 
     max-width: 312px;
-    max-height: 314px;
+    max-height: 325px;
 
     border: 1px solid var(--line-200);
     border-radius: 16px;
@@ -26,7 +26,7 @@
   }
 
   .title {
-    padding: 14px 12px 0px 16px;
+    padding: 14px 12px 10px 16px;
     display: flex;
     justify-content: space-between;
     font-size: 16px;
@@ -45,6 +45,12 @@
     padding: 12px 16px;
     border-bottom: 1px solid var(--line-200);
     line-height: 24px;
+    cursor: pointer;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
   }
 
   .item:last-child {
@@ -99,7 +105,7 @@
   }
 
   .title {
-    padding: 14px 12px 5px 16px;
+    padding: 14px 12px 15px 16px;
     display: flex;
     justify-content: space-between;
     font-size: 16px;
@@ -118,6 +124,12 @@
     padding: 12px 16px;
     border-bottom: 1px solid var(--line-200);
     line-height: 26px;
+    cursor: pointer;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
   }
 
   .item:last-child {
@@ -126,6 +138,7 @@
 
   .item:hover {
     background-color: lightgray;
+    cursor: pointer;
   }
 
   .itemContent {
@@ -191,6 +204,12 @@
     padding: 16px 20px;
     border-bottom: 1px solid var(--line-200);
     line-height: 26px;
+    cursor: pointer;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
   }
 
   .item:last-child {
