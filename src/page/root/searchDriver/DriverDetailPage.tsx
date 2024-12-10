@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import style from "./DriverDetail.module.css";
-import DriverCard from "../../../components/card/DriverCard";
-import Review from "../../../components/review/Review";
-import FixedBottomTab from "./components/FixedBottomTab";
-import Button from "../../../components/btn/Button";
-import { MOCK_DATA } from "./mockData";
-import { ChipProps } from "../../../components/chip/Chip";
-import {
-  translateServiceRegion,
-  translateServiceType,
-} from "./EnumMapper";
-import HeartIcon from "../../../assets/icons/ic_full_heart_small.svg";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import style from './DriverDetail.module.css';
+import DriverCard from '../../../components/card/DriverCard';
+import Review from '../../../components/review/Review';
+import FixedBottomTab from './components/FixedBottomTab';
+import Button from '../../../components/btn/Button';
+import { MOCK_DATA } from './mockData';
+import { ChipProps } from '../../../components/chip/Chip';
+import { translateServiceRegion, translateServiceType } from './EnumMapper';
+import HeartIcon from '../../../assets/icons/ic_full_heart_small.svg';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const driver = MOCK_DATA.find((driver) => driver.id === parseInt(id || "", 10));
+  const driver = MOCK_DATA.find(
+    (driver) => driver.moverId === parseInt(id || '', 10),
+  );
 
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   if (!driver) {
@@ -35,7 +34,7 @@ const DriverDetailPage = () => {
 
   const transformedDriver = {
     ...driver,
-    serviceType: driver.serviceType.map((type) => type as ChipProps["type"]),
+    serviceType: driver.serviceType.map((type) => type as ChipProps['type']),
   };
 
   return (
@@ -43,7 +42,7 @@ const DriverDetailPage = () => {
       <div className={style.noPadding}></div>
       <div className={style.container}>
         <div className={style.leftFilters}>
-          <DriverCard user={transformedDriver} />
+          <DriverCard list={transformedDriver} />
           <div className={style.section}>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>상세설명</h2>
@@ -74,19 +73,19 @@ const DriverDetailPage = () => {
         </div>
         {!isMobileView && (
           <div className={style.rightFilters}>
-            <h2>{driver.nickname} 기사님에게 지정 견적을 요청해보세요!</h2>
+            <h2>{driver.moverName} 기사님에게 지정 견적을 요청해보세요!</h2>
             <div className={style.rightButtons}>
               <Button
-                text="기사님 찜하기"
-                btnStyle="outlined354pxLine200"
+                text='기사님 찜하기'
+                btnStyle='outlined354pxLine200'
                 src={HeartIcon}
                 srcLocationFront
-                alt="찜하기 아이콘"
+                alt='찜하기 아이콘'
                 className={style.heartButton}
               />
               <Button
-                text="지정 견적 요청하기"
-                btnStyle="solid354pxBlue300"
+                text='지정 견적 요청하기'
+                btnStyle='solid354pxBlue300'
                 className={style.requestButton}
               />
             </div>
