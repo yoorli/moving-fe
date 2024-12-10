@@ -3,7 +3,11 @@ import DriverCard from '../../../../components/card/DriverCard';
 import { mockData, DriverDataDetail } from '../mock';
 // import { useMedia } from '../../../../lib/function/useMediaQuery';
 
-export default function ReceivedCostCard() {
+export interface Props {
+  redirect: (id: number) => void;
+}
+
+export default function ReceivedCostCard({ redirect }: Props) {
   // const { pc } = useMedia();
 
   return (
@@ -20,6 +24,7 @@ export default function ReceivedCostCard() {
                     ? 'cancel'
                     : 'notConfirm'
               }
+              costListBtn={() => redirect(mover.id)}
             />
           </div>
         ))}

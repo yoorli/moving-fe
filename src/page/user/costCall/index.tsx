@@ -3,6 +3,7 @@ import Navigation from './components/Navigation';
 import NoContents from '../../../components/noContents/NoContents';
 import style from './index.module.css';
 import CostCallContent from './components/CostCallContent';
+import useDirection from '../../../lib/function/direction';
 
 export interface SelectValues {
   movingType: boolean;
@@ -12,6 +13,7 @@ export interface SelectValues {
 }
 
 export default function UserCostCallPage() {
+  const { direction_pendingCost } = useDirection();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [isSelectOption, setIsSelectOption] = useState<SelectValues>({
@@ -20,10 +22,6 @@ export default function UserCostCallPage() {
     departure: false,
     arrival: false,
   });
-
-  const handleTabChange = () => {
-    alert('받은요청 페이지로 가자!');
-  };
 
   return (
     <>
@@ -35,13 +33,14 @@ export default function UserCostCallPage() {
               isSelectOption={isSelectOption}
               setIsSelectOption={setIsSelectOption}
               setIsSubmitted={setIsSubmitted}
+              redirect={direction_pendingCost}
             />
           ) : (
             <NoContents
               image='car'
               hasButton={true}
               buttonText='받은 견적 보러가기'
-              buttonHandler={() => handleTabChange()}
+              buttonHandler={() => direction_pendingCost()}
             />
           )}
         </div>

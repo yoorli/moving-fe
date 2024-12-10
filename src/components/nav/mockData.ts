@@ -20,7 +20,8 @@ export const mockData: NotificationProps = {
   notReadCount: 6,
   list: [
     // (유저) 견적 도착
-    // 김코드 기사님의 견적이 도착했습니다
+    // 김코드 기사님의 견적이 도착했습니다 -> 김코드 기사님의 견적상세(견적서id)
+
     {
       id: 1,
       content: ' 소형이사',
@@ -30,7 +31,7 @@ export const mockData: NotificationProps = {
       isRead: false,
     },
     // (유저) 견적 확정
-    // 김코드 기사님의 견적이 확정되었어요
+    // 김코드 기사님의 견적이 확정되었어요 -> 견적 id
     {
       id: 2,
       content: '견적이 확정됐습니다',
@@ -40,7 +41,7 @@ export const mockData: NotificationProps = {
       isRead: false,
     },
     // (유저) 이사일 알림
-    // 오늘은 경기(양산) -> 서울(영등포) 이사 예정일이에요
+    // 오늘은 경기(양산) -> 서울(영등포) 이사 예정일이에요 -> 견적 id
     {
       id: 3,
       content: '경기도 양산 -> 서울 송파 이사 예정일',
@@ -49,7 +50,7 @@ export const mockData: NotificationProps = {
       isRead: false,
     },
     // (기사님) 견적 도착
-    // 김가나 고객님의 소형이사 지정 견적이 도착했습니다
+    // 김가나 고객님의 소형이사 지정 견적이 도착했습니다 -> 프론트에서 처리
     {
       id: 4,
       content: '소형이사',
@@ -59,7 +60,7 @@ export const mockData: NotificationProps = {
       isRead: false,
     },
     // (기사님) 견적 확정
-    // 김기나 고객님의 소형이사 견적이 확정되었습니다
+    // 김기나 고객님의 소형이사 견적이 확정되었습니다 -> 견적 Id
     {
       id: 5,
       content: '소형이사',
@@ -68,7 +69,7 @@ export const mockData: NotificationProps = {
       createAt: '2024-11-19T19:30:45',
       isRead: false,
     },
-    // (기사님) 이사일 알림
+    // (기사님) 이사일 알림 -> 견적 id
     {
       id: 6,
       content: '경기도 양산 -> 서울 송파 이사 예정일',

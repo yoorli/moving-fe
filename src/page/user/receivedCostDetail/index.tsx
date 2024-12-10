@@ -8,6 +8,7 @@ import { mockData } from './mockData';
 import useDirection from '../../../lib/function/direction';
 
 export default function ReceivedCostDetail() {
+  const { direction_pendingCost, direction_receivedCost } = useDirection();
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('second');
 
   const handleTabChange = (selectedTab: 'first' | 'second') => {
@@ -15,8 +16,6 @@ export default function ReceivedCostDetail() {
   };
 
   // const { id } = useParams();\
-
-  const { direction_pendingCost, direction_receivedCost } = useDirection();
 
   return (
     <>

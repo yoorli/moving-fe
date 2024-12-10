@@ -25,12 +25,14 @@ interface CostCallContentProps {
   isSelectOption: SelectValues;
   setIsSelectOption: React.Dispatch<React.SetStateAction<SelectValues>>;
   setIsSubmitted: (value: boolean) => void;
+  redirect: () => void;
 }
 
 export default function UserCostCallPage({
   isSelectOption,
   setIsSelectOption,
   setIsSubmitted,
+  redirect,
 }: CostCallContentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [values, setValues] = useState<FormValues>({
@@ -65,6 +67,7 @@ export default function UserCostCallPage({
   const modalBtnClick = () => {
     setIsSubmitted(true);
     setIsModalOpen(false);
+    redirect();
   };
 
   return (
