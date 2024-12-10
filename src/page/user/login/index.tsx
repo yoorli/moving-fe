@@ -42,6 +42,8 @@ export default function UserLoginPage() {
     password: '',
   });
 
+  const [isPending, setIsPending] = useState<boolean>(false);
+
   const inputHeandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setValues({
@@ -64,8 +66,10 @@ export default function UserLoginPage() {
       validation.password
     ) {
       try {
+        setIsPending(true);
         await auth.post('/user/login', values);
-        return (window.location.href = '/');
+        setIsPending(false);
+        window.location.href = '/';
       } catch (e) {
         if (isAxiosError(e)) {
           const data = e.response?.data;
@@ -121,7 +125,7 @@ export default function UserLoginPage() {
               }
             />
             <AuthBtn
-              context='로그인'
+              context={isPending ? 'loading...' : '로그인'}
               validation={
                 !!values.email &&
                 !!values.password &&

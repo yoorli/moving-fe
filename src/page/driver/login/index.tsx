@@ -33,6 +33,8 @@ export default function DriverLoginPage() {
     password: true,
   });
 
+  const [isPending, setIsPending] = useState<boolean>(false);
+
   const inputHeandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setValues({
@@ -63,8 +65,10 @@ export default function DriverLoginPage() {
       validation.password
     ) {
       try {
+        setIsPending(true);
         await auth.post('/user/login', values);
-        return (window.location.href = '/');
+        setIsPending(false);
+        window.location.href = '/';
       } catch (e) {
         if (isAxiosError(e)) {
           const data = e.response?.data;
@@ -120,7 +124,7 @@ export default function DriverLoginPage() {
               }
             />
             <AuthBtn
-              context='로그인'
+              context={isPending ? 'loading...' : '로그인'}
               validation={
                 !!values.email &&
                 !!values.password &&

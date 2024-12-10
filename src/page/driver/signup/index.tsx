@@ -51,6 +51,8 @@ export default function DriverSignupPage() {
     email: '',
   });
 
+  const [isPending, setIsPending] = useState<boolean>(false);
+
   const inputHeandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     const { password } = values; // 비밀번호 확인 용
@@ -88,10 +90,12 @@ export default function DriverSignupPage() {
       };
 
       try {
+        setIsPending(true);
         const response = await auth.post(
           '/user/signup?userType=MOVER',
           request,
         );
+        setIsPending(false);
         alert(response.data);
         window.location.href = '/driver/login';
       } catch (e) {
@@ -107,6 +111,8 @@ export default function DriverSignupPage() {
             ...errorMessage,
             email: data.message,
           });
+
+          setIsPending(false);
         }
       }
     } else {
@@ -169,7 +175,7 @@ export default function DriverSignupPage() {
               errorMessage='비밀번호가 일치하지 않습니다.'
             />
             <AuthBtn
-              context='시작하기'
+              context={isPending ? 'loading...' : '시작하기'}
               validation={
                 !!values.email &&
                 !!values.password &&

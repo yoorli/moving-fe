@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import style from './RendingLayout.module.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { UserMenuModal } from '../components/nav/NavMenuModal';
-import { NonLoginNav, UserNav } from '../components/nav/Nav';
+import { DriverNav, NonLoginNav, UserNav } from '../components/nav/Nav';
 import { useMedia } from '../lib/function/useMediaQuery';
+import { AuthContext } from '../context/authContext';
 
 export default function RendingLayout() {
+  const context = useContext(AuthContext);
   const [modal, setModal] = useState<boolean>(false);
   const { pc } = useMedia();
 
@@ -14,7 +16,7 @@ export default function RendingLayout() {
   //   name: '김대건',
   // };
 
-  const user = undefined;
+  const { user } = context;
 
   const modalController = () => {
     setModal((prev) => !prev);
@@ -25,7 +27,11 @@ export default function RendingLayout() {
       <div className={style.container}>
         <div className={style.wrapper}>
           {user ? (
-            <UserNav modalController={modalController} />
+            user.userType === 'MOVER' ? (
+              <DriverNav modalController={modalController} />
+            ) : (
+              <UserNav modalController={modalController} />
+            )
           ) : (
             <NonLoginNav modalController={modalController} />
           )}

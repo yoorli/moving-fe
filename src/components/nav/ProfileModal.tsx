@@ -1,5 +1,12 @@
+import { auth } from '../../lib/api/auth';
 import useDirection from '../../lib/function/direction';
 import style from './ProfileModal.module.css';
+
+const logout = async () => {
+  const response = await auth.post('/user/logout');
+  console.log(response.data);
+  window.location.href = '/';
+};
 
 type Props = {
   modalController: () => void;
@@ -11,6 +18,7 @@ export function UserProfileModal({ modalController }: Props) {
     direction();
     modalController();
   };
+
   return (
     <div className={style.container}>
       <div className={style.title}>
@@ -34,7 +42,9 @@ export function UserProfileModal({ modalController }: Props) {
       </div>
       <div className={style.item}>찜한 기사님</div>
       <div className={style.item}>이사 리뷰</div>
-      <div className={style.logout}>로그아웃</div>
+      <div onClick={logout} className={style.logout}>
+        로그아웃
+      </div>
     </div>
   );
 }
@@ -78,7 +88,9 @@ export function DriverProfileModal({ modalController }: Props) {
       >
         마이 페이지
       </div>
-      <div className={style.logout}>로그아웃</div>
+      <div onClick={logout} className={style.logout}>
+        로그아웃
+      </div>
     </div>
   );
 }
