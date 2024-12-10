@@ -1,24 +1,36 @@
 import { useState } from 'react';
+
 import Tab from '../../../components/tab/Tab';
+import UserCard from '../../../components/card/UserCard';
+import Pagination from '../../../components/pagination/Pagination';
 
 import style from './index.module.css';
 
 import { mockData } from './mockData';
-import UserCard from '../../../components/card/UserCard';
-import Pagination from '../../../components/pagination/Pagination';
 
 export default function DriverCostHandlerPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentTab, setCurrentTab] = useState<'first' | 'second'>('first');
+  const [currentTab, setCurrentTab] = useState<'first' | 'second' | 'third'>(
+    'first',
+  );
+  const [list, setList] = useState(mockData.users);
+
+    const handleTabChange = (tab: 'first' | 'second' | 'third') => {
+      setCurrentTab(tab);
+      if(tab === 'first'){
+        setList(mockData.users)
+      } else if(tab === 'second'){
+        setList(mockData.users.filter((list) => list.isConfirmed))
+      } else {
+        setList(mockData.users.filter((list) => list.isCancelled))
+      }
+      setCurrentPage(1)
+    };
 
   const itemsPerPage = 6;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentUsers = mockData.users.slice(startIndex, endIndex);
-
-  const handleTabChange = (tab: 'first' | 'second') => {
-    setCurrentTab(tab);
-  };
+  const selectedPage = list.slice(startIndex, endIndex);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -27,7 +39,7 @@ export default function DriverCostHandlerPage() {
   const page = {
     currentPage: currentPage,
     itemsPerPage: itemsPerPage,
-    data: 10,
+    data: list.length,
     onPageChange: handlePageChange,
   };
 
@@ -35,23 +47,24 @@ export default function DriverCostHandlerPage() {
     <div className={style.container}>
       <Tab
         selectable={true}
-        firstText='보낸 견적 전체 조회'
+        firstText='견적 전체 조회'
         secondText='확정 견적 조회'
-        // thirdText='반려 요청ㆍ취소 조회'
+        thirdText='반려ㆍ취소 요청'
+        hasThirdTab={true}
         selectedTab={currentTab}
         onTabChange={handleTabChange}
       />
       <div className={style.mainContainer}>
         {currentTab && (
           <div className={style.cardList}>
-            {currentUsers.map((user, index) => (
+            {selectedPage.map((user, index) => (
               <div key={index} className={style.card}>
                 <UserCard user={user} type='confirmedCost' />
               </div>
             ))}
           </div>
         )}
-        {currentUsers.length > 0 && (
+        {selectedPage.length > 0 && (
           <div className={style.pagination}>
             <Pagination {...page} />
           </div>

@@ -21,7 +21,7 @@
 }
 
 .card {
-  max-width: 828px;
+  max-width: calc(50% - 12px);
   flex: 1 1 calc(50% - 24px);
   margin-bottom: 24px;
 }
