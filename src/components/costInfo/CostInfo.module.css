@@ -43,7 +43,7 @@
   line-height: 26px;
 }
 
-@media (max-width: 1199px) and (min-width: 744px) {
+@media (max-width: 1199px) {
   .container {
     gap: 24px;
   }
