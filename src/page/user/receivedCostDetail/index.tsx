@@ -5,6 +5,7 @@ import style from './index.module.css';
 import ReceivedCostInfo from './components/ReceivedCostInfo';
 import ReceivedList from './components/ReceivedList';
 import { mockData } from './mockData';
+import useDirection from '../../../lib/function/direction';
 
 export default function ReceivedCostDetail() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('second');
@@ -13,17 +14,23 @@ export default function ReceivedCostDetail() {
     setCurrentTab(selectedTab);
   };
 
-  // const { id } = useParams();
+  // const { id } = useParams();\
+
+  const { direction_pendingCost, direction_receivedCost } = useDirection();
 
   return (
     <>
       <Tab
         selectable={true}
-        firstText='대기중인 견적'
+        firstText='대기 중인 견적'
         secondText='받았던 견적'
         selectedTab={currentTab}
         onTabChange={handleTabChange}
+        tabChangeType='route'
+        firstTabRoute={direction_pendingCost}
+        secondTabRoute={direction_receivedCost}
       />
+
       <div className={style.container}>
         <div className={style.layout}>
           <div className={style.main}>
