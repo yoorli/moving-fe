@@ -15,6 +15,7 @@
   padding: 20px;
   gap: 30px;
   position: relative;
+  width: 100%;
 }
 
 .leftSection {
@@ -26,6 +27,7 @@
   text-align: center;
   position: relative;
   height: 100%;
+  max-width: 350px;
 }
 
 .averageRating {
@@ -72,7 +74,7 @@
   background-color: #f7f7f7;
   border-radius: 24px;
   padding: 16px 18px;
-  width: 400px;
+  width: 440px;
   height: 100%;
   position: relative;
   margin-left: 30px;
@@ -166,7 +168,7 @@
   }
 
   .reviewContainer {
-    max-width: 800px;
+    width: 100%;
   }
 
   .averageScore {
@@ -187,11 +189,13 @@
   }
 
   .rightSection {
-    padding: 30px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-right: 64px;
+    padding-left: 64px;
   }
 }
 
-/* 1119px ~ 744px */
 @media (max-width: 1199px) and (min-width: 744px) {
   .reviewHeader {
     font-size: 16px;
@@ -215,7 +219,10 @@
   }
 
   .rightSection {
-    padding: 25px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
   }
 
   .ratingLabel {
@@ -238,9 +245,12 @@
     width: 20px;
     height: 20px;
   }
+
+  .leftSection {
+    max-width: 300px;
+  }
 }
 
-/* 743px ~ 375px */
 @media (max-width: 743px) {
   .reviewHeader {
     font-size: 16px;
@@ -276,14 +286,18 @@
   }
 
   .rightSection {
-    width: 327px;
+    min-width: 327px;
+    width: 55%;
     margin-top: 30px;
     margin-left: 0;
-    padding: 22px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
   }
 
   .reviewList {
-    width: 327px;
+    width: 100%;
     padding: 22px;
     margin-top: 20px;
   }
@@ -304,4 +318,3 @@
     height: 20px;
   }
 }
-
