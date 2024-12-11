@@ -20,6 +20,12 @@
   justify-content: space-between;
 }
 
+.labelBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .label { 
   display: flex;
   gap: 12px;
