@@ -10,7 +10,7 @@ export interface Review {
     averageScore: number; // 평점
   };
   content: string; // 리뷰 내용
-  serviceType: ChipType; // 이용한 서비스 타입 ['SMALL', 'HOUSE', ...]
+  serviceType: ChipType[]; // 이용한 서비스 타입 ['SMALL', 'HOUSE', ...]
   isAssigned: boolean; // 지정 견적인지 여부
   createAt: string; // 리뷰 작성일
 }
@@ -38,7 +38,7 @@ export const reviewMockData: ApiReviewResponse = {
       },
       content:
         '정말 친절하시고 이사도 깔끔하게 해주셨어요! 그리고 어찌나 완벽하신지 제 할 일이라고는 자장면을 시켜먹는 일이였어요.',
-      serviceType: 'SMALL',
+      serviceType: ['SMALL', 'HOUSE'],
     },
     {
       isAssigned: false,
@@ -52,7 +52,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 3, // 평점
       },
       content: '전문적이고 빠른 이사 서비스였습니다.',
-      serviceType: 'HOUSE',
+      serviceType: ['HOUSE'],
     },
     {
       isAssigned: true,
@@ -66,7 +66,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 5, // 평점
       },
       content: '시간 약속을 잘 지키셨어요. 만족합니다.',
-      serviceType: 'SMALL',
+      serviceType: ['SMALL'],
     },
     {
       isAssigned: false,
@@ -80,7 +80,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 1, // 평점
       },
       content: '친절하고 신속한 작업에 감사드립니다.',
-      serviceType: 'OFFICE',
+      serviceType: ['OFFICE'],
     },
     {
       isAssigned: true,
@@ -94,7 +94,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 4, // 평점
       },
       content: '이사 후에도 문제가 없어서 좋았습니다!',
-      serviceType: 'HOUSE',
+      serviceType: ['HOUSE'],
     },
     {
       isAssigned: false,
@@ -108,7 +108,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 2, // 평점
       },
       content: '가격 대비 서비스가 좋아요.',
-      serviceType: 'SMALL',
+      serviceType: ['SMALL'],
     },
     {
       isAssigned: true,
@@ -122,7 +122,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 4.3, // 평점
       },
       content: '기사님이 친절하시고 이사도 꼼꼼하게 해주셨어요.',
-      serviceType: 'HOUSE',
+      serviceType: ['HOUSE'],
     },
     {
       isAssigned: false,
@@ -136,7 +136,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 4.3, // 평점
       },
       content: '무난한 서비스였습니다. 다음에도 이용할 것 같아요.',
-      serviceType: 'OFFICE',
+      serviceType: ['OFFICE'],
     },
     {
       isAssigned: true,
@@ -150,7 +150,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 4.3, // 평점
       },
       content: '약간의 소통 문제는 있었지만 결과적으로 만족했습니다.',
-      serviceType: 'SMALL',
+      serviceType: ['SMALL'],
     },
     {
       isAssigned: false,
@@ -164,7 +164,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 4.3, // 평점
       },
       content: '깔끔하고 세심한 작업이 인상적이었습니다.',
-      serviceType: 'HOUSE',
+      serviceType: ['HOUSE'],
     },
   ],
 };

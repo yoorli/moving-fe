@@ -24,7 +24,7 @@ export default function MyReview() {
         {paginatedData.map((review, index) => (
           <UserCard
             key={index}
-            list={{ ...review, movingType: review.serviceType }}
+            list={review}
             type='review'
           />
         ))}
