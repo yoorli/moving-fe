@@ -4,6 +4,7 @@ import style from './index.module.css';
 import useDirection from '../../../lib/function/direction';
 import CostInfo from '../../../components/costInfo/CostInfo';
 import PendingList from './components/PendingList';
+import ModalContainer from '../../../components/modal/ModalContainer';
 
 interface infoProps {
   id: number; // 견적 요청 ID
@@ -31,12 +32,23 @@ const mockData: infoProps = {
 
 export default function PendingCost() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('first');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { direction_pendingCost, direction_receivedCost, direction_costCall } =
+    useDirection();
 
   const handleTabChange = (selectedTab: 'first' | 'second') => {
     setCurrentTab(selectedTab);
   };
 
-  const { direction_pendingCost, direction_receivedCost } = useDirection();
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const cancelCostCall = () => {
+    // 요청 지우는 API??
+    direction_costCall();
+  };
+
   return (
     <>
       <Tab
@@ -58,9 +70,22 @@ export default function PendingCost() {
             departure={mockData.departure}
             arrival={mockData.arrival}
             comment={mockData.comment}
+            hasButton={true}
+            setIsModalOpen={setIsModalOpen}
           />
           <PendingList />
         </div>
+        {isModalOpen && (
+          <ModalContainer
+            title='견적 요청 취소하기'
+            isText={true}
+            text='정말 취소하시겠습니까?'
+            btnColorRed={true}
+            buttonText='취소하기'
+            closeBtnClick={handleModalClose}
+            buttonClick={cancelCostCall}
+          />
+        )}
       </div>
     </>
   );

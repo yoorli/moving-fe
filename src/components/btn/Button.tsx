@@ -23,6 +23,7 @@ const BUTTON_STYLES = {
   outlined354pxLine200: 'outlined354pxLine200',
   outlined314pxLine200: 'outlined314pxLine200',
   outlined660pxBlue300: 'outlined660pxBlue300',
+  outlinedRed200: '.outlinedRed200',
   // 기사님 only
   solid448pxBlue300: 'solid448pxBlue300',
   solid123pxBlue100: 'solid123pxBlue100',
