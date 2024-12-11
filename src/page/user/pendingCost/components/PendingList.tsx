@@ -27,7 +27,7 @@ export default function PendingList({
           // confirmCostBtn(견적 확정하기 버튼, detailBtn(상세보기 버튼) props
           <DriverCard
             key={index}
-            user={cost}
+            list={cost}
             type='waiting'
             confirmCostBtn={confirmCostBtn}
             detailBtn={detailbtn}

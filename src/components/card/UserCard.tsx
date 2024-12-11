@@ -16,7 +16,7 @@ export default function UserCard({
   sendCostBtn: sendCost,
   rejectCostBtn: rejectCost,
   type,
-  user,
+  list,
 }: UserProfileProps) {
   const isPc = useMedia().pc;
   return (
@@ -28,24 +28,26 @@ export default function UserCard({
       <div className={style.top}>
         <div>
           <div className={style.label}>
-            {user.movingType?.map((type, index) => (
-              <Chip key={index} type={type} />
-            ))}
-            {user.isAssigned && <Chip type='ASSIGN' />}
+            {list.movingType && <Chip type={list.movingType} />}
+            {list.serviceType &&
+              list.serviceType.map((type, index) => (
+                <Chip key={index} type={type} />
+              ))}
+            {list.isAssigned && <Chip type='ASSIGN' />}
           </div>
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
-            {user.createAt && getDate(user.createAt)}
+            {list.createAt && getDate(list.createAt)}
           </div>
         ) : (
           <div className={style.createAtRType}>
-            {user.createAt && getDate(user.createAt)}
+            {list.createAt && getDate(list.createAt)}
           </div>
         )}
       </div>
-      <UserProfile type={type} user={user} />
-      {user.comment && <span>요청사항 : {user.comment}</span>}
+      <UserProfile type={type} list={list} />
+      {list.comment && <span>요청사항 : {list.comment}</span>}
       {type === 'receive' && (
         <div className={style.btnBox}>
           <Button
@@ -54,7 +56,7 @@ export default function UserCard({
             src={writing}
             onClick={sendCost}
           />
-          {user.isAssigned && (
+          {list.isAssigned && (
             <Button
               text='반려'
               btnStyle='outlined448pxBlue300'
@@ -67,16 +69,16 @@ export default function UserCard({
       {type === 'confirmedCost' && (
         <div className={style.cost}>
           <span className={style.text}>견적 금액 </span>{' '}
-          {user.price && formatCurrency(user.price)}
+          {list.price && formatCurrency(list.price)}
         </div>
       )}
 
       {type === 'review' && (
         <>
-          <div className={style.review}>{user.content}</div>
+          <div className={style.review}>{list.content}</div>
           {!isPc && (
             <div className={style.createAtRTypeNoPc}>
-              {user.createAt && getDate(user.createAt)}
+              {list.createAt && getDate(list.createAt)}
             </div>
           )}
         </>

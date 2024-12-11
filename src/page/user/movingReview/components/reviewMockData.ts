@@ -94,7 +94,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 4, // 평점
       },
       content: '이사 후에도 문제가 없어서 좋았습니다!',
-      serviceType: ['HOUSE', 'OFFICE'],
+      serviceType: ['HOUSE'],
     },
     {
       isAssigned: false,
@@ -136,7 +136,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 4.3, // 평점
       },
       content: '무난한 서비스였습니다. 다음에도 이용할 것 같아요.',
-      serviceType: ['OFFICE', 'HOUSE'],
+      serviceType: ['OFFICE'],
     },
     {
       isAssigned: true,
@@ -164,7 +164,7 @@ export const reviewMockData: ApiReviewResponse = {
         averageScore: 4.3, // 평점
       },
       content: '깔끔하고 세심한 작업이 인상적이었습니다.',
-      serviceType: ['HOUSE', 'SMALL'],
+      serviceType: ['HOUSE'],
     },
   ],
 };
