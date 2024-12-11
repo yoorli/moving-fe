@@ -1,3 +1,5 @@
+import { ChipType } from "../../components/card/type";
+
 // 24시간 이하 - @시간/분 전, 이상 - yyyy. mm. dd 형식 출력
 export function getDate(inputDate: string | Date) {
   const now = new Date();
@@ -41,7 +43,21 @@ export function getNotificationDate(inputDate: string | Date) {
 
 // 한국기준 금액 형식 출력
 export function formatCurrency(cost: number, onlyNum?: boolean) {
-  const price = cost.toLocaleString('ko-KR')
+  const price = cost.toLocaleString('ko-KR');
 
   return onlyNum ? price : price + '원';
 }
+
+export const getChips = (chipList: ChipType[], count: number) => {
+  const chips: ChipType[][] = [];
+  let k = 0;
+
+  for (let i = 0; i < chipList.length / count; i++) {
+    chips[i] = [];
+    for (let j = k; j < k + count && j < chipList.length; j++) {
+      chips[i].push(chipList[j]);
+    }
+    k += count;
+  }
+  return chips;
+};
