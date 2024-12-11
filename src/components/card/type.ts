@@ -28,6 +28,7 @@ export interface BaseProps {
     isCancelled?: boolean; // 취소 여부 (false)
     moverName?: string; //기사 닉네임
     movingDate?: string; // 이사 날짜
+    serviceType?: ChipType[]; // 서비스 유형
     departure?: string; // 출발지
     arrival?: string; // 도착지
     price?: number; // 견적가
@@ -54,7 +55,6 @@ export interface DriverProfileProps extends BaseProps {
   list: BaseProps['list'] & {
     moverId: number; // 기사 아이디
     estimateId?: number; // 견적 id
-    serviceType?: ChipType[]; // 서비스 유형
     career?: number; // 경력
     summary?: string; // 한 줄 소개
     serviceRegion?: string[]; // 서비스 지역

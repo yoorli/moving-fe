@@ -29,6 +29,10 @@ export default function UserCard({
         <div>
           <div className={style.label}>
             {list.movingType && <Chip type={list.movingType} />}
+            {list.serviceType &&
+              list.serviceType.map((type, index) => (
+                <Chip key={index} type={type} />
+              ))}
             {list.isAssigned && <Chip type='ASSIGN' />}
           </div>
         </div>
