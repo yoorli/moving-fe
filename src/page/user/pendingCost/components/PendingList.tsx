@@ -9,7 +9,7 @@ export default function PendingList() {
       <div className={style.cardContainer}>
         {mockData.list.map((cost, index) => (
           // confirmCostBtn(견적 확정하기 버튼, detailBtn(상세보기 버튼) props
-          <DriverCard key={index} user={cost} type='waiting' />
+          <DriverCard key={index} list={cost} type='waiting' />
         ))}
       </div>
     </div>

@@ -11,7 +11,7 @@ export default function ReceivedList({ list, count }: MoverList) {
           {list.length > 0 ? (
             list?.map((mover: Mover) => (
               <div key={mover.id} className={style.card}>
-                <DriverCard user={mover} type='cost' />
+                <DriverCard list={mover} type='cost' />
               </div>
             ))
           ) : (

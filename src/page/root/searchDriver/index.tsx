@@ -7,10 +7,13 @@ import SortDropdown from './components/SortDropdown';
 import DriverSearch from './components/DriverSearch';
 import DriverCard from '../../../components/card/DriverCard';
 import style from './index.module.css';
-import { translations, REGION_ITEMS, SERVICE_ITEMS } from '../searchDriver/utils/Constants';
+import {
+  translations,
+  REGION_ITEMS,
+  SERVICE_ITEMS,
+} from '../searchDriver/utils/Constants';
 import { MOCK_DATA } from '../searchDriver/mockData';
 import { ChipProps } from '../../../components/chip/Chip';
-
 
 const FILTER_TYPES = {
   REGION: 'region',
@@ -27,13 +30,19 @@ const SORT_OPTIONS = [
 
 const SearchDriverForGuest = () => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
-  const [selectedRegionLabel, setSelectedRegionLabel] = useState<string>('지역');
-  const [selectedServiceLabel, setSelectedServiceLabel] = useState<string>('서비스');
+  const [selectedRegionLabel, setSelectedRegionLabel] =
+    useState<string>('지역');
+  const [selectedServiceLabel, setSelectedServiceLabel] =
+    useState<string>('서비스');
   const [searchKeyword, setSearchKeyword] = useState<string>(''); // 검색 상태
   const [sortOption, setSortOption] = useState<string>('reviewCount'); // 정렬 상태
   const [filteredData, setFilteredData] = useState(MOCK_DATA); // 필터링된 데이터 상태
-  const [isMediumScreen, setIsMediumScreen] = useState<boolean>(window.innerWidth <= 1199);
-  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth <= 744);
+  const [isMediumScreen, setIsMediumScreen] = useState<boolean>(
+    window.innerWidth <= 1199,
+  );
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(
+    window.innerWidth <= 744,
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,28 +59,33 @@ const SearchDriverForGuest = () => {
 
     if (selectedRegionLabel !== '지역') {
       data = data.filter((driver) =>
-        driver.serviceRegion.includes(translations[selectedRegionLabel])
+        driver.serviceRegion.includes(translations[selectedRegionLabel]),
       );
     }
 
     if (selectedServiceLabel !== '서비스') {
       data = data.filter((driver) =>
-        driver.serviceType.includes(translations[selectedServiceLabel])
+        driver.serviceType.includes(translations[selectedServiceLabel]),
       );
     }
 
     if (searchKeyword) {
-      data = data.filter((driver) =>
-        driver.nickname.includes(searchKeyword) || driver.summary.includes(searchKeyword)
+      data = data.filter(
+        (driver) =>
+          driver.moverName.includes(searchKeyword) ||
+          driver.summary.includes(searchKeyword),
       );
     }
 
     if (sortOption) {
       data = [...data].sort((a, b) => {
-        if (sortOption === 'reviewCount') return b.reviewStats.totalReviews - a.reviewStats.totalReviews;
-        if (sortOption === 'averageScore') return b.reviewStats.averageScore - a.reviewStats.averageScore;
+        if (sortOption === 'reviewCount')
+          return b.reviewStats.totalReviews - a.reviewStats.totalReviews;
+        if (sortOption === 'averageScore')
+          return b.reviewStats.averageScore - a.reviewStats.averageScore;
         if (sortOption === 'career') return b.career - a.career;
-        if (sortOption === 'confirmationCount') return b.confirmationCount - a.confirmationCount;
+        if (sortOption === 'confirmationCount')
+          return b.confirmationCount - a.confirmationCount;
         return 0;
       });
     }
@@ -123,7 +137,7 @@ const SearchDriverForGuest = () => {
         />
       </div>
       <SortDropdown
-        placeholder="리뷰 많은순"
+        placeholder='리뷰 많은순'
         options={SORT_OPTIONS}
         isOpen={openFilter === FILTER_TYPES.SORT}
         onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
@@ -136,18 +150,24 @@ const SearchDriverForGuest = () => {
   const renderDriverCards = () => (
     <div
       className={`${style.cardContainer} ${
-        isMediumScreen ? (isSmallScreen ? style.smallScreen : style.compact) : style.rightFilters
+        isMediumScreen
+          ? isSmallScreen
+            ? style.smallScreen
+            : style.compact
+          : style.rightFilters
       }`}
     >
       {filteredData.map((user) => (
         <DriverCard
-        key={user.id}
-        user={{
-          ...user,
-          serviceType: user.serviceType.map((type) => type as ChipProps["type"]),
-        }}
-        onClick={() => handleCardClick(user.id)}
-      />
+          key={user.moverId}
+          list={{
+            ...user,
+            serviceType: user.serviceType.map(
+              (type) => type as ChipProps['type'],
+            ),
+          }}
+          onClick={() => handleCardClick(user.moverId)}
+        />
       ))}
     </div>
   );
@@ -156,14 +176,16 @@ const SearchDriverForGuest = () => {
     <div className={style.favoriteDriversContainer}>
       {MOCK_DATA.map((user) => (
         <DriverCard
-        key={user.id}
-        user={{
-          ...user,
-          serviceType: user.serviceType.map((type) => type as ChipProps["type"]),
-        }}
-        styles='small'
-        onClick={() => handleCardClick(user.id)}
-      />
+          key={user.moverId}
+          list={{
+            ...user,
+            serviceType: user.serviceType.map(
+              (type) => type as ChipProps['type'],
+            ),
+          }}
+          styles='small'
+          onClick={() => handleCardClick(user.moverId)}
+        />
       ))}
     </div>
   );
@@ -171,17 +193,21 @@ const SearchDriverForGuest = () => {
   return (
     <div className={style.outerContainer}>
       <div className={style.noPadding}>
-        <Tab firstText="기사님 찾기" />
+        <Tab firstText='기사님 찾기' />
       </div>
-      <div className={`${style.container} ${isMediumScreen ? style.compactLayout : ''}`}>
-        <div className={`${style.filterRow} ${isMediumScreen ? style.compactFilterRow : ''}`}>
+      <div
+        className={`${style.container} ${isMediumScreen ? style.compactLayout : ''}`}
+      >
+        <div
+          className={`${style.filterRow} ${isMediumScreen ? style.compactFilterRow : ''}`}
+        >
           {isMediumScreen ? (
             renderFilters()
           ) : (
             <>
               <div className={style.leftFilters}>
                 <FilterDropdown
-                  title="지역을 선택해주세요"
+                  title='지역을 선택해주세요'
                   placeholder={selectedRegionLabel}
                   items={REGION_ITEMS}
                   onSelect={(label) => handleSelect(FILTER_TYPES.REGION, label)}
@@ -190,10 +216,12 @@ const SearchDriverForGuest = () => {
                   onToggle={() => handleToggleFilter(FILTER_TYPES.REGION)}
                 />
                 <FilterDropdown
-                  title="어떤 서비스가 필요하세요?"
+                  title='어떤 서비스가 필요하세요?'
                   placeholder={selectedServiceLabel}
                   items={SERVICE_ITEMS}
-                  onSelect={(label) => handleSelect(FILTER_TYPES.SERVICE, label)}
+                  onSelect={(label) =>
+                    handleSelect(FILTER_TYPES.SERVICE, label)
+                  }
                   isOpen={openFilter === FILTER_TYPES.SERVICE}
                   onToggle={() => handleToggleFilter(FILTER_TYPES.SERVICE)}
                 />
@@ -202,13 +230,18 @@ const SearchDriverForGuest = () => {
               </div>
               <div className={style.rightFilters}>
                 <SortDropdown
-                  placeholder="리뷰 많은순"
+                  placeholder='리뷰 많은순'
                   options={SORT_OPTIONS}
                   isOpen={openFilter === FILTER_TYPES.SORT}
                   onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
                   onSelect={handleSortSelect}
                 />
-                {!isMediumScreen && <DriverSearch placeholder="검색어를 입력하세요" onChange={handleSearchChange} />}
+                {!isMediumScreen && (
+                  <DriverSearch
+                    placeholder='검색어를 입력하세요'
+                    onChange={handleSearchChange}
+                  />
+                )}
                 {!isMediumScreen && renderDriverCards()}
               </div>
             </>
@@ -216,7 +249,10 @@ const SearchDriverForGuest = () => {
         </div>
         {isMediumScreen && (
           <div className={style.searchBarCompact}>
-            <DriverSearch placeholder="검색어를 입력하세요" onChange={handleSearchChange} />
+            <DriverSearch
+              placeholder='검색어를 입력하세요'
+              onChange={handleSearchChange}
+            />
           </div>
         )}
         {isMediumScreen && renderDriverCards()}
@@ -226,4 +262,3 @@ const SearchDriverForGuest = () => {
 };
 
 export default SearchDriverForGuest;
-

@@ -2,11 +2,11 @@ type ChipType = 'SMALL' | 'HOUSE' | 'OFFICE' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
 
 // 데이터 연결을 위한 임시 mockData (지울 예정)
 export interface Mover {
-  id: number;
+  moverId: number;
   serviceType: ChipType[];
   isAssigned: boolean;
-  nickname: string;
-  profileImage: string;
+  moverName: string;
+  profileImg: string;
   comment: string;
   reviewStats: {
     averageScore: number;
@@ -26,11 +26,11 @@ export const mockData: ApiResponse = {
   total: 8,
   list: [
     {
-      id: 1,
+      moverId: 1,
       serviceType: ['SMALL', 'OFFICE'],
       isAssigned: true,
-      nickname: '김기사',
-      profileImage: 'https://via.placeholder.com/150',
+      moverName: '김기사',
+      profileImg: 'https://via.placeholder.com/150',
       comment: '안전하고 빠른 이사 서비스!',
       reviewStats: {
         averageScore: 4.8,
@@ -41,11 +41,11 @@ export const mockData: ApiResponse = {
       favoriteCount: 200,
     },
     {
-      id: 2,
+      moverId: 2,
       serviceType: ['HOUSE'],
       isAssigned: false,
-      nickname: '이기사',
-      profileImage: 'https://via.placeholder.com/150',
+      moverName: '이기사',
+      profileImg: 'https://via.placeholder.com/150',
       comment: '저렴하고 효율적인 이사!',
       reviewStats: {
         averageScore: 4.6,
@@ -56,11 +56,11 @@ export const mockData: ApiResponse = {
       favoriteCount: 150,
     },
     {
-      id: 3,
+      moverId: 3,
       serviceType: ['OFFICE', 'SMALL'],
       isAssigned: true,
-      nickname: '박기사',
-      profileImage: 'https://via.placeholder.com/150',
+      moverName: '박기사',
+      profileImg: 'https://via.placeholder.com/150',
       comment: '친절과 신속한 서비스로 보답하겠습니다.',
       reviewStats: {
         averageScore: 4.9,
@@ -71,11 +71,11 @@ export const mockData: ApiResponse = {
       favoriteCount: 250,
     },
     {
-      id: 4,
+      moverId: 4,
       serviceType: ['SMALL'],
       isAssigned: false,
-      nickname: '최기사',
-      profileImage: 'https://via.placeholder.com/150',
+      moverName: '최기사',
+      profileImg: 'https://via.placeholder.com/150',
       comment: '최고의 이사 서비스 제공',
       reviewStats: {
         averageScore: 4.7,
@@ -86,11 +86,11 @@ export const mockData: ApiResponse = {
       favoriteCount: 180,
     },
     {
-      id: 5,
+      moverId: 5,
       serviceType: ['HOUSE', 'OFFICE'],
       isAssigned: true,
-      nickname: '송기사',
-      profileImage: 'https://via.placeholder.com/150',
+      moverName: '송기사',
+      profileImg: 'https://via.placeholder.com/150',
       comment: '신뢰받는 이사 전문가',
       reviewStats: {
         averageScore: 4.5,
@@ -101,11 +101,11 @@ export const mockData: ApiResponse = {
       favoriteCount: 160,
     },
     {
-      id: 6,
+      moverId: 6,
       serviceType: ['SMALL'],
       isAssigned: false,
-      nickname: '이기사',
-      profileImage: 'https://via.placeholder.com/150',
+      moverName: '이기사',
+      profileImg: 'https://via.placeholder.com/150',
       comment: '신속 정확한 이사!',
       reviewStats: {
         averageScore: 4.4,
@@ -116,11 +116,11 @@ export const mockData: ApiResponse = {
       favoriteCount: 100,
     },
     {
-      id: 7,
+      moverId: 7,
       serviceType: ['OFFICE'],
       isAssigned: true,
-      nickname: '박기사',
-      profileImage: 'https://via.placeholder.com/150',
+      moverName: '박기사',
+      profileImg: 'https://via.placeholder.com/150',
       comment: '이사 고민 해결사!',
       reviewStats: {
         averageScore: 4.9,
@@ -131,11 +131,11 @@ export const mockData: ApiResponse = {
       favoriteCount: 300,
     },
     {
-      id: 8,
+      moverId: 8,
       serviceType: ['HOUSE'],
       isAssigned: false,
-      nickname: '정기사',
-      profileImage: 'https://via.placeholder.com/150',
+      moverName: '정기사',
+      profileImg: 'https://via.placeholder.com/150',
       comment: '늘 정성을 다하는 이사 서비스',
       reviewStats: {
         averageScore: 4.3,

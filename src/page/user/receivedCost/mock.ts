@@ -1,13 +1,13 @@
 import { ChipType } from '../../../components/card/type';
 
 export interface DriverDataDetail {
-  id: number; // 기사 아이디
+  moverId: number; // 기사 아이디
   serviceType?: ChipType[]; // 서비스 유형
   isConfirmed?: boolean; // 확정된 요청인지 확인(true)
   isCancelled?: boolean; // 취소 여부 (false)
   isAssigned?: boolean; // 지정경적 여부
   profileImage: string; // 프로필 이미지
-  nickname: string; // 기사 닉네임
+  moverName: string; // 기사 닉네임
   career?: number; // 경력
   reviewStats?: {
     averageScore?: number; // 평점
@@ -18,7 +18,7 @@ export interface DriverDataDetail {
   movingDate?: string; // 이사 날짜
   departure?: string; // 출발지
   arrival?: string; // 도착지
-  isLiked?: boolean; // 찜 여부
+  isFavorite?: boolean; // 찜 여부
   price?: number; //견적가
 }
 
@@ -29,13 +29,13 @@ export interface DriverListData {
 export interface DriverData {
   total: number;
   list: {
-    id: number; // 기사 아이디
+    moverId: number; // 기사 아이디
     serviceType?: ChipType[]; // 서비스 유형
     isConfirmed?: boolean; // 확정된 요청인지 확인(true)
     isCancelled?: boolean; // 취소 여부 (false)
     isAssigned?: boolean; // 지정경적 여부
     profileImage: string; // 프로필 이미지
-    nickname: string; // 기사 닉네임
+    moverName: string; // 기사 닉네임
     career?: number; // 경력
     reviewStats?: {
       averageScore?: number; // 평점
@@ -46,7 +46,7 @@ export interface DriverData {
     movingDate?: string; // 이사 날짜
     departure?: string; // 출발지
     arrival?: string; // 도착지
-    isLiked?: boolean; // 찜 여부
+    isFavorite?: boolean; // 찜 여부
     price?: number; //견적가
   }[];
 }
@@ -56,13 +56,13 @@ export const mockData: DriverData = {
   list: [
     // 확정된 견적 요청일 때
     {
-      id: 1,
+      moverId: 1,
       serviceType: ['SMALL', 'OFFICE'],
       isConfirmed: true, // 확정
       isCancelled: false, //취소
       isAssigned: true, //지정
       profileImage: 'image1',
-      nickname: 'driver1',
+      moverName: 'driver1',
       career: 7,
       reviewStats: {
         averageScore: 4.2,
@@ -73,18 +73,18 @@ export const mockData: DriverData = {
       movingDate: '2024.12.10',
       departure: '서울특별시 강남구',
       arrival: '서울특별시 마포구',
-      isLiked: true,
+      isFavorite: true,
       price: 500000,
     },
     // 확정되지 않은 견적 요청일 때
     {
-      id: 2,
+      moverId: 2,
       serviceType: ['HOUSE'],
       isConfirmed: false,
       isCancelled: false,
       isAssigned: true,
       profileImage: 'image2',
-      nickname: 'driver2',
+      moverName: 'driver2',
       career: 20,
       reviewStats: {
         averageScore: 4.5,
@@ -95,18 +95,18 @@ export const mockData: DriverData = {
       movingDate: '2024.07.15',
       departure: '서울특별시 은평구',
       arrival: '서울특별시 종로구',
-      isLiked: false,
+      isFavorite: false,
       price: 500000,
     },
     // 확정된 견적 요청일 때
     {
-      id: 3,
+      moverId: 3,
       serviceType: ['OFFICE'],
       isConfirmed: true,
       isCancelled: false,
       isAssigned: false,
       profileImage: 'image3',
-      nickname: 'driver3',
+      moverName: 'driver3',
       career: 10,
       reviewStats: {
         averageScore: 3.8,
@@ -117,17 +117,17 @@ export const mockData: DriverData = {
       movingDate: '2024.08.01',
       departure: '경기도 성남시',
       arrival: '경기도 부천시',
-      isLiked: true,
+      isFavorite: true,
       price: 650000,
     },
     // 취소된 견적 요청일 때
     {
-      id: 4,
+      moverId: 4,
       serviceType: ['SMALL'],
       isConfirmed: false,
       isCancelled: true,
       profileImage: 'image4',
-      nickname: 'driver4',
+      moverName: 'driver4',
       career: 12,
       reviewStats: {
         averageScore: 4.7,
@@ -138,16 +138,16 @@ export const mockData: DriverData = {
       movingDate: '2024.09.01',
       departure: '인천광역시 연수구',
       arrival: '인천광역시 계양구',
-      isLiked: false,
+      isFavorite: false,
       price: 720000,
     },
     {
-      id: 5,
+      moverId: 5,
       serviceType: ['SMALL'],
       isConfirmed: false,
       isCancelled: true,
       profileImage: 'image4',
-      nickname: 'driver4',
+      moverName: 'driver4',
       career: 12,
       reviewStats: {
         averageScore: 4.7,
@@ -158,16 +158,16 @@ export const mockData: DriverData = {
       movingDate: '2024.09.01',
       departure: '인천광역시 연수구',
       arrival: '인천광역시 계양구',
-      isLiked: false,
+      isFavorite: false,
       price: 720000,
     },
     {
-      id: 6,
+      moverId: 6,
       serviceType: ['SMALL'],
       isConfirmed: false,
       isCancelled: true,
       profileImage: 'image4',
-      nickname: 'driver4',
+      moverName: 'driver4',
       career: 12,
       reviewStats: {
         averageScore: 4.7,
@@ -178,7 +178,7 @@ export const mockData: DriverData = {
       movingDate: '2024.09.01',
       departure: '인천광역시 연수구',
       arrival: '인천광역시 계양구',
-      isLiked: false,
+      isFavorite: false,
       price: 720000,
     },
     // {
