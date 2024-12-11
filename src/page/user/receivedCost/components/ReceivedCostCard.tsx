@@ -14,9 +14,9 @@ export default function ReceivedCostCard({ redirect }: Props) {
     <>
       <div className={style.container}>
         {mockData.list?.map((mover: DriverDataDetail) => (
-          <div key={mover.id} className={style.item}>
+          <div key={mover.moverId} className={style.item}>
             <DriverCard
-              user={mover}
+              list={mover}
               type={
                 mover.isConfirmed
                   ? 'confirm'
@@ -24,7 +24,7 @@ export default function ReceivedCostCard({ redirect }: Props) {
                     ? 'cancel'
                     : 'notConfirm'
               }
-              costListBtn={() => redirect(mover.id)}
+              costListBtn={() => redirect(mover.moverId)}
             />
           </div>
         ))}

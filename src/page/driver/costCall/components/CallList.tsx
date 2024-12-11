@@ -14,9 +14,9 @@ import document from '../../../../assets/icons/ic_document_medium.svg';
 
 interface User {
   id: number;
-  movingType: ChipType[];
+  movingType: ChipType;
   isAssigned: boolean;
-  customer: string;
+  customerName: string;
   movingDate: string;
   departure: string;
   arrival: string;
@@ -63,7 +63,7 @@ export default function CallList({ list }: CallListProps) {
       {list.map((user, index) => (
         <UserCard
           key={user.id}
-          user={user}
+          list={user}
           type='receive'
           sendCostBtn={() => sendBtnHandler(index)}
           rejectCostBtn={() => rejectBtnHandler(index)}
@@ -78,13 +78,11 @@ export default function CallList({ list }: CallListProps) {
         >
           <div className={style.container}>
             <div className={style.chipBar}>
-              {list[userIndex].movingType.map((type, idx) => (
-                <Chip key={idx} type={type} />
-              ))}
+              <Chip type={list[userIndex].movingType} />
               {list[userIndex].isAssigned && <Chip type='ASSIGN' />}
             </div>
             <div className={style.profile}>
-              <UserProfile user={list[userIndex]} type='modal' />
+              <UserProfile list={list[userIndex]} type='modal' />
               {list[userIndex].comment && (
                 <>
                   <img

@@ -13,7 +13,7 @@ import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
 export default function DriverProfile({
   styles,
   type,
-  user,
+  list: user,
 }: DriverProfileProps) {
   const isPc = useMedia().pc;
   return (
@@ -35,11 +35,12 @@ export default function DriverProfile({
         })}
       >
         <img
-          src={user.profileImage}
-          alt={`${user.nickname}'s profile`}
+          src={user.profileImg}
+          alt={`${user.moverName}'s profile`}
           className={classNames(style.avatar, {
             [style.avatarLarge]:
-              (type === 'profile' || type === 'dibs' || type === 'review') && isPc,
+              (type === 'profile' || type === 'dibs' || type === 'review') &&
+              isPc,
           })}
         />
       </div>
@@ -94,7 +95,7 @@ export default function DriverProfile({
               [style.nameSmall]: styles === 'small',
             })}
           >
-            <span>{user.nickname} 기사님</span>
+            <span>{user.moverName} 기사님</span>
             {user.favoriteCount !== undefined && (
               <span
                 className={classNames(style.favoriteCount, {
@@ -102,7 +103,7 @@ export default function DriverProfile({
                 })}
               >
                 <img
-                  src={user.isLiked ? fullHeartMedium : emptyHeartMedium}
+                  src={user.isFavorite ? fullHeartMedium : emptyHeartMedium}
                   alt='fullHeart'
                 />
                 {user.favoriteCount}

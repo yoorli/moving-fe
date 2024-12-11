@@ -24,7 +24,7 @@ export default function DriverCard({
   onClick, // onClick prop 추가
   type,
   styles,
-  user,
+  list: user,
 }: DriverProfileProps & { onClick?: () => void }) {
   const isPc = useMedia().pc;
 
@@ -43,14 +43,14 @@ export default function DriverCard({
           {!isPc && (
             <div className={style.profileImage}>
               <img
-                src={user.profileImage}
-                alt={`${user.nickname}'s profile`}
+                src={user.profileImg}
+                alt={`${user.moverName}'s profile`}
                 className={style.avatar}
               />
             </div>
           )}
           <div className={style.namePType}>
-            {user.nickname}
+            {user.moverName}
             <div className={style.contentPType}>{user.summary}</div>
           </div>
           <div className={style.buttonBoxPType}>
@@ -93,7 +93,7 @@ export default function DriverCard({
       ) : type === 'cancel' ? (
         <span className={style.noProfile}>취소된 견적</span>
       ) : (
-        <DriverProfile user={user} type={type} styles={styles} />
+        <DriverProfile list={user} type={type} styles={styles} />
       )}
       {type === 'cost' && (
         <div className={style.cost}>
