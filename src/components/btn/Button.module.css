@@ -213,6 +213,18 @@
   font-size: 20px;
 }
 
+/* 대기 중인 견적 - 견적 요청 취소하기 */
+.outlinedRed200 {
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--gray-50);
+  color: var(--red-200);
+  border: 1px solid var(--red-200);
+  font-weight: 600;
+  font-size: 20px;
+}
+
 /* 내 견적 관리 - 견적 상세보기 */
 .solid123pxBlue100 {
   max-width: 123px;
@@ -269,7 +281,8 @@
   .solid448pxBlue300,
   .outlined448pxBlue300,
   .solid280pxBackground200,
-  .solid280pxBlue300 {
+  .solid280pxBlue300,
+  .outlinedRed200 {
     height: 54px;
     font-size: 16px;
   }

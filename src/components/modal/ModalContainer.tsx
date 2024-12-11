@@ -13,6 +13,7 @@ interface modalProps {
   selectedTab?: 'modalFirstTab' | 'modalSecondTab';
   onTabChange?: (selectedTab: 'modalFirstTab' | 'modalSecondTab') => void;
   children?: ReactNode;
+  btnColorRed?: boolean; // 버튼 색 빨강
   buttonText: string;
   disabled?: boolean;
   closeBtnClick: () => void;
@@ -28,6 +29,7 @@ export default function ModalContainer({
   selectedTab,
   onTabChange,
   children,
+  btnColorRed = false,
   buttonText,
   disabled,
   closeBtnClick,
@@ -86,7 +88,7 @@ export default function ModalContainer({
         <Button
           text={buttonText}
           disabled={disabled}
-          btnStyle='solid560pxBlue300'
+          btnStyle={btnColorRed ? 'outlinedRed200' : 'solid560pxBlue300'}
           onClick={buttonClick}
         />
       </div>
