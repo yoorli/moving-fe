@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Tab from '../../../components/tab/Tab';
 import UserCard from '../../../components/card/UserCard';
 import Pagination from '../../../components/pagination/Pagination';
+import Button from '../../../components/btn/Button';
 
 import style from './index.module.css';
 
@@ -14,6 +15,7 @@ export default function DriverCostHandlerPage() {
     'first',
   );
   const [list, setList] = useState(mockData.users);
+  let text: string;
 
   const handleTabChange = (tab: 'first' | 'second' | 'third') => {
     setCurrentTab(tab);
@@ -22,7 +24,9 @@ export default function DriverCostHandlerPage() {
     } else if (tab === 'second') {
       setList(mockData.users.filter((list) => list.isConfirmed));
     } else {
-      setList(mockData.users.filter((list) => list.isCancelled));
+      setList(
+        mockData.users.filter((list) => list.isCancelled || list.isRejected),
+      );
     }
     setCurrentPage(1);
   };
@@ -43,6 +47,22 @@ export default function DriverCostHandlerPage() {
     onPageChange: handlePageChange,
   };
 
+  const disabledCard = (index: number) => {
+    const idx = index + (currentPage - 1) * itemsPerPage;
+
+    if (list[idx].isMoveDateOver) {
+      text = '이사 완료된 견적이에요';
+      return true;
+    } else if (list[idx].isCancelled) {
+      text = '취소된 요청이에요';
+      return true;
+    } else if (list[idx].isRejected) {
+      text = '반려된 요청이에요';
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className={style.container}>
       <Tab
@@ -60,6 +80,18 @@ export default function DriverCostHandlerPage() {
             {selectedPage.map((user, index) => (
               <div key={index} className={style.card}>
                 <UserCard list={user} type='confirmedCost' />
+                {disabledCard(index) && (
+                  <div className={style.coveredCard}>
+                    <div className={style.cardCover}></div>
+                    <div className={style.cardButton}>
+                      {text}
+                      <Button
+                        text='견적 상세보기'
+                        btnStyle='solid123pxBlue100'
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
