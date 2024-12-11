@@ -1,0 +1,42 @@
+.callList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.profile {
+  border-radius: 8px;
+  padding: 8px 0;
+  border: 1px solid var(--line-100);
+  position: relative;
+}
+
+.commentImg {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  cursor: pointer;
+}
+
+.chipBar {
+  display: flex;
+  gap: 14px;
+}
+
+.comment {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  min-height: 50%;
+  background-color: var(--blue-50);
+  opacity : 0.95;
+  border-radius: 12px;
+  border: 1px solid var(--line-200);
+  padding: 12px;
+}

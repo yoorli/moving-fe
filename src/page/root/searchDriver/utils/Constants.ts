@@ -1,0 +1,52 @@
+export const translations: Record<string, string> = {
+  전체: '',
+  서울: 'SEOUL',
+  경기: 'GYEONGGI',
+  인천: 'INCHEON',
+  강원: 'GANGWON',
+  충북: 'CHUNGBUK',
+  충남: 'CHUNGNAM',
+  세종: 'SEJONG',
+  대전: 'DAEJEON',
+  전북: 'JEONBUK',
+  전남: 'JEONNAM',
+  광주: 'GWANGJU',
+  경북: 'GYEONGBUK',
+  경남: 'GYEONGNAM',
+  대구: 'DAEGU',
+  울산: 'ULSAN',
+  부산: 'BUSAN',
+  제주: 'JEJU',
+  소형이사: 'SMALL',
+  가정이사: 'HOUSE',
+  사무실이사: 'OFFICE',
+};
+
+export const REGION_ITEMS = [
+  { label: '전체' },
+  { label: '서울' },
+  { label: '경기' },
+  { label: '인천' },
+  { label: '강원' },
+  { label: '충북' },
+  { label: '충남' },
+  { label: '세종' },
+  { label: '대전' },
+  { label: '전북' },
+  { label: '전남' },
+  { label: '광주' },
+  { label: '경북' },
+  { label: '경남' },
+  { label: '대구' },
+  { label: '울산' },
+  { label: '부산' },
+  { label: '제주' },
+];
+
+export const SERVICE_ITEMS = [
+  { label: '전체' },
+  { label: '소형이사' },
+  { label: '가정이사' },
+  { label: '사무실이사' },
+];
+

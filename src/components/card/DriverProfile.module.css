@@ -13,6 +13,19 @@
   border: 1px solid var(--line-200);
 }
 
+.profileRType {
+  border: none;
+}
+
+.profileWType {
+  height: 92px;
+}
+
+.profileSmall {
+  gap: 12px;
+  padding: 10px;
+}
+
 .profileImage {
   border: 2px solid var(--blue-400);
   border-radius: 50%;
@@ -20,12 +33,32 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  width: 70px;
-  height: 60px;
+  width: 66px;
+  height: 56px;
 }
 
-.profileImagePType {
+.hidden {
   display: none;
+}
+
+.profileImgDType {
+  width: 96px;
+  height: 80px;
+}
+
+.profileImgPType {
+  width: 88px;
+  height: 80px;
+}
+
+.profileImgRType {
+  width: 110px;
+  height: 90px;
+}
+
+.profileImageSmall {
+  width: 60px;
+  height: 50px;
 }
 
 .avatar {
@@ -35,21 +68,34 @@
   height: 64px;
 }
 
+.avatarLarge {
+  width: 120px;
+  height: 100px;
+}
+
 .info {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
 }
 
 .name {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--black-300);
   height: 100%;
+}
+
+.nameRType {
+  font-size: 24px;
+}
+
+.nameSmall {
+  font-size: 14px;
 }
 
 .favoriteCount {
@@ -59,6 +105,12 @@
   align-items: center;
   gap: 10px;
   color: var(--blue-400);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.favoriteCountSmall {
+  font-size: 13px;
 }
 
 .details {
@@ -71,6 +123,11 @@
   color: var(--black-300);
 }
 
+.detailsSmall {
+  gap: 4px;
+  font-size: 13px;
+}
+
 .detailsPType {
   display: flex;
   align-items: center;
@@ -80,6 +137,21 @@
   white-space: nowrap;
   height: 100%;
   color: var(--black-300);
+}
+
+.text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.textSmall {
+  gap: 4px;
+}
+
+.textLabel {
+  color: var(--gray-300);
 }
 
 .textPType {
@@ -102,11 +174,24 @@
   line-height: 24px;
 }
 
+.starBox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.starBoxSmall {
+  gap: 4px;
+}
+
 .stars {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 6px;
+}
+
+.starsSmall {
+  gap: 4px;
 }
 
 .separator {
@@ -118,16 +203,21 @@
   display: none;
 }
 
-.text {
+.boxing {
+  color: var(--gray-400);
+  background-color: var(--background-400);
+  width: 42px;
+  height: 26px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  font-size: 13px;
 }
 
 @media (max-width: 743px) {
   .profile {
-    gap: 14px;
+    gap: 12px;
+    padding: 10px 0;
   }
 
   .detailsPType {
@@ -139,19 +229,33 @@
 
 @media (max-width: 1199px) and (min-width: 744px) {
   .profile {
+    max-width: 907px;
+    padding: 10px 8px;
+  }
+
+  .profile {
     gap: 12px;
   }
 }
 
 @media (max-width: 1199px) {
-  .profile {
-    max-width: 907px;
-    padding: 10px;
+  .profileWType {
+    height: 94px;
   }
 
   .profileImage {
-    width: 60px;
-    height: 50px;
+    width: 50px;
+    height: 46px;
+  }
+
+  .profileImgDType {
+    width: 50px;
+    height: 46px;
+  }
+
+  .profileImgRType {
+    width: 46px;
+    height: 46px;
   }
 
   .info {
@@ -162,6 +266,10 @@
     font-size: 14px;
   }
 
+  .favoriteCount {
+    font-size: 13px;
+  }
+
   .likes {
     font-size: 13px;
     font-weight: 500;
@@ -170,12 +278,18 @@
   }
 
   .details {
+    min-width: 237px;
     gap: 8px;
   }
 
   .detailsPType {
     gap: 14px;
     font-size: 14px;
+  }
+
+  .text {
+    font-size: 13px;
+    gap: 6px;
   }
 
   .textPType {
@@ -189,12 +303,11 @@
     font-weight: 500;
   }
 
-  .stars {
-    font-size: 13px;
-    gap: 2px;
+  .starBox {
+    gap: 8px;
   }
 
-  .text {
+  .stars {
     font-size: 13px;
     gap: 2px;
   }

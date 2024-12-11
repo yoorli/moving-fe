@@ -6,15 +6,39 @@
   border: 0.5px solid var(--line-100);
   display: flex;
   flex-direction: column;
+  background-color: var(--gray-50);
 }
 
 .cardPType {
   background-color: var(--background-200);
 }
 
+.cardCDType {
+  gap: 16px;
+}
+
+.cardPRType {
+  gap: 32px;
+}
+
+.cardPSmall {
+  gap: 14px;
+}
+
 .topPType {
   display: flex;
   justify-content: space-between;
+}
+
+.profileImage {
+  border: 2px solid var(--blue-400);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  width: 50px;
+  height: 46px;
 }
 
 .namePType {
@@ -35,6 +59,7 @@
 
 .buttonBoxPType {
   display: flex;
+  justify-content: flex-end;
   gap: 16px;
   width: 100%;
 }
@@ -46,8 +71,27 @@
 
 .content {
   color: var(--black-300);
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
+}
+
+.contentSmall {
+  font-size: 14px;
+}
+
+.contentCType {
+  font-size: 20px;
+}
+
+.noProfile {
+  height: 92px;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--line-100);
+  padding: 16px 18px;
 }
 
 .cost {
@@ -73,6 +117,7 @@
 .schedule {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .separator {
@@ -99,6 +144,7 @@
   font-size: 18px;
   font-weight: 400;
   padding: 4px 6px;
+  white-space: nowrap;
 }
 
 .costBtn {
@@ -108,8 +154,18 @@
 }
 
 @media (max-width: 743px) {
+  .card {
+    width: 100%;
+    padding: 16px 14px;
+    gap: 14px;
+  }
+
   .cardPType {
     margin-bottom: 126px;
+  }
+
+  .cardPRType {
+    padding: 14px;
   }
 
   .buttonBoxPType {
@@ -129,6 +185,12 @@
 }
 
 @media (max-width: 1199px) and (min-width: 744px) {
+  .card {
+    width: 100%;
+    padding: 16px 14px;
+    gap: 14px;
+  }
+
   .cardPType {
     margin-bottom: 70px;
   }
@@ -148,31 +210,19 @@
 }
 
 @media (max-width: 1199px) {
-  .card {
-    max-width: 955px;
-    padding: 16px 14px;
-    gap: 14px;
-  }
-
   .cardPType {
     position: relative;
+    gap: 16px;
+  }
+
+  .cardCDType {
+    gap: 14px;
   }
   
   .topPType {
     display: flex;
     align-items: center;
     gap: 16px;
-  }
-
-  .profileImage {
-    border: 2px solid var(--blue-400);
-    border-radius: 50%;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    width: 60px;
-    height: 50px;
   }
 
   .avatar {
@@ -205,6 +255,18 @@
   .content {
     font-size: 14px;
   }
+
+.noProfile {
+  height: 94px;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--line-100);
+  padding: 16px 18px;
+}
+
 
   .cost {
     gap: 8px;

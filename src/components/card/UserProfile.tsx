@@ -1,32 +1,13 @@
 import classNames from 'classnames';
 
 import { formatCurrency } from '../../lib/function/utils';
+import { useMedia } from '../../lib/function/useMediaQuery';
+import { UserProfileProps } from './type';
 
 import style from './UserProfile.module.css';
 
 import fullStarsMedium from '../../assets/icons/ic_full_star_medium.svg';
 import emptyStarMedium from '../../assets/icons/ic_empty_star_medium.svg';
-import { useMedia } from '../../lib/function/useMediaQuery';
-
-interface ProfileProps {
-  type?: string;
-  user: {
-    movingType?: string[]; // 서비스 유형
-    isAssigned?: boolean;// 지정견적 여부
-    customer?: string;// 고객 이름
-    moverName?: string; //기사 닉네임
-    movingDate?: string;// 이사 날짜
-    departure?: string;// 출발지
-    arrival?: string;// 도착지
-    price?: number;// 견적가
-    createAt?: string;// 작성일
-    profileImg?: string;// 기사 프로필 이미지
-    reviewStats?: {
-      averageScore: number;// 평점
-    };
-    content?: string;// 리뷰 내용
-  };
-}
 
 export function getStars(rating: number) {
   const stars = [];
@@ -59,7 +40,7 @@ export function getStars(rating: number) {
       </div>,
     );
   }
-  if (rating < 4) {
+  if (rating <= 4) {
     for (let i = 1; i <= 5 - rating; i++) {
       stars.push(<img src={emptyStarMedium} alt='empty star' />);
     }
@@ -67,8 +48,10 @@ export function getStars(rating: number) {
   return stars;
 }
 
-export default function UserProfile({ type, user }: ProfileProps) {
+export default function UserProfile({ type, list: user }: UserProfileProps) {
   const isPc = useMedia().pc;
+  // const isTablet = useMedia().tablet;
+  const isMobile = useMedia().mobile;
   return (
     <>
       {type !== 'review' ? (
@@ -77,17 +60,29 @@ export default function UserProfile({ type, user }: ProfileProps) {
             [style.profilePadding]: type !== 'confirmedCost' && isPc,
           })}
         >
-          <div className={style.userInfo}>{user.customer} 고객님</div>
-          <div className={style.separator}></div>
-          <div className={style.movingInfo}>
+          <div className={style.userInfo}>{user.customerName} 고객님</div>
+          <div
+            className={
+              type === 'modal' || isMobile ? style.hidden : style.separator
+            }
+          ></div>
+          <div
+            className={classNames(style.movingInfo, {
+              [style.movingInfoMType]: type == 'modal',
+            })}
+          >
             <span className={style.text}>
               <span className={style.movingLabel}>이사일</span>
               {user.movingDate}
             </span>
             <span
-              className={classNames(style.separatorHorizon, {
-                [style.hidden]: !isPc,
-              })}
+              className={
+                type === 'modal'
+                  ? style.hidden
+                  : !isMobile
+                    ? style.separatorHorizon
+                    : style.separator
+              }
             ></span>
             <span className={style.text}>
               <span className={style.movingLabel}>출발</span>
@@ -119,7 +114,8 @@ export default function UserProfile({ type, user }: ProfileProps) {
               {user.price && formatCurrency(user.price)}
             </div>
             <div className={style.stars}>
-              {user.reviewStats?.averageScore && getStars(user.reviewStats.averageScore)}
+              {user.reviewStats?.averageScore &&
+                getStars(user.reviewStats.averageScore)}
             </div>
           </div>
         </div>

@@ -1,18 +1,9 @@
 import { useState } from 'react';
-import MovingType from './components/MovingType';
-import MovingDate from './components/MovingDate';
 import Navigation from './components/Navigation';
-import MovingAddress from './components/MovingAddress';
-import MovingComments from './components/MovingComments';
+import NoContents from '../../../components/noContents/NoContents';
 import style from './index.module.css';
-
-export interface FormValues {
-  movingType: null | string;
-  movingDate: null | string;
-  departure: null | string;
-  arrival: null | string;
-  comment?: undefined | string | null;
-}
+import CostCallContent from './components/CostCallContent';
+import useDirection from '../../../lib/function/direction';
 
 export interface SelectValues {
   movingType: boolean;
@@ -22,13 +13,8 @@ export interface SelectValues {
 }
 
 export default function UserCostCallPage() {
-  const [values, setValues] = useState<FormValues>({
-    movingType: null,
-    movingDate: null,
-    departure: null,
-    arrival: null,
-    comment: null,
-  });
+  const { direction_pendingCost } = useDirection();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [isSelectOption, setIsSelectOption] = useState<SelectValues>({
     movingType: false,
@@ -37,72 +23,28 @@ export default function UserCostCallPage() {
     arrival: false,
   });
 
-  const handleSelectCompletion = (
-    name: keyof FormValues,
-    value: string | Date | null,
-  ) => {
-    setValues((prev: FormValues) => ({
-      ...prev,
-      [name]: value,
-    }));
-    setIsSelectOption((prev: SelectValues) => ({
-      ...prev,
-      [name]: true,
-    }));
-  };
-
-  const isButtonEnabled = !!(
-    values.movingType &&
-    values.movingDate &&
-    values.arrival &&
-    values.departure !== null
-  );
-
   return (
-    <div className={style.container}>
-      <div className={style.mainContent}>
-        <Navigation isSelectOption={isSelectOption} />
-
-        <div className={style.contentSection}>
-          <MovingType
-            onClick={(type) => handleSelectCompletion('movingType', type)}
-            value={values.movingType}
-          />
-          <div>
-            {isSelectOption.movingType && (
-              <MovingDate
-                onClick={(date) => handleSelectCompletion('movingDate', date)}
-                value={values.movingDate}
-              />
-            )}
-          </div>
-          <div>
-            {isSelectOption.movingDate && (
-              <MovingAddress
-                arrival={values.arrival}
-                departure={values.departure}
-                arrivalClick={(arrival) =>
-                  handleSelectCompletion('arrival', arrival)
-                }
-                departureClick={(departure) =>
-                  handleSelectCompletion('departure', departure)
-                }
-              />
-            )}
-          </div>
-          <div>
-            {isSelectOption.arrival && isSelectOption.departure && (
-              <MovingComments
-                value={values.comment}
-                onClick={(comment) =>
-                  handleSelectCompletion('comment', comment)
-                }
-                disabled={isButtonEnabled}
-              />
-            )}
-          </div>
+    <>
+      <Navigation isSelectOption={isSelectOption} isSubmitted={isSubmitted} />
+      <div className={style.container}>
+        <div className={style.mainContent}>
+          {!isSubmitted ? (
+            <CostCallContent
+              isSelectOption={isSelectOption}
+              setIsSelectOption={setIsSelectOption}
+              setIsSubmitted={setIsSubmitted}
+              redirect={direction_pendingCost}
+            />
+          ) : (
+            <NoContents
+              image='car'
+              hasButton={true}
+              buttonText='받은 견적 보러가기'
+              buttonHandler={() => direction_pendingCost()}
+            />
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 }

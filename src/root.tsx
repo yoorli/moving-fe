@@ -7,9 +7,10 @@ import UserLoginPage from './page/user/login';
 import UserFavoriteMover from './page/user/favoriteMover';
 import PendingCost from './page/user/pendingCost';
 import ReceivedCost from './page/user/receivedCost';
+import ReceivedCostDetail from './page/user/receivedCostDetail';
 import UserSignupPage from './page/user/signup';
 import DriverSignupPage from './page/driver/signup';
-import DriverCallPage from './page/driver/costCall';
+import DriverCostCallPage from './page/driver/costCall';
 import UserMovingReview from './page/user/movingReview';
 import UserCostCallPage from './page/user/costCall';
 import UserRegisterPage from './page/user/register';
@@ -20,6 +21,9 @@ import UserEditProfilePage from './page/user/editProfile';
 import ServiceRandingPage from './page/root';
 import DriverRegisterPage from './page/driver/register';
 import MyPage from './page/driver/myPage';
+import DriverCostHandlerPage from './page/driver/costHandler';
+import SearchDriverForGuest from './page/root/searchDriver';
+import DriverDetailPage from './page/root/searchDriver/DriverDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -28,9 +32,11 @@ const router = createBrowserRouter([
       { path: '/', element: <ServiceRandingPage /> },
       {
         path: '/searchDriver',
-        element: (
-          <span style={{ width: '100%', minHeight: '100vh' }}>기사님 찾기</span>
-        ),
+        element: <SearchDriverForGuest />, // 비회원용 기사님 찾기 페이지
+      },
+      {
+        path: '/driver/:id',
+        element: <DriverDetailPage />, // 기사님 상세 페이지
       },
       {
         path: '/user/login',
@@ -73,6 +79,10 @@ const router = createBrowserRouter([
             path: 'receivedCost',
             element: <ReceivedCost />,
           },
+          {
+            path: 'receivedCost/:id',
+            element: <ReceivedCostDetail />,
+          },
         ],
       },
       {
@@ -81,7 +91,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'editProfile',
-        element: <span>editProfile</span>,
+        element: <UserEditProfilePage />,
       },
       {
         path: 'movingReview',
@@ -107,7 +117,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'costCall',
-        element: <DriverCallPage />,
+        element: <DriverCostCallPage />,
       },
       {
         path: 'register',
@@ -122,8 +132,8 @@ const router = createBrowserRouter([
         element: <DriverEditInfoPage />,
       },
       {
-        path: 'constHandler',
-        element: <span>내 견적 관리</span>,
+        path: 'costHandler',
+        element: <DriverCostHandlerPage />,
       },
       {
         path: 'myPage',

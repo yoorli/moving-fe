@@ -24,11 +24,23 @@
   display: flex;
   gap: 16px;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.movingInfoMType {
+  flex-wrap: wrap;
+}
+
+.movingInfoMType > :first-child {
+  width: 100%;
 }
 
 .text {
   font-size: 18px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .movingLabel {
@@ -112,6 +124,7 @@
   .movingInfo {
     flex-wrap: wrap;
   }
+  
   .movingInfo > :first-child {
     width: 100%;
   }
@@ -157,6 +170,11 @@
   }
   
   .profileImage {
+    width: 46px;
+    height: 46px;
+  }
+  
+  .avatar {
     width: 60px;
     height: 60px;
   }

@@ -1,0 +1,32 @@
+.container {
+  width: 100%;
+  height: 100%;
+  max-width: 1920px;
+  /* 반응형 추후 추가 시 min-width: 332px */
+}
+
+.mainContainer {
+  margin-top: 40px;
+  padding: 0 120px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.card {
+  max-width: calc(50% - 12px);
+  flex: 1 1 calc(50% - 24px);
+  margin-bottom: 24px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}

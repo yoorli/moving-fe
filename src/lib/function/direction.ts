@@ -18,7 +18,22 @@ export default function useDirection() {
   const direction_userSignup = () => {
     nav('/user/signup');
   };
+  const direction_userEditProfile = () => {
+    nav('/user/editProfile');
+  };
+  const direction_userEditInfo = () => {
+    nav('/user/editInfo');
+  };
+  const direction_costCall = () => {
+    nav('/user/costCall');
+  };
 
+  const direction_driverEditProfile = () => {
+    nav('/driver/editProfile');
+  };
+  const direction_driverEditInfo = () => {
+    nav('/driver/editInfo');
+  };
   const direction_pendingCost = () => {
     nav('/user/pendingCost');
   };
@@ -27,12 +42,37 @@ export default function useDirection() {
     nav('/user/receivedCost');
   };
 
+  const direction_receivedCostDetail = (id: number) => {
+    nav(`/user/receivedCost/${id}`);
+  };
+
+  const direction_driverCostCall = () => {
+    nav('/driver/costCall');
+  };
+
+  const direction_costHandler = () => {
+    nav('/driver/costHandler');
+  };
+
+  const direction_myPgae = () => {
+    nav('/driver/myPage');
+  };
+
   return {
     direction_root,
     direction_searchDriver,
     direction_userLogin,
+    direction_costCall,
     direction_pendingCost,
     direction_receivedCost,
     direction_userSignup,
+    direction_userEditProfile,
+    direction_userEditInfo,
+    direction_driverCostCall,
+    direction_receivedCostDetail,
+    direction_costHandler,
+    direction_myPgae,
+    direction_driverEditProfile,
+    direction_driverEditInfo,
   };
 }
