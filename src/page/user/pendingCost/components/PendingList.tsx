@@ -3,14 +3,14 @@ import DriverCard from '../../../../components/card/DriverCard';
 import { mockData } from './mockData';
 import style from './PendingList.module.css';
 
-interface PendinfListProps {
+interface PendingListProps {
   setIsConfirmModalOpen: (value: boolean) => void; // Modal 열기
 }
 
 export default function PendingList({
   setIsConfirmModalOpen,
-}: PendinfListProps) {
-  // const { direction_땡땡 } = useDirection();
+}: PendingListProps) {
+  // const { direction_땡땡 } = useDirection(); 받았던 견적_견적 상세 페이지
   const confirmCostBtn = () => {
     console.log('견적 확정하기 모달 띄우기');
     setIsConfirmModalOpen(true);
@@ -23,10 +23,9 @@ export default function PendingList({
   return (
     <div className={style.container}>
       <div className={style.cardContainer}>
-        {mockData.list.map((cost, index) => (
-          // confirmCostBtn(견적 확정하기 버튼, detailBtn(상세보기 버튼) props
+        {mockData.list.map((cost) => (
           <DriverCard
-            key={index}
+            key={cost.estimateId}
             list={cost}
             type='waiting'
             confirmCostBtn={confirmCostBtn}
