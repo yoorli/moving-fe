@@ -50,7 +50,6 @@ export function getStars(rating: number) {
 
 export default function UserProfile({ type, list: user }: UserProfileProps) {
   const isPc = useMedia().pc;
-  // const isTablet = useMedia().tablet;
   const isMobile = useMedia().mobile;
   return (
     <>
