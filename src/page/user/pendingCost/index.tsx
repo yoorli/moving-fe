@@ -4,11 +4,12 @@ import style from './index.module.css';
 import useDirection from '../../../lib/function/direction';
 import CostInfo from '../../../components/costInfo/CostInfo';
 import PendingList from './components/PendingList';
+import ModalContainer from '../../../components/modal/ModalContainer';
 
 interface infoProps {
-  id: number; // 견적 요청 ID
-  name?: string; // 소비자 이름
-  movingRequest: string; // 견적 요청일
+  estimateReqid: number; // 견적 요청 ID
+  customerName?: string; // 소비자 이름
+  createdAt: string; // 견적 요청일
   movingType: string; // 이사 종류
   movingDate: string; // 이사 날짜
   departure: string; // 출발지
@@ -17,10 +18,11 @@ interface infoProps {
   isConfirmed: boolean; //확정된 요청인지 확인
 }
 
+// 유저 견적 요청 조회 - /estimateReq
 const mockData: infoProps = {
-  id: 1,
+  estimateReqid: 1024,
   movingType: 'SMALL',
-  movingRequest: '2024.07.01',
+  createdAt: '2024.07.01',
   movingDate: '2024.07.10',
   departure: '인천광역시 서구',
   arrival: '서울특별시 마포구',
@@ -31,12 +33,35 @@ const mockData: infoProps = {
 
 export default function PendingCost() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('first');
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const {
+    direction_pendingCost,
+    direction_receivedCost,
+    direction_costCall,
+    direction_receivedCostDetail,
+  } = useDirection();
 
   const handleTabChange = (selectedTab: 'first' | 'second') => {
     setCurrentTab(selectedTab);
   };
 
-  const { direction_pendingCost, direction_receivedCost } = useDirection();
+  const handleModalClose = () => {
+    setIsCancelModalOpen(false);
+    setIsConfirmModalOpen(false);
+  };
+
+  const cancelCostCall = () => {
+    // 요청 지우는 API??
+    direction_costCall();
+  };
+
+  const confirmCost = () => {
+    // 견적 확정 API??
+    direction_receivedCostDetail(mockData.estimateReqid); // estimateReqid를 넘겨줘서 받았던 견적 상세로
+  };
+  console.log(mockData.estimateReqid);
+
   return (
     <>
       <Tab
@@ -52,15 +77,38 @@ export default function PendingCost() {
       <div className={style.overlay}>
         <div className={style.container}>
           <CostInfo
-            movingRequest={mockData.movingRequest}
+            movingRequest={mockData.createdAt}
             movingType={mockData.movingType}
             movingDate={mockData.movingDate}
             departure={mockData.departure}
             arrival={mockData.arrival}
             comment={mockData.comment}
+            hasButton={true}
+            setIsModalOpen={setIsCancelModalOpen}
           />
-          <PendingList />
+          <PendingList setIsConfirmModalOpen={setIsConfirmModalOpen} />
         </div>
+        {isCancelModalOpen && (
+          <ModalContainer
+            title='견적 요청 취소하기'
+            isText={true}
+            text='견적 요청을 취소하시겠습니까?'
+            btnColorRed={true}
+            buttonText='취소하기'
+            closeBtnClick={handleModalClose}
+            buttonClick={cancelCostCall}
+          />
+        )}
+        {isConfirmModalOpen && (
+          <ModalContainer
+            title='견적 확정하기'
+            isText={true}
+            text='이 기사님으로 확정하시겠습니까?'
+            buttonText='확인'
+            closeBtnClick={handleModalClose}
+            buttonClick={confirmCost}
+          />
+        )}
       </div>
     </>
   );
