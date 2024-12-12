@@ -95,7 +95,7 @@ export default function DriverCard({
       ) : (
         <DriverProfile list={user} type={type} styles={styles} />
       )}
-      {type === 'cost' && (
+      {type === 'cost' && user.price &&(
         <div className={style.cost}>
           <span className={style.text}>견적 금액</span>
           {user.price && formatCurrency(user.price)}
