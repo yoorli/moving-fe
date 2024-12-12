@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Tab from '../../../components/tab/Tab';
 import UserCard from '../../../components/card/UserCard';
@@ -6,6 +6,7 @@ import Pagination from '../../../components/pagination/Pagination';
 import Button from '../../../components/btn/Button';
 
 import useDirection from '../../../lib/function/direction';
+import { useMedia } from '../../../lib/function/useMediaQuery';
 
 import style from './index.module.css';
 
@@ -13,12 +14,16 @@ import { mockData } from './mockData';
 
 export default function DriverCostHandlerPage() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [currentTab, setCurrentTab] = useState<'first' | 'second' | 'third'>(
     'first',
   );
   const [list, setList] = useState(mockData.users);
 
   const { direction_costDetail } = useDirection();
+  const isPc = useMedia().pc;
+  const isTablet = useMedia().tablet;
+  const isMobile = useMedia().mobile;
 
   let text: string;
 
@@ -36,7 +41,6 @@ export default function DriverCostHandlerPage() {
     setCurrentPage(1);
   };
 
-  const itemsPerPage = 6;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const selectedPage = list.slice(startIndex, endIndex);
@@ -67,6 +71,12 @@ export default function DriverCostHandlerPage() {
     }
     return false;
   };
+
+  useEffect(() => {
+    if (isTablet || isMobile) {
+      setItemsPerPage(3);
+    } else setItemsPerPage(6);
+  }, [isPc, isTablet, isMobile]);
 
   return (
     <div className={style.container}>
