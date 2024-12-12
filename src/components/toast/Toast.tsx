@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import styles from './Toast.module.css';
+import style from './Toast.module.css';
 import icInfoLarge from '../../assets/icons/ic_info_large.svg';
 
 interface ToastProps {
@@ -31,9 +31,9 @@ function Toast({ text, autoDismiss, dismissDuration = 3000 }: ToastProps) {
   if (!visible) return null;
 
   return (
-    <div className={styles.toastContainer}>
-      <img className={styles.icon} src={icInfoLarge} alt="info" />
-      <span className={styles.toastText}>{text}</span>
+    <div className={style.toastContainer}>
+      <img className={style.icon} src={icInfoLarge} alt="info" />
+      <span className={style.toastText}>{text}</span>
     </div>
   );
 }
