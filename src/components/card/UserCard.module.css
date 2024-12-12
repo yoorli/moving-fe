@@ -6,6 +6,7 @@
   border: 1px solid var(--line-200);
   border-radius: 16px;
   min-width: 327px;
+  width: 100%;
   background-color: var(--gray-50);
 }
 

@@ -8,15 +8,39 @@
 .navigation {
   text-align: left;
   height: 96px;
-  padding: 32px;
+  padding: 32px 0;
   background-color: var(--gray-50);
   font-size: 24px;
   font-weight: 600;
 }
 
 .mainContainer {
-  padding: 24px;
+  padding: 24px 0;
   display: flex;
-  gap: 100px;
-  justify-content: space-between;
+  gap: 117px;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+}
+
+.share {
+  width: 224px;
+  margin-right: 104px;
+}
+
+.estimate {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.label {
+  font-size: 24px;
+  font-weight: 600;
 }
