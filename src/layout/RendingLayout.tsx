@@ -11,8 +11,8 @@ export default function RendingLayout() {
   const profileRef = useRef<HTMLDivElement | null>(null);
   const notificationRef = useRef<HTMLDivElement | null>(null);
   const [activeModal, setActiveModal] = useState<
-    'none' | 'menu' | 'profile' | 'notification'
-  >('none');
+    null | 'menu' | 'profile' | 'notification'
+  >(null);
   const { pc } = useMedia();
 
   const user = {
@@ -20,9 +20,9 @@ export default function RendingLayout() {
   };
 
   const toggleModal = (
-    modalType: 'menu' | 'profile' | 'notification' | 'none',
+    modalType: 'menu' | 'profile' | 'notification' | null,
   ) => {
-    setActiveModal((prev) => (prev === modalType ? 'none' : modalType));
+    setActiveModal((prev) => (prev === modalType ? null : modalType));
   };
 
   const handleOutsideClick = (e: any) => {
@@ -37,7 +37,7 @@ export default function RendingLayout() {
         notificationRef.current &&
         !notificationRef.current.contains(e.target))
     ) {
-      setActiveModal('none');
+      setActiveModal(null);
     }
   };
 
@@ -61,7 +61,6 @@ export default function RendingLayout() {
               notificationController={() => toggleModal('notification')}
               profileModal={activeModal === 'profile'}
               notificationModal={activeModal === 'notification'}
-              toggleModal={() => toggleModal('none')}
             />
           ) : (
             <NonLoginNav modalController={() => toggleModal('menu')} />

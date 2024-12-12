@@ -12,14 +12,14 @@ export default function UserLayout() {
   const profileRef = useRef<HTMLDivElement | null>(null);
   const notificationRef = useRef<HTMLDivElement | null>(null);
   const [activeModal, setActiveModal] = useState<
-    'none' | 'menu' | 'profile' | 'notification'
-  >('none');
+    null | 'menu' | 'profile' | 'notification'
+  >(null);
   const { pc } = useMedia();
 
   const toggleModal = (
-    modalType: 'menu' | 'profile' | 'notification' | 'none',
+    modalType: 'menu' | 'profile' | 'notification' | null,
   ) => {
-    setActiveModal((prev) => (prev === modalType ? 'none' : modalType));
+    setActiveModal((prev) => (prev === modalType ? null : modalType));
   };
 
   const handleOutsideClick = (e: any) => {
@@ -34,7 +34,7 @@ export default function UserLayout() {
         notificationRef.current &&
         !notificationRef.current.contains(e.target))
     ) {
-      setActiveModal('none');
+      setActiveModal(null);
     }
   };
 
