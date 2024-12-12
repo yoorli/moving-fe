@@ -2,14 +2,16 @@ import useDirection from '../../lib/function/direction';
 import style from './ProfileModal.module.css';
 
 type Props = {
-  modalController: () => void;
+  modalController?: () => void;
 };
 
 export function UserProfileModal({ modalController }: Props) {
   const { direction_userEditProfile, direction_userEditInfo } = useDirection();
   const directionAndPopModal = (direction: () => void) => {
     direction();
-    modalController();
+    if (modalController) {
+      modalController();
+    }
   };
   return (
     <div className={style.container}>
@@ -47,7 +49,9 @@ export function DriverProfileModal({ modalController }: Props) {
   } = useDirection();
   const directionAndPopModal = (direction: () => void) => {
     direction();
-    modalController();
+    if (modalController) {
+      modalController();
+    }
   };
   return (
     <div className={style.containerD}>

@@ -78,7 +78,6 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
   };
 
   const handleInputCancel = () => {
-    setAddress('');
     setIndex(null);
     setInputValue('');
   };

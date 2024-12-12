@@ -7,15 +7,20 @@ import { NonLoginNav, UserNav } from '../components/nav/Nav';
 import { useMedia } from '../lib/function/useMediaQuery';
 
 export default function RendingLayout() {
-  const [modal, setModal] = useState<boolean>(false);
+  const [activeModal, setActiveModal] = useState<
+    'none' | 'menu' | 'profile' | 'notification'
+  >('none');
+
   const { pc } = useMedia();
 
   const user = {
     name: '김대건',
   };
 
-  const modalController = () => {
-    setModal((prev) => !prev);
+  const toggleModal = (
+    modalType: 'menu' | 'profile' | 'notification' | 'none',
+  ) => {
+    setActiveModal((prev) => (prev === modalType ? 'none' : modalType));
   };
 
   return (
@@ -23,15 +28,23 @@ export default function RendingLayout() {
       <div className={style.container}>
         <div className={style.wrapper}>
           {user ? (
-            <UserNav modalController={modalController} />
+            <UserNav
+              modalController={() => toggleModal('menu')}
+              profileController={() => toggleModal('profile')}
+              notificationController={() => toggleModal('notification')}
+              profileModal={activeModal === 'profile'}
+              notificationModal={activeModal === 'notification'}
+              toggleModal={() => toggleModal('none')}
+            />
           ) : (
-            <NonLoginNav modalController={modalController} />
+            <NonLoginNav modalController={() => toggleModal('menu')} />
           )}
           <Outlet />
         </div>
       </div>
-      {!pc && modal && user ? (
-        <UserMenuModal modalController={modalController} />
+
+      {!pc && activeModal === 'menu' && user ? (
+        <UserMenuModal modalController={() => toggleModal('menu')} />
       ) : null}
     </>
   );
