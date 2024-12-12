@@ -5,7 +5,7 @@ import Button from '../btn/Button';
 import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
-import { getDate, formatCurrency } from '../../lib/function/utils';
+import { getNotificationDate, formatCurrency } from '../../lib/function/utils';
 import { UserProfileProps } from './type';
 
 import style from './UserCard.module.css';
@@ -38,11 +38,11 @@ export default function UserCard({
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
-            {list.createAt && getDate(list.createAt)}
+            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
           </div>
         ) : (
           <div className={style.createAtRType}>
-            {list.createAt && getDate(list.createAt)}
+            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
           </div>
         )}
       </div>
@@ -78,7 +78,7 @@ export default function UserCard({
           <div className={style.review}>{list.content}</div>
           {!isPc && (
             <div className={style.createAtRTypeNoPc}>
-              {list.createAt && getDate(list.createAt)}
+              {list.createAt && getNotificationDate(list.createAt, 'noSec')}
             </div>
           )}
         </>
