@@ -10,7 +10,9 @@ import { ChipType } from '../../../../components/card/type';
 
 import style from './CallList.module.css';
 
-import document from '../../../../assets/icons/ic_document_medium.svg';
+import icCheckLarge from '../../../../assets/icons/ic_check_large.svg';
+import icCheckMedium from '../../../../assets/icons/ic_check_medium.svg';
+import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 interface User {
   id: number;
@@ -33,6 +35,8 @@ export default function CallList({ list }: CallListProps) {
   const [modalContent, setModalContent] = useState(true); // true : 견적보내기 / false : 반려
   const [isCommentOpen, setIsCommentOpen] = useState(false); // 요구사항
   const [userIndex, setUserIndex] = useState<number>(); // 선택된 카드 index
+
+  const isPc = useMedia().pc;
 
   const sendBtnHandler = (index: number) => {
     setIsModalOpen(!isModalOpen);
@@ -84,20 +88,23 @@ export default function CallList({ list }: CallListProps) {
             <div className={style.profile}>
               <UserProfile list={list[userIndex]} type='modal' />
               {list[userIndex].comment && (
-                <>
+                <div
+                  className={style.commentChip}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
                   <img
-                    src={document}
-                    alt='document'
+                    src={isPc ? icCheckLarge : icCheckMedium}
+                    alt='icCheck'
                     className={style.commentImg}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
                   />
+                  요청사항
                   {isCommentOpen && (
                     <div className={style.comment}>
                       {list[userIndex].comment}
                     </div>
                   )}
-                </>
+                </div>
               )}
             </div>
             {modalContent ? (

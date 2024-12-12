@@ -78,9 +78,9 @@ export default function DriverCard({
         </div>
       ) : (
         // 칩
-        <div className={style.labelBox}>
+        <div className={style.chipBox}>
           {chips.map((row, rowIndex) => (
-            <div key={rowIndex} className={style.label}>
+            <div key={rowIndex} className={style.chip}>
               {row.map((chip, chipIndex) => (
                 <Chip key={chipIndex} type={chip} />
               ))}

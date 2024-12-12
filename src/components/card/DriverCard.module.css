@@ -64,13 +64,13 @@
   width: 100%;
 }
 
-.labelBox {
+.chipBox {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.label {
+.chip { 
   display: flex;
   gap: 12px;
 }
