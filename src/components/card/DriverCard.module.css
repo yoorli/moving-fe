@@ -64,6 +64,12 @@
   width: 100%;
 }
 
+.labelBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .label {
   display: flex;
   gap: 12px;
@@ -156,12 +162,14 @@
 @media (max-width: 743px) {
   .card {
     width: 100%;
-    padding: 16px 14px;
+    padding: 16px 12px;
     gap: 14px;
   }
 
   .cardPType {
     margin-bottom: 126px;
+    padding: 16px 14px;
+    gap: 16px;
   }
 
   .cardPRType {

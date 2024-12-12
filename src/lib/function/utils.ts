@@ -1,3 +1,5 @@
+import { ChipType } from "../../components/card/type";
+
 // 시간 변환
 // type => yyyy. mm. dd / ss초 전 표시 x
 // type X => yy. mm. dd / ss초 전 표시
@@ -27,3 +29,17 @@ export function formatCurrency(cost: number, onlyNum?: boolean) {
 
   return onlyNum ? price : price + '원';
 }
+
+export const getChips = (chipList: ChipType[], count: number) => {
+  const chips: ChipType[][] = [];
+  let k = 0;
+
+  for (let i = 0; i < chipList.length / count; i++) {
+    chips[i] = [];
+    for (let j = k; j < k + count && j < chipList.length; j++) {
+      chips[i].push(chipList[j]);
+    }
+    k += count;
+  }
+  return chips;
+};

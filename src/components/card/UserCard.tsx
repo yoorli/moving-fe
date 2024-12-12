@@ -5,8 +5,8 @@ import Button from '../btn/Button';
 import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
-import { getNotificationDate, formatCurrency } from '../../lib/function/utils';
-import { UserProfileProps } from './type';
+import { getNotificationDate, formatCurrency, getChips } from '../../lib/function/utils';
+import { ChipType, UserProfileProps } from './type';
 
 import style from './UserCard.module.css';
 
@@ -17,8 +17,18 @@ export default function UserCard({
   rejectCostBtn: rejectCost,
   type,
   list,
+  count = 6,
 }: UserProfileProps) {
   const isPc = useMedia().pc;
+  const chipList: ChipType[] = [];
+
+  if (list.isConfirmed) chipList.push('CONFIRM');
+  if (list.movingType) chipList.push(list.movingType);
+  list.serviceType?.map((type) => chipList.push(type));
+  if (list.isAssigned) chipList.push('ASSIGN');
+
+  const chips = getChips(chipList, count);
+
   return (
     <div
       className={classNames(style.card, {
@@ -26,15 +36,15 @@ export default function UserCard({
       })}
     >
       <div className={style.top}>
-        <div>
-          <div className={style.label}>
-            {list.movingType && <Chip type={list.movingType} />}
-            {list.serviceType &&
-              list.serviceType.map((type, index) => (
-                <Chip key={index} type={type} />
+        {/* 칩 */}
+        <div className={style.labelBox}>
+          {chips.map((row, rowIndex) => (
+            <div key={rowIndex} className={style.label}>
+              {row.map((chip, chipIndex) => (
+                <Chip key={chipIndex} type={chip} />
               ))}
-            {list.isAssigned && <Chip type='ASSIGN' />}
-          </div>
+            </div>
+          ))}
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>

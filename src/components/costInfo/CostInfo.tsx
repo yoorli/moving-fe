@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import style from './CostInfo.module.css';
+import Button from '../btn/Button';
 
 interface CostInfoProps {
   id?: number; // 견적 요청 ID
@@ -12,6 +13,8 @@ interface CostInfoProps {
   departure: string; // 출발지
   arrival: string; // 도착지
   comment: string; //요구 사항
+  hasButton?: boolean; // 버튼 유무
+  setIsModalOpen?: (value: boolean) => void; // Modal 열기
 }
 
 const infoMovingType = (type: string): string => {
@@ -34,10 +37,16 @@ export default function CostInfo({
   departure,
   arrival,
   comment,
+  hasButton,
+  setIsModalOpen,
 }: CostInfoProps) {
   const date = new Date(movingDate); // 또는 원하는 날짜 객체
 
   const formattedDate = format(date, 'yyyy. MM. dd(EEE)', { locale: ko });
+
+  const handleModalOpen = () => {
+      setIsModalOpen?.(true);
+  };
 
   return (
     <div className={style.container}>
@@ -63,6 +72,15 @@ export default function CostInfo({
           <div className={style.infoTitle}>요청 사항</div>
           <div className={style.request}>{comment}</div>
         </div>
+        {hasButton && (
+          <div className={style.button}>
+            <Button
+              text='견적 요청 취소하기'
+              btnStyle='outlinedRed200'
+              onClick={handleModalOpen}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
