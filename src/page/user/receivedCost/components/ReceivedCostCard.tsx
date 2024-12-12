@@ -1,14 +1,14 @@
 import style from './ReceivedCostCard.module.css';
 import DriverCard from '../../../../components/card/DriverCard';
 import { mockData, DriverDataDetail } from '../mock';
-// import { useMedia } from '../../../../lib/function/useMediaQuery';
+import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 export interface Props {
   redirect: (id: number) => void;
 }
 
 export default function ReceivedCostCard({ redirect }: Props) {
-  // const { pc } = useMedia();
+  const { receivedMobile, receivedMobileSecond } = useMedia();
 
   return (
     <>
@@ -24,6 +24,7 @@ export default function ReceivedCostCard({ redirect }: Props) {
                     ? 'cancel'
                     : 'notConfirm'
               }
+              count={receivedMobile ? 4 : receivedMobileSecond ? 3 : 6}
               costListBtn={() => redirect(mover.moverId)}
             />
           </div>

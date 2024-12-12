@@ -57,7 +57,7 @@ export const mockData: DriverData = {
     // 확정된 견적 요청일 때
     {
       moverId: 1,
-      serviceType: ['SMALL', 'OFFICE'],
+      serviceType: ['SMALL', 'OFFICE', 'HOUSE'],
       isConfirmed: true, // 확정
       isCancelled: false, //취소
       isAssigned: true, //지정
