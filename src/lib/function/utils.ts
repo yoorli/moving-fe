@@ -30,6 +30,17 @@ export function formatCurrency(cost: number, onlyNum?: boolean) {
   return onlyNum ? price : price + '원';
 }
 
+// 칩 배열 반환 함수
+// ex )
+// <div className={style.labelBox}>
+// {chips.map((row, rowIndex) => (
+//   <div key={rowIndex} className={style.label}>
+//     {row.map((chip, chipIndex) => (
+//       <Chip key={chipIndex} type={chip} />
+//     ))}
+//   </div>
+// ))}
+// </div>
 export const getChips = (chipList: ChipType[], count: number) => {
   const chips: ChipType[][] = [];
   let k = 0;
