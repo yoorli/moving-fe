@@ -5,7 +5,7 @@ import useDirection from '../../lib/function/direction';
 import LoginBtn from '../btn/LoginBtn';
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import alarm from '../../assets/icons/ic_alarm_large.svg';
 import profile from '../../assets/icons/ic_profile_large.svg';
 import alarmMobile from '../../assets/icons/ic_alarm_medium.svg';
@@ -14,6 +14,9 @@ import { DriverProfileModal, UserProfileModal } from './ProfileModal';
 import { NotificationModal } from './NotificationModal';
 
 type Props = {
+  menuRef?: React.RefObject<HTMLDivElement>;
+  profileRef?: React.RefObject<HTMLDivElement>;
+  notificationRef?: React.RefObject<HTMLDivElement>;
   modalController: () => void;
   profileController?: () => void;
   notificationController?: () => void;
@@ -89,6 +92,9 @@ export function NonLoginNav({ modalController }: Props) {
 }
 
 export function UserNav({
+  menuRef,
+  profileRef,
+  notificationRef,
   modalController,
   profileController,
   notificationController,
@@ -143,26 +149,30 @@ export function UserNav({
           </nav>
         </div>
         <div className={style.navIcons}>
-          <img
-            className={style.navIcon}
-            src={alarm}
-            alt=''
-            onClick={notificationController}
-          />
-          {notificationModal ? (
-            <NotificationModal modalController={notificationController} />
-          ) : null}
+          <div ref={notificationRef}>
+            <img
+              className={style.navIcon}
+              src={alarm}
+              alt=''
+              onClick={notificationController}
+            />
+            {notificationModal ? (
+              <NotificationModal modalController={notificationController} />
+            ) : null}
+          </div>
 
-          <img
-            onClick={profileController}
-            className={style.navIconProfile}
-            src={profile}
-            alt=''
-          />
-          <span className={style.navIconText}>김가나</span>
-          {profileModal ? (
-            <UserProfileModal modalController={profileController} />
-          ) : null}
+          <div className={style.navProfile} ref={profileRef}>
+            <img
+              onClick={profileController}
+              className={style.navIconProfile}
+              src={profile}
+              alt=''
+            />
+            <span className={style.navIconText}>김가나</span>
+            {profileModal ? (
+              <UserProfileModal modalController={profileController} />
+            ) : null}
+          </div>
         </div>
       </div>
     );
@@ -176,31 +186,38 @@ export function UserNav({
           alt=''
         />
         <div className={style.navIcons}>
-          <img
-            className={style.navIcon}
-            src={alarmMobile}
-            alt=''
-            onClick={notificationController}
-          />
-          {notificationModal ? (
-            <NotificationModal modalController={notificationController} />
-          ) : null}
+          <div ref={notificationRef}>
+            <img
+              className={style.navIcon}
+              src={alarmMobile}
+              alt=''
+              onClick={notificationController}
+            />
+            {notificationModal ? (
+              <NotificationModal modalController={notificationController} />
+            ) : null}
+          </div>
 
-          <img
-            onClick={profileController}
-            className={style.navIcon}
-            src={profileMobile}
-            alt=''
-          />
-          <img
-            onClick={modalController}
-            className={style.navIcon}
-            src={menu}
-            alt=''
-          />
-          {profileModal ? (
-            <UserProfileModal modalController={() => profileController} />
-          ) : null}
+          <div className={style.navProfile} ref={profileRef}>
+            <img
+              onClick={profileController}
+              className={style.navIcon}
+              src={profileMobile}
+              alt=''
+            />
+            {profileModal ? (
+              <UserProfileModal modalController={() => profileController} />
+            ) : null}
+          </div>
+
+          <div ref={menuRef}>
+            <img
+              onClick={modalController}
+              className={style.navIcon}
+              src={menu}
+              alt=''
+            />
+          </div>
         </div>
       </div>
     );
@@ -214,31 +231,38 @@ export function UserNav({
           alt=''
         />
         <div className={style.navIcons}>
-          <img
-            className={style.navIcon}
-            src={alarmMobile}
-            alt=''
-            onClick={notificationController}
-          />
-          {notificationModal ? (
-            <NotificationModal modalController={notificationController} />
-          ) : null}
+          <div ref={notificationRef}>
+            <img
+              className={style.navIcon}
+              src={alarmMobile}
+              alt=''
+              onClick={notificationController}
+            />
+            {notificationModal ? (
+              <NotificationModal modalController={notificationController} />
+            ) : null}
+          </div>
 
-          <img
-            onClick={profileController}
-            className={style.navIcon}
-            src={profile}
-            alt=''
-          />
-          <img
-            onClick={modalController}
-            className={style.menu}
-            src={menu}
-            alt=''
-          />
-          {profileModal ? (
-            <UserProfileModal modalController={profileController} />
-          ) : null}
+          <div className={style.navProfile} ref={profileRef}>
+            <img
+              onClick={profileController}
+              className={style.navIcon}
+              src={profile}
+              alt=''
+            />
+            {profileModal ? (
+              <UserProfileModal modalController={profileController} />
+            ) : null}
+          </div>
+
+          <div ref={menuRef}>
+            <img
+              onClick={modalController}
+              className={style.menu}
+              src={menu}
+              alt=''
+            />
+          </div>
         </div>
       </div>
     );
@@ -248,6 +272,9 @@ export function UserNav({
 }
 
 export function DriverNav({
+  menuRef,
+  profileRef,
+  notificationRef,
   modalController,
   profileController,
   notificationController,
@@ -293,26 +320,30 @@ export function DriverNav({
           </nav>
         </div>
         <div className={style.navIcons}>
-          <img
-            className={style.navIcon}
-            src={alarm}
-            alt=''
-            onClick={notificationController}
-          />
-          {notificationModal ? (
-            <NotificationModal modalController={notificationController} />
-          ) : null}
+          <div ref={notificationRef}>
+            <img
+              className={style.navIcon}
+              src={alarm}
+              alt=''
+              onClick={notificationController}
+            />
+            {notificationModal ? (
+              <NotificationModal modalController={notificationController} />
+            ) : null}
+          </div>
 
-          <img
-            onClick={profileController}
-            className={style.navIconProfile}
-            src={profile}
-            alt=''
-          />
-          <span className={style.navIconText}>김기사</span>
-          {profileModal ? (
-            <DriverProfileModal modalController={profileController} />
-          ) : null}
+          <div className={style.navProfile} ref={profileRef}>
+            <img
+              onClick={profileController}
+              className={style.navIconProfile}
+              src={profile}
+              alt=''
+            />
+            <span className={style.navIconText}>김기사</span>
+            {profileModal ? (
+              <DriverProfileModal modalController={profileController} />
+            ) : null}
+          </div>
         </div>
       </div>
     );
@@ -326,31 +357,38 @@ export function DriverNav({
           alt=''
         />
         <div className={style.navIcons}>
-          <img
-            className={style.navIcon}
-            src={alarmMobile}
-            alt=''
-            onClick={notificationController}
-          />
-          {notificationModal ? (
-            <NotificationModal modalController={notificationController} />
-          ) : null}
+          <div ref={notificationRef}>
+            <img
+              className={style.navIcon}
+              src={alarmMobile}
+              alt=''
+              onClick={notificationController}
+            />
+            {notificationModal ? (
+              <NotificationModal modalController={notificationController} />
+            ) : null}
+          </div>
 
-          <img
-            onClick={profileController}
-            className={style.navIcon}
-            src={profileMobile}
-            alt=''
-          />
-          <img
-            onClick={modalController}
-            className={style.navIcon}
-            src={menu}
-            alt=''
-          />
-          {profileModal ? (
-            <DriverProfileModal modalController={profileController} />
-          ) : null}
+          <div className={style.navProfile} ref={profileRef}>
+            <img
+              onClick={profileController}
+              className={style.navIcon}
+              src={profileMobile}
+              alt=''
+            />
+            {profileModal ? (
+              <DriverProfileModal modalController={profileController} />
+            ) : null}
+          </div>
+
+          <div ref={menuRef}>
+            <img
+              onClick={modalController}
+              className={style.navIcon}
+              src={menu}
+              alt=''
+            />
+          </div>
         </div>
       </div>
     );
@@ -364,31 +402,38 @@ export function DriverNav({
           alt=''
         />
         <div className={style.navIcons}>
-          <img
-            className={style.navIcon}
-            src={alarm}
-            alt=''
-            onClick={notificationController}
-          />
-          {notificationModal ? (
-            <NotificationModal modalController={notificationController} />
-          ) : null}
+          <div ref={notificationRef}>
+            <img
+              className={style.navIcon}
+              src={alarm}
+              alt=''
+              onClick={notificationController}
+            />
+            {notificationModal ? (
+              <NotificationModal modalController={notificationController} />
+            ) : null}
+          </div>
 
-          <img
-            onClick={profileController}
-            className={style.navIcon}
-            src={profile}
-            alt=''
-          />
-          <img
-            onClick={modalController}
-            className={style.menu}
-            src={menu}
-            alt=''
-          />
-          {profileModal ? (
-            <DriverProfileModal modalController={profileController} />
-          ) : null}
+          <div className={style.navProfile} ref={profileRef}>
+            <img
+              onClick={profileController}
+              className={style.navIcon}
+              src={profile}
+              alt=''
+            />
+            {profileModal ? (
+              <DriverProfileModal modalController={profileController} />
+            ) : null}
+          </div>
+
+          <div ref={menuRef}>
+            <img
+              onClick={modalController}
+              className={style.menu}
+              src={menu}
+              alt=''
+            />
+          </div>
         </div>
       </div>
     );

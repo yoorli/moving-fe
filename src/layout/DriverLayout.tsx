@@ -2,10 +2,13 @@ import { Outlet } from 'react-router-dom';
 import style from './DriverLayout.module.css';
 import { DriverNav } from '../components/nav/Nav';
 import { DriverMenuModal } from '../components/nav/NavMenuModal';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useMedia } from '../lib/function/useMediaQuery';
 
 export default function DriverLayout() {
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const profileRef = useRef<HTMLDivElement | null>(null);
+  const notificationRef = useRef<HTMLDivElement | null>(null);
   const [activeModal, setActiveModal] = useState<
     'none' | 'menu' | 'profile' | 'notification'
   >('none');
@@ -17,12 +20,36 @@ export default function DriverLayout() {
     setActiveModal((prev) => (prev === modalType ? 'none' : modalType));
   };
 
+  const handleOutsideClick = (e: any) => {
+    if (
+      (activeModal === 'menu' &&
+        menuRef.current &&
+        !menuRef.current.contains(e.target)) ||
+      (activeModal === 'profile' &&
+        profileRef.current &&
+        !profileRef.current.contains(e.target)) ||
+      (activeModal === 'notification' &&
+        notificationRef.current &&
+        !notificationRef.current.contains(e.target))
+    ) {
+      setActiveModal('none');
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, [activeModal]);
+
   return (
     <>
       <div className={style.container}>
         <div className={style.wrapper}>
           <DriverNav
-            // modalController={modalController}
+            menuRef={menuRef}
+            profileRef={profileRef}
+            notificationRef={notificationRef}
             modalController={() => toggleModal('menu')}
             profileController={() => toggleModal('profile')}
             notificationController={() => toggleModal('notification')}

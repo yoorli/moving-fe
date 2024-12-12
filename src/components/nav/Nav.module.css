@@ -210,6 +210,12 @@
     cursor: pointer;
   }
 
+  .navProfile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
   .navIcon {
     cursor: pointer;
   }
@@ -218,5 +224,6 @@
     font-weight: 500;
     font-size: 18px;
     color: var(--black-400);
+    text-align: center;
   }
 }
