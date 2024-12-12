@@ -2,7 +2,8 @@ import { ChipType } from '../../../components/card/type';
 
 export interface UserData {
   users: {
-    estimateReqId: number // 견적 ID
+    estimateReqId?: number; // 견적 요청 ID
+    estimateId?: number; // 견적 ID
     movingType?: ChipType; // 서비스 유형
     isConfirmed?: boolean; // 확정된 요청인지 확인(true)
     isCancelled?: boolean; // 취소 여부 (false)
@@ -14,14 +15,14 @@ export interface UserData {
     price?: number; //견적가
     isMoveDateOver?: boolean; // 이사일의 지남 여부
     isReqConfirmed?: boolean; // 해당 견적이 속한 요청의 확정 여부
-    isRejected?: boolean //반려 여부
+    isRejected?: boolean; //반려 여부
   }[];
 }
 
 export const mockData: UserData = {
   users: [
     {
-      estimateReqId: 1,
+      estimateId: 1,
       movingType: 'SMALL',
       isConfirmed: true,
       isAssigned: true,
@@ -34,7 +35,7 @@ export const mockData: UserData = {
       isReqConfirmed: true,
     },
     {
-      estimateReqId: 2,
+      estimateId: 2,
       movingType: 'HOUSE',
       isConfirmed: false,
       isAssigned: true,
@@ -47,7 +48,7 @@ export const mockData: UserData = {
       isReqConfirmed: true,
     },
     {
-      estimateReqId: 3,
+      estimateId: 3,
       movingType: 'OFFICE',
       isConfirmed: true,
       isAssigned: false,
@@ -60,7 +61,7 @@ export const mockData: UserData = {
       isReqConfirmed: false,
     },
     {
-      estimateReqId: 4,
+      estimateId: 4,
       movingType: 'SMALL',
       isConfirmed: false,
       isCancelled: true,
@@ -75,7 +76,7 @@ export const mockData: UserData = {
       isRejected: false,
     },
     {
-      estimateReqId: 5,
+      estimateId: 5,
       movingType: 'HOUSE',
       isConfirmed: true,
       isAssigned: true,
@@ -88,7 +89,7 @@ export const mockData: UserData = {
       isReqConfirmed: true,
     },
     {
-      estimateReqId: 6,
+      estimateId: 6,
       movingType: 'OFFICE',
       isConfirmed: false,
       isAssigned: true,
@@ -101,7 +102,7 @@ export const mockData: UserData = {
       isReqConfirmed: true,
     },
     {
-      estimateReqId: 7,
+      estimateId: 7,
       movingType: 'SMALL',
       isConfirmed: true,
       isAssigned: false,
@@ -114,7 +115,7 @@ export const mockData: UserData = {
       isReqConfirmed: true,
     },
     {
-      estimateReqId: 8,
+      estimateId: 8,
       movingType: 'OFFICE',
       isConfirmed: false,
       isAssigned: false,
@@ -128,7 +129,7 @@ export const mockData: UserData = {
       isRejected: true,
     },
     {
-      estimateReqId: 9,
+      estimateId: 9,
       movingType: 'HOUSE',
       isConfirmed: true,
       isAssigned: true,
@@ -141,7 +142,7 @@ export const mockData: UserData = {
       isReqConfirmed: true,
     },
     {
-      estimateReqId: 10,
+      estimateId: 10,
       movingType: 'OFFICE',
       isConfirmed: false,
       isAssigned: true,

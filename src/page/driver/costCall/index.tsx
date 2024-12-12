@@ -14,7 +14,7 @@ import style from './index.module.css';
 
 import filter from '../../../assets/icons/ic_filter_medium.svg';
 
-import { mockData } from './components/mockData';
+import { mockData } from './mockData';
 
 export default function DriverCostCallPage() {
   const [currentPage, setCurrentPage] = useState(1);

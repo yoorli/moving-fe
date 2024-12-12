@@ -1,4 +1,4 @@
-import { ChipType } from "../../../../components/card/type";
+import { ChipType } from '../../../components/card/type';
 
 export interface UserData {
   total: number; //리스트 총 갯수
@@ -35,7 +35,7 @@ export const mockData: UserData = {
       departure: '서울특별시 강남구',
       arrival: '서울특별시 마포구',
       createAt: '2024.12.02 18:00:00',
-      comment: '부탁드립니다부탁드립니다부탁드립니다부탁드립니다부탁드립니다'
+      comment: '부탁드립니다부탁드립니다부탁드립니다부탁드립니다부탁드립니다',
     },
     {
       id: 2,
@@ -56,7 +56,7 @@ export const mockData: UserData = {
       departure: '경기도 성남시',
       arrival: '경기도 부천시',
       createAt: '2024.12.03 12:30:00',
-      comment: '부탁드립니다부탁드립니다부탁드립니다부탁드립니다부탁드립니다'
+      comment: '부탁드립니다부탁드립니다부탁드립니다부탁드립니다부탁드립니다',
     },
     {
       id: 4,
@@ -87,7 +87,7 @@ export const mockData: UserData = {
       departure: '서울특별시 동대문구',
       arrival: '서울특별시 강동구',
       createAt: '2024.12.06 10:15:00',
-      comment: '부탁드립니다부탁드립니다부탁드립니다부탁드립니다부탁드립니다'
+      comment: '부탁드립니다부탁드립니다부탁드립니다부탁드립니다부탁드립니다',
     },
     {
       id: 7,
@@ -128,7 +128,7 @@ export const mockData: UserData = {
       departure: '경기도 용인시',
       arrival: '서울특별시 서대문구',
       createAt: '2024.12.10 16:45:00',
-      comment: '부탁드립니다부탁드립니다부탁드립니다부탁드립니다부탁드립니다'
+      comment: '부탁드립니다부탁드립니다부탁드립니다부탁드립니다부탁드립니다',
     },
   ],
 };
