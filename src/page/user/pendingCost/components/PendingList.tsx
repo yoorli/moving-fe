@@ -6,8 +6,8 @@ import style from './PendingList.module.css';
 export default function PendingList() {
   const navigate = useNavigate();
 
-  const handleCardClick = (id: number) => {
-    navigate(`/user/costDetail/${id}`); // 카드 클릭 시 견적 상세 페이지로 이동
+  const handleCardClick = (cardData: any) => {
+    navigate(`/user/costDetail/${cardData.id}`, { state: cardData }); // 카드 데이터 전달
   };
 
   return (
@@ -18,7 +18,7 @@ export default function PendingList() {
             key={index}
             list={cost}
             type="waiting"
-            onClick={() => handleCardClick(cost.id)}
+            onClick={() => handleCardClick(cost)} // 카드 데이터 전달
           />
         ))}
       </div>
