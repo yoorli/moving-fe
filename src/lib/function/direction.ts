@@ -54,6 +54,11 @@ export default function useDirection() {
     nav('/driver/costHandler');
   };
 
+  const direction_costDetail = (id: number) => {
+    nav(`/driver/costHandler/${id}`);
+  };
+
+
   const direction_myPgae = () => {
     nav('/driver/myPage');
   };
@@ -71,6 +76,7 @@ export default function useDirection() {
     direction_driverCostCall,
     direction_receivedCostDetail,
     direction_costHandler,
+    direction_costDetail,
     direction_myPgae,
     direction_driverEditProfile,
     direction_driverEditInfo,

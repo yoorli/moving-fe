@@ -5,6 +5,8 @@ import UserCard from '../../../components/card/UserCard';
 import Pagination from '../../../components/pagination/Pagination';
 import Button from '../../../components/btn/Button';
 
+import useDirection from '../../../lib/function/direction';
+
 import style from './index.module.css';
 
 import { mockData } from './mockData';
@@ -15,6 +17,9 @@ export default function DriverCostHandlerPage() {
     'first',
   );
   const [list, setList] = useState(mockData.users);
+
+  const { direction_costDetail } = useDirection();
+
   let text: string;
 
   const handleTabChange = (tab: 'first' | 'second' | 'third') => {
@@ -88,6 +93,10 @@ export default function DriverCostHandlerPage() {
                       <Button
                         text='견적 상세보기'
                         btnStyle='solid123pxBlue100'
+                        onClick={() => {
+                          user.estimateId &&
+                            direction_costDetail(user.estimateId);
+                        }}
                       />
                     </div>
                   </div>
