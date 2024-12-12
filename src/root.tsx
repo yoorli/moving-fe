@@ -20,6 +20,7 @@ import UserEditInfoPage from './page/user/editInfo';
 import UserEditProfilePage from './page/user/editProfile';
 import ServiceRandingPage from './page/root';
 import DriverRegisterPage from './page/driver/register';
+import MyPage from './page/driver/myPage';
 import DriverCostHandlerPage from './page/driver/costHandler';
 import SearchDriverForGuest from './page/root/searchDriver';
 import DriverDetailPage from './page/root/searchDriver/DriverDetailPage';
@@ -136,7 +137,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'myPage',
-        element: <span>myPage</span>,
+        element: <MyPage />,
       },
     ],
   },
