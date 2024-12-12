@@ -31,7 +31,11 @@ export default function DriverCostDetailPage() {
           <UserCard list={user} />
           {!isPc && (
             <div className={style.share}>
-              <SnsShare nickname={user.customerName} />
+              <SnsShare
+                nickname={user.customerName}
+                text='견적서 공유하기'
+                styles={16}
+              />
             </div>
           )}
           <div className={style.estimate}>
@@ -46,7 +50,11 @@ export default function DriverCostDetailPage() {
         </div>
         {isPc && (
           <div className={style.share}>
-            <SnsShare nickname={user.customerName} />
+            <SnsShare
+              nickname={user.customerName}
+              text='견적서 공유하기'
+              styles={16}
+            />
           </div>
         )}
       </div>

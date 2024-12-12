@@ -4,6 +4,10 @@
   padding-bottom: 22px;
 }
 
+.otherText {
+  padding-bottom: 40px;
+}
+
 .imgs {
   display: flex;
   gap: 16px;
@@ -13,9 +17,20 @@
   cursor: pointer;
 }
 
-@media (max-width: 1199px) and (min-width: 744px) {
+@media (max-width: 1199px) {
   .text {
     font-size: 14px;
     padding-bottom: 8px;
+  }
+ 
+  .otherText {
+    font-size: 14px;
+    padding-bottom: 16px;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 744px) {
+  .otherText {
+    font-size: 16px;
   }
 }
