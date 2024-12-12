@@ -1,7 +1,8 @@
 .overlay {
+  display: flex;
   width: 100%;
   height: 100%;
-
+  justify-content: center;
   background-color: var(--background-100);
 }
 
@@ -9,8 +10,8 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
+  max-width: 1800px;
   align-items: center;
-  max-width: 1920px;
   border-radius: 40px;
   padding: 48px 60px;
   margin: 48px 60px;

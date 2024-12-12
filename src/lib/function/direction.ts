@@ -37,13 +37,18 @@ export default function useDirection() {
   const direction_pendingCost = () => {
     nav('/user/pendingCost');
   };
-
   const direction_receivedCost = () => {
     nav('/user/receivedCost');
   };
-
   const direction_receivedCostDetail = (id: number) => {
     nav(`/user/receivedCost/${id}`);
+  };
+
+  const direction_favoriteMover = () => {
+    nav('/user/favoriteMover');
+  };
+  const direction_movingReview = () => {
+    nav('/user/movingReview');
   };
 
   const direction_driverCostCall = () => {
@@ -70,6 +75,8 @@ export default function useDirection() {
     direction_userEditInfo,
     direction_driverCostCall,
     direction_receivedCostDetail,
+    direction_favoriteMover,
+    direction_movingReview,
     direction_costHandler,
     direction_myPgae,
     direction_driverEditProfile,
