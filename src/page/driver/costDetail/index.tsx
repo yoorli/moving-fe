@@ -1,13 +1,15 @@
-import UserCard from '../../../components/card/UserCard';
-
 import { useParams } from 'react-router-dom';
+
+import UserCard from '../../../components/card/UserCard';
+import SnsShare from '../../../components/snsShare/SnsShare';
+import CostInfo from '../../../components/costInfo/CostInfo';
+
+import { useMedia } from '../../../lib/function/useMediaQuery';
+import { formatCurrency } from '../../../lib/function/utils';
+
 import style from './index.module.css';
 
 import { mockData } from './mockData';
-import SnsShare from '../../../components/snsShare/SnsShare';
-import CostInfo from '../../../components/costInfo/CostInfo';
-import { useMedia } from '../../../lib/function/useMediaQuery';
-import { formatCurrency } from '../../../lib/function/utils';
 
 export default function DriverCostDetailPage() {
   const isPc = useMedia().pc;
@@ -31,11 +33,7 @@ export default function DriverCostDetailPage() {
           <UserCard list={user} />
           {!isPc && (
             <div className={style.share}>
-              <SnsShare
-                nickname={user.customerName}
-                text='견적서 공유하기'
-                styles={16}
-              />
+              <SnsShare nickname={user.customerName} type='shareEstimate' />
             </div>
           )}
           <div className={style.estimate}>
@@ -50,11 +48,7 @@ export default function DriverCostDetailPage() {
         </div>
         {isPc && (
           <div className={style.share}>
-            <SnsShare
-              nickname={user.customerName}
-              text='견적서 공유하기'
-              styles={16}
-            />
+            <SnsShare nickname={user.customerName} type='shareEstimate' />
           </div>
         )}
       </div>

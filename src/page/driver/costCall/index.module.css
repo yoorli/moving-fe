@@ -9,14 +9,16 @@
 .navigation {
   text-align: left;
   height: 96px;
-  padding: 32px;
+  padding: 32px 0;
   background-color: var(--gray-50);
   font-size: 24px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
 }
 
 .mainContainer {
-  padding: 24px;
+  padding: 24px 0;
   display: flex;
   gap: 100px;
   justify-content: space-between;
@@ -105,7 +107,7 @@
 @media (max-width: 1200px) {
   .navigation {
     height: 54px;
-    padding: 10px;
+    padding: 10px 0;
     font-size: 18px;
   }
 
