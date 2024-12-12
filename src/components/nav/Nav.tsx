@@ -25,7 +25,7 @@ type Props = {
   notificationModal?: boolean;
 };
 
-export function NonLoginNav({ modalController }: Props) {
+export function NonLoginNav({ modalController, menuRef }: Props) {
   const { direction_root, direction_searchDriver, direction_userLogin } =
     useDirection();
   const { pc, tablet, mobile } = useMedia();
@@ -61,12 +61,14 @@ export function NonLoginNav({ modalController }: Props) {
           src={logo}
           alt=''
         />
-        <img
-          onClick={modalController}
-          className={style.menu}
-          src={menu}
-          alt=''
-        />
+        <div ref={menuRef}>
+          <img
+            onClick={modalController}
+            className={style.menu}
+            src={menu}
+            alt=''
+          />
+        </div>
       </div>
     );
   } else if (mobile) {
@@ -78,12 +80,14 @@ export function NonLoginNav({ modalController }: Props) {
           src={logo}
           alt=''
         />
-        <img
-          onClick={modalController}
-          className={style.menu}
-          src={menu}
-          alt=''
-        />
+        <div ref={menuRef}>
+          <img
+            onClick={modalController}
+            className={style.menu}
+            src={menu}
+            alt=''
+          />
+        </div>
       </div>
     );
   } else {

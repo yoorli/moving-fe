@@ -2,7 +2,10 @@ import { Outlet } from 'react-router-dom';
 import style from './RendingLayout.module.css';
 import { useState, useRef, useEffect } from 'react';
 
-import { UserMenuModal } from '../components/nav/NavMenuModal';
+import {
+  UserMenuModal,
+  NonLoginMenuModal,
+} from '../components/nav/NavMenuModal';
 import { NonLoginNav, UserNav } from '../components/nav/Nav';
 import { useMedia } from '../lib/function/useMediaQuery';
 
@@ -63,7 +66,10 @@ export default function RendingLayout() {
               notificationModal={activeModal === 'notification'}
             />
           ) : (
-            <NonLoginNav modalController={() => toggleModal('menu')} />
+            <NonLoginNav
+              menuRef={menuRef}
+              modalController={() => toggleModal('menu')}
+            />
           )}
           <Outlet />
         </div>
@@ -71,6 +77,8 @@ export default function RendingLayout() {
 
       {!pc && activeModal === 'menu' && user ? (
         <UserMenuModal modalController={() => toggleModal('menu')} />
+      ) : !pc && activeModal === 'menu' && !user ? (
+        <NonLoginMenuModal modalController={() => toggleModal('menu')} />
       ) : null}
     </>
   );
