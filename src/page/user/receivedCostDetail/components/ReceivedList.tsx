@@ -1,8 +1,11 @@
 import style from './ReceivedList.module.css';
 import DriverCard from '../../../../components/card/DriverCard';
 import { MoverList, Mover } from '../mockData';
+import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 export default function ReceivedList({ list, count }: MoverList) {
+  const { mobileWithChip, mobileWithChipSecond } = useMedia();
+
   return (
     <>
       <div className={style.infoContainer}>
@@ -11,7 +14,11 @@ export default function ReceivedList({ list, count }: MoverList) {
           {list.length > 0 ? (
             list?.map((mover: Mover) => (
               <div key={mover.id} className={style.card}>
-                <DriverCard list={mover} type='cost' />
+                <DriverCard
+                  list={mover}
+                  type='cost'
+                  count={mobileWithChip ? 4 : mobileWithChipSecond ? 3 : 6}
+                />
               </div>
             ))
           ) : (

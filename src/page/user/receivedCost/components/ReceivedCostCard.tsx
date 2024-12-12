@@ -8,7 +8,7 @@ export interface Props {
 }
 
 export default function ReceivedCostCard({ redirect }: Props) {
-  const { receivedMobile, receivedMobileSecond } = useMedia();
+  const { mobileWithChip, mobileWithChipSecond } = useMedia();
 
   return (
     <>
@@ -24,7 +24,7 @@ export default function ReceivedCostCard({ redirect }: Props) {
                     ? 'cancel'
                     : 'notConfirm'
               }
-              count={receivedMobile ? 4 : receivedMobileSecond ? 3 : 6}
+              count={mobileWithChip ? 4 : mobileWithChipSecond ? 3 : 6}
               costListBtn={() => redirect(mover.moverId)}
             />
           </div>

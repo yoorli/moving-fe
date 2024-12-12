@@ -17,11 +17,11 @@ export function useMedia() {
   });
   const mobile = useMediaQuery({ query: '(max-width: 743px)' });
 
-  const receivedMobile = useMediaQuery({
+  const mobileWithChip = useMediaQuery({
     query: '(min-width: 421px) and (max-width: 540px)',
   });
 
-  const receivedMobileSecond = useMediaQuery({ query: '(max-width: 420px)' });
+  const mobileWithChipSecond = useMediaQuery({ query: '(max-width: 420px)' });
 
-  return { pc, tablet, mobile, receivedMobile, receivedMobileSecond };
+  return { pc, tablet, mobile, mobileWithChip, mobileWithChipSecond };
 }
