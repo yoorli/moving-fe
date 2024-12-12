@@ -16,6 +16,8 @@ export interface PendingListType {
   confirmationCount: number; // 총 확정 개수 totalContirmed
   favoriteCount: number; // 기사님이 찜된 횟수
   isLiked: boolean; // 찜 여부
+  isReqConfirmed: boolean; // 해당 견적이 속한 요청의 확정 여부
+  isConfirmed: boolean; // 견적 확정 여부
   movingDate: string; // 이사 날짜 (예시, 2024. 11. 28)
   departure: string; // 출발지
   arrival: string; // 도착지
@@ -45,6 +47,8 @@ export const mockData: ApiResponse = {
       confirmationCount: 120,
       favoriteCount: 80,
       isLiked: true,
+      isConfirmed: true, // 확정 o
+      isReqConfirmed: false,
       movingDate: '2024. 12. 20',
       departure: '서울시 강남구',
       arrival: '경기도 성남시',
@@ -65,6 +69,8 @@ export const mockData: ApiResponse = {
       confirmationCount: 140,
       favoriteCount: 65,
       isLiked: false,
+      isConfirmed: false, // 확정 x
+      isReqConfirmed: false,
       movingDate: '2024. 12. 22',
       departure: '서울시 송파구',
       arrival: '인천광역시',
@@ -85,6 +91,8 @@ export const mockData: ApiResponse = {
       confirmationCount: 200,
       favoriteCount: 90,
       isLiked: true,
+      isConfirmed: true, // 확정 여부
+      isReqConfirmed: false,
       movingDate: '2024. 12. 25',
       departure: '서울시 서대문구',
       arrival: '경기도 용인시',
@@ -105,6 +113,8 @@ export const mockData: ApiResponse = {
       confirmationCount: 80,
       favoriteCount: 50,
       isLiked: false,
+      isConfirmed: false, // 확정 여부
+      isReqConfirmed: false,
       movingDate: '2024. 12. 28',
       departure: '서울시 관악구',
       arrival: '부산광역시',
@@ -125,6 +135,8 @@ export const mockData: ApiResponse = {
       confirmationCount: 60,
       favoriteCount: 70,
       isLiked: true,
+      isConfirmed: true, // 확정 여부
+      isReqConfirmed: false,
       movingDate: '2024. 12. 30',
       departure: '서울시 노원구',
       arrival: '경기도 화성시',
@@ -145,6 +157,8 @@ export const mockData: ApiResponse = {
       confirmationCount: 150,
       favoriteCount: 95,
       isLiked: true,
+      isConfirmed: false, // 확정 여부
+      isReqConfirmed: false,
       movingDate: '2024. 12. 15',
       departure: '서울시 중구',
       arrival: '경기도 안양시',
@@ -165,6 +179,8 @@ export const mockData: ApiResponse = {
       confirmationCount: 100,
       favoriteCount: 45,
       isLiked: false,
+      isConfirmed: true, // 확정 여부
+      isReqConfirmed: false,
       movingDate: '2024. 12. 18',
       departure: '서울시 동대문구',
       arrival: '강원도 춘천시',
@@ -185,6 +201,8 @@ export const mockData: ApiResponse = {
       confirmationCount: 250,
       favoriteCount: 120,
       isLiked: true,
+      isConfirmed: false, // 확정 여부
+      isReqConfirmed: false,
       movingDate: '2024. 12. 26',
       departure: '서울시 강북구',
       arrival: '충청북도 청주시',
@@ -205,6 +223,8 @@ export const mockData: ApiResponse = {
       confirmationCount: 50,
       favoriteCount: 30,
       isLiked: false,
+      isConfirmed: true, // 확정 여부
+      isReqConfirmed: false,
       movingDate: '2024. 12. 21',
       departure: '서울시 종로구',
       arrival: '경상남도 창원시',
@@ -225,6 +245,8 @@ export const mockData: ApiResponse = {
       confirmationCount: 90,
       favoriteCount: 55,
       isLiked: true,
+      isConfirmed: false, // 확정 여부
+      isReqConfirmed: false,
       movingDate: '2024. 12. 29',
       departure: '서울시 은평구',
       arrival: '제주특별자치도 제주시',
