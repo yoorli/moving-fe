@@ -118,7 +118,7 @@ export const mockData: UserData = {
       estimateId: 8,
       movingType: 'OFFICE',
       isConfirmed: false,
-      isAssigned: false,
+      isAssigned: true,
       customerName: '강민지',
       movingDate: '2024.06.25',
       departure: '인천광역시 남동구 간석동',

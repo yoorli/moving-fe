@@ -18,7 +18,9 @@ export default function DriverCostHandlerPage() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second' | 'third'>(
     'first',
   );
-  const [list, setList] = useState(mockData.users);
+  const [list, setList] = useState(
+    mockData.users.filter((list) => !list.isCancelled && !list.isRejected),
+  );
 
   const { direction_costDetail } = useDirection();
   const isPc = useMedia().pc;
@@ -30,7 +32,9 @@ export default function DriverCostHandlerPage() {
   const handleTabChange = (tab: 'first' | 'second' | 'third') => {
     setCurrentTab(tab);
     if (tab === 'first') {
-      setList(mockData.users);
+      setList(
+        mockData.users.filter((list) => !list.isCancelled && !list.isRejected),
+      );
     } else if (tab === 'second') {
       setList(mockData.users.filter((list) => list.isConfirmed));
     } else {
@@ -94,20 +98,25 @@ export default function DriverCostHandlerPage() {
           <div className={style.cardList}>
             {selectedPage.map((user, index) => (
               <div key={index} className={style.card}>
-                <UserCard list={user} type='confirmedCost' />
+                <UserCard
+                  list={user}
+                  type={currentTab === 'third' ? undefined : 'confirmedCost'}
+                />
                 {disabledCard(index) && (
                   <div className={style.coveredCard}>
                     <div className={style.cardCover}></div>
                     <div className={style.cardButton}>
                       {text}
-                      <Button
-                        text='견적 상세보기'
-                        btnStyle='solid123pxBlue100'
-                        onClick={() => {
-                          user.estimateId &&
-                            direction_costDetail(user.estimateId);
-                        }}
-                      />
+                      {user.isMoveDateOver && (
+                        <Button
+                          text='견적 상세보기'
+                          btnStyle='solid123pxBlue100'
+                          onClick={() => {
+                            user.estimateId &&
+                              direction_costDetail(user.estimateId);
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                 )}
