@@ -19,6 +19,7 @@ export interface Mover {
   isConfirmed: boolean;
   serviceType: ChipType[];
   summary: string;
+  isReqConfirmed: boolean;
   isAssigned: boolean;
   profileImage: string;
   nickname: string;
@@ -70,6 +71,7 @@ export const mockData: mockDataProps = {
       id: 1,
       moverId: 2,
       isConfirmed: true,
+      isReqConfirmed: true,
       serviceType: ['SMALL', 'OFFICE', 'HOUSE'],
       summary: '맡겨만 주세요!',
       isAssigned: true,
@@ -89,6 +91,7 @@ export const mockData: mockDataProps = {
       id: 1,
       moverId: 1,
       isConfirmed: false,
+      isReqConfirmed: true,
       serviceType: ['HOUSE'],
       summary: '20년 경력입니다!',
       isAssigned: true,

@@ -26,7 +26,11 @@ export default function DriverCard({
   styles,
   list,
   count = 6,
-}: DriverProfileProps & { onClick?: () => void }) {
+  showPrice = true, // 가격이 표시되지 않는 카드 조건을 위해 (견적 상세페이지)
+}: DriverProfileProps & {
+  onClick?: () => void;
+  showPrice?: boolean;
+}) {
   const isPc = useMedia().pc;
   const chipList: ChipType[] = [];
 
@@ -107,12 +111,13 @@ export default function DriverCard({
       ) : (
         <DriverProfile list={list} type={type} styles={styles} />
       )}
-      {type === 'cost' && (
-        <div className={style.cost}>
-          <span className={style.text}>견적 금액</span>
-          {list.price && formatCurrency(list.price)}
-        </div>
-      )}
+      {type === 'cost' && showPrice && list.price && (
+  <div className={style.cost}>
+    <span className={style.text}>견적 금액</span>
+    {formatCurrency(list.price)}
+  </div>
+)}
+
       {(type === 'waiting' ||
         type === 'confirm' ||
         type === 'notConfirm' ||

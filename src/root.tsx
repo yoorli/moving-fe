@@ -5,6 +5,7 @@ import UserLayout from './layout/UserLayout';
 import DriverLoginPage from './page/driver/login';
 import UserLoginPage from './page/user/login';
 import UserFavoriteMover from './page/user/favoriteMover';
+import CostDetail from './page/user/costDetail';
 import PendingCost from './page/user/pendingCost';
 import ReceivedCost from './page/user/receivedCost';
 import ReceivedCostDetail from './page/user/receivedCostDetail';
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
           {
             path: 'receivedCost/:id',
             element: <ReceivedCostDetail />,
+          },
+          {
+            path: 'costDetail/:id',
+            element: <CostDetail />, // 견적 상세 페이지
           },
         ],
       },
