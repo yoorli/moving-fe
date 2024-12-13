@@ -6,13 +6,15 @@ import { getNotificationDate } from '../../lib/function/utils';
 import { mockData, Notification } from './mockData';
 
 type Props = {
-  modalController: () => void;
+  modalController?: (e: any) => void;
 };
 
 export function NotificationModal({ modalController }: Props) {
   // const { direction_userEditProfile, direction_userEditInfo } = useDirection();
-  const directionAndPopModal = () => {
-    modalController();
+  const directionAndPopModal = (e: any) => {
+    if (modalController) {
+      modalController(e);
+    }
   };
 
   const dateFormat = (createAt: string) => {
