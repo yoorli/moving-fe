@@ -7,8 +7,11 @@ import FixedBottomTab from './components/FixedBottomTab';
 import Button from '../../../components/btn/Button';
 import { MOCK_DATA } from './mockData';
 import { ChipProps } from '../../../components/chip/Chip';
-import { translateServiceRegion, translateServiceType } from './EnumMapper';
 import HeartIcon from '../../../assets/icons/ic_full_heart_small.svg';
+import {
+  translateServiceRegion,
+  translateServiceType,
+} from '../../../lib/function/utils';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -37,6 +40,9 @@ const DriverDetailPage = () => {
     serviceType: driver.serviceType.map((type) => type as ChipProps['type']),
   };
 
+  const translatedTypes = translateServiceType(driver.serviceType);
+  const translatedRegions = translateServiceRegion(driver.serviceRegion);
+
   return (
     <div className={style.outerContainer}>
       <div className={style.noPadding}></div>
@@ -50,18 +56,18 @@ const DriverDetailPage = () => {
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>제공 서비스</h2>
             <div className={style.chips}>
-              {driver.serviceType.map((type, index) => (
+              {translatedTypes.map((type, index) => (
                 <span key={index} className={style.serviceChip}>
-                  {translateServiceType(type)}
+                  {type}
                 </span>
               ))}
             </div>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>서비스 가능 지역</h2>
             <div className={style.chips}>
-              {driver.serviceRegion.map((region, index) => (
+              {translatedRegions.map((region, index) => (
                 <span key={index} className={style.regionChip}>
-                  {translateServiceRegion(region)}
+                  {region}
                 </span>
               ))}
             </div>

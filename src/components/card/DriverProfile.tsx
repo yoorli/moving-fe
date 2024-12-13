@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
-import { formatCurrency } from '../../lib/function/utils';
+import {
+  formatCurrency,
+  translateServiceRegion,
+  translateServiceType,
+} from '../../lib/function/utils';
 import { DriverProfileProps } from './type';
 
 import style from './DriverProfile.module.css';
@@ -72,7 +76,8 @@ export default function DriverProfile({
             <div className={style.detailsPType}>
               <span className={style.textPType}>
                 <span className={style.movingLabel}>제공 서비스</span>
-                {user.serviceType?.join(', ')}
+                {user.serviceType &&
+                  translateServiceType(user.serviceType)?.join(', ')}
               </span>
               <span
                 className={classNames(style.separator, {
@@ -83,7 +88,8 @@ export default function DriverProfile({
               </span>
               <span className={style.textPType}>
                 <span className={style.movingLabel}>지역</span>
-                {user.serviceRegion?.join(', ')}
+                {user.serviceRegion &&
+                  translateServiceRegion(user.serviceRegion)?.join(', ')}
               </span>
             </div>
           </>
