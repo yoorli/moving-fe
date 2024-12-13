@@ -12,7 +12,7 @@ interface CostInfoProps {
   movingDate: string; // 이사 날짜 (이용일)
   departure: string; // 출발지
   arrival: string; // 도착지
-  comment: string; //요구 사항
+  comment?: string; //요구 사항
   hasButton?: boolean; // 버튼 유무
   setIsModalOpen?: (value: boolean) => void; // Modal 열기
 }
