@@ -1,13 +1,13 @@
 import React from 'react';
-
 import classNames from 'classnames';
+
 import DriverProfile from './DriverProfile';
 import Button from '../btn/Button';
 import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
-import { formatCurrency } from '../../lib/function/utils';
-import { DriverProfileProps } from './type';
+import { formatCurrency, getChips } from '../../lib/function/utils';
+import { ChipType, DriverProfileProps } from './type';
 
 import style from './DriverCard.module.css';
 
@@ -24,9 +24,21 @@ export default function DriverCard({
   onClick, // onClick prop 추가
   type,
   styles,
-  list: user,
-}: DriverProfileProps & { onClick?: () => void }) {
+  list,
+  count = 6,
+  showPrice = true, // 가격이 표시되지 않는 카드 조건을 위해 (견적 상세페이지)
+}: DriverProfileProps & {
+  onClick?: () => void;
+  showPrice?: boolean;
+}) {
   const isPc = useMedia().pc;
+  const chipList: ChipType[] = [];
+
+  if (list.isConfirmed) chipList.push('CONFIRM');
+  list.serviceType?.map((type) => chipList.push(type));
+  if (list.isAssigned) chipList.push('ASSIGN');
+
+  const chips = getChips(chipList, count);
 
   return (
     <div
@@ -43,15 +55,15 @@ export default function DriverCard({
           {!isPc && (
             <div className={style.profileImage}>
               <img
-                src={user.profileImg}
-                alt={`${user.moverName}'s profile`}
+                src={list.profileImg}
+                alt={`${list.moverName}'s profile`}
                 className={style.avatar}
               />
             </div>
           )}
           <div className={style.namePType}>
-            {user.moverName}
-            <div className={style.contentPType}>{user.summary}</div>
+            {list.moverName}
+            <div className={style.contentPType}>{list.summary}</div>
           </div>
           <div className={style.buttonBoxPType}>
             <Button
@@ -69,11 +81,15 @@ export default function DriverCard({
           </div>
         </div>
       ) : (
-        <div className={style.label}>
-          {user.serviceType?.map((type, index) => (
-            <Chip key={index} type={type} />
+        // 칩
+        <div className={style.labelBox}>
+          {chips.map((row, rowIndex) => (
+            <div key={rowIndex} className={style.label}>
+              {row.map((chip, chipIndex) => (
+                <Chip key={chipIndex} type={chip} />
+              ))}
+            </div>
           ))}
-          {user.isAssigned && <Chip type='ASSIGN' />}
         </div>
       )}
       {(type === 'cost' || type === undefined) && (
@@ -84,7 +100,7 @@ export default function DriverCard({
               [style.contentCType]: type === 'cost',
             })}
           >
-            {user.summary}
+            {list.summary}
           </span>
         </>
       )}
@@ -93,14 +109,15 @@ export default function DriverCard({
       ) : type === 'cancel' ? (
         <span className={style.noProfile}>취소된 견적</span>
       ) : (
-        <DriverProfile list={user} type={type} styles={styles} />
+        <DriverProfile list={list} type={type} styles={styles} />
       )}
-      {type === 'cost' && user.price &&(
-        <div className={style.cost}>
-          <span className={style.text}>견적 금액</span>
-          {user.price && formatCurrency(user.price)}
-        </div>
-      )}
+      {type === 'cost' && showPrice && list.price && (
+  <div className={style.cost}>
+    <span className={style.text}>견적 금액</span>
+    {formatCurrency(list.price)}
+  </div>
+)}
+
       {(type === 'waiting' ||
         type === 'confirm' ||
         type === 'notConfirm' ||
@@ -113,7 +130,7 @@ export default function DriverCard({
               })}
             >
               <span className={style.movingLabel}>이사일</span>{' '}
-              {user.movingDate}
+              {list.movingDate}
             </span>
             <span
               className={classNames(style.separator, {
@@ -123,11 +140,11 @@ export default function DriverCard({
               |
             </span>
             <span className={style.movingInfo}>
-              <span className={style.movingLabel}>출발</span> {user.departure}
+              <span className={style.movingLabel}>출발</span> {list.departure}
             </span>
             <span className={style.separator}>|</span>
             <span className={style.movingInfo}>
-              <span className={style.movingLabel}>도착</span> {user.arrival}
+              <span className={style.movingLabel}>도착</span> {list.arrival}
             </span>
           </div>
           <div className={style.cost}>
@@ -136,7 +153,7 @@ export default function DriverCard({
               ? '미확정'
               : type === 'cancel'
                 ? '취소'
-                : user.price && formatCurrency(user.price)}
+                : list.price && formatCurrency(list.price)}
           </div>
           <div className={style.costBtn}>
             {type === 'waiting' && (

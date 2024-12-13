@@ -25,7 +25,6 @@
 
 @media (min-width: 1200px) {
   .searchContainer {
-    max-width: 955px;
     height: 64px;
   }
 

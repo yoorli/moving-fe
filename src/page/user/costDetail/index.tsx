@@ -28,9 +28,6 @@ const CostDetail = () => {
     );
   }
 
-  // price 필드를 undefined로 설정 => DriverCard에서 숨김
-  const driverWithoutPrice = { ...driver, price: undefined };
-
   const costInfoData = {
     id: driver.id || 1,
     name: driver.name || '홍길동',
@@ -53,7 +50,7 @@ const CostDetail = () => {
 
       <div className={style.container}>
         <div className={style.leftFilters}>
-          <DriverCard list={driverWithoutPrice} type='cost' />
+          <DriverCard list={driver} type='cost' showPrice={false} />
           <div className={style.section}>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>견적가</h2>
@@ -105,4 +102,3 @@ const CostDetail = () => {
 };
 
 export default CostDetail;
-

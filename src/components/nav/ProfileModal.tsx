@@ -6,7 +6,7 @@ type Props = {
 };
 
 export function UserProfileModal({ modalController }: Props) {
-  const { direction_userEditProfile, direction_userEditInfo } = useDirection();
+  const { direction_userEditProfile, direction_userEditInfo, direction_favoriteMover, direction_movingReview } = useDirection();
   const directionAndPopModal = (direction: () => void) => {
     direction();
     modalController();
@@ -32,8 +32,22 @@ export function UserProfileModal({ modalController }: Props) {
       >
         기본정보 수정
       </div>
-      <div className={style.item}>찜한 기사님</div>
-      <div className={style.item}>이사 리뷰</div>
+      <div
+        onClick={() => {
+          directionAndPopModal(direction_favoriteMover);
+        }}
+        className={style.item}
+      >
+        찜한 기사님
+      </div>
+      <div
+        onClick={() => {
+          directionAndPopModal(direction_movingReview);
+        }}
+        className={style.item}
+      >
+        이사 리뷰
+      </div>
       <div className={style.logout}>로그아웃</div>
     </div>
   );
