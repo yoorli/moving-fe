@@ -5,7 +5,11 @@ import Button from '../btn/Button';
 import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
-import { getDate, formatCurrency, getChips } from '../../lib/function/utils';
+import {
+  getNotificationDate,
+  formatCurrency,
+  getChips,
+} from '../../lib/function/utils';
 import { ChipType, UserProfileProps } from './type';
 
 import style from './UserCard.module.css';
@@ -37,9 +41,9 @@ export default function UserCard({
     >
       <div className={style.top}>
         {/* 칩 */}
-        <div className={style.labelBox}>
+        <div className={style.chipBox}>
           {chips.map((row, rowIndex) => (
-            <div key={rowIndex} className={style.label}>
+            <div key={rowIndex} className={style.chip}>
               {row.map((chip, chipIndex) => (
                 <Chip key={chipIndex} type={chip} />
               ))}
@@ -48,16 +52,21 @@ export default function UserCard({
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
-            {list.createAt && getDate(list.createAt)}
+            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
           </div>
         ) : (
           <div className={style.createAtRType}>
-            {list.createAt && getDate(list.createAt)}
+            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
           </div>
         )}
       </div>
       <UserProfile type={type} list={list} />
-      {list.comment && <span>요청사항 : {list.comment}</span>}
+      {list.comment && (
+        <div className={style.labelBox}>
+          <div className={style.label}>요청사항</div>
+          {list.comment}
+        </div>
+      )}
       {type === 'receive' && (
         <div className={style.btnBox}>
           <Button
@@ -88,7 +97,7 @@ export default function UserCard({
           <div className={style.review}>{list.content}</div>
           {!isPc && (
             <div className={style.createAtRTypeNoPc}>
-              {list.createAt && getDate(list.createAt)}
+              {list.createAt && getNotificationDate(list.createAt, 'noSec')}
             </div>
           )}
         </>

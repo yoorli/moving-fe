@@ -5,6 +5,7 @@ import UserLayout from './layout/UserLayout';
 import DriverLoginPage from './page/driver/login';
 import UserLoginPage from './page/user/login';
 import UserFavoriteMover from './page/user/favoriteMover';
+import CostDetail from './page/user/costDetail';
 import PendingCost from './page/user/pendingCost';
 import ReceivedCost from './page/user/receivedCost';
 import ReceivedCostDetail from './page/user/receivedCostDetail';
@@ -24,6 +25,7 @@ import MyPage from './page/driver/myPage';
 import DriverCostHandlerPage from './page/driver/costHandler';
 import SearchDriverForGuest from './page/root/searchDriver';
 import DriverDetailPage from './page/root/searchDriver/DriverDetailPage';
+import DriverCostDetailPage from './page/driver/costDetail';
 
 const router = createBrowserRouter([
   {
@@ -83,6 +85,10 @@ const router = createBrowserRouter([
             path: 'receivedCost/:id',
             element: <ReceivedCostDetail />,
           },
+          {
+            path: 'costDetail/:id',
+            element: <CostDetail />, // 견적 상세 페이지
+          },
         ],
       },
       {
@@ -134,6 +140,10 @@ const router = createBrowserRouter([
       {
         path: 'costHandler',
         element: <DriverCostHandlerPage />,
+      },
+      {
+        path: 'costHandler/:id',
+        element: <DriverCostDetailPage />,
       },
       {
         path: 'myPage',

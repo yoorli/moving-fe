@@ -57,7 +57,7 @@ export const mockData: DriverData = {
     // 확정된 견적 요청일 때
     {
       moverId: 1,
-      serviceType: ['SMALL', 'OFFICE'],
+      serviceType: ['SMALL', 'OFFICE', 'HOUSE'],
       isConfirmed: true, // 확정
       isCancelled: false, //취소
       isAssigned: true, //지정
@@ -161,26 +161,26 @@ export const mockData: DriverData = {
       isFavorite: false,
       price: 720000,
     },
-    {
-      moverId: 6,
-      serviceType: ['SMALL'],
-      isConfirmed: false,
-      isCancelled: true,
-      profileImage: 'image4',
-      moverName: 'driver4',
-      career: 12,
-      reviewStats: {
-        averageScore: 4.7,
-        totalReviews: 50,
-      },
-      favoriteCount: 35,
-      confirmationCount: 45,
-      movingDate: '2024.09.01',
-      departure: '인천광역시 연수구',
-      arrival: '인천광역시 계양구',
-      isFavorite: false,
-      price: 720000,
-    },
+    // {
+    //   moverId: 6,
+    //   serviceType: ['SMALL'],
+    //   isConfirmed: false,
+    //   isCancelled: true,
+    //   profileImage: 'image4',
+    //   moverName: 'driver4',
+    //   career: 12,
+    //   reviewStats: {
+    //     averageScore: 4.7,
+    //     totalReviews: 50,
+    //   },
+    //   favoriteCount: 35,
+    //   confirmationCount: 45,
+    //   movingDate: '2024.09.01',
+    //   departure: '인천광역시 연수구',
+    //   arrival: '인천광역시 계양구',
+    //   isFavorite: false,
+    //   price: 720000,
+    // },
     // {
     //   id: 7,
     //   serviceType: ['SMALL'],

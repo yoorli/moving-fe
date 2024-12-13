@@ -1,5 +1,5 @@
+import { useNavigate } from 'react-router-dom';
 import DriverCard from '../../../../components/card/DriverCard';
-// import useDirection from '../../../../lib/function/direction';
 import { mockData } from './mockData';
 import style from './PendingList.module.css';
 
@@ -10,14 +10,16 @@ interface PendingListProps {
 export default function PendingList({
   setIsConfirmModalOpen,
 }: PendingListProps) {
-  // const { direction_땡땡 } = useDirection(); 받았던 견적_견적 상세 페이지
+  const navigate = useNavigate();
+
   const confirmCostBtn = () => {
     console.log('견적 확정하기 모달 띄우기');
     setIsConfirmModalOpen(true);
   };
 
-  const detailbtn = () => {
+  const detailbtn = (cardData: any) => {
     console.log('받았던 견적_견적 상세 페이지로 리다이렉트');
+    navigate(`/user/costDetail/${cardData.id}`, { state: cardData }); // 카드 데이터 전달
   };
 
   return (
@@ -27,13 +29,13 @@ export default function PendingList({
           <DriverCard
             key={cost.estimateId}
             list={cost}
-            type='waiting'
+            type="waiting"
             confirmCostBtn={confirmCostBtn}
-            detailBtn={detailbtn}
+            detailBtn={() => detailbtn(cost)} // 카드 데이터 전달
           />
         ))}
       </div>
     </div>
   );
-  3;
 }
+

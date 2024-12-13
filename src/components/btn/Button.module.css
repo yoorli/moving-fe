@@ -127,19 +127,19 @@
   font-size: 20px;
 }
 
-/* 내 견적 관리_대기 중인 견적 - 견적 확정하기 */
+/* 내 견적 관리_대기 중인 견적 - 견적 확정하기(확정이 된 상태 - 버튼 비활성화)*/
 .outlined314pxBlue300 {
   width: 100%;
   height: 64px;
   border-radius: 16px;
-  background-color: var(--gray-50);
-  color: var(--black-500);
-  border: 1px solid var(--blue-300);
+  background-color: var(--gray-100);
+  color: var(--gray-50);
+  border: 1px solid var(--gray-100);
   font-weight: 600;
   font-size: 20px;
 }
 
-/* 내 견적 관리_대기 중인 견적 - 견적 확정하기 */
+/* 내 견적 관리_대기 중인 견적 - 견적 확정하기(확정이 안된 상태 - 버튼 활성화) */
 .solid314pxBlue300 {
   width: 100%;
   height: 64px;
