@@ -72,9 +72,9 @@ export const mockData: mockDataProps = {
       moverId: 2,
       isConfirmed: true,
       isReqConfirmed: true,
-      serviceType: ['SMALL', 'OFFICE'],
+      serviceType: ['SMALL', 'OFFICE', 'HOUSE'],
       summary: '맡겨만 주세요!',
-      isAssigned: false,
+      isAssigned: true,
       profileImage: 'https://via.placeholder.com/150',
       nickname: '기사 별명',
       reviewStats: {

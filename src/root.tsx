@@ -25,6 +25,7 @@ import MyPage from './page/driver/myPage';
 import DriverCostHandlerPage from './page/driver/costHandler';
 import SearchDriverForGuest from './page/root/searchDriver';
 import DriverDetailPage from './page/root/searchDriver/DriverDetailPage';
+import DriverCostDetailPage from './page/driver/costDetail';
 
 const router = createBrowserRouter([
   {
@@ -139,6 +140,10 @@ const router = createBrowserRouter([
       {
         path: 'costHandler',
         element: <DriverCostHandlerPage />,
+      },
+      {
+        path: 'costHandler/:id',
+        element: <DriverCostDetailPage />,
       },
       {
         path: 'myPage',

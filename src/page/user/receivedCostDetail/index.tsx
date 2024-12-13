@@ -2,10 +2,11 @@ import { useState } from 'react';
 // import { useParams } from 'react-router-dom';
 import Tab from '../../../components/tab/Tab';
 import style from './index.module.css';
-import ReceivedCostInfo from './components/ReceivedCostInfo';
+
 import ReceivedList from './components/ReceivedList';
 import { mockData } from './mockData';
 import useDirection from '../../../lib/function/direction';
+import CostInfo from '../../../components/costInfo/CostInfo';
 
 export default function ReceivedCostDetail() {
   const { direction_pendingCost, direction_receivedCost } = useDirection();
@@ -33,7 +34,14 @@ export default function ReceivedCostDetail() {
       <div className={style.container}>
         <div className={style.layout}>
           <div className={style.main}>
-            <ReceivedCostInfo info={mockData.info} />
+            <CostInfo
+              movingRequest={mockData.info.movingRequest}
+              movingType={mockData.info.movingType}
+              movingDate={mockData.info.movingDate}
+              departure={mockData.info.departure}
+              arrival={mockData.info.arrival}
+              comment={mockData.info.comment}
+            />
             <ReceivedList list={mockData.list} count={mockData.total} />
           </div>
         </div>
