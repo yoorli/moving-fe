@@ -6,13 +6,23 @@ import CostInfo from '../../../components/costInfo/CostInfo';
 import Button from '../../../components/btn/Button';
 import Tab from '../../../components/tab/Tab';
 import Toast from '../../../components/toast/Toast';
+import HeartEmptyIcon from '../../../assets/icons/ic_empty_heart_small.svg';
+import HeartIcon from '../../../assets/icons/ic_full_heart_small.svg';
 import style from './index.module.css';
 
 const CostDetail = () => {
   const location = useLocation();
   const driver = location.state; // 전달받은 데이터
 
-  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
+  const [isMobileView, setIsMobileView] = useState<boolean>(
+    window.innerWidth <= 1199,
+  );
+  const [isConfirmed, setIsConfirmed] = useState<boolean>(
+    driver?.isConfirmed || false,
+  );
+  const [isFavorite, setIsFavorite] = useState<boolean>(
+    driver?.isFavorite || false,
+  );
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
@@ -31,7 +41,7 @@ const CostDetail = () => {
   const costInfoData = {
     id: driver.id || 1,
     name: driver.name || '홍길동',
-    isConfirmed: driver.isConfirmed || false,
+    isConfirmed,
     movingRequest: driver.movingRequest || '2023-10-01',
     movingType: driver.movingType || 'HOUSE',
     movingDate: driver.movingDate || '2023-10-15',
@@ -40,7 +50,15 @@ const CostDetail = () => {
     comment: driver.comment || '엘리베이터가 없는 빌라 3층입니다.',
   };
 
-  const shouldShowToast = driver.isReqConfirmed && !driver.isConfirmed; // Toast 메세지 나올 조건
+  const shouldShowToast = driver.isReqConfirmed && !isConfirmed;
+
+  const handleConfirmClick = () => {
+    setIsConfirmed(true);
+  };
+
+  const handleFavoriteToggle = () => {
+    setIsFavorite(!isFavorite);
+  };
 
   return (
     <div className={style.outerContainer}>
@@ -77,28 +95,48 @@ const CostDetail = () => {
           </div>
         </div>
 
-        <div className={style.rightFilters}>
-          {driver.isReqConfirmed ? (
-            <p className={style.shareText}>견적서 공유하기</p>
-          ) : (
-            <Button
-              text='견적 확정하기'
-              btnStyle={
-                driver.isConfirmed
-                  ? 'outlined314pxBlue300'
-                  : 'solid314pxBlue300'
-              }
-              className={style.confirmButton}
-            />
-          )}
-        </div>
+        {!isMobileView && (
+          <div className={style.rightFilters}>
+            {driver.isReqConfirmed ? (
+              <p className={style.shareText}>견적서 공유하기</p>
+            ) : (
+              <>
+                <Button
+                  text='견적 찜하기'
+                  btnStyle='outlined354pxLine200'
+                  src={isFavorite ? HeartIcon : HeartEmptyIcon}
+                  srcLocationFront
+                  className={style.heartButton}
+                  onClick={handleFavoriteToggle}
+                />
+                <div style={{ height: '32px' }}></div>
+                <Button
+                  text='견적 확정하기'
+                  btnStyle={
+                    isConfirmed ? 'outlined314pxBlue300' : 'solid314pxBlue300'
+                  }
+                  className={style.confirmButton}
+                  disabled={isConfirmed}
+                  onClick={handleConfirmClick}
+                />
+              </>
+            )}
+          </div>
+        )}
       </div>
 
-      {!driver.isReqConfirmed && isMobileView && (
-        <CostDetailBottomTab isConfirmed={driver.isConfirmed} />
+      {isMobileView && (
+        <CostDetailBottomTab
+          isFavorite={isFavorite}
+          setIsFavorite={setIsFavorite}
+          isConfirmed={isConfirmed}
+          setIsConfirmed={setIsConfirmed}
+          isReqConfirmed={driver.isReqConfirmed}
+        />
       )}
     </div>
   );
 };
 
 export default CostDetail;
+
