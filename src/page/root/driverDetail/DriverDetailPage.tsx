@@ -124,6 +124,7 @@ const DriverDetailPage = () => {
           isAssigned={isAssigned}
           isConfirmed={driver.isConfirmed}
           setModalOpen={setIsModalOpen}
+          setIsFavorite={setIsFavorite}
         />
       )}
       {isModalOpen && (

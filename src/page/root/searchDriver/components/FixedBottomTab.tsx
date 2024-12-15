@@ -9,10 +9,12 @@ interface FixedBottomTabProps {
   isAssigned: boolean;
   isConfirmed: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsFavorite: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FixedBottomTab = ({
   isFavorite,
+  setIsFavorite,
   isAssigned,
   isConfirmed,
   setModalOpen,
@@ -26,6 +28,7 @@ const FixedBottomTab = ({
           alt="찜하기 아이콘"
           srcLocationFront
           className={style.heartButton}
+          onClick={() => setIsFavorite(!isFavorite)}
         />
         <Button
           text={isAssigned ? "지정 견적 요청 완료" : "지정 견적 요청하기"}
@@ -44,5 +47,4 @@ const FixedBottomTab = ({
 };
 
 export default FixedBottomTab;
-
 
