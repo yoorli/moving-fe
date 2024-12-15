@@ -24,7 +24,7 @@ import DriverRegisterPage from './page/driver/register';
 import MyPage from './page/driver/myPage';
 import DriverCostHandlerPage from './page/driver/costHandler';
 import SearchDriverForGuest from './page/root/searchDriver';
-import DriverDetailPage from './page/root/searchDriver/DriverDetailPage';
+import DriverDetailPage from './page/root/driverDetail/DriverDetailPage';
 import DriverCostDetailPage from './page/driver/costDetail';
 
 const router = createBrowserRouter([
