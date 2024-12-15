@@ -111,7 +111,7 @@ const CostDetail = () => {
                 />
                 <div style={{ height: '32px' }}></div>
                 <Button
-                  text='견적 확정하기'
+                  text={isConfirmed ? '견적 확정 완료' : '견적 확정하기'}
                   btnStyle={
                     isConfirmed ? 'outlined314pxBlue300' : 'solid314pxBlue300'
                   }
@@ -139,4 +139,3 @@ const CostDetail = () => {
 };
 
 export default CostDetail;
-

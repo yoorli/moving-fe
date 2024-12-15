@@ -48,7 +48,7 @@ function CostDetailBottomTab({
         <div style={{ height: '16px' }}></div>
         <Button
           btnStyle={isConfirmed ? 'outlined314pxBlue300' : 'solid314pxBlue300'}
-          text=''
+          text={isConfirmed ? '견적 확정 완료' : '견적 확정하기'}
           className={style.confirmButton}
           disabled={isConfirmed}
           onClick={handleConfirmClick}

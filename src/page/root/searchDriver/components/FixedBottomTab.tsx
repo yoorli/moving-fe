@@ -10,12 +10,14 @@ interface FixedBottomTabProps {
   isConfirmed: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsFavorite: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAssigned: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FixedBottomTab = ({
   isFavorite,
   setIsFavorite,
   isAssigned,
+  setIsAssigned,
   isConfirmed,
   setModalOpen,
 }: FixedBottomTabProps) => {
@@ -36,7 +38,9 @@ const FixedBottomTab = ({
           disabled={isAssigned}
           className={style.requestButton}
           onClick={() => {
-            if (!isAssigned && !isConfirmed) {
+            if (!isAssigned && isConfirmed) {
+              setIsAssigned(true);
+            } else if (!isConfirmed) {
               setModalOpen(true);
             }
           }}
