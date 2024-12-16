@@ -61,7 +61,7 @@ export default function UserCard({
         )}
       </div>
       <UserProfile type={type} list={list} />
-      {list.comment && (
+      {list.comment && type == 'receive' &&(
         <div className={style.labelBox}>
           <div className={style.label}>요청사항</div>
           {list.comment}

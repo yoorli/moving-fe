@@ -22,7 +22,7 @@ export default function DriverCostDetailPage() {
     movingDate: user.movingDate,
     departure: user.detailDeparture,
     arrival: user.detailArrival,
-    comment: user.comment,
+    comment: user.customerComment,
   };
 
   return (
@@ -38,7 +38,7 @@ export default function DriverCostDetailPage() {
           )}
           <div className={style.estimate}>
             <div className={style.label}>코멘트</div>
-            {user.comment && user.comment}
+            {user.moverComment && user.moverComment}
           </div>
           <div className={style.estimate}>
             <div className={style.label}>견적가</div>
