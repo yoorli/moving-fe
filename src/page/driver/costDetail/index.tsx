@@ -37,6 +37,10 @@ export default function DriverCostDetailPage() {
             </div>
           )}
           <div className={style.estimate}>
+            <div className={style.label}>코멘트</div>
+            {user.comment && user.comment}
+          </div>
+          <div className={style.estimate}>
             <div className={style.label}>견적가</div>
             {formatCurrency(user.price)}
           </div>
