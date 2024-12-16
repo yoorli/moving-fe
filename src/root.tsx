@@ -24,13 +24,9 @@ import DriverRegisterPage from './page/driver/register';
 import MyPage from './page/driver/myPage';
 import DriverCostHandlerPage from './page/driver/costHandler';
 import SearchDriverForGuest from './page/root/searchDriver';
-<<<<<<< HEAD
-import DriverDetailPage from './page/root/DriverDetailPage';
 import { AuthProvider } from './context/authContext';
-=======
 import DriverDetailPage from './page/root/driverDetail/DriverDetailPage';
 import DriverCostDetailPage from './page/driver/costDetail';
->>>>>>> main
 
 const router = createBrowserRouter([
   {
@@ -126,7 +122,26 @@ const router = createBrowserRouter([
         ],
       },
       {
-<<<<<<< HEAD
+        path: 'editProfile',
+        element: <UserEditProfilePage />,
+      },
+      {
+        path: 'movingReview',
+        element: <UserMovingReview />,
+      },
+      {
+        path: 'editProfile',
+        element: <UserEditProfilePage />,
+      },
+      {
+        path: 'editInfo',
+        element: <UserEditInfoPage />,
+      },
+      {
+        path: 'register',
+        element: <UserRegisterPage />,
+      },
+      {
         path: '/driver',
         element: <DriverLayout />,
         children: [
@@ -148,71 +163,17 @@ const router = createBrowserRouter([
           },
           {
             path: 'costHandler',
-            element: (
-              <span>
-                <DriverCostHandlerPage />
-              </span>
-            ),
+            element: <DriverCostHandlerPage />,
+          },
+          {
+            path: 'costHandler/:id',
+            element: <DriverCostDetailPage />,
           },
           {
             path: 'myPage',
-            element: <span>myPage</span>,
+            element: <MyPage />,
           },
         ],
-=======
-        path: 'editProfile',
-        element: <UserEditProfilePage />,
-      },
-      {
-        path: 'movingReview',
-        element: <UserMovingReview />,
-      },
-      {
-        path: 'editProfile',
-        element: <UserEditProfilePage />,
-      },
-      {
-        path: 'editInfo',
-        element: <UserEditInfoPage />,
-      },
-      {
-        path: 'register',
-        element: <UserRegisterPage />,
-      },
-    ],
-  },
-  {
-    path: '/driver',
-    element: <DriverLayout />,
-    children: [
-      {
-        path: 'costCall',
-        element: <DriverCostCallPage />,
-      },
-      {
-        path: 'register',
-        element: <DriverRegisterPage />,
-      },
-      {
-        path: 'editProfile',
-        element: <DriverEditProfilePage />,
-      },
-      {
-        path: 'editInfo',
-        element: <DriverEditInfoPage />,
-      },
-      {
-        path: 'costHandler',
-        element: <DriverCostHandlerPage />,
-      },
-      {
-        path: 'costHandler/:id',
-        element: <DriverCostDetailPage />,
-      },
-      {
-        path: 'myPage',
-        element: <MyPage />,
->>>>>>> main
       },
     ],
   },

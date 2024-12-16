@@ -7,7 +7,7 @@ import {
   UserMenuModal,
   NonLoginMenuModal,
 } from '../components/nav/NavMenuModal';
-import { NonLoginNav, UserNav } from '../components/nav/Nav';
+import { DriverNav, NonLoginNav, UserNav } from '../components/nav/Nav';
 import { useMedia } from '../lib/function/useMediaQuery';
 import { AuthContext } from '../context/authContext';
 
@@ -55,16 +55,29 @@ export default function RendingLayout() {
       <div className={style.container}>
         <div className={style.wrapper}>
           {user ? (
-            <UserNav
-              menuRef={menuRef}
-              profileRef={profileRef}
-              notificationRef={notificationRef}
-              modalController={() => toggleModal('menu')}
-              profileController={() => toggleModal('profile')}
-              notificationController={() => toggleModal('notification')}
-              profileModal={activeModal === 'profile'}
-              notificationModal={activeModal === 'notification'}
-            />
+            user.userType === 'CUSTOMER' ? (
+              <UserNav
+                menuRef={menuRef}
+                profileRef={profileRef}
+                notificationRef={notificationRef}
+                modalController={() => toggleModal('menu')}
+                profileController={() => toggleModal('profile')}
+                notificationController={() => toggleModal('notification')}
+                profileModal={activeModal === 'profile'}
+                notificationModal={activeModal === 'notification'}
+              />
+            ) : (
+              <DriverNav
+                menuRef={menuRef}
+                profileRef={profileRef}
+                notificationRef={notificationRef}
+                modalController={() => toggleModal('menu')}
+                profileController={() => toggleModal('profile')}
+                notificationController={() => toggleModal('notification')}
+                profileModal={activeModal === 'profile'}
+                notificationModal={activeModal === 'notification'}
+              />
+            )
           ) : (
             <NonLoginNav
               menuRef={menuRef}
