@@ -8,15 +8,9 @@ import { useMedia } from '../lib/function/useMediaQuery';
 import { AuthContext } from '../context/authContext';
 
 export default function RendingLayout() {
-  const context = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [modal, setModal] = useState<boolean>(false);
   const { pc } = useMedia();
-
-  // const user = {
-  //   name: '김대건',
-  // };
-
-  const { user } = context;
 
   const modalController = () => {
     setModal((prev) => !prev);

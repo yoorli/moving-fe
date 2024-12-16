@@ -13,6 +13,7 @@ export function AuthProvider() {
     try {
       const response = await auth.get('/user/me');
       setUser(response.data);
+      console.log(response.data);
     } catch (e) {
       console.log(e);
     }

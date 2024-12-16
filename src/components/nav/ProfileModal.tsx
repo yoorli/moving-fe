@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import { auth } from '../../lib/api/auth';
 import useDirection from '../../lib/function/direction';
 import style from './ProfileModal.module.css';
+import { AuthContext } from '../../context/authContext';
 
 const logout = async () => {
   const response = await auth.post('/user/logout');
@@ -18,11 +20,12 @@ export function UserProfileModal({ modalController }: Props) {
     direction();
     modalController();
   };
+  const { user } = useContext(AuthContext);
 
   return (
     <div className={style.container}>
       <div className={style.title}>
-        <span>김가나 고객님</span>
+        <span>{user.name} 고객님</span>
       </div>
       <div
         onClick={() => {
@@ -59,10 +62,11 @@ export function DriverProfileModal({ modalController }: Props) {
     direction();
     modalController();
   };
+  const { user } = useContext(AuthContext);
   return (
     <div className={style.containerD}>
       <div className={style.title}>
-        <span>김기사 기사님</span>
+        <span>{user.name} 기사님</span>
       </div>
       <div
         onClick={() => {
