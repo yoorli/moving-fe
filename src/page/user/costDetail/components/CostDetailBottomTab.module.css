@@ -1,0 +1,40 @@
+.fixedBottomTab {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 74px;
+  background-color: #ffffff;
+  z-index: 1000;
+  border: #ffffff;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 0 24px;
+  gap: 8px;
+}
+
+.heartButton {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  border: 1px solid #e6e6e6;
+  padding: 10px;
+}
+
+.confirmButton {
+  flex-grow: 1;
+  height: 54px;
+}
+
+@media (min-width: 744px) and (max-width: 1199px) {
+  .container {
+    padding: 0 72px;
+  }
+}
+

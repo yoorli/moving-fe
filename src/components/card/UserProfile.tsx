@@ -48,9 +48,8 @@ export function getStars(rating: number) {
   return stars;
 }
 
-export default function UserProfile({ type, user }: UserProfileProps) {
+export default function UserProfile({ type, list: user }: UserProfileProps) {
   const isPc = useMedia().pc;
-  // const isTablet = useMedia().tablet;
   const isMobile = useMedia().mobile;
   return (
     <>
@@ -60,7 +59,7 @@ export default function UserProfile({ type, user }: UserProfileProps) {
             [style.profilePadding]: type !== 'confirmedCost' && isPc,
           })}
         >
-          <div className={style.userInfo}>{user.customer} 고객님</div>
+          <div className={style.userInfo}>{user.customerName} 고객님</div>
           <div
             className={
               type === 'modal' || isMobile ? style.hidden : style.separator

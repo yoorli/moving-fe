@@ -1,19 +1,19 @@
 .infoContainer {
-  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  margin: 48px 0px;
+  gap: 40px;
 }
 
 .infoTitle {
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 40px;
 }
 
 .infoMain {
   display: flex;
   flex-direction: column;
-  padding: 32px 40px;
   border-radius: 16px;
-  gap: 12px;
   min-height: 192px;
   height: 100%;
 }
@@ -25,9 +25,29 @@
   border-radius: 16px;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1199px) and (min-width: 744px) {
   .info {
     font-size: 16px;
     margin-bottom: 20px;
+  }
+
+  .infoTitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 743px) {
+  .infoMain {
+    padding: 0px 0px;
+  }
+
+  .infoTitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    margin-bottom: 30px;
   }
 }

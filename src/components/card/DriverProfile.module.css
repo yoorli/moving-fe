@@ -69,11 +69,12 @@
 }
 
 .avatarLarge {
-  width: 100px;
+  width: 120px;
   height: 100px;
 }
 
 .info {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -100,7 +101,7 @@
 .favoriteCount {
   min-width: 49px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-start;
   align-items: center;
   gap: 10px;
   color: var(--blue-400);
@@ -215,8 +216,17 @@
 
 @media (max-width: 743px) {
   .profile {
-    gap: 12px;
+    gap: 10px;
     padding: 10px 0;
+  }
+
+  .profileImage {
+    margin-left: 5px;
+  }
+
+  .favoriteCount {
+    gap: 5px;
+    padding-right: 15px;
   }
 
   .detailsPType {
@@ -230,9 +240,6 @@
   .profile {
     max-width: 907px;
     padding: 10px 8px;
-  }
-
-  .profile {
     gap: 12px;
   }
 }

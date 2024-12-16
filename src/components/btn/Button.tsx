@@ -23,6 +23,8 @@ const BUTTON_STYLES = {
   outlined354pxLine200: 'outlined354pxLine200',
   outlined314pxLine200: 'outlined314pxLine200',
   outlined660pxBlue300: 'outlined660pxBlue300',
+  outlined314pxBlue300: 'outlined314pxBlue300',
+  outlinedRed200: '.outlinedRed200',
   // 기사님 only
   solid448pxBlue300: 'solid448pxBlue300',
   solid123pxBlue100: 'solid123pxBlue100',
@@ -34,7 +36,7 @@ const BUTTON_STYLES = {
 type ButtonStyle = keyof typeof BUTTON_STYLES;
 
 interface ButtonProps {
-  text: string;
+  text?: string;
   btnStyle: ButtonStyle;
   src?: string;
   srcLocationFront?: boolean;

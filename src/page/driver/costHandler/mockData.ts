@@ -1,118 +1,158 @@
-import { ChipType } from "../../../components/card/type";
-import avatar from '../../../assets/images/img_avatar_pink_medium.svg'
+import { ChipType } from '../../../components/card/type';
 
-export interface DriverData {
+export interface UserData {
   users: {
-    id: number; // 기사 아이디
-    serviceType?: ChipType[]; // 서비스 유형
+    estimateReqId?: number; // 견적 요청 ID
+    estimateId?: number; // 견적 ID
+    movingType?: ChipType; // 서비스 유형
     isConfirmed?: boolean; // 확정된 요청인지 확인(true)
     isCancelled?: boolean; // 취소 여부 (false)
     isAssigned?: boolean; // 지정경적 여부
-    profileImage: string; // 프로필 이미지
-    nickname: string; // 기사 닉네임
-    career?: number; // 경력
-    reviewStats?: {
-      averageScore?: number; // 평점
-      totalReviews?: number; // 리뷰 갯수
-    };
-    favoriteCount?: number; // 찜 갯수
-    confirmationCount?: number; // 확정 건 수
+    customerName: string; // 고객 이름
     movingDate?: string; // 이사 날짜
     departure?: string; // 출발지
     arrival?: string; // 도착지
-    isLiked?: boolean; // 찜 여부
     price?: number; //견적가
+    isMoveDateOver?: boolean; // 이사일의 지남 여부
+    isReqConfirmed?: boolean; // 해당 견적이 속한 요청의 확정 여부
+    isRejected?: boolean; //반려 여부
   }[];
 }
 
-export const mockData: DriverData = {
+export const mockData: UserData = {
   users: [
-    // 확정된 견적 요청일 때
     {
-      id: 1,
-      serviceType: ['SMALL', 'OFFICE'],
+      estimateId: 1,
+      movingType: 'SMALL',
       isConfirmed: true,
-      isCancelled: false,
       isAssigned: true,
-      profileImage: avatar,
-      nickname: 'driver1',
-      career: 7,
-      reviewStats: {
-        averageScore: 4.2,
-        totalReviews: 20,
-      },
-      favoriteCount: 10,
-      confirmationCount: 30,
+      customerName: '김민수',
       movingDate: '2024.12.10',
-      departure: '서울특별시 강남구',
-      arrival: '서울특별시 마포구',
-      isLiked: true,
-      price: 500000,
+      departure: '서울특별시 강남구 대치동',
+      arrival: '서울특별시 마포구 합정동',
+      price: 450000,
+      isMoveDateOver: true,
+      isReqConfirmed: true,
     },
-    // 확정되지 않은 견적 요청일 때
     {
-      id: 2,
-      serviceType: ['HOUSE'],
+      estimateId: 2,
+      movingType: 'HOUSE',
       isConfirmed: false,
-      isCancelled: false,
       isAssigned: true,
-      profileImage: avatar,
-      nickname: 'driver2',
-      career: 20,
-      reviewStats: {
-        averageScore: 4.5,
-        totalReviews: 100,
-      },
-      favoriteCount: 200,
-      confirmationCount: 500,
+      customerName: '이지은',
       movingDate: '2024.07.15',
-      departure: '서울특별시 은평구',
-      arrival: '서울특별시 종로구',
-      isLiked: false,
-      price: 500000,
+      departure: '서울특별시 은평구 응암동',
+      arrival: '서울특별시 종로구 평창동',
+      price: 5200000,
+      isMoveDateOver: true,
+      isReqConfirmed: true,
     },
-    // // 확정된 견적 요청일 때
-    // {
-    //   id: 3,
-    //   serviceType: ['OFFICE'],
-    //   isConfirmed: true,
-    //   isCancelled: false,
-    //   isAssigned: false,
-    //   profileImage: 'image3',
-    //   nickname: 'driver3',
-    //   career: 10,
-    //   reviewStats: {
-    //     averageScore: 3.8,
-    //     totalReviews: 40,
-    //   },
-    //   favoriteCount: 15,
-    //   confirmationCount: 25,
-    //   movingDate: '2024.08.01',
-    //   departure: '경기도 성남시',
-    //   arrival: '경기도 부천시',
-    //   isLiked: true,
-    //   price: 650000,
-    // },
-    // // 취소된 견적 요청일 때
-    // {
-    //   id: 4,
-    //   serviceType: ['SMALL'],
-    //   isConfirmed: false,
-    //   isCancelled: true,
-    //   profileImage: 'image4',
-    //   nickname: 'driver4',
-    //   career: 12,
-    //   reviewStats: {
-    //     averageScore: 4.7,
-    //     totalReviews: 50,
-    //   },
-    //   favoriteCount: 35,
-    //   confirmationCount: 45,
-    //   movingDate: '2024.09.01',
-    //   departure: '인천광역시 연수구',
-    //   arrival: '인천광역시 계양구',
-    //   isLiked: false,
-    //   price: 720000,
-    // },
+    {
+      estimateId: 3,
+      movingType: 'OFFICE',
+      isConfirmed: true,
+      isAssigned: false,
+      customerName: '박지훈',
+      movingDate: '2024.08.01',
+      departure: '경기도 성남시 판교역',
+      arrival: '경기도 부천시 중동',
+      price: 8500000,
+      isMoveDateOver: true,
+      isReqConfirmed: false,
+    },
+    {
+      estimateId: 4,
+      movingType: 'SMALL',
+      isConfirmed: false,
+      isCancelled: true,
+      isAssigned: false,
+      customerName: '최영희',
+      movingDate: '2024.09.01',
+      departure: '인천광역시 연수구 송도동',
+      arrival: '인천광역시 계양구 작전동',
+      price: 180000,
+      isMoveDateOver: false,
+      isReqConfirmed: false,
+      isRejected: false,
+    },
+    {
+      estimateId: 5,
+      movingType: 'HOUSE',
+      isConfirmed: true,
+      isAssigned: true,
+      customerName: '정동원',
+      movingDate: '2024.10.20',
+      departure: '경기도 안양시 동안구',
+      arrival: '서울특별시 서대문구 남가좌동',
+      price: 4700000,
+      isMoveDateOver: false,
+      isReqConfirmed: true,
+    },
+    {
+      estimateId: 6,
+      movingType: 'OFFICE',
+      isConfirmed: false,
+      isAssigned: true,
+      customerName: '한상윤',
+      movingDate: '2024.11.01',
+      departure: '서울특별시 동대문구 청량리동',
+      arrival: '서울특별시 강북구 수유동',
+      price: 6300000,
+      isMoveDateOver: false,
+      isReqConfirmed: true,
+    },
+    {
+      estimateId: 7,
+      movingType: 'SMALL',
+      isConfirmed: true,
+      isAssigned: false,
+      customerName: '윤서진',
+      movingDate: '2024.12.05',
+      departure: '서울특별시 성동구 성수동',
+      arrival: '경기도 광주시 탄벌동',
+      price: 150000,
+      isMoveDateOver: true,
+      isReqConfirmed: true,
+    },
+    {
+      estimateId: 8,
+      movingType: 'OFFICE',
+      isConfirmed: false,
+      isAssigned: true,
+      customerName: '강민지',
+      movingDate: '2024.06.25',
+      departure: '인천광역시 남동구 간석동',
+      arrival: '경기도 수원시 팔달구',
+      price: 7200000,
+      isMoveDateOver: false,
+      isReqConfirmed: false,
+      isRejected: true,
+    },
+    {
+      estimateId: 9,
+      movingType: 'HOUSE',
+      isConfirmed: true,
+      isAssigned: true,
+      customerName: '임재혁',
+      movingDate: '2024.08.15',
+      departure: '경기도 성남시 분당구',
+      arrival: '서울특별시 관악구 신림동',
+      price: 3900000,
+      isMoveDateOver: true,
+      isReqConfirmed: true,
+    },
+    {
+      estimateId: 10,
+      movingType: 'OFFICE',
+      isConfirmed: false,
+      isAssigned: true,
+      customerName: '노현정',
+      movingDate: '2024.09.10',
+      departure: '경기도 용인시 수지구',
+      arrival: '서울특별시 중랑구 면목동',
+      price: 7600000,
+      isMoveDateOver: true,
+      isReqConfirmed: true,
+    },
   ],
 };

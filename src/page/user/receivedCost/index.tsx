@@ -13,8 +13,11 @@ export default function ReceivedCost() {
   const handleTabChange = (selectedTab: 'first' | 'second') => {
     setCurrentTab(selectedTab);
   };
-
-  const { direction_pendingCost, direction_receivedCost } = useDirection();
+  const {
+    direction_pendingCost,
+    direction_receivedCost,
+    direction_receivedCostDetail,
+  } = useDirection();
 
   return (
     <>
@@ -30,7 +33,7 @@ export default function ReceivedCost() {
       />
       {mockData.total > 0 ? (
         <div>
-          <ReceivedCostCard />
+          <ReceivedCostCard redirect={direction_receivedCostDetail} />
           <div className={style.pagination}>
             <Pagination
               currentPage={currentPage}

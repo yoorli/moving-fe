@@ -5,8 +5,12 @@ import Button from '../btn/Button';
 import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
-import { getDate, formatCurrency } from '../../lib/function/utils';
-import { UserProfileProps } from './type';
+import {
+  getNotificationDate,
+  formatCurrency,
+  getChips,
+} from '../../lib/function/utils';
+import { ChipType, UserProfileProps } from './type';
 
 import style from './UserCard.module.css';
 
@@ -16,9 +20,19 @@ export default function UserCard({
   sendCostBtn: sendCost,
   rejectCostBtn: rejectCost,
   type,
-  user,
+  list,
+  count = 6,
 }: UserProfileProps) {
   const isPc = useMedia().pc;
+  const chipList: ChipType[] = [];
+
+  if (list.isConfirmed) chipList.push('CONFIRM');
+  if (list.movingType) chipList.push(list.movingType);
+  list.serviceType?.map((type) => chipList.push(type));
+  if (list.isAssigned) chipList.push('ASSIGN');
+
+  const chips = getChips(chipList, count);
+
   return (
     <div
       className={classNames(style.card, {
@@ -26,26 +40,33 @@ export default function UserCard({
       })}
     >
       <div className={style.top}>
-        <div>
-          <div className={style.label}>
-            {user.movingType?.map((type, index) => (
-              <Chip key={index} type={type} />
-            ))}
-            {user.isAssigned && <Chip type='ASSIGN' />}
-          </div>
+        {/* 칩 */}
+        <div className={style.chipBox}>
+          {chips.map((row, rowIndex) => (
+            <div key={rowIndex} className={style.chip}>
+              {row.map((chip, chipIndex) => (
+                <Chip key={chipIndex} type={chip} />
+              ))}
+            </div>
+          ))}
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
-            {user.createAt && getDate(user.createAt)}
+            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
           </div>
         ) : (
           <div className={style.createAtRType}>
-            {user.createAt && getDate(user.createAt)}
+            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
           </div>
         )}
       </div>
-      <UserProfile type={type} user={user} />
-      {user.comment && <span>요청사항 : {user.comment}</span>}
+      <UserProfile type={type} list={list} />
+      {list.comment && (
+        <div className={style.labelBox}>
+          <div className={style.label}>요청사항</div>
+          {list.comment}
+        </div>
+      )}
       {type === 'receive' && (
         <div className={style.btnBox}>
           <Button
@@ -54,7 +75,7 @@ export default function UserCard({
             src={writing}
             onClick={sendCost}
           />
-          {user.isAssigned && (
+          {list.isAssigned && (
             <Button
               text='반려'
               btnStyle='outlined448pxBlue300'
@@ -67,16 +88,16 @@ export default function UserCard({
       {type === 'confirmedCost' && (
         <div className={style.cost}>
           <span className={style.text}>견적 금액 </span>{' '}
-          {user.price && formatCurrency(user.price)}
+          {list.price && formatCurrency(list.price)}
         </div>
       )}
 
       {type === 'review' && (
         <>
-          <div className={style.review}>{user.content}</div>
+          <div className={style.review}>{list.content}</div>
           {!isPc && (
             <div className={style.createAtRTypeNoPc}>
-              {user.createAt && getDate(user.createAt)}
+              {list.createAt && getNotificationDate(list.createAt, 'noSec')}
             </div>
           )}
         </>

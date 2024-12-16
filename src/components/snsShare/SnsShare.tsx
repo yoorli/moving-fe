@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import classNames from 'classnames';
 import ShareKakao from './ShareKakao';
 import icShareKakaoLarge from '../../assets/icons/ic_share_kakao_large.svg';
 import icShareKakaoMedium from '../../assets/icons/ic_share_kakao_medium.svg';
@@ -12,9 +13,10 @@ import style from './SnsShare.module.css';
 
 interface SnsShareProps {
   nickname: string;
+  type?: string;
 }
 
-const SnsShare = ({ nickname }: SnsShareProps) => {
+const SnsShare = ({ nickname, type }: SnsShareProps) => {
   const { pc } = useMedia();
   const location = useLocation();
 
@@ -23,7 +25,9 @@ const SnsShare = ({ nickname }: SnsShareProps) => {
   return (
     <>
       <div>
-        <div className={style.text}>나만 알기 아쉬운 기사님인가요?</div>
+        <div className={classNames(style.text, {[style.otherText] : type})}>
+          {type ? '견적서 공유하기' : '나만 알기 아쉬운 기사님인가요?'}
+        </div>
         <div className={style.imgs}>
           <img
             src={pc ? icShareLarge : icShareMedium}
@@ -33,7 +37,7 @@ const SnsShare = ({ nickname }: SnsShareProps) => {
           <img
             src={pc ? icShareKakaoLarge : icShareKakaoMedium}
             onClick={() => {
-              ShareKakao(url, nickname);
+              ShareKakao(url, nickname, type);
             }}
             alt='카카오톡 공유'
             className={style.img}

@@ -49,22 +49,21 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
 
     if (daysToCheck.includes(day)) {
       contents.push(
-        <>
-          <div
-            style={{
-              position: 'relative',
-              width: '10px',
-              height: '10px',
-              borderRadius: '50%',
-              backgroundColor: 'var(  --red-200)',
-              marginTop: '5px',
-            }}
-          />
-        </>,
+        <div
+          key={date.toString()}
+          style={{
+            position: 'relative',
+            width: '10px',
+            height: '10px',
+            borderRadius: '50%',
+            backgroundColor: 'var(--red-200)',
+            marginTop: '5px',
+          }}
+        />,
       );
     }
 
-    return <div>{contents}</div>; // 각 날짜마다 해당 요소가 들어감
+    return <>{contents}</>;
   };
 
   return (
