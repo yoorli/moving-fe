@@ -40,6 +40,7 @@
   gap: 32px;
   font-size: 32px;
   font-weight: 700;
+  min-height: 110px;
 }
 
 .label {
@@ -51,24 +52,38 @@
   .container {
     padding: 0 24px;
   }
+
+  .estimate {
+    gap: 16px;
+    font-size: 20px;
+    padding: 0;
+    min-height: 74px;
+  }
 }
 
 @media (max-width: 1199px) and (min-width: 744px) {
   .container {
     padding: 0 72px;
   }
+
+  .estimate {
+    gap: 10px;
+    font-size: 20px;
+    padding: 10px 0;
+    min-height: 94px;
+  }
 }
 
 @media (max-width: 1200px) {
   .navigation {
-    height: 54px;
-    padding: 10px 0;
+    height: 86px;
+    padding: 16px 0;
     font-size: 18px;
   }
 
   .mainContainer {
     padding: 24px 0;
-    gap: 117px;
+    gap: 24px;
   }
 
   .contents {
@@ -79,12 +94,6 @@
   .share {
     width: 100%;
     margin-right: 0;
-  }
-
-  .estimate {
-    gap: 16px;
-    font-size: 20px;
-    padding: 10px 0;
   }
 
   .label {

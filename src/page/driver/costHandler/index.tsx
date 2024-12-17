@@ -10,6 +10,9 @@ import { useMedia } from '../../../lib/function/useMediaQuery';
 
 import style from './index.module.css';
 
+import icCheckLarge from '../../../assets/icons/ic_check_large.svg';
+import icCheckMedium from '../../../assets/icons/ic_check_medium.svg';
+
 import { mockData } from './mockData';
 
 export default function DriverCostHandlerPage() {
@@ -21,6 +24,15 @@ export default function DriverCostHandlerPage() {
   const [list, setList] = useState(
     mockData.users.filter((list) => !list.isCancelled && !list.isRejected),
   );
+  const [isCommentOpen, setIsCommentOpen] = useState([false]); // 요구사항
+
+  const handleMouseEnter = (index: number) => {
+    setIsCommentOpen((prev) => ({ ...prev, [index]: true }));
+  };
+
+  const handleMouseLeave = (index: number) => {
+    setIsCommentOpen((prev) => ({ ...prev, [index]: false }));
+  };
 
   const { direction_costDetail } = useDirection();
   const isPc = useMedia().pc;
@@ -102,6 +114,23 @@ export default function DriverCostHandlerPage() {
                   list={user}
                   type={currentTab === 'third' ? undefined : 'confirmedCost'}
                 />
+                {list[index].comment && (
+                  <div
+                    className={style.commentChip}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={() => handleMouseLeave(index)}
+                  >
+                    <img
+                      src={isPc ? icCheckLarge : icCheckMedium}
+                      alt='icCheck'
+                      className={style.commentImg}
+                    />
+                    요청사항
+                    {isCommentOpen[index] && (
+                      <div className={style.comment}>{list[index].comment}</div>
+                    )}
+                  </div>
+                )}
                 {disabledCard(index) && (
                   <div className={style.coveredCard}>
                     <div className={style.cardCover}></div>

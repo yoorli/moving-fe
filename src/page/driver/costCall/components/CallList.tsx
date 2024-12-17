@@ -7,12 +7,12 @@ import UserProfile from '../../../../components/card/UserProfile';
 import ModalInput from './ModalInput';
 
 import { ChipType } from '../../../../components/card/type';
+import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 import style from './CallList.module.css';
 
 import icCheckLarge from '../../../../assets/icons/ic_check_large.svg';
 import icCheckMedium from '../../../../assets/icons/ic_check_medium.svg';
-import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 interface User {
   id: number;

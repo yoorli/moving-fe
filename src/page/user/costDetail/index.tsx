@@ -47,7 +47,7 @@ const CostDetail = () => {
     movingDate: driver.movingDate || '2023-10-15',
     departure: driver.departure || '서울특별시 강남구',
     arrival: driver.arrival || '경기도 성남시',
-    comment: driver.comment || '엘리베이터가 없는 빌라 3층입니다.',
+    comment: driver.customerComment || '엘리베이터가 없는 빌라 3층입니다.',
   };
 
   const shouldShowToast = driver.isReqConfirmed && !isConfirmed;
@@ -80,7 +80,7 @@ const CostDetail = () => {
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>코멘트</h2>
             <p className={style.comment}>
-              {driver.comment || '기사님의 코멘트입니다.'}
+              {driver.moverComment || '기사님의 코멘트입니다.'}
             </p>
 
             <div className={style.costInfoWrapper}>
