@@ -3,7 +3,7 @@ import axios from './axios';
 import { getParams } from '../function/utils';
 import { estimateQueryParams, PaginationParams } from '../../types/apiTypes';
 
-const PATH = '/estimateReq';
+const PATH = `${process.env.REACT_APP_API_URL}/estimateReq`;
 
 /* GET - 기사-견적 요청 리스트 조회 */
 export async function getMoverEstimateReq(queryParams: estimateQueryParams) {
@@ -39,7 +39,7 @@ export async function createEstimateReq(data: any) {
 
 /* GET USER-받았던 견적 리스트 조회*/
 export async function getEstimateReqList({ page, pageSize }: PaginationParams) {
-  const res = await axios.get(`${PATH}/estimateReq/customer/list`, {
+  const res = await axios.get(`${PATH}/customer/list`, {
     params: { page, pageSize },
   });
   return res.data;

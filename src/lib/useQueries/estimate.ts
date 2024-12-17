@@ -85,7 +85,7 @@ export function useGetMovedEstimates({ page, pageSize }: PaginationParams) {
 }
 
 /* GET USER-받았던 견적 상세내용 리스트 조회*/
-export function useGetEstimate(estimateRequestId: number) {
+export function useGetEstimate(estimateRequestId: string) {
   return useQuery({
     queryKey: ['estimate', estimateRequestId],
     queryFn: () => getEstimate(estimateRequestId),

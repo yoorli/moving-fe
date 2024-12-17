@@ -18,10 +18,10 @@ export default function ReceivedList({ list, count }: MoverList) {
       <div className={style.infoMain}>
         {list.length > 0 ? (
           list.map((mover: Mover) => (
-            <div key={mover.id} className={style.card}>
+            <div key={mover.moverId} className={style.card}>
               <DriverCard
                 list={mover}
-                type="cost"
+                type='cost'
                 onClick={() => handleCardClick(mover)} // 카드 클릭 시 데이터 전달
                 count={mobileWithChip ? 4 : mobileWithChipSecond ? 3 : 6} // 반응형 카드 표시 개수
               />

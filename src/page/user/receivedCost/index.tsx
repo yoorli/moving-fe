@@ -3,21 +3,28 @@ import Tab from '../../../components/tab/Tab';
 import style from './index.module.css';
 import useDirection from '../../../lib/function/direction';
 import ReceivedCostCard from './components/ReceivedCostCard';
-import { mockData } from './mock';
+import { useGetEstimateReqList } from '../../../lib/useQueries/estimateReq';
 import Pagination from '../../../components/pagination/Pagination';
 
 export default function ReceivedCost() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('second');
   const [currentPage, setCurrentPage] = useState(1);
 
+  const { data } = useGetEstimateReqList({ page: currentPage, pageSize: 10 });
+
   const handleTabChange = (selectedTab: 'first' | 'second') => {
     setCurrentTab(selectedTab);
   };
+
   const {
     direction_pendingCost,
     direction_receivedCost,
     direction_receivedCostDetail,
   } = useDirection();
+
+  if (!data || !data.total) {
+    return <div>No data available</div>;
+  }
 
   return (
     <>
@@ -31,14 +38,17 @@ export default function ReceivedCost() {
         firstTabRoute={direction_pendingCost}
         secondTabRoute={direction_receivedCost}
       />
-      {mockData.total > 0 ? (
+      {data.total > 0 ? (
         <div>
-          <ReceivedCostCard redirect={direction_receivedCostDetail} />
+          <ReceivedCostCard
+            redirect={direction_receivedCostDetail}
+            data={data}
+          />
           <div className={style.pagination}>
             <Pagination
               currentPage={currentPage}
-              data={mockData.total}
-              itemsPerPage={6}
+              data={data?.total}
+              itemsPerPage={8}
               onPageChange={setCurrentPage}
             />
           </div>

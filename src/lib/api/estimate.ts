@@ -7,7 +7,7 @@ import {
   PaginationParams,
 } from '../../types/apiTypes';
 
-const PATH = '/estimate';
+const PATH = `${process.env.REACT_APP_API_URL}/estimate`;
 
 /* /:id GET - 기사 프로필 상세 조회 */
 export async function getMoverMe(moverId: number) {
@@ -46,7 +46,7 @@ export async function getMovedEstimates({ page, pageSize }: PaginationParams) {
 }
 
 /* GET USER-받았던 견적 상세내용 리스트 조회*/
-export async function getEstimate(estimateRequestId: number) {
+export async function getEstimate(estimateRequestId: string) {
   const res = await axios.get(`${PATH}/${estimateRequestId}`);
   return res.data;
 }

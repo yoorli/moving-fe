@@ -59,7 +59,7 @@ export function useGetEstimateReqList({
   pageSize,
 }: PaginationParams): any {
   return useQuery({
-    queryKey: ['estimateReq'],
+    queryKey: ['estimateReq', page, pageSize],
     queryFn: () => getEstimateReqList({ page, pageSize }),
   });
 }

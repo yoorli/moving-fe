@@ -65,8 +65,8 @@ export default function DriverProfile({
               </span>
               <span className={style.separator}>|</span>
               <span className={style.text}>
-                {user.confirmationCount}건
                 <span style={{ color: 'var(--gray-300)' }}>확정</span>
+                {user.confirmationCount}건
               </span>
             </div>
             <div className={style.detailsPType}>
@@ -155,8 +155,8 @@ export default function DriverProfile({
                       [style.textSmall]: styles === 'small',
                     })}
                   >
-                    {user.confirmationCount}건
                     <span style={{ color: 'var(--gray-300)' }}>확정</span>
+                    {user.confirmationCount}건
                   </span>
                 </>
               )}
