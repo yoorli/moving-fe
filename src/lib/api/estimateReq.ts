@@ -5,13 +5,6 @@ import { estimateQueryParams, PaginationParams } from '../../types/apiTypes';
 
 const PATH = '/estimateReq';
 
-/* GET - 기사-견적 요청 리스트 조회 */
-export async function getMoverEstimateReq(queryParams: estimateQueryParams) {
-  const params = getParams(queryParams);
-  const res = await axios.get(`${PATH}/mover/list`, { params });
-  return res.data;
-}
-
 /**
  * 유저-견적 요청 조회 /estimateReq
  * @returns 견적 요청
@@ -38,9 +31,19 @@ export async function createEstimateReq(data: any) {
 }
 
 /* GET USER-받았던 견적 리스트 조회*/
-export async function getEstimateReqList({ page, pageSize }: PaginationParams) {
+export async function getEstimateReqList({
+  page,
+  pageSize,
+}: PaginationParams) {
   const res = await axios.get(`${PATH}/estimateReq/customer/list`, {
     params: { page, pageSize },
   });
+  return res.data;
+}
+
+/* GET - 기사-견적 요청 리스트 조회 */
+export async function getMoverEstimateReq(queryParams: estimateQueryParams) {
+  const params = getParams(queryParams);
+  const res = await axios.get(`${PATH}/mover/list`, { params });
   return res.data;
 }
