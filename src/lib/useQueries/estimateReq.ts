@@ -65,7 +65,7 @@ export function useGetEstimateReqList({
 }
 
 // 기사 - 견적 요청 리스트 조회
-export function useGeMoverEstimateReq(queryParams: estimateQueryParams) {
+export function useGetMoverEstimateReq(queryParams: estimateQueryParams) {
   return useQuery({
     queryKey: ['estimateReq', queryParams],
     queryFn: () => getMoverEstimateReq(queryParams),
