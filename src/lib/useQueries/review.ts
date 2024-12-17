@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   createReview,
-  getMoverReviewList,
+  getMoverReviews,
   getMyReviewList,
   ReviewData,
 } from '../api/review';
@@ -15,10 +15,14 @@ export function useGetMyReviewList() {
 }
 
 /* 기사님 리뷰 조회 */
-export function useGetMoverReviewList(moverId: number) {
+export function useGetMoverReviewList(
+  moverId: number,
+  page = 1,
+  pageSize = 5
+) {
   return useQuery({
-    queryKey: ['review', moverId],
-    queryFn: () => getMoverReviewList(moverId),
+    queryKey: ['review', moverId, page, pageSize],
+    queryFn: () => getMoverReviews(moverId, page, pageSize),
     enabled: !!moverId,
   });
 }
@@ -37,3 +41,4 @@ export function useCreateReview() {
 
   return mutation;
 }
+
