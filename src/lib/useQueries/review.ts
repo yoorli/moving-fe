@@ -1,9 +1,39 @@
-import axios from 'axios';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+  createReview,
+  getMoverReviewList,
+  getMyReviewList,
+  ReviewData,
+} from '../api/review';
 
-const PATH = '/review';
+/* 작성한 리뷰 리스트 조회 */
+export function useGetMyReviewList() {
+  return useQuery({
+    queryKey: ['myReview'],
+    queryFn: () => getMyReviewList(),
+  });
+}
 
-/* /:id GET - 기사 프로필 상세 조회 */
-export async function getMoverMe(moverId: number) {
-  const res = await axios.get(`${PATH}/${moverId}/detail`);
-  return res.data;
+/* 기사님 리뷰 조회 */
+export function useGetMoverReviewList(moverId: number) {
+  return useQuery({
+    queryKey: ['review', moverId],
+    queryFn: () => getMoverReviewList(moverId),
+    enabled: !!moverId,
+  });
+}
+
+/* 리뷰 작성 */
+export function useCreateReview() {
+  const mutation = useMutation({
+    mutationFn: (data: ReviewData) => createReview(data),
+    onSuccess: (data) => {
+      console.log('your review has been successfully created', data);
+    },
+    onError: (error) => {
+      console.error('Error on creating Review', error);
+    },
+  });
+
+  return mutation;
 }
