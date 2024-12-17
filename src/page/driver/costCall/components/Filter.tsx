@@ -10,26 +10,30 @@ interface FilterOption {
 
 type FilterProps = {
   type?: 'moving' | 'filter';
-  setItems: (items: any) => void;
+  setCheckedItems: (items: string[]) => void;
   count: {
     total: number;
     small: number;
-    medium: number;
-    large: number;
+    house: number;
+    office: number;
     assign: number;
   };
 };
 
-export default function Filter({ type, setItems, count }: FilterProps) {
+export default function Filter({
+  type,
+  setCheckedItems: setCheckedItems,
+  count,
+}: FilterProps) {
   const [moveTypes, setMoveTypes] = useState<FilterOption[]>([
     { label: '소형이사', count: count.small, isChecked: true },
-    { label: '가정이사', count: count.medium, isChecked: true },
-    { label: '사무실이사', count: count.large, isChecked: true },
+    { label: '가정이사', count: count.house, isChecked: true },
+    { label: '사무실이사', count: count.office, isChecked: true },
   ]);
 
   const [isAssigned, setIsAssigned] = useState<FilterOption>({
     label: '지정 견적 요청',
-    count: count.large,
+    count: count.assign,
     isChecked: true,
   });
 
@@ -63,9 +67,30 @@ export default function Filter({ type, setItems, count }: FilterProps) {
 
   const allChecked = moveTypes.every((moveType) => moveType.isChecked);
 
+  const itemType = (
+    moveTypes: FilterOption[],
+    isAssigned: FilterOption,
+  ): string[] => {
+    const selectedItems: string[] = [];
+
+    moveTypes.forEach((moveType) => {
+      if (moveType.isChecked) {
+        if (moveType.label === '소형이사') selectedItems.push('SMALL');
+        if (moveType.label === '가정이사') selectedItems.push('HOUSE');
+        if (moveType.label === '사무실이사') selectedItems.push('OFFICE');
+      }
+    });
+
+    if (isAssigned.isChecked) {
+      selectedItems.push('ASSIGN');
+    }
+
+    return selectedItems;
+  };
+
   useEffect(() => {
-    setItems({ small: moveTypes[0].isChecked });
-  }, [moveTypes]);
+    setCheckedItems(itemType(moveTypes, isAssigned));
+  }, [moveTypes, isAssigned]);
 
   return (
     <div className={style.filter}>
