@@ -1,9 +1,22 @@
-import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import { getMoverEstimateReq } from '../api/estimateReq';
 
-const PATH = '/estimateReq';
+interface QueryParams {
+  page?: number;
+  pageSize?: number;
+}
 
-/* /:id GET - 기사 프로필 상세 조회 */
-export async function getMoverMe(moverId: number) {
-  const res = await axios.get(`${PATH}/${moverId}/detail`);
-  return res.data;
+interface estimateQueryParams extends QueryParams {
+  type?: string;
+  isAssigned?: boolean;
+  order?: string;
+  keyWord?: string;
+}
+
+// 견적 요청 리스트 조회
+export function useGetEstimateReq(queryParams: estimateQueryParams) {
+  return useQuery({
+    queryKey: ['estimateReq', queryParams],
+    queryFn: () => getMoverEstimateReq(queryParams),
+  });
 }
