@@ -60,10 +60,18 @@ export const getChips = (chipList: ChipType[], count: number) => {
 // api - undefined면 반환x
 // Record<string, any>: 문자열을 키로, 어떤 값이든 허용하는 타입
 export function getParams(queryParams: Record<string, any>) {
-  // Object.fromEntries()는 키-값 배열을 다시 객체로 변환
-  return Object.fromEntries(
-    // undefined가 아닌 경우에만 배열에 남도록 함함
-    // [_, value] : 첫 번째 요소(키)를 무시, 두 번째 요소(값)만 사용
-    Object.entries(queryParams).filter(([_, value]) => value !== undefined),
-  );
+  const params = new URLSearchParams();
+
+  Object.entries(queryParams).forEach(([key, value]) => {
+    if (value !== undefined && value !== "") {
+      // 배열이면 동일한 키로 반복 추가
+      if (Array.isArray(value)) {
+        value.forEach((v) => params.append(key, v));
+      } else {
+        params.append(key, value);
+      }
+    }
+  });
+
+  return params;
 }
