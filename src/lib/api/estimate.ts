@@ -1,66 +1,9 @@
 import axios from './axios';
 
+import { getParams } from '../function/utils';
+import { EstimateConsumer, EstimateMover, EstimateParams, PaginationParams } from '../../types/apiTypes';
+
 const PATH = '/estimate';
-
-interface PaginationParams {
-  page?: number;
-  pageSize?: number;
-}
-
-interface EstimateParams {
-  estimateId: number;
-  comment?: string;
-  price: number;
-}
-
-interface EstimateConsumer {
-  estimateId: number;
-  moverId: number;
-  isConfirmed: boolean;
-  isReqConfirmed: boolean;
-  serviceType: string[];
-  isAssigned: boolean;
-  summary: string;
-  profileImg: string;
-  moverName: string;
-  reviewStats: ReviewStats;
-  career: number;
-  confirmationCount: number;
-  favoriteCount: number;
-  isFavorite: boolean;
-  price: number;
-  comment: string;
-  movingRequest: string;
-  movingType: string;
-  movingDate: string;
-  departure: string;
-  arrival: string;
-}
-
-interface EstimateMover {
-  estimateId: number;
-  movingType: string;
-  isAssigned: boolean;
-  customerName: string;
-  movingDate: string;
-  departure: string;
-  arrival: string;
-  price: number;
-  movingRequest: string;
-  detailDeparture: string;
-  detailArrival: string;
-}
-
-interface ReviewStats {
-  averageScore: number;
-  totalReviews: number;
-}
-
-function getParams(queryParams: Record<string, any>) {
-  return Object.fromEntries(
-    Object.entries(queryParams).filter(([_, value]) => value !== undefined),
-  );
-}
 
 /* /:id GET - 기사 프로필 상세 조회 */
 export async function getMoverMe(moverId: number) {

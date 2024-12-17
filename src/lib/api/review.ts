@@ -27,6 +27,15 @@ interface MoverReviewsResponse {
   reviews: Reviews;
 }
 
+/* /{moverId} GET - 기사 리뷰 조회 */
+interface ReviewStats {
+  totalReviews: number;
+  reviewCount: {
+    [key: string]: number; // 리뷰 점수별 갯수 (1~5점)
+  };
+}
+
+
 /* /:id GET - 기사 프로필 상세 조회 */
 export async function getMoverMe(moverId: number) {
   const res = await axios.get(`${PATH}/${moverId}/detail`);
@@ -60,13 +69,6 @@ export async function createReview(data: ReviewData) {
 export async function getMoverReviewList(moverId: number) {
   const res = await axios.get(`${PATH}/${moverId}`);
   return res.data;
-}
-/* /{moverId} GET - 기사 리뷰 조회 */
-interface ReviewStats {
-  totalReviews: number;
-  reviewCount: {
-    [key: string]: number; // 리뷰 점수별 갯수 (1~5점)
-  };
 }
 
 /**

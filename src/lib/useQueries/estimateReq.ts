@@ -1,17 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMoverEstimateReq } from '../api/estimateReq';
-
-interface QueryParams {
-  page?: number;
-  pageSize?: number;
-}
-
-interface estimateQueryParams extends QueryParams {
-  type?: string;
-  isAssigned?: boolean;
-  order?: string;
-  keyWord?: string;
-}
+import { estimateQueryParams } from '../../types/apiTypes';
 
 // 견적 요청 리스트 조회
 export function useGetEstimateReq(queryParams: estimateQueryParams) {

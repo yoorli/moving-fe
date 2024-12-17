@@ -1,17 +1,9 @@
 import axios from './axios';
 
+import { getParams } from '../function/utils';
+import { PaginationParams } from '../../types/apiTypes';
+
 const PATH = '/assignedEstimateReq';
-
-interface PaginationParams {
-  page?: number;
-  pageSize?: number;
-}
-
-function getParams(queryParams: Record<string, any>) {
-  return Object.fromEntries(
-    Object.entries(queryParams).filter(([_, value]) => value !== undefined)
-  );
-}
 
 /* PATCH - 기사 - 지정 견적 반려 */
 export async function updateEstimateReject(estimateRequestId: number) {

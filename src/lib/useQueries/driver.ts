@@ -1,9 +1,20 @@
-import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import { getMoverDetailProfile, getMoverList } from '../api/driver';
 
-const PATH = '/mover';
+export function useGetMoverList(
+  serviceType?: string[],
+  serviceRegion?: string[],
+) {
+  return useQuery({
+    queryKey: ['moverList', { serviceType, serviceRegion }],
+    queryFn: () => getMoverList(),
+  });
+}
 
-/* /:id GET - 기사 프로필 상세 조회 */
-export async function getMoverMe(moverId: number) {
-  const res = await axios.get(`${PATH}/${moverId}/detail`);
-  return res.data;
+export function useGetMoverDetail(id: number) {
+  return useQuery({
+    queryKey: ['moverDetail', id],
+    queryFn: () => getMoverDetailProfile(id),
+    enabled: !!id, // id가 존재할 때만 실행
+  });
 }

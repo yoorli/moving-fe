@@ -3,11 +3,7 @@ import {
   getEstimateReject,
   updateEstimateReject,
 } from '../api/assignedEstimateReq';
-
-interface QueryParams {
-  page?: number;
-  pageSize?: number;
-}
+import { PaginationParams } from '../../types/apiTypes';
 
 // 지정 견적 반려
 export function useUpdateEstimateReject() {
@@ -25,7 +21,7 @@ export function useUpdateEstimateReject() {
 }
 
 // 반려된 견적 요청 및 취소된 견적 요청 조회
-export function useGetEstimateReject(queryParams: QueryParams) {
+export function useGetEstimateReject(queryParams: PaginationParams) {
   return useQuery({
     queryKey: ['rejectList', queryParams],
     queryFn: () => getEstimateReject(queryParams),

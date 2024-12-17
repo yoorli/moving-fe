@@ -1,4 +1,4 @@
-import { ChipType } from '../../../../components/card/type';
+import { ChipType } from '../../../../types/cardTypes';
 
 export interface Review {
   id: number; // 리뷰 아이디

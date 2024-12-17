@@ -5,20 +5,10 @@ import {
   getEstimateDetail,
   getEstimateList,
 } from '../api/estimate';
-
-interface QueryParams {
-  page?: number;
-  pageSize?: number;
-}
-
-interface EstimateParams {
-  estimateId: number;
-  comment?: string;
-  price: number;
-}
+import { EstimateParams, PaginationParams } from '../../types/apiTypes';
 
 // 확정된 견적 리스트 조회
-export function useGetEstimateConfirmed(queryParams: QueryParams) {
+export function useGetEstimateConfirmed(queryParams: PaginationParams) {
   return useQuery({
     queryKey: ['estimateConfirmed', queryParams],
     queryFn: () => getEstimateConfirmed(queryParams),
@@ -26,7 +16,7 @@ export function useGetEstimateConfirmed(queryParams: QueryParams) {
 }
 
 // 보낸 견적 리스트 조회
-export function useGetEstimateList(queryParams: QueryParams) {
+export function useGetEstimateList(queryParams: PaginationParams) {
   return useQuery({
     queryKey: ['estimateList', queryParams],
     queryFn: () => getEstimateList(queryParams),

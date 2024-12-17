@@ -1,4 +1,4 @@
-import { ChipType } from '../../../../components/card/type';
+import { ChipType } from '../../../../types/cardTypes';
 
 // 타입 정의
 export interface Estimate {

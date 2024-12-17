@@ -7,7 +7,7 @@ import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { formatCurrency, getChips } from '../../lib/function/utils';
-import { ChipType, DriverProfileProps } from './type';
+import { ChipType, DriverProfileProps } from '../../types/cardTypes';
 
 import style from './DriverCard.module.css';
 
@@ -112,11 +112,11 @@ export default function DriverCard({
         <DriverProfile list={list} type={type} styles={styles} />
       )}
       {type === 'cost' && showPrice && list.price && (
-  <div className={style.cost}>
-    <span className={style.text}>견적 금액</span>
-    {formatCurrency(list.price)}
-  </div>
-)}
+        <div className={style.cost}>
+          <span className={style.text}>견적 금액</span>
+          {formatCurrency(list.price)}
+        </div>
+      )}
 
       {(type === 'waiting' ||
         type === 'confirm' ||
