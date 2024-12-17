@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import style from './DriverDetail.module.css';
 import DriverCard from '../../../components/card/DriverCard';
 import Review from '../../../components/review/Review';
-import FixedBottomTab from './components/FixedBottomTab';
+import FixedBottomTab from '../searchDriver/components/FixedBottomTab';
 import Button from '../../../components/btn/Button';
-import { MOCK_DATA } from './mockData';
+import { MOCK_DATA } from '../searchDriver/mockData';
 import { ChipProps } from '../../../components/chip/Chip';
-import { translateServiceRegion, translateServiceType } from './EnumMapper';
+import { translateServiceRegion, translateServiceType } from '../searchDriver/EnumMapper';
 import HeartIcon from '../../../assets/icons/ic_full_heart_small.svg';
+import HeartEmptyIcon from '../../../assets/icons/ic_empty_heart_small.svg';
+import ModalContainer from '../../../components/modal/ModalContainer';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
   const driver = MOCK_DATA.find(
     (driver) => driver.moverId === parseInt(id || '', 10),
   );
 
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(driver?.isFavorite || false);
+  const [isAssigned, setIsAssigned] = useState(driver?.isAssigned || false);
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
@@ -35,6 +42,22 @@ const DriverDetailPage = () => {
   const transformedDriver = {
     ...driver,
     serviceType: driver.serviceType.map((type) => type as ChipProps['type']),
+  };
+
+  const handleFavoriteToggle = () => {
+    setIsFavorite(!isFavorite);
+  };
+
+  const handleAssignRequest = () => {
+    if (!isAssigned && driver.isConfirmed) {
+      setIsAssigned(true);
+    } else if (!driver.isConfirmed) {
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleModalButtonClick = () => {
+    navigate('/user/costCall');
   };
 
   return (
@@ -78,23 +101,46 @@ const DriverDetailPage = () => {
               <Button
                 text='기사님 찜하기'
                 btnStyle='outlined354pxLine200'
-                src={HeartIcon}
+                src={isFavorite ? HeartIcon : HeartEmptyIcon}
                 srcLocationFront
                 alt='찜하기 아이콘'
                 className={style.heartButton}
+                onClick={handleFavoriteToggle}
               />
               <Button
-                text='지정 견적 요청하기'
+                text={isAssigned ? '지정 견적 요청 완료' : '지정 견적 요청하기'}
                 btnStyle='solid354pxBlue300'
                 className={style.requestButton}
+                disabled={isAssigned}
+                onClick={handleAssignRequest}
               />
             </div>
           </div>
         )}
       </div>
-      {isMobileView && <FixedBottomTab />}
+      {isMobileView && (
+        <FixedBottomTab
+          isFavorite={isFavorite}
+          isAssigned={isAssigned}
+          isConfirmed={driver.isConfirmed}
+          setModalOpen={setIsModalOpen}
+          setIsFavorite={setIsFavorite}
+          setIsAssigned={setIsAssigned}
+        />
+      )}
+      {isModalOpen && (
+        <ModalContainer
+          title='지정 견적 요청하기'
+          isText={true}
+          text='일반 견적 요청을 먼저 진행해주세요.'
+          buttonText='일반 견적 요청하기'
+          closeBtnClick={() => setIsModalOpen(false)}
+          buttonClick={handleModalButtonClick}
+        />
+      )}
     </div>
   );
 };
 
 export default DriverDetailPage;
+

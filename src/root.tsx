@@ -24,66 +24,41 @@ import DriverRegisterPage from './page/driver/register';
 import MyPage from './page/driver/myPage';
 import DriverCostHandlerPage from './page/driver/costHandler';
 import SearchDriverForGuest from './page/root/searchDriver';
-import DriverDetailPage from './page/root/searchDriver/DriverDetailPage';
+import { AuthProvider } from './context/authContext';
+import DriverDetailPage from './page/root/driverDetail/DriverDetailPage';
 import DriverCostDetailPage from './page/driver/costDetail';
 
 const router = createBrowserRouter([
   {
-    element: <RendingLayout />,
-    children: [
-      { path: '/', element: <ServiceRandingPage /> },
-      {
-        path: '/searchDriver',
-        element: <SearchDriverForGuest />, // 비회원용 기사님 찾기 페이지
-      },
-      {
-        path: '/driver/:id',
-        element: <DriverDetailPage />, // 기사님 상세 페이지
-      },
-      {
-        path: '/user/login',
-        element: <UserLoginPage />,
-      },
-      {
-        path: '/user/signup',
-        element: <UserSignupPage />,
-      },
-      {
-        path: '/driver/login',
-        element: <DriverLoginPage />,
-      },
-      {
-        path: '/driver/signup',
-        element: <DriverSignupPage />,
-      },
-    ],
-  },
-  {
-    path: '/user',
-    element: <UserLayout />,
+    element: <AuthProvider />,
     children: [
       {
-        path: 'costCall',
-        element: <UserCostCallPage />,
-      },
-      {
-        path: 'searchDriver',
-        element: <span>기사님 찾기</span>,
-      },
-      {
-        element: <Outlet />,
+        element: <RendingLayout />,
         children: [
+          { path: '/', element: <ServiceRandingPage /> },
           {
-            path: 'pendingCost',
-            element: <PendingCost />,
+            path: '/searchDriver',
+            element: <SearchDriverForGuest />, // 비회원용 기사님 찾기 페이지
           },
           {
-            path: 'receivedCost',
-            element: <ReceivedCost />,
+            path: '/driver/:id',
+            element: <DriverDetailPage />, // 기사님 상세 페이지
           },
           {
-            path: 'receivedCost/:id',
-            element: <ReceivedCostDetail />,
+            path: '/user/login',
+            element: <UserLoginPage />,
+          },
+          {
+            path: '/user/signup',
+            element: <UserSignupPage />,
+          },
+          {
+            path: '/driver/login',
+            element: <DriverLoginPage />,
+          },
+          {
+            path: '/driver/signup',
+            element: <DriverSignupPage />,
           },
           {
             path: 'costDetail/:id',
@@ -92,8 +67,59 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: 'favoriteMover',
-        element: <UserFavoriteMover />,
+        path: '/user',
+        element: <UserLayout />,
+        children: [
+          {
+            path: 'costCall',
+            element: <UserCostCallPage />,
+          },
+          {
+            path: 'searchDriver',
+            element: <span>기사님 찾기</span>,
+          },
+          {
+            element: <Outlet />,
+            children: [
+              {
+                path: 'pendingCost',
+                element: <PendingCost />,
+              },
+              {
+                path: 'receivedCost',
+                element: <ReceivedCost />,
+              },
+              {
+                path: 'receivedCost/:id',
+                element: <ReceivedCostDetail />,
+              },
+            ],
+          },
+          {
+            path: 'favoriteMover',
+            element: <UserFavoriteMover />,
+          },
+          {
+            path: 'editProfile',
+            element: <UserEditProfilePage />,
+          },
+          {
+            path: 'movingReview',
+            element: <UserMovingReview />,
+          },
+          {
+            path: 'editProfile',
+            element: <UserEditProfilePage />,
+          },
+          {
+            path: 'editInfo',
+            element: <UserEditInfoPage />,
+          },
+          {
+            path: 'register',
+            element: <UserRegisterPage />,
+          },
+        ],
       },
       {
         path: 'editProfile',
@@ -115,39 +141,39 @@ const router = createBrowserRouter([
         path: 'register',
         element: <UserRegisterPage />,
       },
-    ],
-  },
-  {
-    path: '/driver',
-    element: <DriverLayout />,
-    children: [
       {
-        path: 'costCall',
-        element: <DriverCostCallPage />,
-      },
-      {
-        path: 'register',
-        element: <DriverRegisterPage />,
-      },
-      {
-        path: 'editProfile',
-        element: <DriverEditProfilePage />,
-      },
-      {
-        path: 'editInfo',
-        element: <DriverEditInfoPage />,
-      },
-      {
-        path: 'costHandler',
-        element: <DriverCostHandlerPage />,
-      },
-      {
-        path: 'costHandler/:id',
-        element: <DriverCostDetailPage />,
-      },
-      {
-        path: 'myPage',
-        element: <MyPage />,
+        path: '/driver',
+        element: <DriverLayout />,
+        children: [
+          {
+            path: 'costCall',
+            element: <DriverCostCallPage />,
+          },
+          {
+            path: 'register',
+            element: <DriverRegisterPage />,
+          },
+          {
+            path: 'editProfile',
+            element: <DriverEditProfilePage />,
+          },
+          {
+            path: 'editInfo',
+            element: <DriverEditInfoPage />,
+          },
+          {
+            path: 'costHandler',
+            element: <DriverCostHandlerPage />,
+          },
+          {
+            path: 'costHandler/:id',
+            element: <DriverCostDetailPage />,
+          },
+          {
+            path: 'myPage',
+            element: <MyPage />,
+          },
+        ],
       },
     ],
   },

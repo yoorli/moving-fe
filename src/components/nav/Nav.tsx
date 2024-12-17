@@ -5,12 +5,13 @@ import useDirection from '../../lib/function/direction';
 import LoginBtn from '../btn/LoginBtn';
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { useLocation } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import alarm from '../../assets/icons/ic_alarm_large.svg';
 import profile from '../../assets/icons/ic_profile_large.svg';
 import alarmMobile from '../../assets/icons/ic_alarm_medium.svg';
 import profileMobile from '../../assets/icons/ic_profile_medium.svg';
 import { DriverProfileModal, UserProfileModal } from './ProfileModal';
+import { AuthContext } from '../../context/authContext';
 import { NotificationModal } from './NotificationModal';
 
 type Props = {
@@ -113,7 +114,7 @@ export function UserNav({
   } = useDirection();
   const { pc, tablet, mobile } = useMedia();
   const { pathname } = useLocation();
-
+  const { user } = useContext(AuthContext);
   useEffect(() => {
     return;
   }, [pathname]);
@@ -172,7 +173,7 @@ export function UserNav({
               src={profile}
               alt=''
             />
-            <span className={style.navIconText}>김가나</span>
+            <span className={style.navIconText}>{user.name}</span>
             {profileModal ? (
               <UserProfileModal modalController={profileController} />
             ) : null}
@@ -291,6 +292,9 @@ export function DriverNav({
   const { pc, tablet, mobile } = useMedia();
   const { pathname } = useLocation();
 
+  const { user } = useContext(AuthContext);
+  console.log(user);
+
   useEffect(() => {
     return;
   }, [pathname]);
@@ -343,7 +347,7 @@ export function DriverNav({
               src={profile}
               alt=''
             />
-            <span className={style.navIconText}>김기사</span>
+            <span className={style.navIconText}>{user?.name}</span>
             {profileModal ? (
               <DriverProfileModal modalController={profileController} />
             ) : null}

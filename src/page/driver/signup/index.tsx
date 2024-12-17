@@ -9,6 +9,8 @@ import {
 import AuthBtn from '../../../components/btn/AuthBtn';
 import { DriverSignupTop } from '../../../components/page/auth/AuthTop';
 import { DriverSignupBottom } from '../../../components/page/auth/AuthBottom';
+import { auth } from '../../../lib/api/auth';
+import { isAxiosError } from 'axios';
 
 type FormLogin = {
   name: string;
@@ -43,6 +45,14 @@ export default function DriverSignupPage() {
     confirmPassword: true,
   });
 
+  const [errorMessage, setErrorMessage] = useState<{
+    email: string;
+  }>({
+    email: '',
+  });
+
+  const [isPending, setIsPending] = useState<boolean>(false);
+
   const inputHeandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     const { password } = values; // 비밀번호 확인 용
@@ -58,7 +68,7 @@ export default function DriverSignupPage() {
     });
   };
 
-  const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const loginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
       !!values.email &&
@@ -72,7 +82,39 @@ export default function DriverSignupPage() {
       validation.phoneNumber &&
       validation.confirmPassword
     ) {
-      /**TODO API request */
+      const request = {
+        email: values.email,
+        password: values.password,
+        name: values.name,
+        phoneNumber: values.phoneNumber,
+      };
+
+      try {
+        setIsPending(true);
+        const response = await auth.post(
+          '/user/signup?userType=MOVER',
+          request,
+        );
+        setIsPending(false);
+        alert(response.data);
+        window.location.href = '/driver/login';
+      } catch (e) {
+        if (isAxiosError(e)) {
+          const data = e.response?.data;
+
+          setValidation({
+            ...validation,
+            email: false,
+          });
+
+          setErrorMessage({
+            ...errorMessage,
+            email: data.message,
+          });
+
+          setIsPending(false);
+        }
+      }
     } else {
       return;
     }
@@ -99,7 +141,11 @@ export default function DriverSignupPage() {
               name='email'
               inputHeandler={inputHeandler}
               validation={validation.email}
-              errorMessage='이메일 형식이 아닙니다.'
+              errorMessage={
+                errorMessage.email
+                  ? errorMessage.email
+                  : '이메일 형식이 아닙니다.'
+              }
             />
             <NomalInputComponent
               title='전화번호'
@@ -129,7 +175,7 @@ export default function DriverSignupPage() {
               errorMessage='비밀번호가 일치하지 않습니다.'
             />
             <AuthBtn
-              context='시작하기'
+              context={isPending ? 'loading...' : '시작하기'}
               validation={
                 !!values.email &&
                 !!values.password &&

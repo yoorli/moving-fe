@@ -16,6 +16,7 @@ export interface UserData {
     isMoveDateOver?: boolean; // 이사일의 지남 여부
     isReqConfirmed?: boolean; // 해당 견적이 속한 요청의 확정 여부
     isRejected?: boolean; //반려 여부
+    comment?: string;
   }[];
 }
 
@@ -46,6 +47,7 @@ export const mockData: UserData = {
       price: 5200000,
       isMoveDateOver: true,
       isReqConfirmed: true,
+      comment: '대형 가구 있어 특별 주의 필요, 주말 오전 이동 희망',
     },
     {
       estimateId: 3,
@@ -59,6 +61,7 @@ export const mockData: UserData = {
       price: 8500000,
       isMoveDateOver: true,
       isReqConfirmed: false,
+      comment: '사무용 고가 장비 운송, 전문 포장 필요',
     },
     {
       estimateId: 4,
@@ -74,6 +77,7 @@ export const mockData: UserData = {
       isMoveDateOver: false,
       isReqConfirmed: false,
       isRejected: false,
+      comment: '반려견 동반, 애완용품 특별 취급 요망',
     },
     {
       estimateId: 5,
@@ -87,6 +91,7 @@ export const mockData: UserData = {
       price: 4700000,
       isMoveDateOver: false,
       isReqConfirmed: true,
+      comment: '3층 주택, 좁은 계단 있음. 가구 분해 후 운송 필요.',
     },
     {
       estimateId: 6,
@@ -100,6 +105,7 @@ export const mockData: UserData = {
       price: 6300000,
       isMoveDateOver: false,
       isReqConfirmed: true,
+      comment: '중요 서류 및 컴퓨터 장비 운송, 최대한 주의 요망',
     },
     {
       estimateId: 7,
@@ -113,6 +119,7 @@ export const mockData: UserData = {
       price: 150000,
       isMoveDateOver: true,
       isReqConfirmed: true,
+      comment: '오후 이동 선호, 짐 적은 편임',
     },
     {
       estimateId: 8,
@@ -127,6 +134,7 @@ export const mockData: UserData = {
       isMoveDateOver: false,
       isReqConfirmed: false,
       isRejected: true,
+      comment: '피아노 운송 필요, 전문 취급 요청',
     },
     {
       estimateId: 9,
@@ -140,6 +148,7 @@ export const mockData: UserData = {
       price: 3900000,
       isMoveDateOver: true,
       isReqConfirmed: true,
+      comment: '사무실 이전, 야간 작업 가능',
     },
     {
       estimateId: 10,
@@ -153,6 +162,7 @@ export const mockData: UserData = {
       price: 7600000,
       isMoveDateOver: true,
       isReqConfirmed: true,
+      comment: '1인 가구, 짐 적고 간단한 이동',
     },
   ],
 };
