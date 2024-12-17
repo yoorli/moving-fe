@@ -9,6 +9,8 @@ import {
 import AuthBtn from '../../../components/btn/AuthBtn';
 import { DriverLoginTop } from '../../../components/page/auth/AuthTop';
 import { DriverLoginBottom } from '../../../components/page/auth/AuthBottom';
+import { isAxiosError } from 'axios';
+import { auth } from '../../../lib/api/auth';
 
 type FormLogin = {
   email: string;
@@ -31,6 +33,8 @@ export default function DriverLoginPage() {
     password: true,
   });
 
+  const [isPending, setIsPending] = useState<boolean>(false);
+
   const inputHeandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setValues({
@@ -44,12 +48,46 @@ export default function DriverLoginPage() {
     });
   };
 
-  const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [errorMessage, setErrorMessage] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: '',
+    password: '',
+  });
+
+  const loginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!(validation.email && validation.password)) {
-      return;
-    } else {
+    if (
+      values.email &&
+      values.password &&
+      validation.email &&
+      validation.password
+    ) {
+      try {
+        setIsPending(true);
+        await auth.post('/user/login', values);
+        setIsPending(false);
+        window.location.href = '/';
+      } catch (e) {
+        if (isAxiosError(e)) {
+          const data = e.response?.data;
+
+          setValidation({
+            ...validation,
+            [data.type]: false,
+          });
+
+          setErrorMessage({
+            ...errorMessage,
+            [data.type]: data.message,
+          });
+        }
+      }
+
       /**TODO API request */
+    } else {
+      return;
     }
   };
 
@@ -66,7 +104,11 @@ export default function DriverLoginPage() {
               name='email'
               inputHeandler={inputHeandler}
               validation={validation.email}
-              errorMessage='이메일 형식이 아닙니다.'
+              errorMessage={
+                errorMessage.email
+                  ? errorMessage.email
+                  : '이메일 형식이 아닙니다.'
+              }
             />
             <InvisibleInputComponent
               title='비밀번호'
@@ -75,10 +117,14 @@ export default function DriverLoginPage() {
               name='password'
               inputHeandler={inputHeandler}
               validation={validation.password}
-              errorMessage='비밀번호가 올바르지 않습니다.'
+              errorMessage={
+                errorMessage.password
+                  ? errorMessage.password
+                  : '비밀번호가 올바르지 않습니다.'
+              }
             />
             <AuthBtn
-              context='로그인'
+              context={isPending ? 'loading...' : '로그인'}
               validation={
                 !!values.email &&
                 !!values.password &&

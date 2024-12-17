@@ -1,22 +1,37 @@
+import { useContext } from 'react';
+import { auth } from '../../lib/api/auth';
 import useDirection from '../../lib/function/direction';
 import style from './ProfileModal.module.css';
+import { AuthContext } from '../../context/authContext';
+
+const logout = async () => {
+  await auth.post('/user/logout');
+  window.location.href = '/';
+};
 
 type Props = {
   modalController?: () => void;
 };
 
 export function UserProfileModal({ modalController }: Props) {
-  const { direction_userEditProfile, direction_userEditInfo, direction_favoriteMover, direction_movingReview } = useDirection();
+  const {
+    direction_userEditProfile,
+    direction_userEditInfo,
+    direction_favoriteMover,
+    direction_movingReview,
+  } = useDirection();
   const directionAndPopModal = (direction: () => void) => {
     direction();
     if (modalController) {
       modalController();
     }
   };
+  const { user } = useContext(AuthContext);
+
   return (
     <div className={style.container}>
       <div className={style.title}>
-        <span>김가나 고객님</span>
+        <span>{user.name} 고객님</span>
       </div>
       <div
         onClick={() => {
@@ -34,6 +49,7 @@ export function UserProfileModal({ modalController }: Props) {
       >
         기본정보 수정
       </div>
+
       <div
         onClick={() => {
           directionAndPopModal(direction_favoriteMover);
@@ -50,7 +66,9 @@ export function UserProfileModal({ modalController }: Props) {
       >
         이사 리뷰
       </div>
-      <div className={style.logout}>로그아웃</div>
+      <div onClick={logout} className={style.logout}>
+        로그아웃
+      </div>
     </div>
   );
 }
@@ -67,10 +85,11 @@ export function DriverProfileModal({ modalController }: Props) {
       modalController();
     }
   };
+  const { user } = useContext(AuthContext);
   return (
     <div className={style.containerD}>
       <div className={style.title}>
-        <span>김기사 기사님</span>
+        <span>{user.name} 기사님</span>
       </div>
       <div
         onClick={() => {
@@ -96,7 +115,9 @@ export function DriverProfileModal({ modalController }: Props) {
       >
         마이 페이지
       </div>
-      <div className={style.logout}>로그아웃</div>
+      <div onClick={logout} className={style.logout}>
+        로그아웃
+      </div>
     </div>
   );
 }
