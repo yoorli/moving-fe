@@ -43,7 +43,10 @@ export function useCreateEstimate() {
 }
 
 // 견적 상세 조회
-export function useGetEstimateDetail(id: number, userType: 'consumer' | 'mover') {
+export function useGetEstimateDetail(
+  id: number,
+  userType: 'consumer' | 'mover',
+) {
   return useQuery({
     queryKey: ['estimateDetail', id, userType],
     queryFn: () => getEstimateDetail(id, userType),
@@ -74,10 +77,10 @@ export function useUpdateEstimateConfirmed() {
 }
 
 /* 작성 가능한 리뷰(이사 완료 리스트) 조회 */
-export function useGetMovedEstimates() {
+export function useGetMovedEstimates({ page, pageSize }: PaginationParams) {
   return useQuery({
     queryKey: ['completionEstimates'],
-    queryFn: () => getMovedEstimates(),
+    queryFn: () => getMovedEstimates({ page, pageSize }),
   });
 }
 

@@ -1,7 +1,11 @@
 import axios from './axios';
-
 import { getParams } from '../function/utils';
-import { EstimateConsumer, EstimateMover, EstimateParams, PaginationParams } from '../../types/apiTypes';
+import {
+  EstimateConsumer,
+  EstimateMover,
+  EstimateParams,
+  PaginationParams,
+} from '../../types/apiTypes';
 
 const PATH = '/estimate';
 
@@ -34,8 +38,10 @@ export async function updateEstimateConfirmed(estimateId: number) {
  * 이사 완료한 견적 리스트 조회 - /estimate/movedList
  * @returns 이사 완료한 견적 리스트
  */
-export async function getMovedEstimates() {
-  const res = await axios.get(`${PATH}/movedList`);
+export async function getMovedEstimates({ page, pageSize }: PaginationParams) {
+  const res = await axios.get(`${PATH}/movedList`, {
+    params: { page, pageSize },
+  });
   return res.data;
 }
 

@@ -6,7 +6,7 @@ import {
   getUserEstimateReq,
   getMoverEstimateReq,
 } from '../api/estimateReq';
-import { estimateQueryParams } from '../../types/apiTypes';
+import { estimateQueryParams, PaginationParams } from '../../types/apiTypes';
 
 export interface FormValues {
   movingType: null | string;
@@ -15,11 +15,6 @@ export interface FormValues {
   arrival: null | string;
   comment?: undefined | string | null;
 }
-
-type useGetEstimateReqListProps = {
-  page?: number;
-  pageSize?: number;
-};
 
 /* 유저-견적 요청 조회 */
 export function useGetUserEstimateReq() {
@@ -62,7 +57,7 @@ export function useCreateEstimateReq() {
 export function useGetEstimateReqList({
   page,
   pageSize,
-}: useGetEstimateReqListProps): any {
+}: PaginationParams): any {
   return useQuery({
     queryKey: ['estimateReq'],
     queryFn: () => getEstimateReqList({ page, pageSize }),
