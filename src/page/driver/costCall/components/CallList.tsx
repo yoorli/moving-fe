@@ -6,7 +6,7 @@ import Chip from '../../../../components/chip/Chip';
 import UserProfile from '../../../../components/card/UserProfile';
 import ModalInput from './ModalInput';
 
-import { ChipType } from '../../../../components/card/type';
+import { ChipType } from '../../../../types/cardTypes';
 import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 import style from './CallList.module.css';

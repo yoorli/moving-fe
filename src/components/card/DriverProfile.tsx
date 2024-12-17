@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { formatCurrency } from '../../lib/function/utils';
-import { DriverProfileProps } from './type';
+import { DriverProfileProps } from '../../types/cardTypes';
 
 import style from './DriverProfile.module.css';
 

@@ -1,9 +1,29 @@
-import axios from 'axios';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  getEstimateReject,
+  updateEstimateReject,
+} from '../api/assignedEstimateReq';
+import { PaginationParams } from '../../types/apiTypes';
 
-const PATH = '/assignedEstimateReq';
+// 지정 견적 반려
+export function useUpdateEstimateReject() {
+  const queryClient = useQueryClient();
 
-/* /:id GET - 기사 프로필 상세 조회 */
-export async function getMoverMe(moverId: number) {
-  const res = await axios.get(`${PATH}/${moverId}/detail`);
-  return res.data;
+  return useMutation({
+    mutationFn: (id: number) => updateEstimateReject(id),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['rejectList'] });
+    },
+    onError: (error) => {
+      console.error('Error:', error);
+    },
+  });
+}
+
+// 반려된 견적 요청 및 취소된 견적 요청 조회
+export function useGetEstimateReject(queryParams: PaginationParams) {
+  return useQuery({
+    queryKey: ['rejectList', queryParams],
+    queryFn: () => getEstimateReject(queryParams),
+  });
 }

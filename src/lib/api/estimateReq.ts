@@ -1,15 +1,14 @@
 import axios from './axios';
 
+import { getParams } from '../function/utils';
+import { estimateQueryParams, PaginationParams } from '../../types/apiTypes';
+
 const PATH = '/estimateReq';
 
-type useGetEstimateReqListProps = {
-  page?: number;
-  pageSize?: number;
-};
-
-/* /:id GET - 기사 프로필 상세 조회 */
-export async function getMoverMe(moverId: number) {
-  const res = await axios.get(`${PATH}/${moverId}/detail`);
+/* GET - 기사-견적 요청 리스트 조회 */
+export async function getMoverEstimateReq(queryParams: estimateQueryParams) {
+  const params = getParams(queryParams);
+  const res = await axios.get(`${PATH}/mover/list`, { params });
   return res.data;
 }
 
@@ -17,7 +16,7 @@ export async function getMoverMe(moverId: number) {
  * 유저-견적 요청 조회 /estimateReq
  * @returns 견적 요청
  */
-export async function getEstimateReq() {
+export async function getUserEstimateReq() {
   const res = await axios.get(`${PATH}`);
   return res.data;
 }
@@ -39,10 +38,7 @@ export async function createEstimateReq(data: any) {
 }
 
 /* GET USER-받았던 견적 리스트 조회*/
-export async function getEstimateReqList({
-  page,
-  pageSize,
-}: useGetEstimateReqListProps) {
+export async function getEstimateReqList({ page, pageSize }: PaginationParams) {
   const res = await axios.get(`${PATH}/estimateReq/customer/list`, {
     params: { page, pageSize },
   });

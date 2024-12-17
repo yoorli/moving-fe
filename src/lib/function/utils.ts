@@ -1,4 +1,4 @@
-import { ChipType } from "../../components/card/type";
+import { ChipType } from '../../types/cardTypes';
 
 // 시간 변환
 // type => yyyy. mm. dd / ss초 전 표시 x
@@ -19,7 +19,9 @@ export function getNotificationDate(inputDate: string | Date, type?: string) {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
-    return type ? `${year}. ${month}. ${day}` : `${year.toString().slice(-2)}. ${month}. ${day}`;
+    return type
+      ? `${year}. ${month}. ${day}`
+      : `${year.toString().slice(-2)}. ${month}. ${day}`;
   }
 }
 
@@ -54,3 +56,14 @@ export const getChips = (chipList: ChipType[], count: number) => {
   }
   return chips;
 };
+
+// api - undefined면 반환x
+// Record<string, any>: 문자열을 키로, 어떤 값이든 허용하는 타입
+export function getParams(queryParams: Record<string, any>) {
+  // Object.fromEntries()는 키-값 배열을 다시 객체로 변환
+  return Object.fromEntries(
+    // undefined가 아닌 경우에만 배열에 남도록 함함
+    // [_, value] : 첫 번째 요소(키)를 무시, 두 번째 요소(값)만 사용
+    Object.entries(queryParams).filter(([_, value]) => value !== undefined),
+  );
+}

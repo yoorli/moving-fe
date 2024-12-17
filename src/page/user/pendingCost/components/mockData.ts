@@ -1,4 +1,4 @@
-import { ChipType } from '../../../../components/card/type';
+import { ChipType } from '../../../../types/cardTypes';
 
 export interface PendingListType {
   estimateId: number; // 견적 ID

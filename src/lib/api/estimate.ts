@@ -1,5 +1,8 @@
 import axios from './axios';
 
+import { getParams } from '../function/utils';
+import { EstimateConsumer, EstimateMover, EstimateParams, PaginationParams } from '../../types/apiTypes';
+
 const PATH = '/estimate';
 
 /* /:id GET - 기사 프로필 상세 조회 */
@@ -42,4 +45,73 @@ export async function getEstimate(estimateRequestId: number) {
   return res.data;
 }
 
+/* GET - 기사-확정된 견적 리스트 조회*/
+export async function getEstimateConfirmed(queryParams: PaginationParams) {
+  const params = getParams(queryParams);
+  const res = await axios.get(`${PATH}/confirmed`, { params });
+  return res.data;
+}
 
+/* GET - 기사-보낸 견적 리스트 조회*/
+export async function getEstimateList(queryParams: PaginationParams) {
+  const params = getParams(queryParams);
+  const res = await axios.get(`${PATH}/sentList`, { params });
+  return res.data;
+}
+
+/* POST - 견적 작성 */
+export async function createEstimate(data: EstimateParams) {
+  const res = await axios.post(`${PATH}`, data);
+  return res.data;
+}
+
+/* /{estimateId} GET - 견적 상세 조회 */
+export async function getEstimateDetail(
+  estimateId: number,
+  userType: 'consumer' | 'mover',
+): Promise<EstimateConsumer | EstimateMover> {
+  const response = await axios.get(`${PATH}/${estimateId}`);
+  const data = response.data;
+
+  if (userType === 'consumer') {
+    const consumerData: EstimateConsumer = {
+      estimateId: data.estimateId,
+      moverId: data.moverId,
+      isConfirmed: data.isConfirmed,
+      isReqConfirmed: data.isReqConfirmed,
+      serviceType: data.serviceType,
+      isAssigned: data.isAssigned,
+      summary: data.summary,
+      profileImg: data.profileImg || '/default-profile.png',
+      moverName: data.moverName,
+      reviewStats: data.reviewStats,
+      career: data.career,
+      confirmationCount: data.confirmationCount,
+      favoriteCount: data.favoriteCount,
+      isFavorite: data.isFavorite,
+      price: data.price,
+      comment: data.comment,
+      movingRequest: data.movingRequest,
+      movingType: data.movingType,
+      movingDate: data.movingDate,
+      departure: data.departure,
+      arrival: data.arrival,
+    };
+    return consumerData;
+  }
+
+  const moverData: EstimateMover = {
+    estimateId: data.estimateId,
+    movingType: data.movingType,
+    isAssigned: data.isAssigned,
+    customerName: data.customerName,
+    movingDate: data.movingDate,
+    departure: data.departure,
+    arrival: data.arrival,
+    price: data.price,
+    movingRequest: data.movingRequest,
+    detailDeparture: data.detailDeparture,
+    detailArrival: data.detailArrival,
+  };
+  return moverData;
+}

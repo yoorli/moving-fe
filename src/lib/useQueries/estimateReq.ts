@@ -3,8 +3,10 @@ import {
   createEstimateReq,
   deleteEstimateReq,
   getEstimateReqList,
-  getEstimateReq,
+  getUserEstimateReq,
+  getMoverEstimateReq,
 } from '../api/estimateReq';
+import { estimateQueryParams } from '../../types/apiTypes';
 
 export interface FormValues {
   movingType: null | string;
@@ -20,10 +22,10 @@ type useGetEstimateReqListProps = {
 };
 
 /* 유저-견적 요청 조회 */
-export function useGetEstimateReq() {
+export function useGetUserEstimateReq() {
   return useQuery({
     queryKey: ['estimateReq'],
-    queryFn: () => getEstimateReq(),
+    queryFn: () => getUserEstimateReq(),
   });
 }
 
@@ -64,5 +66,13 @@ export function useGetEstimateReqList({
   return useQuery({
     queryKey: ['estimateReq'],
     queryFn: () => getEstimateReqList({ page, pageSize }),
+  });
+}
+
+// 견적 요청 리스트 조회
+export function useGetEstimateReq(queryParams: estimateQueryParams) {
+  return useQuery({
+    queryKey: ['estimateReq', queryParams],
+    queryFn: () => getMoverEstimateReq(queryParams),
   });
 }
