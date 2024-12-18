@@ -1,6 +1,6 @@
 // import DriverCard from '../../../components/card/DriverCard';
 import DriverCard from '../../../components/card/DriverCard';
-import { ChipType } from '../../../components/card/type';
+import { ChipType } from '../../../types/cardTypes';
 import Review from '../../../components/review/Review';
 import Tab from '../../../components/tab/Tab';
 import useDirection from '../../../lib/function/direction';

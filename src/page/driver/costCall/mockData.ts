@@ -1,4 +1,4 @@
-import { ChipType } from '../../../components/card/type';
+import { ChipType } from '../../../types/cardTypes';
 
 export interface UserData {
   total: number; //리스트 총 갯수

@@ -4,7 +4,7 @@ import style from './WritingReview.module.css';
 import icEmptyStarLarge from '../../../../assets/icons/ic_empty_star_large.svg';
 import icFullStarLarge from '../../../../assets/icons/ic_full_star_large.svg';
 import Chip from '../../../../components/chip/Chip';
-import { ChipType } from '../../../../components/card/type';
+import { ChipType } from '../../../../types/cardTypes';
 
 interface WritingReviewProps {
   mover: any;

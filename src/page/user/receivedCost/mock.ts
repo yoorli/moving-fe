@@ -1,4 +1,4 @@
-import { ChipType } from '../../../components/card/type';
+import { ChipType } from '../../../types/cardTypes';
 
 export interface DriverDataDetail {
   moverId: number; // 기사 아이디

@@ -10,7 +10,7 @@ import {
   formatCurrency,
   getChips,
 } from '../../lib/function/utils';
-import { ChipType, UserProfileProps } from './type';
+import { ChipType, UserProfileProps } from '../../types/cardTypes';
 
 import style from './UserCard.module.css';
 
@@ -61,7 +61,7 @@ export default function UserCard({
         )}
       </div>
       <UserProfile type={type} list={list} />
-      {list.comment && type == 'receive' &&(
+      {list.comment && type == 'receive' && (
         <div className={style.labelBox}>
           <div className={style.label}>요청사항</div>
           {list.comment}

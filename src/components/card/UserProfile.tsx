@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import { formatCurrency } from '../../lib/function/utils';
 import { useMedia } from '../../lib/function/useMediaQuery';
-import { UserProfileProps } from './type';
+import { UserProfileProps } from '../../types/cardTypes';
 
 import style from './UserProfile.module.css';
 

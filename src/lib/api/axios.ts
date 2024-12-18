@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 
-// axios 에러 핸들링 여기서 하면 될 듯
+// axios 에러 핸들링 여기서?
 
 const instance = axios.create({
   baseURL: API_URL,
