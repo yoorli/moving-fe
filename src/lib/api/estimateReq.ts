@@ -3,7 +3,7 @@ import axios from './axios';
 import { getParams } from '../function/utils';
 import { estimateQueryParams, PaginationParams } from '../../types/apiTypes';
 
-const PATH = `${process.env.REACT_APP_API_URL}/estimateReq`;
+const PATH = `/estimateReq`;
 
 /**
  * 유저-견적 요청 조회 /estimateReq
