@@ -19,7 +19,6 @@
   margin-top: 64px;
   border-radius: 40px;
   padding: 48px 40px;
-  min-height: 100vh;
 }
 
 @media (max-width: 1199px) and (min-width: 744px) {

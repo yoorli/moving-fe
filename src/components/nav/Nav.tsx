@@ -173,7 +173,7 @@ export function UserNav({
               src={profile}
               alt=''
             />
-            <span className={style.navIconText}>{user.name}</span>
+            <span className={style.navIconText}>{user?.name}</span>
             {profileModal ? (
               <UserProfileModal modalController={profileController} />
             ) : null}

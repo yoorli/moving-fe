@@ -183,6 +183,7 @@ const SearchDriverForGuest = () => {
               (type) => type as ChipProps['type'],
             ),
           }}
+          type='dibs'
           styles='small'
           onClick={() => handleCardClick(user.moverId)}
         />
