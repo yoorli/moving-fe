@@ -86,13 +86,17 @@ export default function DriverCard({
           {chips.map((row, rowIndex) => (
             <div key={rowIndex} className={style.chip}>
               {row.map((chip, chipIndex) => (
-                <Chip key={chipIndex} type={chip} />
+                <Chip
+                  key={chipIndex}
+                  type={chip}
+                  size={type === 'dibs' ? 'favorite' : 'noFavorite'}
+                />
               ))}
             </div>
           ))}
         </div>
       )}
-      {(type === 'cost' || type === undefined) && (
+      {(type === 'cost' || type === undefined || type === 'dibs') && (
         <>
           <span
             className={classNames(style.content, {

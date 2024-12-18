@@ -53,8 +53,9 @@ export interface DriverProfileProps extends BaseProps {
   reviewBtn?: () => void; //리뷰 작성하기 버튼
   costListBtn?: () => void; //견적 목록보기 버튼
   list: BaseProps['list'] & {
-    moverId: number; // 기사 아이디
+    moverId?: number; // 기사 아이디
     estimateId?: number; // 견적 id
+    estimateReqId?: number;
     career?: number; // 경력
     summary?: string; // 한 줄 소개
     serviceRegion?: string[]; // 서비스 지역

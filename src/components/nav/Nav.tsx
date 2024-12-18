@@ -173,7 +173,7 @@ export function UserNav({
               src={profile}
               alt=''
             />
-            <span className={style.navIconText}>{user.name}</span>
+            <span className={style.navIconText}>{user?.name}</span>
             {profileModal ? (
               <UserProfileModal modalController={profileController} />
             ) : null}
@@ -347,7 +347,7 @@ export function DriverNav({
               src={profile}
               alt=''
             />
-            <span className={style.navIconText}>{user?.name}</span>
+            <span className={style.navIconText}>{user.name}</span>
             {profileModal ? (
               <DriverProfileModal modalController={profileController} />
             ) : null}

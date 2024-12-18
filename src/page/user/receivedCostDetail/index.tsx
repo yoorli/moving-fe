@@ -1,10 +1,11 @@
 import { useState } from 'react';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Tab from '../../../components/tab/Tab';
 import style from './index.module.css';
 
 import ReceivedList from './components/ReceivedList';
-import { mockData } from './mockData';
+// import { mockData } from './mockData';
+import { useGetEstimate } from '../../../lib/useQueries/estimate';
 import useDirection from '../../../lib/function/direction';
 import CostInfo from '../../../components/costInfo/CostInfo';
 
@@ -16,7 +17,13 @@ export default function ReceivedCostDetail() {
     setCurrentTab(selectedTab);
   };
 
-  // const { id } = useParams();\
+  const { id } = useParams<{ id: string }>();
+
+  const { data } = useGetEstimate(id ?? '');
+
+  if (!data) {
+    return <div>No data available</div>;
+  }
 
   return (
     <>
@@ -35,14 +42,14 @@ export default function ReceivedCostDetail() {
         <div className={style.layout}>
           <div className={style.main}>
             <CostInfo
-              movingRequest={mockData.info.movingRequest}
-              movingType={mockData.info.movingType}
-              movingDate={mockData.info.movingDate}
-              departure={mockData.info.departure}
-              arrival={mockData.info.arrival}
-              comment={mockData.info.comment}
+              movingRequest={data?.info?.movingRequest}
+              movingType={data?.info?.movingType}
+              movingDate={data?.info?.movingDate}
+              departure={data.info.departure}
+              arrival={data.info.arrival}
+              comment={data.info.comment}
             />
-            <ReceivedList list={mockData.list} count={mockData.total} />
+            <ReceivedList list={data.list} count={data.total} />
           </div>
         </div>
       </div>
