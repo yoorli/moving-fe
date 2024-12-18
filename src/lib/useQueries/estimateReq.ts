@@ -55,8 +55,8 @@ export function useCreateEstimateReq() {
 
 /* GET USER-받았던 견적 리스트 조회*/
 export function useGetEstimateReqList({
-  page,
-  pageSize,
+  page = 1,
+  pageSize = 8,
 }: PaginationParams): any {
   return useQuery({
     queryKey: ['estimateReq', page, pageSize],

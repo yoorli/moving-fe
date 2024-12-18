@@ -10,7 +10,7 @@ export default function ReceivedCost() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('second');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data } = useGetEstimateReqList({ page: currentPage, pageSize: 10 });
+  const { data } = useGetEstimateReqList({ page: currentPage, pageSize: 8 });
 
   const handleTabChange = (selectedTab: 'first' | 'second') => {
     setCurrentTab(selectedTab);
@@ -38,24 +38,26 @@ export default function ReceivedCost() {
         firstTabRoute={direction_pendingCost}
         secondTabRoute={direction_receivedCost}
       />
-      {data.total > 0 ? (
-        <div>
-          <ReceivedCostCard
-            redirect={direction_receivedCostDetail}
-            data={data}
-          />
-          <div className={style.pagination}>
-            <Pagination
-              currentPage={currentPage}
-              data={data?.total}
-              itemsPerPage={8}
-              onPageChange={setCurrentPage}
+      <div className={style.container}>
+        {data.total > 0 ? (
+          <div>
+            <ReceivedCostCard
+              redirect={direction_receivedCostDetail}
+              data={data}
             />
+            <div className={style.pagination}>
+              <Pagination
+                currentPage={currentPage}
+                data={data?.total}
+                itemsPerPage={8}
+                onPageChange={setCurrentPage}
+              />
+            </div>
           </div>
-        </div>
-      ) : (
-        <div>받은 견적이 없습니다</div>
-      )}
+        ) : (
+          <div>받은 견적이 없습니다</div>
+        )}
+      </div>
     </>
   );
 }
