@@ -50,6 +50,11 @@
   height: 24px;
 }
 
+.favoriteRedLayout {
+  background-color: var(--red-100);
+  color: var(--red-200);
+}
+
 @media (max-width: 1199px) {
   .layout {
     padding: 2px 6px 2px 2px;

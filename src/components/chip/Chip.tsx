@@ -69,7 +69,8 @@ export default function Chip({ type, size = 'noFavorite' }: ChipProps) {
   return (
     <div
       className={cn(size === 'favorite' ? style.favoriteLayout : style.layout, {
-        [style.redLayout]: type === 'ASSIGN',
+        [size === 'favorite' ? style.favoriteRedLayout : style.redLayout]:
+          type === 'ASSIGN',
         [size === 'favorite' ? style.favoriteBlackLayout : style.blackLayout]:
           type === 'CONFIRM' || type === 'WAITING',
       })}
