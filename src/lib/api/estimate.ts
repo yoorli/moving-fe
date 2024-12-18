@@ -47,7 +47,7 @@ export async function getMovedEstimates({ page, pageSize }: PaginationParams) {
 
 /* GET USER-받았던 견적 상세내용 리스트 조회*/
 export async function getEstimate(estimateRequestId: string) {
-  const res = await axios.get(`${PATH}/${estimateRequestId}`);
+  const res = await axios.get(`${PATH}/list/${estimateRequestId}`);
   return res.data;
 }
 
