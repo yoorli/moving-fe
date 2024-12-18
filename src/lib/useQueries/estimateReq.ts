@@ -64,8 +64,8 @@ export function useGetEstimateReqList({
   });
 }
 
-// 견적 요청 리스트 조회
-export function useGetEstimateReq(queryParams: estimateQueryParams) {
+// 기사 - 견적 요청 리스트 조회
+export function useGetMoverEstimateReq(queryParams: estimateQueryParams) {
   return useQuery({
     queryKey: ['estimateReq', queryParams],
     queryFn: () => getMoverEstimateReq(queryParams),

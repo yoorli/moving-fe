@@ -9,12 +9,6 @@ import {
 
 const PATH = `${process.env.REACT_APP_API_URL}/estimate`;
 
-/* /:id GET - 기사 프로필 상세 조회 */
-export async function getMoverMe(moverId: number) {
-  const res = await axios.get(`${PATH}/${moverId}/detail`);
-  return res.data;
-}
-
 /**
  * 유저-대기 중인 견적 조회 /estimate
  * @returns 대기 중인 견적 리스트
