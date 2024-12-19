@@ -35,7 +35,6 @@ export interface Mover {
 }
 
 export interface MoverList {
-  count: number;
   list: Mover[];
 }
 
