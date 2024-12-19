@@ -49,7 +49,7 @@ export default function ReceivedCostDetail() {
               arrival={data.info.arrival}
               comment={data.info.comment}
             />
-            <ReceivedList list={data.list} count={data.total} />
+            <ReceivedList list={data.list} />
           </div>
         </div>
       </div>
