@@ -77,7 +77,7 @@ export interface EstimateMover extends EstimateUser {
 
 // estimateReq
 export interface estimateQueryParams extends PaginationParams {
-  type?: string;
+  type?: string[];
   isAssigned?: boolean;
   order?: string;
   keyWord?: string;

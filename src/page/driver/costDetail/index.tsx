@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 import UserCard from '../../../components/card/UserCard';
 import SnsShare from '../../../components/snsShare/SnsShare';
@@ -13,7 +13,8 @@ import { mockData } from './mockData';
 
 export default function DriverCostDetailPage() {
   const isPc = useMedia().pc;
-  const id = useParams().id;
+  // const id = useParams().id;
+  const id = 5;
   const user = mockData.users[Number(id) - 1];
 
   const info = {
