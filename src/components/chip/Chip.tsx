@@ -12,21 +12,38 @@ import icDocumentMedium from '../../assets/icons/ic_document_medium.svg';
 
 export interface ChipProps {
   type: 'SMALL' | 'HOUSE' | 'OFFICE' | 'ASSIGN' | 'CONFIRM' | 'WAITING';
+  size?: 'favorite' | 'noFavorite';
 }
 
-export default function Chip({ type }: ChipProps) {
+export default function Chip({ type, size = 'noFavorite' }: ChipProps) {
   const { pc } = useMedia();
 
-  const chipImg = (type: string): string => {
+  const chipImg = (type: string, size: string): string => {
     switch (type) {
       case 'SMALL':
-        return pc ? icBoxLarge : icBoxMedium;
+        return size === 'favorite'
+          ? icBoxMedium
+          : pc
+            ? icBoxLarge
+            : icBoxMedium;
       case 'HOUSE':
-        return pc ? icHomeLarge : icHomeMedium;
+        return size === 'favorite'
+          ? icHomeMedium
+          : pc
+            ? icHomeLarge
+            : icHomeMedium;
       case 'OFFICE':
-        return pc ? icCompanyLarge : icCompanyMedium;
+        return size === 'favorite'
+          ? icCompanyMedium
+          : pc
+            ? icCompanyLarge
+            : icCompanyMedium;
       case 'ASSIGN':
-        return pc ? icDocumentLarge : icDocumentMedium;
+        return size === 'favorite'
+          ? icDocumentMedium
+          : pc
+            ? icDocumentLarge
+            : icDocumentMedium;
       default:
         return '';
     }
@@ -51,12 +68,14 @@ export default function Chip({ type }: ChipProps) {
 
   return (
     <div
-      className={cn(style.layout, {
-        [style.redLayout]: type === 'ASSIGN',
-        [style.blackLayout]: type === 'CONFIRM' || type === 'WAITING',
+      className={cn(size === 'favorite' ? style.favoriteLayout : style.layout, {
+        [size === 'favorite' ? style.favoriteRedLayout : style.redLayout]:
+          type === 'ASSIGN',
+        [size === 'favorite' ? style.favoriteBlackLayout : style.blackLayout]:
+          type === 'CONFIRM' || type === 'WAITING',
       })}
     >
-      <img src={chipImg(type)} alt='' />
+      <img src={chipImg(type, size)} alt='' />
       <div>{chipText(type)}</div>
     </div>
   );

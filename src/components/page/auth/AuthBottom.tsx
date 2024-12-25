@@ -9,6 +9,13 @@ import { useMedia } from '../../../lib/function/useMediaQuery';
 
 export const UserLoginBottom = () => {
   const { pc } = useMedia();
+  // const loginKakao = async () => {
+  //   try {
+  //     await auth.get('user/kakao?userType=CUSTOMER');
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
   return (
     <div className={style.bottom}>
       <span>SNS 계정으로 간편 가입하기</span>
@@ -16,13 +23,17 @@ export const UserLoginBottom = () => {
         {pc ? (
           <>
             <img src={google} alt='' />
-            <img src={kakao} alt='' />
+            <a href='https://moving-be-render.onrender.com/user/kakao?userType=CUSTOMER'>
+              <img src={kakao} alt='' />
+            </a>
             <img src={naver} alt='' />
           </>
         ) : (
           <>
             <img src={googleMedium} alt='' />
-            <img src={kakaoMedium} alt='' />
+            <a href='https://moving-be-render.onrender.com/user/kakao?userType=CUSTOMER'>
+              <img src={kakaoMedium} alt='' />
+            </a>
             <img src={naverMedium} alt='' />
           </>
         )}
@@ -40,13 +51,17 @@ export const DriverLoginBottom = () => {
         {pc ? (
           <>
             <img src={google} alt='' />
-            <img src={kakao} alt='' />
+            <a href='https://moving-be-render.onrender.com/user/kakao?userType=MOVER'>
+              <img src={kakao} alt='' />
+            </a>
             <img src={naver} alt='' />
           </>
         ) : (
           <>
             <img src={googleMedium} alt='' />
-            <img src={kakaoMedium} alt='' />
+            <a href='https://moving-be-render.onrender.com/user/kakao?userType=MOVER'>
+              <img src={kakaoMedium} alt='' />
+            </a>
             <img src={naverMedium} alt='' />
           </>
         )}
@@ -64,13 +79,17 @@ export const UserSignupBottom = () => {
         {pc ? (
           <>
             <img src={google} alt='' />
-            <img src={kakao} alt='' />
+            <a href='https://moving-be-render.onrender.com/user/kakao?userType=CUSTOMER'>
+              <img src={kakao} alt='' />
+            </a>
             <img src={naver} alt='' />
           </>
         ) : (
           <>
             <img src={googleMedium} alt='' />
-            <img src={kakaoMedium} alt='' />
+            <a href='https://moving-be-render.onrender.com/user/kakao?userType=CUSTOMER'>
+              <img src={kakaoMedium} alt='' />
+            </a>
             <img src={naverMedium} alt='' />
           </>
         )}
@@ -88,13 +107,17 @@ export const DriverSignupBottom = () => {
         {pc ? (
           <>
             <img src={google} alt='' />
-            <img src={kakao} alt='' />
+            <a href='https://moving-be-render.onrender.com/user/kakao?userType=MOVER'>
+              <img src={kakao} alt='' />
+            </a>
             <img src={naver} alt='' />
           </>
         ) : (
           <>
             <img src={googleMedium} alt='' />
-            <img src={kakaoMedium} alt='' />
+            <a href='https://moving-be-render.onrender.com/user/kakao?userType=MOVER'>
+              <img src={kakaoMedium} alt='' />
+            </a>
             <img src={naverMedium} alt='' />
           </>
         )}

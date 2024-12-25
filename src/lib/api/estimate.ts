@@ -7,13 +7,7 @@ import {
   PaginationParams,
 } from '../../types/apiTypes';
 
-const PATH = '/estimate';
-
-/* /:id GET - 기사 프로필 상세 조회 */
-export async function getMoverMe(moverId: number) {
-  const res = await axios.get(`${PATH}/${moverId}/detail`);
-  return res.data;
-}
+const PATH = `/estimate`;
 
 /**
  * 유저-대기 중인 견적 조회 /estimate
@@ -46,8 +40,8 @@ export async function getMovedEstimates({ page, pageSize }: PaginationParams) {
 }
 
 /* GET USER-받았던 견적 상세내용 리스트 조회*/
-export async function getEstimate(estimateRequestId: number) {
-  const res = await axios.get(`${PATH}/${estimateRequestId}`);
+export async function getEstimate(estimateRequestId: string) {
+  const res = await axios.get(`${PATH}/list/${estimateRequestId}`);
   return res.data;
 }
 

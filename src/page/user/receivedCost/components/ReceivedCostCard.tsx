@@ -1,20 +1,21 @@
 import style from './ReceivedCostCard.module.css';
 import DriverCard from '../../../../components/card/DriverCard';
-import { mockData, DriverDataDetail } from '../mock';
+import { DriverDataDetail, DriverData } from '../mock';
 import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 export interface Props {
   redirect: (id: number) => void;
+  data: DriverData;
 }
 
-export default function ReceivedCostCard({ redirect }: Props) {
+export default function ReceivedCostCard({ redirect, data }: Props) {
   const { mobileWithChip, mobileWithChipSecond } = useMedia();
 
   return (
     <>
       <div className={style.container}>
-        {mockData.list?.map((mover: DriverDataDetail) => (
-          <div key={mover.moverId} className={style.item}>
+        {data.list?.map((mover: DriverDataDetail) => (
+          <div key={mover.estimateReqId} className={style.item}>
             <DriverCard
               list={mover}
               type={
@@ -25,7 +26,7 @@ export default function ReceivedCostCard({ redirect }: Props) {
                     : 'notConfirm'
               }
               count={mobileWithChip ? 4 : mobileWithChipSecond ? 3 : 6}
-              costListBtn={() => redirect(mover.moverId)}
+              costListBtn={() => redirect(mover.estimateReqId)}
             />
           </div>
         ))}

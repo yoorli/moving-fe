@@ -4,6 +4,7 @@ import MovingDate from './MovingDate';
 import MovingAddress from './MovingAddress';
 import MovingComments from './MovingComments';
 import ModalContainer from '../../../../components/modal/ModalContainer';
+import { useCreateEstimateReq } from '../../../../lib/useQueries/estimateReq';
 import pageStyle from '../index.module.css';
 
 export interface FormValues {
@@ -64,9 +65,12 @@ export default function UserCostCallPage({
     values.departure !== null
   );
 
+  const { mutate } = useCreateEstimateReq();
+
   const modalBtnClick = () => {
     setIsSubmitted(true);
     setIsModalOpen(false);
+    mutate(values);
     redirect();
   };
 
