@@ -9,7 +9,7 @@ import NoContents from '../../../components/noContents/NoContents';
 import ModalContainer from '../../../components/modal/ModalContainer';
 
 import { useMedia } from '../../../lib/function/useMediaQuery';
-import { useGeMoverEstimateReq } from '../../../lib/useQueries/estimateReq';
+import { useGetMoverEstimateReq } from '../../../lib/useQueries/estimateReq';
 
 import style from './index.module.css';
 
@@ -20,22 +20,30 @@ export default function DriverCostCallPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [sortItem, setSortItem] = useState('');
-  const [checkedItems, setCheckedItems] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTab, setModalTab] = useState<'modalFirstTab' | 'modalSecondTab'>(
     'modalFirstTab',
   );
-  const [params, setParams] = useState({});
+  const [params, setParams] = useState({
+    page: 1,
+    pageSize: 3,
+    type: ['SMALL'],
+    isAssigned: false,
+  });
+  const [selectedOptions, setSelectedOptions] = useState({
+    SMALL: true,
+    HOUSE: true,
+    OFFICE: true,
+    ASSIGN: false,
+  });
+  const [isNoContents, setIsNoContents] = useState(false);
+
   const isPc = useMedia().pc;
 
-  const { data } = useGeMoverEstimateReq(params);
+  const { data, isLoading } = useGetMoverEstimateReq(params);
 
   const list = data?.list;
-  const currentUsers = list?.users ?? [];
-
-  // const startIndex = (currentPage - 1) * itemsPerPage;
-  // const endIndex = startIndex + itemsPerPage;
-  // const currentUsers = users.slice(startIndex, endIndex);
+  const totalItems = data?.total || 0;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -44,16 +52,63 @@ export default function DriverCostCallPage() {
   const page = {
     currentPage: currentPage,
     itemsPerPage: itemsPerPage,
-    data: list?.total,
+    data: totalItems,
     onPageChange: handlePageChange,
   };
 
   const count = {
-    total: data?.total || 0,
-    small: data?.small || 0,
-    house: data?.house || 0,
-    office: data?.office || 0,
-    assign: data?.assign || 0,
+    total: totalItems,
+    SMALL: data?.small || 0,
+    HOUSE: data?.house || 0,
+    OFFICE: data?.office || 0,
+    ASSIGN: data?.assign || 0,
+  };
+
+  const handleSetCheckedItems = (newItems: string[]) => {
+    const newState = {
+      SMALL: false,
+      HOUSE: false,
+      OFFICE: false,
+      ASSIGN: false,
+    };
+
+    newItems.forEach((item) => {
+      if (item === 'SMALL') newState.SMALL = true;
+      if (item === 'HOUSE') newState.HOUSE = true;
+      if (item === 'OFFICE') newState.OFFICE = true;
+      if (item === 'ASSIGN') newState.ASSIGN = true;
+    });
+
+    setSelectedOptions(newState);
+    setSearchTerm('');
+
+    if (!newState.SMALL && !newState.HOUSE && !newState.OFFICE) {
+      setIsNoContents(true);
+      setParams({
+        page: 1,
+        pageSize: itemsPerPage,
+        type: [],
+        isAssigned: newState.ASSIGN,
+      });
+      return;
+    }
+
+    setIsNoContents(false);
+
+    const types = Object.keys(newState).filter(
+      (key) => newState[key as keyof typeof newState],
+    );
+    setParams({
+      page: currentPage,
+      pageSize: itemsPerPage,
+      type: types,
+      isAssigned: newState.ASSIGN,
+    });
+  };
+
+  const handleDropdownChange = (sortOption: string) => {
+    setSortItem(sortOption);
+    setSearchTerm('');
   };
 
   const getFilter = () => {
@@ -75,8 +130,14 @@ export default function DriverCostCallPage() {
   }, [isPc]);
 
   useEffect(() => {
-    const isAssigned = checkedItems?.includes('ASSIGN');
-    const types = checkedItems.filter((item) => item !== 'ASSIGN');
+    const newItems: string[] = [];
+    if (selectedOptions.SMALL) newItems.push('SMALL');
+    if (selectedOptions.HOUSE) newItems.push('HOUSE');
+    if (selectedOptions.OFFICE) newItems.push('OFFICE');
+    const isAssigned = selectedOptions.ASSIGN;
+    if (isAssigned) newItems.push('ASSIGN');
+
+    const types = newItems.filter((item) => item !== 'ASSIGN');
 
     const option = {
       page: currentPage,
@@ -88,7 +149,7 @@ export default function DriverCostCallPage() {
     };
 
     setParams(option);
-  }, [currentPage, searchTerm, sortItem, checkedItems]);
+  }, [currentPage, searchTerm, sortItem, selectedOptions, itemsPerPage]);
 
   return (
     <div className={style.container}>
@@ -96,7 +157,11 @@ export default function DriverCostCallPage() {
       <div className={style.mainContainer}>
         {isPc && (
           <div className={style.filterBox}>
-            <Filter count={count} setCheckedItems={setCheckedItems} />
+            <Filter
+              count={count}
+              checkedItems={selectedOptions}
+              setCheckedItems={handleSetCheckedItems}
+            />
           </div>
         )}
         <div className={style.content}>
@@ -104,30 +169,33 @@ export default function DriverCostCallPage() {
             <div className={style.searchBar}>
               <Search
                 placeholder='어떤 고객님을 찾고 계세요?'
+                searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
               />
             </div>
             <div className={style.sortBar}>
-              전체 {data?.total}건
+              전체 {isNoContents ? 0 : data?.total}건
               <div className={style.filterBar}>
-                <Dropdown setSortItem={setSortItem} />
+                <Dropdown setSortItem={handleDropdownChange} />
                 {!isPc && <img src={filter} alt='filter' onClick={getFilter} />}
               </div>
             </div>
           </div>
-          {currentUsers.length > 0 ? (
-            <div className={style.mainContent}>
-              <CallList list={currentUsers} />
-            </div>
-          ) : (
+          {isLoading ? (
+            <div>로딩 중...</div>
+          ) : isNoContents || list.length === 0 ? ( // NoContents 상태 확인
             <div className={style.noContent}>
               <NoContents image='file' />
             </div>
-          )}
-          {currentUsers.length > 0 && (
-            <div className={style.pagination}>
-              <Pagination {...page} />
-            </div>
+          ) : (
+            <>
+              <div className={style.mainContent}>
+                <CallList list={list} />
+              </div>
+              <div className={style.pagination}>
+                <Pagination {...page} />
+              </div>
+            </>
           )}
         </div>
       </div>
@@ -144,15 +212,17 @@ export default function DriverCostCallPage() {
         >
           {modalTab === 'modalFirstTab' ? (
             <Filter
-              count={count}
               type='moving'
-              setCheckedItems={setCheckedItems}
+              count={count}
+              checkedItems={selectedOptions}
+              setCheckedItems={handleSetCheckedItems}
             />
           ) : (
             <Filter
-              count={count}
               type='filter'
-              setCheckedItems={setCheckedItems}
+              count={count}
+              checkedItems={selectedOptions}
+              setCheckedItems={handleSetCheckedItems}
             />
           )}
         </ModalContainer>
