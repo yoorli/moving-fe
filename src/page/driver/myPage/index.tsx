@@ -5,6 +5,7 @@ import Review from '../../../components/review/Review';
 import Tab from '../../../components/tab/Tab';
 import useDirection from '../../../lib/function/direction';
 import style from './index.module.css';
+import { useGetMoverProfile } from '../../../lib/useQueries/driver';
 
 export type ServiceRegionType =
   | 'SEOUL'
@@ -83,6 +84,8 @@ const mockData: DriverProfile = {
 export default function MyPage() {
   const { direction_driverEditProfile, direction_driverEditInfo } =
     useDirection();
+  const { data } = useGetMoverProfile();
+  console.log(data);
 
   return (
     <>

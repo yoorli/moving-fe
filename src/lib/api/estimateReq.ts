@@ -20,7 +20,7 @@ export async function getUserEstimateReq() {
  * @returns 견적 요청 상태
  */
 export async function deleteEstimateReq(estimateRequestId: number) {
-  const res = await axios.patch(`${PATH}/${estimateRequestId}`);
+  const res = await axios.delete(`${PATH}/${estimateRequestId}`);
   return res.data;
 }
 
