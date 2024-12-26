@@ -40,7 +40,8 @@ export interface MoverDetail extends Mover {
 
 //estimate
 export interface EstimateParams {
-  estimateId: number;
+  estimateId?: number;
+  estimateRequestId?: number;
   comment?: string;
   price: number;
 }
