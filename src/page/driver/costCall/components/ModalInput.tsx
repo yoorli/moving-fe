@@ -9,20 +9,39 @@ interface ModalInputProps {
   text: string;
   basicText: string;
   isTextArea?: boolean;
+  onChange: (value: string | number) => void;
 }
 
 export default function ModalInput({
   text,
   basicText,
   isTextArea,
+  onChange,
 }: ModalInputProps) {
   const [value, setValue] = useState('');
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const inputValue = event.target.value;
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const inputValue = event.target.value.replace(/,/g, '');
-    const formattedValue = formatCurrency(Number(inputValue), true)
-    setValue(formattedValue);
-  }
+    if (!isTextArea) {
+      // 금액 입력 필드 처리
+      const rawValue = inputValue.replace(/,/g, '');
+      const numericValue = Number(rawValue);
+      if (isNaN(numericValue)) {
+        onChange(0);
+        setValue('');
+        return;
+      }
+
+      const formattedValue = formatCurrency(numericValue, true);
+      setValue(formattedValue);
+      onChange(numericValue);
+    } else {
+      setValue(inputValue);
+      onChange(inputValue);
+    }
+  };
 
   return (
     <div className={style.textInput}>
@@ -31,14 +50,15 @@ export default function ModalInput({
         <textarea
           className={classNames(style.input, { [style.textArea]: isTextArea })}
           placeholder={basicText}
+          onChange={handleChange}
         />
       ) : (
         <input
           className={style.input}
           type='text'
           placeholder={basicText}
-          value={value}
           onChange={handleChange}
+          value={value}
         />
       )}
     </div>

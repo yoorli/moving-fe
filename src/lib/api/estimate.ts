@@ -101,7 +101,7 @@ export async function getEstimateDetail(
   }
 
   const moverData: EstimateMover = {
-    estimateId: data.estimateId,
+    estimateRequestId: data.estimateRequestId,
     movingType: data.movingType,
     isAssigned: data.isAssigned,
     customerName: data.customerName,
