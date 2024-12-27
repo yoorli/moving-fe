@@ -108,13 +108,10 @@ export default function DriverCostHandlerPage() {
   }, [isPc, isTablet, isMobile]);
 
   useEffect(() => {
-    const option = {
-      page: currentPage,
-      pageSize: itemsPerPage,
-    };
-
-    setParams(option);
-  }, [currentPage, itemsPerPage]);
+    if (params.page !== currentPage || params.pageSize !== itemsPerPage) {
+      setParams({ page: currentPage, pageSize: itemsPerPage });
+    }
+  }, [currentPage, itemsPerPage, params]);
 
   useEffect(() => {
     if (currentTab === 'first') {
@@ -127,7 +124,10 @@ export default function DriverCostHandlerPage() {
       setTabList(aList);
       setTotal(aTotal);
     }
-    setIsCommentOpen(new Array(tablist.length).fill(false));
+
+    if (tablist.length > 0) {
+      setIsCommentOpen(new Array(tablist.length).fill(false));
+    }
   }, [aList, aTotal, cList, cTotal, currentTab]);
 
   const isLoading = currentTab === 'first' ? aLoading : cLoading;
