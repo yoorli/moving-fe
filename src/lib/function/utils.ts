@@ -26,9 +26,15 @@ export function getNotificationDate(inputDate: string | Date, type?: string) {
 }
 
 // 한국기준 금액 형식 출력
-export function formatCurrency(cost: number, onlyNum?: boolean) {
-  const price = cost.toLocaleString('ko-KR');
+export function formatCurrency(
+  cost: number | undefined | null,
+  onlyNum?: boolean,
+): string {
+  if (typeof cost !== 'number' || isNaN(cost)) {
+    return onlyNum ? '0' : '0원'; // 기본값 반환
+  }
 
+  const price = cost.toLocaleString('ko-KR');
   return onlyNum ? price : price + '원';
 }
 
@@ -63,7 +69,7 @@ export function getParams(queryParams: Record<string, any>) {
   const params = new URLSearchParams();
 
   Object.entries(queryParams).forEach(([key, value]) => {
-    if (value !== undefined && value !== "") {
+    if (value !== undefined && value !== '') {
       // 배열이면 동일한 키로 반복 추가
       if (Array.isArray(value)) {
         value.forEach((v) => params.append(key, v));
