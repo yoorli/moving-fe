@@ -1,4 +1,5 @@
 import { ChipType } from "./cardTypes";
+
 //assignedEstimateReq + estimate, estimateReq /useQueries-assignedEstimateReq,estimate
 export interface PaginationParams {
   page?: number;
@@ -73,8 +74,9 @@ export interface EstimateConsumer extends EstimateUser {
 
 export interface EstimateMover extends EstimateUser {
   customerName: string;
-  detailDeparture: string;
-  detailArrival: string;
+  detailDeparture?: string;
+  detailArrival?: string;
+  customerComment?: string;
 }
 
 // estimateReq
