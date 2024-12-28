@@ -95,7 +95,7 @@ export default function UserSignupPage() {
           '/user/signup?userType=CUSTOMER',
           request,
         );
-        setIsPending(false);
+
         alert(response.data);
         window.location.href = '/user/login';
       } catch (e) {
@@ -111,9 +111,9 @@ export default function UserSignupPage() {
             ...errorMessage,
             email: data.message,
           });
-
-          setIsPending(false);
         }
+      } finally {
+        setIsPending(false);
       }
     } else {
       return;

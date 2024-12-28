@@ -95,7 +95,6 @@ export default function DriverSignupPage() {
           '/user/signup?userType=MOVER',
           request,
         );
-        setIsPending(false);
         alert(response.data);
         window.location.href = '/driver/login';
       } catch (e) {
@@ -111,9 +110,9 @@ export default function DriverSignupPage() {
             ...errorMessage,
             email: data.message,
           });
-
-          setIsPending(false);
         }
+      } finally {
+        setIsPending(false);
       }
     } else {
       return;

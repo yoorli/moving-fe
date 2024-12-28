@@ -67,7 +67,6 @@ export default function DriverLoginPage() {
       try {
         setIsPending(true);
         await auth.post('/user/login', values);
-        setIsPending(false);
         window.location.href = '/';
       } catch (e) {
         if (isAxiosError(e)) {
@@ -83,9 +82,9 @@ export default function DriverLoginPage() {
             [data.type]: data.message,
           });
         }
+      } finally {
+        setIsPending(false);
       }
-
-      /**TODO API request */
     } else {
       return;
     }
