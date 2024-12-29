@@ -1,3 +1,4 @@
+import { ChipType } from "./cardTypes";
 //assignedEstimateReq + estimate, estimateReq /useQueries-assignedEstimateReq,estimate
 export interface PaginationParams {
   page?: number;
@@ -46,7 +47,7 @@ export interface EstimateParams {
 }
 
 export interface EstimateUser extends EstimateParams {
-  movingType: string;
+  movingType: ChipType;
   isAssigned: boolean;
   movingDate: string;
   departure: string;
@@ -58,7 +59,7 @@ export interface EstimateConsumer extends EstimateUser {
   moverId: number;
   isConfirmed: boolean;
   isReqConfirmed: boolean;
-  serviceType: string[];
+  serviceType: ChipType[];
   summary: string;
   profileImg: string;
   moverName: string;
@@ -77,7 +78,7 @@ export interface EstimateMover extends EstimateUser {
 
 // estimateReq
 export interface estimateQueryParams extends PaginationParams {
-  type?: string;
+  type?: string[];
   isAssigned?: boolean;
   order?: string;
   keyWord?: string;

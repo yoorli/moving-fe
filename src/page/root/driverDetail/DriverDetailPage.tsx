@@ -1,37 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import style from './DriverDetail.module.css';
-import DriverCard from '../../../components/card/DriverCard';
-import Review from '../../../components/review/Review';
-import FixedBottomTab from '../searchDriver/components/FixedBottomTab';
-import Button from '../../../components/btn/Button';
-import { MOCK_DATA } from '../searchDriver/mockData';
-import { ChipProps } from '../../../components/chip/Chip';
-import { translateServiceRegion, translateServiceType } from '../searchDriver/EnumMapper';
-import HeartIcon from '../../../assets/icons/ic_full_heart_small.svg';
-import HeartEmptyIcon from '../../../assets/icons/ic_empty_heart_small.svg';
-import ModalContainer from '../../../components/modal/ModalContainer';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import style from "./DriverDetail.module.css";
+import DriverCard from "../../../components/card/DriverCard";
+import Review from "../../../components/review/Review";
+import FixedBottomTab from "../searchDriver/components/FixedBottomTab";
+import Button from "../../../components/btn/Button";
+import { useGetMoverDetail } from "../../../lib/useQueries/driver";
+import { useRequestAssignedEstimate } from "../../../lib/useQueries/assignedEstimateReq";
+import { ChipProps } from "../../../components/chip/Chip";
+import { translateServiceRegion, translateServiceType } from "../searchDriver/EnumMapper";
+import HeartIcon from "../../../assets/icons/ic_full_heart_small.svg";
+import HeartEmptyIcon from "../../../assets/icons/ic_empty_heart_small.svg";
+import ModalContainer from "../../../components/modal/ModalContainer";
+import { toggleFavoriteMover } from "../../../lib/api/favorite";
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const driver = MOCK_DATA.find(
-    (driver) => driver.moverId === parseInt(id || '', 10),
-  );
+  const { data: driver, isLoading, error } = useGetMoverDetail(Number(id));
+  const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
 
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(driver?.isFavorite || false);
-  const [isAssigned, setIsAssigned] = useState(driver?.isAssigned || false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isAssigned, setIsAssigned] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (!driver) {
+  useEffect(() => {
+    if (driver) {
+      console.log("기사님 상세페이지 데이터:", driver);
+      setIsFavorite(driver.isFavorite);
+      setIsAssigned(driver.isAssigned);
+    }
+  }, [driver]);
+
+  if (isLoading) {
+    return <div className={style.container}>로딩 중...</div>;
+  }
+
+  if (error || !driver) {
     return (
       <div className={style.container}>
         <p>해당 기사님을 찾을 수 없습니다.</p>
@@ -41,23 +54,30 @@ const DriverDetailPage = () => {
 
   const transformedDriver = {
     ...driver,
-    serviceType: driver.serviceType.map((type) => type as ChipProps['type']),
+    serviceType: driver.serviceType.map((type) => type as ChipProps["type"]),
+    profileImg: driver.profileImg || undefined,
   };
 
-  const handleFavoriteToggle = () => {
-    setIsFavorite(!isFavorite);
+  const handleFavoriteToggle = async () => {
+    try {
+      const response = await toggleFavoriteMover(driver.id); // 기사님 찜하기 API 호출
+      console.log("찜 상태 변경 응답:", response);
+      setIsFavorite(response.isFavorite); // API 응답에 따라 상태 업데이트 (기사님 찜하기)
+    } catch (error) {
+      console.error("찜 상태 변경 중 오류 발생:", error);
+    }
   };
 
   const handleAssignRequest = () => {
     if (!isAssigned && driver.isConfirmed) {
-      setIsAssigned(true);
+      requestAssignedEstimate(driver.id);
     } else if (!driver.isConfirmed) {
       setIsModalOpen(true);
     }
   };
 
   const handleModalButtonClick = () => {
-    navigate('/user/costCall');
+    navigate("/user/costCall");
   };
 
   return (
@@ -99,17 +119,17 @@ const DriverDetailPage = () => {
             <h2>{driver.moverName} 기사님에게 지정 견적을 요청해보세요!</h2>
             <div className={style.rightButtons}>
               <Button
-                text='기사님 찜하기'
-                btnStyle='outlined354pxLine200'
+                text="기사님 찜하기"
+                btnStyle="outlined354pxLine200"
                 src={isFavorite ? HeartIcon : HeartEmptyIcon}
                 srcLocationFront
-                alt='찜하기 아이콘'
+                alt="찜하기 아이콘"
                 className={style.heartButton}
                 onClick={handleFavoriteToggle}
               />
               <Button
-                text={isAssigned ? '지정 견적 요청 완료' : '지정 견적 요청하기'}
-                btnStyle='solid354pxBlue300'
+                text={isAssigned ? "지정 견적 요청 완료" : "지정 견적 요청하기"}
+                btnStyle="solid354pxBlue300"
                 className={style.requestButton}
                 disabled={isAssigned}
                 onClick={handleAssignRequest}
@@ -120,20 +140,21 @@ const DriverDetailPage = () => {
       </div>
       {isMobileView && (
         <FixedBottomTab
+          moverId={driver.id}
           isFavorite={isFavorite}
+          setIsFavorite={setIsFavorite}
           isAssigned={isAssigned}
+          setIsAssigned={setIsAssigned}
           isConfirmed={driver.isConfirmed}
           setModalOpen={setIsModalOpen}
-          setIsFavorite={setIsFavorite}
-          setIsAssigned={setIsAssigned}
         />
       )}
       {isModalOpen && (
         <ModalContainer
-          title='지정 견적 요청하기'
+          title="지정 견적 요청하기"
           isText={true}
-          text='일반 견적 요청을 먼저 진행해주세요.'
-          buttonText='일반 견적 요청하기'
+          text="일반 견적 요청을 먼저 진행해주세요."
+          buttonText="일반 견적 요청하기"
           closeBtnClick={() => setIsModalOpen(false)}
           buttonClick={handleModalButtonClick}
         />

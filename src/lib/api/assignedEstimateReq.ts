@@ -18,3 +18,10 @@ export async function getEstimateReject(queryParams: PaginationParams) {
 
   return res.data;
 }
+
+
+/* POST - 소비자 - 지정 견적 요청 */
+export async function requestAssignedEstimate(moverId: number) {
+  const res = await axios.post(`${PATH}`, { moverId });
+  return res.data;
+}
