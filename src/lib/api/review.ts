@@ -1,3 +1,4 @@
+import { PaginationParams } from '../../types/apiTypes';
 import axios from './axios';
 
 const PATH = '/review';
@@ -43,8 +44,8 @@ interface MoverReviewsResponse {
  * 작성한 리뷰 리스트 조회 - /review/me
  * @returns 내가 작성한 리뷰 리스트
  */
-export async function getMyReviewList() {
-  const res = await axios.get(`${PATH}/me`);
+export async function getMyReviewList({ page, pageSize }: PaginationParams) {
+  const res = await axios.get(`${PATH}/me`, { params: { page, pageSize } });
   return res.data;
 }
 
@@ -68,7 +69,7 @@ export async function createReview(data: ReviewData) {
 export const getMoverReviews = async (
   moverId: number,
   page = 1,
-  pageSize = 5
+  pageSize = 5,
 ): Promise<MoverReviewsResponse> => {
   const params = { page, pageSize };
   const res = await axios.get(`${PATH}/${moverId}`, { params });

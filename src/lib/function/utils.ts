@@ -67,3 +67,44 @@ export function getParams(queryParams: Record<string, any>) {
     Object.entries(queryParams).filter(([_, value]) => value !== undefined),
   );
 }
+
+export const serviceTypeMapper: Record<string, string> = {
+  SMALL: '소형이사',
+  HOUSE: '가정이사',
+  OFFICE: '사무실이사',
+};
+
+export const serviceRegionMapper: Record<string, string> = {
+  SEOUL: '서울',
+  GYEONGGI: '경기',
+  INCHEON: '인천',
+  GANGWON: '강원',
+  CHUNGBUK: '충북',
+  CHUNGNAM: '충남',
+  SEJONG: '세종',
+  DAEJEON: '대전',
+  JEONBUK: '전북',
+  JEONNAM: '전남',
+  GWANGJU: '광주',
+  GYEONGBUK: '경북',
+  GYEONGNAM: '경남',
+  DAEGU: '대구',
+  ULSAN: '울산',
+  BUSAN: '부산',
+  JEJU: '제주',
+};
+
+// 제공 서비스 타입 번역(영 -> 한)
+export const translateServiceType = (serviceType: string[]): string[] => {
+  return serviceType.map(
+    (type) => serviceTypeMapper[type] || '알 수 없는 유형',
+  );
+};
+
+// 가능한 서비스 지역 번역(영 -> 한)
+export const translateServiceRegion = (serviceRegion: string[]): string[] => {
+  return (
+    serviceRegion.map((region) => serviceRegionMapper[region]) ||
+    '알 수 없는 지역'
+  );
+};

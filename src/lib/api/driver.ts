@@ -28,3 +28,8 @@ export async function getMoverDetail(moverId: number): Promise<MoverDetail> {
   return res.data;
 }
 
+// 기사 프로필 조회 - /mover/me
+export async function getMoverProfile() {
+  const res = await axios.get(`${PATH}/me`);
+  return res;
+}

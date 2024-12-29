@@ -116,7 +116,9 @@ export function UserNav({
   const { pathname } = useLocation();
   const { user } = useContext(AuthContext);
   useEffect(() => {
-    return;
+    if (!user) {
+      window.location.href = '/';
+    }
   }, [pathname]);
 
   //pc size
@@ -293,10 +295,11 @@ export function DriverNav({
   const { pathname } = useLocation();
 
   const { user } = useContext(AuthContext);
-  console.log(user);
 
   useEffect(() => {
-    return;
+    if (!user) {
+      window.location.href = '/';
+    }
   }, [pathname]);
 
   //pc size
@@ -347,7 +350,7 @@ export function DriverNav({
               src={profile}
               alt=''
             />
-            <span className={style.navIconText}>{user.name}</span>
+            <span className={style.navIconText}>{user?.name}</span>
             {profileModal ? (
               <DriverProfileModal modalController={profileController} />
             ) : null}
