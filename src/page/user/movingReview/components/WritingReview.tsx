@@ -27,8 +27,6 @@ export default function WritingReview({
     setRating(index + 1);
   };
 
-  console.log(mover.serviceType);
-
   return (
     <div className={style.container}>
       <div className={style.mover}>

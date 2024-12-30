@@ -5,13 +5,22 @@ import ModalContainer from '../../../components/modal/ModalContainer';
 import WritingReview from './components/WritingReview';
 import WritableReviews from './components/WritableReviews';
 import MyReview from './components/MyReview';
+import { useCreateReview } from '../../../lib/useQueries/review';
+
+interface SelectedMover {
+  estimateId: number;
+  moverId: number;
+}
 
 export default function UserMovingReview() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('first');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedMover, setSelectedMover] = useState(null);
-  const [review, setReview] = useState('');
+  const [selectedMover, setSelectedMover] = useState<SelectedMover | null>(
+    null,
+  );
   const [rating, setRating] = useState(0);
+  const [review, setReview] = useState('');
+  const { mutate } = useCreateReview();
 
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -20,11 +29,25 @@ export default function UserMovingReview() {
   };
 
   const modalBtnClick = () => {
-    setIsModalOpen(false);
-    setReview('');
-    setRating(0);
-    // 리뷰 등록 버튼 누르면 review값을 post / 그리고 내가 작성한 리뷰로 리다이렉트??
-    console.log('you post your review :) '); // 리뷰 등록 버튼
+    if (selectedMover) {
+      const reviewValue = {
+        estimateId: selectedMover.estimateId,
+        moverId: selectedMover.moverId,
+        score: rating,
+        content: review,
+      };
+
+      mutate(reviewValue, {
+        onSuccess: () => {
+          handleModalClose();
+          setCurrentTab('second');
+          console.log(reviewValue, '리뷰 등록 성공');
+        },
+        onError: () => {
+          console.log('리뷰 등록 중 오류가 발생했습니다.');
+        },
+      });
+    }
   };
 
   return (
