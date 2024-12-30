@@ -9,27 +9,41 @@ import NoContents from '../../../components/noContents/NoContents';
 import ModalContainer from '../../../components/modal/ModalContainer';
 
 import { useMedia } from '../../../lib/function/useMediaQuery';
+import { useGetMoverEstimateReq } from '../../../lib/useQueries/estimateReq';
 
 import style from './index.module.css';
 
 import filter from '../../../assets/icons/ic_filter_medium.svg';
 
-import { mockData } from './mockData';
-
 export default function DriverCostCallPage() {
+  const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [item, setItem] = useState('');
-  const [items, setItems] = useState({ small: true });
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [sortItem, setSortItem] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTab, setModalTab] = useState<'modalFirstTab' | 'modalSecondTab'>(
     'modalFirstTab',
   );
-  const isPc = useMedia().pc;
-  const itemsPerPage = 3;
+  const [params, setParams] = useState({
+    page: 1,
+    pageSize: 3,
+    type: ['SMALL'],
+    isAssigned: false,
+  });
+  const [selectedOptions, setSelectedOptions] = useState({
+    SMALL: true,
+    HOUSE: true,
+    OFFICE: true,
+    ASSIGN: false,
+  });
+  const [isNoContents, setIsNoContents] = useState(false);
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentUsers = mockData.users.slice(startIndex, endIndex);
+  const isPc = useMedia().pc;
+
+  const { data, isLoading } = useGetMoverEstimateReq(params);
+
+  const list = data?.list;
+  const totalItems = data?.total || 0;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -38,16 +52,63 @@ export default function DriverCostCallPage() {
   const page = {
     currentPage: currentPage,
     itemsPerPage: itemsPerPage,
-    data: mockData.total,
+    data: totalItems,
     onPageChange: handlePageChange,
   };
 
   const count = {
-    total: mockData.total,
-    small: mockData.small,
-    medium: mockData.medium,
-    large: mockData.large,
-    assign: mockData.assign,
+    total: totalItems,
+    SMALL: data?.small || 0,
+    HOUSE: data?.house || 0,
+    OFFICE: data?.office || 0,
+    ASSIGN: data?.assign || 0,
+  };
+
+  const handleSetCheckedItems = (newItems: string[]) => {
+    const newState = {
+      SMALL: false,
+      HOUSE: false,
+      OFFICE: false,
+      ASSIGN: false,
+    };
+
+    newItems.forEach((item) => {
+      if (item === 'SMALL') newState.SMALL = true;
+      if (item === 'HOUSE') newState.HOUSE = true;
+      if (item === 'OFFICE') newState.OFFICE = true;
+      if (item === 'ASSIGN') newState.ASSIGN = true;
+    });
+
+    setSelectedOptions(newState);
+    setSearchTerm('');
+
+    if (!newState.SMALL && !newState.HOUSE && !newState.OFFICE) {
+      setIsNoContents(true);
+      setParams({
+        page: 1,
+        pageSize: itemsPerPage,
+        type: [],
+        isAssigned: newState.ASSIGN,
+      });
+      return;
+    }
+
+    setIsNoContents(false);
+
+    const types = Object.keys(newState).filter(
+      (key) => newState[key as keyof typeof newState],
+    );
+    setParams({
+      page: currentPage,
+      pageSize: itemsPerPage,
+      type: types,
+      isAssigned: newState.ASSIGN,
+    });
+  };
+
+  const handleDropdownChange = (sortOption: string) => {
+    setSortItem(sortOption);
+    setSearchTerm('');
   };
 
   const getFilter = () => {
@@ -63,9 +124,32 @@ export default function DriverCostCallPage() {
   };
 
   useEffect(() => {
-    console.log(items);
-    console.log(item);
-  }, [item, items]);
+    if (!isPc) {
+      setItemsPerPage(3);
+    }
+  }, [isPc]);
+
+  useEffect(() => {
+    const newItems: string[] = [];
+    if (selectedOptions.SMALL) newItems.push('SMALL');
+    if (selectedOptions.HOUSE) newItems.push('HOUSE');
+    if (selectedOptions.OFFICE) newItems.push('OFFICE');
+    const isAssigned = selectedOptions.ASSIGN;
+    if (isAssigned) newItems.push('ASSIGN');
+
+    const types = newItems.filter((item) => item !== 'ASSIGN');
+
+    const option = {
+      page: currentPage,
+      pageSize: itemsPerPage,
+      type: types,
+      isAssigned: isAssigned,
+      order: sortItem,
+      keyWord: searchTerm,
+    };
+
+    setParams(option);
+  }, [currentPage, searchTerm, sortItem, selectedOptions, itemsPerPage]);
 
   return (
     <div className={style.container}>
@@ -73,35 +157,45 @@ export default function DriverCostCallPage() {
       <div className={style.mainContainer}>
         {isPc && (
           <div className={style.filterBox}>
-            <Filter count={count} setItems={setItems} />
+            <Filter
+              count={count}
+              checkedItems={selectedOptions}
+              setCheckedItems={handleSetCheckedItems}
+            />
           </div>
         )}
         <div className={style.content}>
           <div className={style.filter}>
             <div className={style.searchBar}>
-              <Search placeholder='어떤 고객님을 찾고 계세요?' />
+              <Search
+                placeholder='어떤 고객님을 찾고 계세요?'
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+              />
             </div>
             <div className={style.sortBar}>
-              전체 {mockData.total}건
+              전체 {isNoContents ? 0 : data?.total}건
               <div className={style.filterBar}>
-                <Dropdown setItem={setItem} />
+                <Dropdown setSortItem={handleDropdownChange} />
                 {!isPc && <img src={filter} alt='filter' onClick={getFilter} />}
               </div>
             </div>
           </div>
-          {currentUsers.length > 0 ? (
-            <div className={style.mainContent}>
-              <CallList list={currentUsers} />
-            </div>
-          ) : (
+          {isLoading ? (
+            <div>로딩 중...</div>
+          ) : isNoContents || list.length === 0 ? ( // NoContents 상태 확인
             <div className={style.noContent}>
               <NoContents image='file' />
             </div>
-          )}
-          {currentUsers.length > 0 && (
-            <div className={style.pagination}>
-              <Pagination {...page} />
-            </div>
+          ) : (
+            <>
+              <div className={style.mainContent}>
+                <CallList list={list} />
+              </div>
+              <div className={style.pagination}>
+                <Pagination {...page} />
+              </div>
+            </>
           )}
         </div>
       </div>
@@ -117,9 +211,19 @@ export default function DriverCostCallPage() {
           buttonClick={modalBtnClick}
         >
           {modalTab === 'modalFirstTab' ? (
-            <Filter count={count} type='moving' setItems={setItems} />
+            <Filter
+              type='moving'
+              count={count}
+              checkedItems={selectedOptions}
+              setCheckedItems={handleSetCheckedItems}
+            />
           ) : (
-            <Filter count={count} type='filter' setItems={setItems} />
+            <Filter
+              type='filter'
+              count={count}
+              checkedItems={selectedOptions}
+              setCheckedItems={handleSetCheckedItems}
+            />
           )}
         </ModalContainer>
       )}

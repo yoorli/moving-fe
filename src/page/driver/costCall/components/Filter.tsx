@@ -1,71 +1,61 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 
 import style from './Filter.module.css';
 
-interface FilterOption {
-  label: string;
-  count: number;
-  isChecked: boolean;
-}
-
 type FilterProps = {
   type?: 'moving' | 'filter';
-  setItems: (items: any) => void;
+  checkedItems: {
+    SMALL: boolean;
+    HOUSE: boolean;
+    OFFICE: boolean;
+    ASSIGN: boolean;
+  };
+  setCheckedItems: (items: string[]) => void;
   count: {
     total: number;
-    small: number;
-    medium: number;
-    large: number;
-    assign: number;
+    SMALL: number;
+    HOUSE: number;
+    OFFICE: number;
+    ASSIGN: number;
   };
 };
 
-export default function Filter({ type, setItems, count }: FilterProps) {
-  const [moveTypes, setMoveTypes] = useState<FilterOption[]>([
-    { label: '소형이사', count: count.small, isChecked: true },
-    { label: '가정이사', count: count.medium, isChecked: true },
-    { label: '사무실이사', count: count.large, isChecked: true },
-  ]);
+export default function Filter({
+  type,
+  checkedItems,
+  setCheckedItems,
+  count,
+}: FilterProps) {
+  const allChecked =
+    checkedItems.SMALL && checkedItems.HOUSE && checkedItems.OFFICE;
 
-  const [isAssigned, setIsAssigned] = useState<FilterOption>({
-    label: '지정 견적 요청',
-    count: count.large,
-    isChecked: true,
-  });
+  const handleAllCheck = (e: ChangeEvent<HTMLInputElement>) => {
+    const newVal = e.target.checked;
+    const newItems = [
+      newVal ? 'SMALL' : '',
+      newVal ? 'HOUSE' : '',
+      newVal ? 'OFFICE' : '',
+      checkedItems.ASSIGN ? 'ASSIGN' : '',
+    ].filter(Boolean);
+    setCheckedItems(newItems);
+  };
 
-  const allCheckHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-    setMoveTypes((prev) =>
-      prev.map((moveType) => ({
-        ...moveType,
-        isChecked: checked,
-      })),
+  const toggleCheckbox = (key: keyof typeof checkedItems) => {
+    const updatedItems = {
+      ...checkedItems,
+      [key]: !checkedItems[key],
+    };
+
+    const selectedKeys = Object.keys(updatedItems).filter(
+      (k) => updatedItems[k as keyof typeof checkedItems],
     );
-  };
 
-  const toggleCheckbox = (isMoveType: boolean, index?: number) => {
-    if (isMoveType && typeof index === 'number') {
-      setMoveTypes((prev) => {
-        const updated = [...prev];
-        updated[index] = {
-          ...updated[index],
-          isChecked: !updated[index].isChecked,
-        };
-        return updated;
-      });
-    } else {
-      setIsAssigned((prev) => ({
-        ...prev,
-        isChecked: !prev.isChecked,
-      }));
-    }
+    setCheckedItems(selectedKeys);
   };
-
-  const allChecked = moveTypes.every((moveType) => moveType.isChecked);
 
   useEffect(() => {
-    setItems({ small: moveTypes[0].isChecked });
-  }, [moveTypes]);
+    // count 변화 시 별도 로직 없이 count만 표시
+  }, [count]);
 
   return (
     <div className={style.filter}>
@@ -77,26 +67,40 @@ export default function Filter({ type, setItems, count }: FilterProps) {
               <input
                 type='checkbox'
                 checked={allChecked}
-                onChange={allCheckHandler}
+                onChange={handleAllCheck}
               />
               전체선택
             </span>
           </div>
           <div>
-            {moveTypes.map((moveType, index) => (
-              <label key={moveType.label} className={style.checkboxLabel}>
-                <span>
-                  {moveType.label} ({moveType.count})
-                </span>
-                <input
-                  type='checkbox'
-                  checked={moveType.isChecked}
-                  onChange={() => {
-                    toggleCheckbox(true, index);
-                  }}
-                />
-              </label>
-            ))}
+            <label className={style.checkboxLabel}>
+              소형이사 ({count.SMALL})
+              <input
+                type='checkbox'
+                checked={checkedItems.SMALL}
+                onChange={() => toggleCheckbox('SMALL')}
+              />
+            </label>
+          </div>
+          <div>
+            <label className={style.checkboxLabel}>
+              가정이사 ({count.HOUSE})
+              <input
+                type='checkbox'
+                checked={checkedItems.HOUSE}
+                onChange={() => toggleCheckbox('HOUSE')}
+              />
+            </label>
+          </div>
+          <div>
+            <label className={style.checkboxLabel}>
+              사무실이사 ({count.OFFICE})
+              <input
+                type='checkbox'
+                checked={checkedItems.OFFICE}
+                onChange={() => toggleCheckbox('OFFICE')}
+              />
+            </label>
           </div>
         </div>
       )}
@@ -104,13 +108,11 @@ export default function Filter({ type, setItems, count }: FilterProps) {
         <div className={style.movingFilter}>
           <div className={style.filterName}>필터</div>
           <label className={style.checkboxLabel}>
-            <span className={style.text}>
-              {isAssigned.label} ({isAssigned.count})
-            </span>
+            지정 견적 요청 ({count.ASSIGN})
             <input
               type='checkbox'
-              checked={isAssigned.isChecked}
-              onChange={() => toggleCheckbox(false)}
+              checked={checkedItems.ASSIGN}
+              onChange={() => toggleCheckbox('ASSIGN')}
             />
           </label>
         </div>

@@ -13,78 +13,91 @@ import style from './index.module.css';
 import icCheckLarge from '../../../assets/icons/ic_check_large.svg';
 import icCheckMedium from '../../../assets/icons/ic_check_medium.svg';
 
-import { mockData } from './mockData';
+import {
+  useGetEstimateConfirmed,
+  useGetEstimateList,
+} from '../../../lib/useQueries/estimate';
+// import { useGetEstimateReject } from '../../../lib/useQueries/assignedEstimateReq';
+
+interface User {
+  estimateId: number;
+  comment?: string;
+  isMoveDateOver: boolean;
+  isCancelled: boolean;
+  isRejected: boolean;
+}
 
 export default function DriverCostHandlerPage() {
+  const [params, setParams] = useState({ page: 1, pageSize: 6 });
+  const { data: aData, isLoading: aLoading } = useGetEstimateList(params);
+  const { list: aList = [], total: aTotal = 0 } = aData || {
+    list: [],
+    total: 0,
+  };
+
+  const { data: cData, isLoading: cLoading } = useGetEstimateConfirmed({});
+  const { list: cList = [], total: cTotal = 0 } = cData || {
+    list: [],
+    total: 0,
+  };
+
+  // const { data: rData } = useGetEstimateReject({});
+  // const { list: rList = [], total: rTotal = 0 } = rData || {};
+
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const [currentTab, setCurrentTab] = useState<'first' | 'second' | 'third'>(
     'first',
   );
-  const [list, setList] = useState(
-    mockData.users.filter((list) => !list.isCancelled && !list.isRejected),
-  );
-  const [isCommentOpen, setIsCommentOpen] = useState([false]); // 요구사항
-
-  const handleMouseEnter = (index: number) => {
-    setIsCommentOpen((prev) => ({ ...prev, [index]: true }));
-  };
-
-  const handleMouseLeave = (index: number) => {
-    setIsCommentOpen((prev) => ({ ...prev, [index]: false }));
-  };
+  const [tablist, setTabList] = useState<User[]>(aList);
+  const [total, setTotal] = useState(0);
+  const [isCommentOpen, setIsCommentOpen] = useState<boolean[]>([false]); // 요구사항
 
   const { direction_costDetail } = useDirection();
   const isPc = useMedia().pc;
   const isTablet = useMedia().tablet;
   const isMobile = useMedia().mobile;
 
-  let text: string;
-
   const handleTabChange = (tab: 'first' | 'second' | 'third') => {
     setCurrentTab(tab);
-    if (tab === 'first') {
-      setList(
-        mockData.users.filter((list) => !list.isCancelled && !list.isRejected),
-      );
-    } else if (tab === 'second') {
-      setList(mockData.users.filter((list) => list.isConfirmed));
-    } else {
-      setList(
-        mockData.users.filter((list) => list.isCancelled || list.isRejected),
-      );
-    }
     setCurrentPage(1);
   };
-
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const selectedPage = list.slice(startIndex, endIndex);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
   const page = {
-    currentPage: currentPage,
-    itemsPerPage: itemsPerPage,
-    data: list.length,
+    currentPage,
+    itemsPerPage,
+    data: total || 3,
     onPageChange: handlePageChange,
+  };
+
+  const handleMouseEnter = (index: number) => {
+    setIsCommentOpen((prev) => {
+      const updated = [...prev];
+      updated[index] = true;
+      return updated;
+    });
+  };
+
+  const handleMouseLeave = (index: number) => {
+    setIsCommentOpen((prev) => {
+      const updated = [...prev];
+      updated[index] = false;
+      return updated;
+    });
   };
 
   const disabledCard = (index: number) => {
     const idx = index + (currentPage - 1) * itemsPerPage;
+    const item = tablist[idx];
+    if (!item) return false;
 
-    if (list[idx].isMoveDateOver) {
-      text = '이사 완료된 견적이에요';
-      return true;
-    } else if (list[idx].isCancelled) {
-      text = '취소된 요청이에요';
-      return true;
-    } else if (list[idx].isRejected) {
-      text = '반려된 요청이에요';
-      return true;
-    }
+    if (item.isMoveDateOver) return '이사 완료된 견적이에요';
+    if (item.isCancelled) return '취소된 요청이에요';
+    if (item.isRejected) return '반려된 요청이에요';
     return false;
   };
 
@@ -94,27 +107,56 @@ export default function DriverCostHandlerPage() {
     } else setItemsPerPage(6);
   }, [isPc, isTablet, isMobile]);
 
+  useEffect(() => {
+    if (params.page !== currentPage || params.pageSize !== itemsPerPage) {
+      setParams({ page: currentPage, pageSize: itemsPerPage });
+    }
+  }, [currentPage, itemsPerPage, params]);
+
+  useEffect(() => {
+    if (currentTab === 'first') {
+      setTabList(aList);
+      setTotal(aTotal);
+    } else if (currentTab === 'second') {
+      setTabList(cList);
+      setTotal(cTotal);
+    } else {
+      setTabList(aList);
+      setTotal(aTotal);
+    }
+
+    if (tablist.length > 0) {
+      setIsCommentOpen(new Array(tablist.length).fill(false));
+    }
+  }, [aList, aTotal, cList, cTotal, currentTab]);
+
+  const isLoading = currentTab === 'first' ? aLoading : cLoading;
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
   return (
     <div className={style.container}>
       <Tab
-        selectable={true}
+        selectable
         firstText='견적 전체 조회'
         secondText='확정 견적 조회'
         thirdText='반려ㆍ취소 요청'
-        hasThirdTab={true}
+        hasThirdTab
         selectedTab={currentTab}
         onTabChange={handleTabChange}
       />
       <div className={style.mainContainer}>
         {currentTab && (
           <div className={style.cardList}>
-            {selectedPage.map((user, index) => (
+             {tablist.map((user: User, index: number) => (
               <div key={index} className={style.card}>
                 <UserCard
                   list={user}
                   type={currentTab === 'third' ? undefined : 'confirmedCost'}
                 />
-                {list[index].comment && (
+                {user.comment && (
                   <div
                     className={style.commentChip}
                     onMouseEnter={() => handleMouseEnter(index)}
@@ -127,7 +169,7 @@ export default function DriverCostHandlerPage() {
                     />
                     요청사항
                     {isCommentOpen[index] && (
-                      <div className={style.comment}>{list[index].comment}</div>
+                      <div className={style.comment}>{user.comment}</div>
                     )}
                   </div>
                 )}
@@ -135,15 +177,15 @@ export default function DriverCostHandlerPage() {
                   <div className={style.coveredCard}>
                     <div className={style.cardCover}></div>
                     <div className={style.cardButton}>
-                      {text}
+                      {disabledCard(index)}
                       {user.isMoveDateOver && (
                         <Button
                           text='견적 상세보기'
                           btnStyle='solid123pxBlue100'
-                          onClick={() => {
+                          onClick={() =>
                             user.estimateId &&
-                              direction_costDetail(user.estimateId);
-                          }}
+                            direction_costDetail(user.estimateId)
+                          }
                         />
                       )}
                     </div>
@@ -153,7 +195,7 @@ export default function DriverCostHandlerPage() {
             ))}
           </div>
         )}
-        {selectedPage.length > 0 && (
+        {tablist.length > 0 && (
           <div className={style.pagination}>
             <Pagination {...page} />
           </div>

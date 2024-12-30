@@ -24,7 +24,12 @@ export default function UserCard({
   count = 6,
 }: UserProfileProps) {
   const isPc = useMedia().pc;
+
   const chipList: ChipType[] = [];
+
+  if (!list) {
+    return <div className={style.cardError}>데이터가 없습니다.</div>;
+  }
 
   if (list.isConfirmed) chipList.push('CONFIRM');
   if (list.movingType) chipList.push(list.movingType);

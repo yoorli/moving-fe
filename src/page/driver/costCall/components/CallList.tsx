@@ -13,9 +13,11 @@ import style from './CallList.module.css';
 
 import icCheckLarge from '../../../../assets/icons/ic_check_large.svg';
 import icCheckMedium from '../../../../assets/icons/ic_check_medium.svg';
+import { useCreateEstimate } from '../../../../lib/useQueries/estimate';
+import { useUpdateEstimateReject } from '../../../../lib/useQueries/assignedEstimateReq';
 
 interface User {
-  id: number;
+  estimateReqId: number;
   movingType: ChipType;
   isAssigned: boolean;
   customerName: string;
@@ -35,6 +37,11 @@ export default function CallList({ list }: CallListProps) {
   const [modalContent, setModalContent] = useState(true); // true : 견적보내기 / false : 반려
   const [isCommentOpen, setIsCommentOpen] = useState(false); // 요구사항
   const [userIndex, setUserIndex] = useState<number>(); // 선택된 카드 index
+  const [estimatePrice, setEstimatePrice] = useState(0);
+  const [comment, setComment] = useState('');
+
+  const { mutate: createEstimate } = useCreateEstimate();
+  const { mutate: updateEstimateReject } = useUpdateEstimateReject();
 
   const isPc = useMedia().pc;
 
@@ -51,7 +58,23 @@ export default function CallList({ list }: CallListProps) {
   };
 
   const btnHandler = () => {
+    if (userIndex === undefined) return;
+
+    const user = list[userIndex];
+
+    if (modalContent) {
+      createEstimate({
+        estimateRequestId: user.estimateReqId,
+        price: estimatePrice,
+        comment: comment,
+      });
+    } else {
+      updateEstimateReject(user.estimateReqId );
+    }
+
     setIsModalOpen(false);
+    setEstimatePrice(0);
+    setComment('');
   };
 
   const handleMouseEnter = () => {
@@ -66,7 +89,7 @@ export default function CallList({ list }: CallListProps) {
     <div className={style.callList}>
       {list.map((user, index) => (
         <UserCard
-          key={user.id}
+          key={user.estimateReqId}
           list={user}
           type='receive'
           sendCostBtn={() => sendBtnHandler(index)}
@@ -112,11 +135,13 @@ export default function CallList({ list }: CallListProps) {
                 <ModalInput
                   text='견적가를 입력해 주세요'
                   basicText='견적가 입력'
+                  onChange={(value) => setEstimatePrice(Number(value))}
                 />
                 <ModalInput
                   text='코멘트를 입력해 주세요'
                   basicText='최소 10자 이상 입력해주세요'
                   isTextArea={true}
+                  onChange={(value) => setComment(String(value))}
                 />
               </>
             ) : (
@@ -124,6 +149,7 @@ export default function CallList({ list }: CallListProps) {
                 text='반려 사유를 입력해 주세요'
                 basicText='최소 10자 이상 입력해주세요'
                 isTextArea={true}
+                onChange={(value) => setComment(String(value))}
               />
             )}
           </div>

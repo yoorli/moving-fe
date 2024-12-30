@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import style from './CostInfo.module.css';
 import Button from '../btn/Button';
@@ -42,10 +42,12 @@ export default function CostInfo({
 }: CostInfoProps) {
   const date = new Date(movingDate); // 또는 원하는 날짜 객체
 
-  const formattedDate = format(date, 'yyyy. MM. dd(EEE)', { locale: ko });
+  const formattedDate = isValid(date)
+    ? format(date, 'yyyy. MM. dd(EEE)', { locale: ko })
+    : '유효하지 않은 날짜';
 
   const handleModalOpen = () => {
-      setIsModalOpen?.(true);
+    setIsModalOpen?.(true);
   };
 
   return (
