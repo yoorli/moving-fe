@@ -17,6 +17,11 @@
   border: none;
 }
 
+.region {
+  white-space: pre-wrap;
+  line-height: 25px;
+}
+
 .profileWType {
   height: 92px;
 }
@@ -238,7 +243,6 @@
 
 @media (max-width: 1199px) and (min-width: 744px) {
   .profile {
-    max-width: 907px;
     padding: 10px 8px;
     gap: 12px;
   }
@@ -316,5 +320,9 @@
   .stars {
     font-size: 13px;
     gap: 2px;
+  }
+
+  .region {
+    line-height: 21px;
   }
 }
