@@ -5,7 +5,9 @@ import DriverCard from "../../../components/card/DriverCard";
 import Review from "../../../components/review/Review";
 import FixedBottomTab from "../searchDriver/components/FixedBottomTab";
 import Button from "../../../components/btn/Button";
+import Pagination from "../../../components/pagination/Pagination";
 import { useGetMoverDetail } from "../../../lib/useQueries/driver";
+import { useGetMoverReviewList } from "../../../lib/useQueries/review";
 import { useRequestAssignedEstimate } from "../../../lib/useQueries/assignedEstimateReq";
 import { ChipProps } from "../../../components/chip/Chip";
 import { translateServiceRegion, translateServiceType } from "../searchDriver/EnumMapper";
@@ -25,6 +27,14 @@ const DriverDetailPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isAssigned, setIsAssigned] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const {
+    data: reviewData,
+    isLoading: isReviewLoading,
+    error: reviewError,
+  } = useGetMoverReviewList(Number(id), currentPage, itemsPerPage);
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
@@ -34,7 +44,6 @@ const DriverDetailPage = () => {
 
   useEffect(() => {
     if (driver) {
-      console.log("기사님 상세페이지 데이터:", driver);
       setIsFavorite(driver.isFavorite);
       setIsAssigned(driver.isAssigned);
     }
@@ -60,9 +69,8 @@ const DriverDetailPage = () => {
 
   const handleFavoriteToggle = async () => {
     try {
-      const response = await toggleFavoriteMover(driver.id); // 기사님 찜하기 API 호출
-      console.log("찜 상태 변경 응답:", response);
-      setIsFavorite(response.isFavorite); // API 응답에 따라 상태 업데이트 (기사님 찜하기)
+      const response = await toggleFavoriteMover(driver.id);
+      setIsFavorite(response.isFavorite);
     } catch (error) {
       console.error("찜 상태 변경 중 오류 발생:", error);
     }
@@ -109,9 +117,42 @@ const DriverDetailPage = () => {
               ))}
             </div>
             <div className={style.reviewSeparator}></div>
-            <div className={style.reviewSection}>
-              <Review />
-            </div>
+            {isReviewLoading ? (
+              <div>리뷰 데이터를 로딩 중입니다...</div>
+            ) : reviewError ? (
+              <div>리뷰 데이터를 가져오는 중 오류가 발생했습니다.</div>
+            ) : reviewData ? (
+              <>
+                <Review
+                  totalReviews={reviewData.reviewStats.totalReviews}
+                  averageRating={Object.entries(reviewData.reviewStats.reviewCount)
+                    .reduce(
+                      (acc, [score, count]) =>
+                        acc + Number(score) * Number(count),
+                      0
+                    ) / reviewData.reviewStats.totalReviews}
+                  reviewStats={reviewData.reviewStats.reviewCount}
+                  reviews={reviewData.reviews.list}
+                />
+                <div
+                  style={{
+                    marginTop: "60px",
+                    marginBottom: "60px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Pagination
+                    currentPage={currentPage}
+                    data={reviewData.reviewStats.totalReviews}
+                    itemsPerPage={itemsPerPage}
+                    onPageChange={setCurrentPage}
+                  />
+                </div>
+              </>
+            ) : (
+              <div>리뷰 데이터를 불러오지 못했습니다.</div>
+            )}
           </div>
         </div>
         {!isMobileView && (
@@ -164,4 +205,3 @@ const DriverDetailPage = () => {
 };
 
 export default DriverDetailPage;
-
