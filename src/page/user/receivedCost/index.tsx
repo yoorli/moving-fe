@@ -22,10 +22,6 @@ export default function ReceivedCost() {
     direction_receivedCostDetail,
   } = useDirection();
 
-  if (!data || !data.total) {
-    return <div>No data available</div>;
-  }
-
   return (
     <>
       <Tab
@@ -39,7 +35,7 @@ export default function ReceivedCost() {
         secondTabRoute={direction_receivedCost}
       />
       <div className={style.container}>
-        {data.total > 0 ? (
+        {data?.total > 0 ? (
           <div>
             <ReceivedCostCard
               redirect={direction_receivedCostDetail}

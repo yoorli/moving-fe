@@ -40,17 +40,21 @@ export default function ReceivedCostDetail() {
 
       <div className={style.container}>
         <div className={style.layout}>
-          <div className={style.main}>
-            <CostInfo
-              movingRequest={data?.info?.movingRequest}
-              movingType={data?.info?.movingType}
-              movingDate={data?.info?.movingDate}
-              departure={data.info.departure}
-              arrival={data.info.arrival}
-              comment={data.info.comment}
-            />
-            <ReceivedList list={data.list} />
-          </div>
+          {!data ? (
+            <div className={style.main}>
+              <CostInfo
+                movingRequest={data?.info?.movingRequest}
+                movingType={data?.info?.movingType}
+                movingDate={data?.info?.movingDate}
+                departure={data.info.departure}
+                arrival={data.info.arrival}
+                comment={data.info.comment}
+              />
+              <ReceivedList list={data.list} />
+            </div>
+          ) : (
+            <div className={style.main}>데이터 없음</div>
+          )}
         </div>
       </div>
     </>
