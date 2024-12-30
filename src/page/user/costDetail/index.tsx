@@ -86,7 +86,7 @@ const CostDetail = () => {
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>견적가</h2>
             <p className={style.costValue}>
-              {estimate.price ? `${estimate.price.toLocaleString()} 원` : "가격 정보 없음"}
+            {estimate.price != null ? `${estimate.price.toLocaleString()} 원` : "가격 정보 없음"}
             </p>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>{estimate.moverName} 기사님의 코멘트</h2>
