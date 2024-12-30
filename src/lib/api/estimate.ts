@@ -90,7 +90,8 @@ export async function getEstimateDetail(
       favoriteCount: data.favoriteCount,
       isFavorite: data.isFavorite,
       price: data.price,
-      comment: data.comment,
+      moverComment: data.moverComment,
+      customerComment: data.customerComment,
       movingRequest: data.movingRequest,
       movingType: data.movingType,
       movingDate: data.movingDate,
@@ -98,20 +99,22 @@ export async function getEstimateDetail(
       arrival: data.arrival,
     };
     return consumerData;
+  } else {
+    const moverData: EstimateMover = {
+      estimateRequestId: data.estimateRequestId,
+      movingType: data.movingType,
+      isAssigned: data.isAssigned,
+      customerName: data.customerName,
+      movingDate: data.movingDate,
+      departure: data.departure,
+      arrival: data.arrival,
+      price: data.price,
+      moverComment: data.moverComment,
+      customerComment: data.customerComment,
+      movingRequest: data.movingRequest,
+      detailDeparture: data.detailDeparture,
+      detailArrival: data.detailArrival,
+    };
+    return moverData;
   }
-
-  const moverData: EstimateMover = {
-    estimateRequestId: data.estimateRequestId,
-    movingType: data.movingType,
-    isAssigned: data.isAssigned,
-    customerName: data.customerName,
-    movingDate: data.movingDate,
-    departure: data.departure,
-    arrival: data.arrival,
-    price: data.price,
-    movingRequest: data.movingRequest,
-    detailDeparture: data.detailDeparture,
-    detailArrival: data.detailArrival,
-  };
-  return moverData;
 }
