@@ -8,17 +8,22 @@ import style from './ModalInput.module.css';
 interface ModalInputProps {
   text: string;
   basicText: string;
+  limit?: number;
   isTextArea?: boolean;
   onChange: (value: string | number) => void;
+  setIsBtnActive?: any;
 }
 
 export default function ModalInput({
   text,
   basicText,
   isTextArea,
+  limit = 1,
   onChange,
+  setIsBtnActive,
 }: ModalInputProps) {
   const [value, setValue] = useState('');
+
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -43,6 +48,20 @@ export default function ModalInput({
     }
   };
 
+  const handleBtnActive = () => {
+    setIsBtnActive((prev: boolean[]) => {
+      const updatedActiveArr = [...prev];
+
+      if (!isTextArea) {
+        const rawValue = value.replace(/,/g, '');
+        updatedActiveArr[0] = Number(rawValue) >= limit;
+      } else {
+        updatedActiveArr[1] = value.length >= limit;
+      }
+      return updatedActiveArr;
+    });
+  };
+
   return (
     <div className={style.textInput}>
       {text}
@@ -51,6 +70,7 @@ export default function ModalInput({
           className={classNames(style.input, { [style.textArea]: isTextArea })}
           placeholder={basicText}
           onChange={handleChange}
+          onBlur={handleBtnActive}
         />
       ) : (
         <input
@@ -59,6 +79,7 @@ export default function ModalInput({
           placeholder={basicText}
           onChange={handleChange}
           value={value}
+          onBlur={handleBtnActive}
         />
       )}
     </div>

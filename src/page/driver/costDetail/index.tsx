@@ -98,7 +98,7 @@ export default function DriverCostDetailPage() {
             </div>
           </>
         </div>
-        {!isPc && isEstimateMover(user) && (
+        {isPc && isEstimateMover(user) && (
           <div className={style.share}>
             <SnsShare nickname={user?.customerName} type='shareEstimate' />
           </div>

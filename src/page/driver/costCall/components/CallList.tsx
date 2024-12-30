@@ -8,13 +8,13 @@ import ModalInput from './ModalInput';
 
 import { ChipType } from '../../../../types/cardTypes';
 import { useMedia } from '../../../../lib/function/useMediaQuery';
+import { useCreateEstimate } from '../../../../lib/useQueries/estimate';
+import { useUpdateEstimateReject } from '../../../../lib/useQueries/assignedEstimateReq';
 
 import style from './CallList.module.css';
 
 import icCheckLarge from '../../../../assets/icons/ic_check_large.svg';
 import icCheckMedium from '../../../../assets/icons/ic_check_medium.svg';
-import { useCreateEstimate } from '../../../../lib/useQueries/estimate';
-import { useUpdateEstimateReject } from '../../../../lib/useQueries/assignedEstimateReq';
 
 interface User {
   estimateReqId: number;
@@ -39,22 +39,33 @@ export default function CallList({ list }: CallListProps) {
   const [userIndex, setUserIndex] = useState<number>(); // 선택된 카드 index
   const [estimatePrice, setEstimatePrice] = useState(0);
   const [comment, setComment] = useState('');
+  const [isBtnActive, setIsBtnActive] = useState([false, false]);
 
   const { mutate: createEstimate } = useCreateEstimate();
   const { mutate: updateEstimateReject } = useUpdateEstimateReject();
 
   const isPc = useMedia().pc;
 
+  const getBtnActive = () => {
+    if (modalContent) {
+      return isBtnActive.filter((a) => a === true).length === 2 ? false : true;
+    } else
+      return isBtnActive.filter((a) => a === true).length === 1 ? false : true;
+  };
+
   const sendBtnHandler = (index: number) => {
     setIsModalOpen(!isModalOpen);
     setModalContent(true);
     setUserIndex(index);
+
+    setIsBtnActive([false, false]);
   };
 
   const rejectBtnHandler = (index: number) => {
     setIsModalOpen(!isModalOpen);
     setModalContent(false);
     setUserIndex(index);
+    setIsBtnActive([false, false]);
   };
 
   const btnHandler = () => {
@@ -69,12 +80,13 @@ export default function CallList({ list }: CallListProps) {
         comment: comment,
       });
     } else {
-      updateEstimateReject(user.estimateReqId );
+      updateEstimateReject(user.estimateReqId);
     }
 
     setIsModalOpen(false);
     setEstimatePrice(0);
     setComment('');
+    setIsBtnActive([false, false]);
   };
 
   const handleMouseEnter = () => {
@@ -102,6 +114,7 @@ export default function CallList({ list }: CallListProps) {
           buttonText={modalContent ? '견적 보내기' : '반려하기'}
           closeBtnClick={() => setIsModalOpen(!isModalOpen)}
           buttonClick={btnHandler}
+          disabled={getBtnActive()}
         >
           <div className={style.container}>
             <div className={style.chipBar}>
@@ -135,13 +148,17 @@ export default function CallList({ list }: CallListProps) {
                 <ModalInput
                   text='견적가를 입력해 주세요'
                   basicText='견적가 입력'
+                  limit={1}
                   onChange={(value) => setEstimatePrice(Number(value))}
+                  setIsBtnActive={setIsBtnActive}
                 />
                 <ModalInput
                   text='코멘트를 입력해 주세요'
                   basicText='최소 10자 이상 입력해주세요'
+                  limit={10}
                   isTextArea={true}
                   onChange={(value) => setComment(String(value))}
+                  setIsBtnActive={setIsBtnActive}
                 />
               </>
             ) : (
@@ -150,6 +167,7 @@ export default function CallList({ list }: CallListProps) {
                 basicText='최소 10자 이상 입력해주세요'
                 isTextArea={true}
                 onChange={(value) => setComment(String(value))}
+                setIsBtnActive={setIsBtnActive}
               />
             )}
           </div>
