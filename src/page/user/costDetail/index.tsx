@@ -90,7 +90,7 @@ const CostDetail = () => {
             </p>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>코멘트</h2>
-            <p className={style.comment}>{estimate.comment || "기사님의 코멘트입니다."}</p>
+            <p className={style.comment}>{estimate.moverComment || "기사님의 코멘트입니다."}</p>
 
             <div className={style.costInfoWrapper}>
               <CostInfo {...costInfoData} />
