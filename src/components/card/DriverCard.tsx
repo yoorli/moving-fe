@@ -115,10 +115,10 @@ export default function DriverCard({
       ) : (
         <DriverProfile list={list} type={type} styles={styles} />
       )}
-      {type === 'cost' && showPrice && list.price && (
+      {type === 'cost' && showPrice && (
         <div className={style.cost}>
           <span className={style.text}>견적 금액</span>
-          {formatCurrency(list.price)}
+          {formatCurrency(list?.price)}
         </div>
       )}
 
@@ -157,7 +157,7 @@ export default function DriverCard({
               ? '미확정'
               : type === 'cancel'
                 ? '취소'
-                : list.price && formatCurrency(list.price)}
+                : formatCurrency(list?.price)}
           </div>
           <div className={style.costBtn}>
             {type === 'waiting' && (
