@@ -4,20 +4,20 @@ import Tab from '../../../components/tab/Tab';
 import UserCard from '../../../components/card/UserCard';
 import Pagination from '../../../components/pagination/Pagination';
 import Button from '../../../components/btn/Button';
+import NoContents from '../../../components/noContents/NoContents';
 
 import useDirection from '../../../lib/function/direction';
 import { useMedia } from '../../../lib/function/useMediaQuery';
+import {
+  useGetEstimateConfirmed,
+  useGetEstimateList,
+} from '../../../lib/useQueries/estimate';
+import { useGetEstimateReject } from '../../../lib/useQueries/assignedEstimateReq';
 
 import style from './index.module.css';
 
 import icCheckLarge from '../../../assets/icons/ic_check_large.svg';
 import icCheckMedium from '../../../assets/icons/ic_check_medium.svg';
-
-import {
-  useGetEstimateConfirmed,
-  useGetEstimateList,
-} from '../../../lib/useQueries/estimate';
-// import { useGetEstimateReject } from '../../../lib/useQueries/assignedEstimateReq';
 
 interface User {
   estimateId: number;
@@ -41,8 +41,8 @@ export default function DriverCostHandlerPage() {
     total: 0,
   };
 
-  // const { data: rData } = useGetEstimateReject({});
-  // const { list: rList = [], total: rTotal = 0 } = rData || {};
+  const { data: rData, isLoading: rLoading } = useGetEstimateReject({});
+  const { list: rList = [], total: rTotal = 0 } = rData || {};
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
@@ -121,8 +121,8 @@ export default function DriverCostHandlerPage() {
       setTabList(cList);
       setTotal(cTotal);
     } else {
-      setTabList(aList);
-      setTotal(aTotal);
+      setTabList(rList);
+      setTotal(rTotal);
     }
 
     if (tablist.length > 0) {
@@ -130,11 +130,19 @@ export default function DriverCostHandlerPage() {
     }
   }, [aList, aTotal, cList, cTotal, currentTab]);
 
-  const isLoading = currentTab === 'first' ? aLoading : cLoading;
+  const isLoading =
+    currentTab === 'first'
+      ? aLoading
+      : currentTab === 'second'
+        ? cLoading
+        : rLoading;
 
   if (isLoading) {
     return <div>로딩 중...</div>;
   }
+
+  const isData =
+    currentTab === 'first' ? aData : currentTab === 'second' ? cData : rData;
 
   return (
     <div className={style.container}>
@@ -150,7 +158,7 @@ export default function DriverCostHandlerPage() {
       <div className={style.mainContainer}>
         {currentTab && (
           <div className={style.cardList}>
-             {tablist.map((user: User, index: number) => (
+            {tablist.map((user: User, index: number) => (
               <div key={index} className={style.card}>
                 <UserCard
                   list={user}
@@ -193,6 +201,11 @@ export default function DriverCostHandlerPage() {
                 )}
               </div>
             ))}
+          </div>
+        )}
+        {!isData && (
+          <div className={style.noContent}>
+            <NoContents image='file' />
           </div>
         )}
         {tablist.length > 0 && (

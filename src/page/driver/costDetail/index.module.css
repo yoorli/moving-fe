@@ -48,6 +48,13 @@
   font-weight: 600;
 }
 
+.noContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 560px;
+}
+
 @media (max-width: 743px) {
   .container {
     padding: 0 24px;
