@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   getEstimateReject,
   updateEstimateReject,
+  requestAssignedEstimate,
 } from '../api/assignedEstimateReq';
 import { PaginationParams } from '../../types/apiTypes';
 
@@ -25,5 +26,21 @@ export function useGetEstimateReject(queryParams: PaginationParams) {
   return useQuery({
     queryKey: ['rejectList', queryParams],
     queryFn: () => getEstimateReject(queryParams),
+  });
+}
+
+// 소비자 - 지정 견적 요청
+export function useRequestAssignedEstimate() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (moverId: number) => requestAssignedEstimate(moverId),
+    onSuccess: async () => {
+      console.log('지정 견적 요청 성공');
+      await queryClient.invalidateQueries({ queryKey: ['moverDetail'] }); // 성공 후 데이터 갱신
+    },
+    onError: (error) => {
+      console.error('Error:', error);
+    },
   });
 }
