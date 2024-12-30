@@ -1,26 +1,28 @@
-import React from "react";
-import styles from "./Review.module.css";
-import emptyStarLarge from "../../assets/icons/ic_empty_star_large.svg";
-import emptyStarMedium from "../../assets/icons/ic_empty_star_medium.svg";
-import miniStarIcon from "../../assets/icons/ic_mini_star.svg";
-import reviewBarLarge from "../../assets/icons/ic_review_bar_large.svg";
-import reviewBarMedium from "../../assets/icons/ic_review_bar_medium.svg";
+import React from 'react';
+import styles from './Review.module.css';
+import emptyStarLarge from '../../assets/icons/ic_empty_star_large.svg';
+import emptyStarMedium from '../../assets/icons/ic_empty_star_medium.svg';
+import miniStarIcon from '../../assets/icons/ic_mini_star.svg';
+import reviewBarLarge from '../../assets/icons/ic_review_bar_large.svg';
+import reviewBarMedium from '../../assets/icons/ic_review_bar_medium.svg';
 
 const maskUsername = (username: string) =>
-  username.slice(0, 3) + "*".repeat(username.length - 3);
+  username.length > 3
+    ? username.slice(0, 3) + '*'.repeat(username.length - 3)
+    : username.replace(username[1], '*');
 
 const formatToKoreanTime = (utcDate: string): string => {
   const date = new Date(utcDate);
   const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
     hour12: true,
-    timeZone: "Asia/Seoul",
+    timeZone: 'Asia/Seoul',
   };
-  return new Intl.DateTimeFormat("ko-KR", options).format(date);
+  return new Intl.DateTimeFormat('ko-KR', options).format(date);
 };
 
 const StarRating = ({
@@ -49,7 +51,7 @@ const StarRating = ({
             style={{
               WebkitMaskImage: `url(${icon})`,
               maskImage: `url(${icon})`,
-              backgroundColor: isFull ? "#FFC149" : "#E0E0E0",
+              backgroundColor: isFull ? '#FFC149' : '#E0E0E0',
               width: size,
               height: size,
               ...(isPartial && {
@@ -83,10 +85,12 @@ const ReviewItem = ({
         <span className={styles.username}>
           {maskUsername(review.customerName)}
         </span>
-        <img src={reviewBar} alt="Review Icon" className={styles.reviewIcon} />
-        <span className={styles.reviewDate}>{formatToKoreanTime(review.createAt)}</span>
+        <img src={reviewBar} alt='Review Icon' className={styles.reviewIcon} />
+        <span className={styles.reviewDate}>
+          {formatToKoreanTime(review.createAt)}
+        </span>
       </div>
-      <div style={{ marginTop: "20px" }}>
+      <div style={{ marginTop: '20px' }}>
         <StarRating rating={review.score} icon={miniStarIcon} size={14} />
       </div>
       <div className={styles.reviewComment}>{review.content}</div>
@@ -144,7 +148,7 @@ const Review = ({
                     className={styles.bar}
                     style={{
                       width: `${percentage}%`,
-                      backgroundColor: "#FFC149",
+                      backgroundColor: '#FFC149',
                     }}
                   ></div>
                 </div>
