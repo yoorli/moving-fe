@@ -4,7 +4,7 @@ import DriverCard from '../../../../components/card/DriverCard';
 import { MoverList, Mover } from '../mockData';
 import style from './ReceivedList.module.css';
 
-export default function ReceivedList({ list, count }: MoverList) {
+export default function ReceivedList({ list }: MoverList) {
   const navigate = useNavigate();
   const { mobileWithChip, mobileWithChipSecond } = useMedia();
 
@@ -14,7 +14,7 @@ export default function ReceivedList({ list, count }: MoverList) {
 
   return (
     <div className={style.infoContainer}>
-      <div className={style.infoTitle}>견적서 목록 ({count})</div>
+      <div className={style.infoTitle}>견적서 목록 ({list.length})</div>
       <div className={style.infoMain}>
         {list.length > 0 ? (
           list.map((mover: Mover) => (

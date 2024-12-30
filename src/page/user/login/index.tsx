@@ -68,7 +68,6 @@ export default function UserLoginPage() {
       try {
         setIsPending(true);
         await auth.post('/user/login', values);
-        setIsPending(false);
         window.location.href = '/';
       } catch (e) {
         if (isAxiosError(e)) {
@@ -84,9 +83,9 @@ export default function UserLoginPage() {
             [data.type]: data.message,
           });
         }
+      } finally {
+        setIsPending(false);
       }
-
-      /**TODO API request */
     } else {
       return;
     }

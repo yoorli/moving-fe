@@ -114,12 +114,15 @@ export function UserNav({
   } = useDirection();
   const { pc, tablet, mobile } = useMedia();
   const { pathname } = useLocation();
-  const { user } = useContext(AuthContext);
+  const {
+    userValue: { user, isPending },
+  } = useContext(AuthContext);
+
   useEffect(() => {
-    if (!user) {
-      window.location.href = '/';
+    if (!isPending && !user) {
+      window.location.href = '/user/login';
     }
-  }, [pathname]);
+  }, [user, isPending]);
 
   //pc size
   if (pc) {
@@ -294,13 +297,15 @@ export function DriverNav({
   const { pc, tablet, mobile } = useMedia();
   const { pathname } = useLocation();
 
-  const { user } = useContext(AuthContext);
+  const {
+    userValue: { user, isPending },
+  } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!user) {
-      window.location.href = '/';
+    if (!isPending && !user) {
+      window.location.href = '/driver/login';
     }
-  }, [pathname]);
+  }, [user, isPending]);
 
   //pc size
   if (pc) {
