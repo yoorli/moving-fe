@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Tab from '../../../components/tab/Tab';
 import FilterDropdown from './components/FilterDropdown';
 import FilterDropdownMedium from './components/FilterDropdownMedium';
@@ -43,7 +42,6 @@ const SearchDriverForGuest = () => {
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(
     window.innerWidth <= 744,
   );
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -113,10 +111,6 @@ const SearchDriverForGuest = () => {
     setOpenFilter((prev) => (prev === filterName ? null : filterName));
   };
 
-  const handleCardClick = (id: number) => {
-    navigate(`/driver/${id}`);
-  };
-
   const renderFilters = () => (
     <>
       <div className={style.compactFilters}>
@@ -166,7 +160,6 @@ const SearchDriverForGuest = () => {
               (type) => type as ChipProps['type'],
             ),
           }}
-          onClick={() => handleCardClick(user.moverId)}
         />
       ))}
     </div>
@@ -185,7 +178,6 @@ const SearchDriverForGuest = () => {
           }}
           type='dibs'
           styles='small'
-          onClick={() => handleCardClick(user.moverId)}
         />
       ))}
     </div>
