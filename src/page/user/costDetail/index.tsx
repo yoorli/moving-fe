@@ -31,7 +31,7 @@ const CostDetail = () => {
 
   useEffect(() => {
     if (estimate) {
-      console.log("견적 상세페이지 데이터:", estimate);
+      console.log("견적 상세 데이터:", estimate);
       setIsFavorite(estimate.isFavorite);
       setIsConfirmed(estimate.isConfirmed);
     }
@@ -54,7 +54,7 @@ const CostDetail = () => {
     movingDate: estimate.movingDate || "2023-10-15",
     departure: estimate.departure || "서울특별시 강남구",
     arrival: estimate.arrival || "경기도 성남시",
-    comment: estimate.comment || "추가 요청 사항 없음",
+    comment: estimate.customerComment || "추가 요청 사항 없음",
   };
 
   const shouldShowToast = estimate.isReqConfirmed && !isConfirmed;
@@ -86,10 +86,10 @@ const CostDetail = () => {
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>견적가</h2>
             <p className={style.costValue}>
-              {estimate.price ? `${estimate.price.toLocaleString()} 원` : "가격 정보 없음"}
+            {estimate.price != null ? `${estimate.price.toLocaleString()} 원` : "가격 정보 없음"}
             </p>
             <div className={style.border}></div>
-            <h2 className={style.sectionTitle}>코멘트</h2>
+            <h2 className={style.sectionTitle}>{estimate.moverName} 기사님의 코멘트</h2>
             <p className={style.comment}>{estimate.moverComment || "기사님의 코멘트입니다."}</p>
 
             <div className={style.costInfoWrapper}>

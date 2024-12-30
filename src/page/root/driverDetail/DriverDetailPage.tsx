@@ -44,6 +44,7 @@ const DriverDetailPage = () => {
 
   useEffect(() => {
     if (driver) {
+      console.log("기사님 상세 데이터:", driver);
       setIsFavorite(driver.isFavorite);
       setIsAssigned(driver.isAssigned);
     }

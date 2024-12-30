@@ -8,8 +8,12 @@ export default function ReceivedList({ list }: MoverList) {
   const navigate = useNavigate();
   const { mobileWithChip, mobileWithChipSecond } = useMedia();
 
-  const handleCardClick = (cardData: Mover) => {
-    navigate(`/user/costDetail/${cardData.id}`, { state: cardData }); // 카드 데이터 전달
+  const handleCardClick = (estimateId?: number) => {
+    if (estimateId) {
+      navigate(`/costDetail/${estimateId}`);
+    } else {
+      console.warn('견적 id가 없는 상태');
+    }
   };
 
   return (
@@ -21,8 +25,8 @@ export default function ReceivedList({ list }: MoverList) {
             <div key={mover.moverId} className={style.card}>
               <DriverCard
                 list={mover}
-                type='cost'
-                onClick={() => handleCardClick(mover)} // 카드 클릭 시 데이터 전달
+                type="cost"
+                onClick={() => handleCardClick(mover.estimateId)} // estimateId만 전달
                 count={mobileWithChip ? 4 : mobileWithChipSecond ? 3 : 6} // 반응형 카드 표시 개수
               />
             </div>
