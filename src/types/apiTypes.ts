@@ -44,17 +44,19 @@ export interface MoverDetail extends Mover {
 export interface EstimateParams {
   estimateId?: number;
   estimateRequestId?: number;
+  isAssigned?: boolean;
   comment?: string;
   price: number;
+  movingDate?: string;
 }
 
 export interface EstimateUser extends EstimateParams {
   movingType: ChipType;
-  isAssigned: boolean;
-  movingDate: string;
   departure: string;
   arrival: string;
   movingRequest: string;
+  customerComment?: string;
+  moverComment?: string;
 }
 
 export interface EstimateConsumer extends EstimateUser {
@@ -76,7 +78,6 @@ export interface EstimateMover extends EstimateUser {
   customerName: string;
   detailDeparture?: string;
   detailArrival?: string;
-  customerComment?: string;
 }
 
 // estimateReq

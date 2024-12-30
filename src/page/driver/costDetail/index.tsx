@@ -16,11 +16,7 @@ import style from './index.module.css';
 function isEstimateMover(
   user: EstimateConsumer | EstimateMover,
 ): user is EstimateMover {
-  return (
-    'detailDeparture' in user &&
-    'customerName' in user &&
-    'customerComment' in user
-  ); // `detailDeparture`를 가진 객체인지 확인
+  return 'detailDeparture' in user && 'detailArrival' in user; // `detailDeparture`를 가진 객체인지 확인
 }
 
 export default function DriverCostDetailPage() {
@@ -52,22 +48,22 @@ export default function DriverCostDetailPage() {
   }
 
   const info = isEstimateMover(user)
-    ? {
-        movingRequest: user?.movingRequest || '요청일 정보 없음',
-        movingType: user?.movingType || '이사 유형 정보 없음',
-        movingDate: user?.movingDate || '날짜 정보 없음',
-        departure: user?.detailDeparture || '출발지 정보 없음',
-        arrival: user?.detailArrival || '도착지 정보 없음',
-        comment: user?.customerComment || '요청사항 없음',
-      }
-    : {
-        movingRequest: user?.movingRequest || '요청일 정보 없음',
-        movingType: user?.movingType || '이사 유형 정보 없음',
-        movingDate: user?.movingDate || '날짜 정보 없음',
-        departure: '출발지 정보 없음',
-        arrival: '도착지 정보 없음',
-        comment: '요청사항 없음',
-      };
+  ? {
+      movingRequest: user.movingRequest || '요청일 정보 없음',
+      movingType: user.movingType || '이사 유형 정보 없음',
+      movingDate: user.movingDate || '날짜 정보 없음',
+      departure: user.detailDeparture || '출발지 정보 없음',
+      arrival: user.detailArrival || '도착지 정보 없음',
+      comment: user.customerComment || '요청사항 없음',
+    }
+  : {
+      movingRequest: user.movingRequest || '요청일 정보 없음',
+      movingType: user.movingType || '이사 유형 정보 없음',
+      movingDate: user.movingDate || '날짜 정보 없음',
+      departure: user.departure || '출발지 정보 없음',
+      arrival: user.arrival || '도착지 정보 없음',
+      comment: user.customerComment || '요청사항 없음',
+    };
 
   return (
     <div className={style.container}>
@@ -83,7 +79,9 @@ export default function DriverCostDetailPage() {
           <>
             <div className={style.estimate}>
               <div className={style.label}>코멘트</div>
-              {isEstimateMover(user) && user?.customerComment && user?.customerComment}
+              {isEstimateMover(user) &&
+                user?.moverComment &&
+                user?.moverComment}
             </div>
             <div className={style.estimate}>
               <div className={style.label}>견적가</div>
