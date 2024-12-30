@@ -26,6 +26,11 @@ export interface Mover {
   favoriteCount: number;
   isAssigned: boolean; // 지정 견적 요청
   isFavorite: boolean; // 찜 여부
+  estimateId?: number; // 견적 ID 추가
+}
+
+export interface MoverList {
+  list: Mover[];
 }
 
 export interface MoverListResponse {

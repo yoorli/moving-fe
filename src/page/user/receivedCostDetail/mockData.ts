@@ -32,6 +32,7 @@ export interface Mover {
   favoriteCount: number;
   price: number;
   isLiked: boolean;
+  estimateId?: number; // 견적 ID 추가
 }
 
 export interface MoverList {
