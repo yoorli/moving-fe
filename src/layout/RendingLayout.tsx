@@ -20,7 +20,9 @@ export default function RendingLayout() {
   >(null);
   const { pc } = useMedia();
 
-  const { user } = useContext(AuthContext);
+  const {
+    userValue: { user, isPending },
+  } = useContext(AuthContext);
 
   const toggleModal = (
     modalType: 'menu' | 'profile' | 'notification' | null,
@@ -54,7 +56,7 @@ export default function RendingLayout() {
     <>
       <div className={style.container}>
         <div className={style.wrapper}>
-          {user ? (
+          {!isPending && user ? (
             user.userType === 'CUSTOMER' ? (
               <UserNav
                 menuRef={menuRef}

@@ -26,12 +26,14 @@ export function UserProfileModal({ modalController }: Props) {
       modalController();
     }
   };
-  const { user } = useContext(AuthContext);
+  const {
+    userValue: { user },
+  } = useContext(AuthContext);
 
   return (
     <div className={style.container}>
       <div className={style.title}>
-        <span>{user.name} 고객님</span>
+        <span>{user?.name} 고객님</span>
       </div>
       <div
         onClick={() => {
@@ -85,11 +87,13 @@ export function DriverProfileModal({ modalController }: Props) {
       modalController();
     }
   };
-  const { user } = useContext(AuthContext);
+  const {
+    userValue: { user },
+  } = useContext(AuthContext);
   return (
     <div className={style.containerD}>
       <div className={style.title}>
-        <span>{user.name} 기사님</span>
+        <span>{user?.name} 기사님</span>
       </div>
       <div
         onClick={() => {
