@@ -32,19 +32,23 @@ export default function UserFavoriteMover() {
   return (
     <>
       <Tab firstText='찜한 기사님' />
-      <div className={style.overlay}>
-        <div className={style.container}>
-          <div className={style.cardContainer}>
-            {data?.data.list.map((mover: Mover, moverId: number) => (
-              <DriverCard
-                key={moverId}
-                list={{ ...mover, isFavorite: true }}
-                type='dibs'
-              />
-            ))}
+      {!isLoading && data ? (
+        <div className={style.overlay}>
+          <div className={style.container}>
+            <div className={style.cardContainer}>
+              {data?.data.list.map((mover: Mover, moverId: number) => (
+                <DriverCard
+                  key={moverId}
+                  list={{ ...mover, isFavorite: true }}
+                  type='dibs'
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div>{isLoading ? '로딩 중...' : '데이터를 불러올 수 없습니다.'}</div>
+      )}
     </>
   );
 }

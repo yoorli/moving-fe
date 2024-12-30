@@ -94,8 +94,10 @@ export default function DriverProfile({
               </span>
               <span className={style.textPType}>
                 <span className={style.movingLabel}>지역</span>
-                {user.serviceRegion &&
-                  translateServiceRegion(user.serviceRegion)?.join(', ')}
+                <span className={style.region}>
+                  {user.serviceRegion &&
+                    translateServiceRegion(user.serviceRegion)?.join(', ')}
+                </span>
               </span>
             </div>
           </>

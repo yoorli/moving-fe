@@ -87,16 +87,6 @@ export default function PendingCost() {
     }
   };
 
-  // 로딩 중일 때 처리
-  if (isLoading) {
-    return <div>로딩 중...</div>;
-  }
-
-  // data가 없을 때 처리
-  if (!data) {
-    return <div>데이터를 불러올 수 없습니다.</div>;
-  }
-
   return (
     <>
       <Tab
@@ -109,45 +99,49 @@ export default function PendingCost() {
         firstTabRoute={direction_pendingCost}
         secondTabRoute={direction_receivedCost}
       />
-      <div className={style.overlay}>
-        <div className={style.container}>
-          <CostInfo
-            movingRequest={data.createAt}
-            movingType={data.movingType}
-            movingDate={data.movingDate}
-            departure={data.departure}
-            arrival={data.arrival}
-            comment={data.comment}
-            hasButton={true}
-            setIsModalOpen={setIsCancelModalOpen}
-          />
-          <PendingList
-            setIsConfirmModalOpen={setIsConfirmModalOpen}
-            setSelectedEstimateId={setSelectedEstimateId}
-          />
+      {!isLoading && data ? (
+        <div className={style.overlay}>
+          <div className={style.container}>
+            <CostInfo
+              movingRequest={data.createAt}
+              movingType={data.movingType}
+              movingDate={data.movingDate}
+              departure={data.departure}
+              arrival={data.arrival}
+              comment={data.comment}
+              hasButton={true}
+              setIsModalOpen={setIsCancelModalOpen}
+            />
+            <PendingList
+              setIsConfirmModalOpen={setIsConfirmModalOpen}
+              setSelectedEstimateId={setSelectedEstimateId}
+            />
+          </div>
+          {isCancelModalOpen && (
+            <ModalContainer
+              title='견적 요청 취소하기'
+              isText={true}
+              text='견적 요청을 취소하시겠습니까?'
+              btnColorRed={true}
+              buttonText='취소하기'
+              closeBtnClick={handleModalClose}
+              buttonClick={cancelCostCall}
+            />
+          )}
+          {isConfirmModalOpen && (
+            <ModalContainer
+              title='견적 확정하기'
+              isText={true}
+              text='이 기사님으로 확정하시겠습니까?'
+              buttonText='확인'
+              closeBtnClick={handleModalClose}
+              buttonClick={confirmCost}
+            />
+          )}
         </div>
-        {isCancelModalOpen && (
-          <ModalContainer
-            title='견적 요청 취소하기'
-            isText={true}
-            text='견적 요청을 취소하시겠습니까?'
-            btnColorRed={true}
-            buttonText='취소하기'
-            closeBtnClick={handleModalClose}
-            buttonClick={cancelCostCall}
-          />
-        )}
-        {isConfirmModalOpen && (
-          <ModalContainer
-            title='견적 확정하기'
-            isText={true}
-            text='이 기사님으로 확정하시겠습니까?'
-            buttonText='확인'
-            closeBtnClick={handleModalClose}
-            buttonClick={confirmCost}
-          />
-        )}
-      </div>
+      ) : (
+        <div>{isLoading ? '로딩 중...' : '데이터를 불러올 수 없습니다.'}</div>
+      )}
     </>
   );
 }
