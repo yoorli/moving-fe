@@ -86,6 +86,13 @@
   background-color: var(--gray-500);
 }
 
+.noContents {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  height: 100vh; /* 전체 화면 높이로 설정 */
+}
+
 @media (max-width: 744px) {
   .container {
     min-width: 332px;

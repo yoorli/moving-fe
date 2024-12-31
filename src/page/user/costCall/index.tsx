@@ -4,6 +4,7 @@ import NoContents from '../../../components/noContents/NoContents';
 import style from './index.module.css';
 import CostCallContent from './components/CostCallContent';
 import useDirection from '../../../lib/function/direction';
+import { useGetCustomer } from '../../../lib/useQueries/customer';
 
 export interface SelectValues {
   movingType: boolean;
@@ -23,28 +24,39 @@ export default function UserCostCallPage() {
     arrival: false,
   });
 
+  const { data } = useGetCustomer();
+
+  console.log(data);
+
   return (
     <>
-      <Navigation isSelectOption={isSelectOption} isSubmitted={isSubmitted} />
-      <div className={style.container}>
-        <div className={style.mainContent}>
-          {!isSubmitted ? (
-            <CostCallContent
-              isSelectOption={isSelectOption}
-              setIsSelectOption={setIsSelectOption}
-              setIsSubmitted={setIsSubmitted}
-              redirect={direction_pendingCost}
-            />
-          ) : (
-            <NoContents
-              image='car'
-              hasButton={true}
-              buttonText='받은 견적 보러가기'
-              buttonHandler={() => direction_pendingCost()}
-            />
-          )}
+      {!data?.isConfirmed ? (
+        <>
+          <Navigation
+            isSelectOption={isSelectOption}
+            isSubmitted={isSubmitted}
+          />
+          <div className={style.container}>
+            <div className={style.mainContent}>
+              <CostCallContent
+                isSelectOption={isSelectOption}
+                setIsSelectOption={setIsSelectOption}
+                setIsSubmitted={setIsSubmitted}
+                redirect={direction_pendingCost}
+              />
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className={style.noContents}>
+          <NoContents
+            image='car'
+            hasButton={true}
+            buttonText='받은 견적 보러가기'
+            buttonHandler={() => direction_pendingCost()}
+          />
         </div>
-      </div>
+      )}
     </>
   );
 }
