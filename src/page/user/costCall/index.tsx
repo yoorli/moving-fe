@@ -5,6 +5,7 @@ import style from './index.module.css';
 import CostCallContent from './components/CostCallContent';
 import useDirection from '../../../lib/function/direction';
 import { useGetCustomer } from '../../../lib/useQueries/customer';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 export interface SelectValues {
   movingType: boolean;
@@ -24,13 +25,13 @@ export default function UserCostCallPage() {
     arrival: false,
   });
 
-  const { data } = useGetCustomer();
+  const { data, isLoading } = useGetCustomer();
 
   console.log(data);
 
   return (
     <>
-      {!data?.isConfirmed ? (
+      {!isLoading && !data?.isConfirmed ? (
         <>
           <Navigation
             isSelectOption={isSelectOption}
@@ -49,12 +50,16 @@ export default function UserCostCallPage() {
         </>
       ) : (
         <div className={style.noContents}>
-          <NoContents
-            image='car'
-            hasButton={true}
-            buttonText='받은 견적 보러가기'
-            buttonHandler={() => direction_pendingCost()}
-          />
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <NoContents
+              image='car'
+              hasButton={true}
+              buttonText='받은 견적 보러가기'
+              buttonHandler={() => direction_pendingCost()}
+            />
+          )}
         </div>
       )}
     </>
