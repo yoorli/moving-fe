@@ -20,6 +20,11 @@
   background-color: var(--gray-50);
 }
 
+.noContents {
+  display: flex;
+  height: 760px;
+}
+
 @media (max-width: 1199px) and (min-width: 744px) {
   .container {
     /* api 연동 후 디자인 수정 주석 해제만 하면 됨 */

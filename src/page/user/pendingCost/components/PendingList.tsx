@@ -73,7 +73,7 @@ export default function PendingList({
             detailBtn={() => detailbtn(cost)} // 카드 데이터 전달
           />
         ))}
-      </div> : <NoContents image='car' contentText='대기 중인 견적이'/>}
+      </div> : <NoContents image='car' contentText='대기 중인 견적이 없어요!'/>}
     </div>
   );
 }
