@@ -8,6 +8,7 @@ import ReceivedList from './components/ReceivedList';
 import { useGetEstimate } from '../../../lib/useQueries/estimate';
 import useDirection from '../../../lib/function/direction';
 import CostInfo from '../../../components/costInfo/CostInfo';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 export default function ReceivedCostDetail() {
   const { direction_pendingCost, direction_receivedCost } = useDirection();
@@ -19,11 +20,7 @@ export default function ReceivedCostDetail() {
 
   const { id } = useParams<{ id: string }>();
 
-  const { data } = useGetEstimate(id ?? '');
-
-  if (!data) {
-    return <div>No data available</div>;
-  }
+  const { data, isLoading } = useGetEstimate(id ?? '');
 
   return (
     <>
@@ -41,16 +38,24 @@ export default function ReceivedCostDetail() {
       <div className={style.container}>
         <div className={style.layout}>
           <div className={style.main}>
-            <CostInfo
-              movingRequest={data?.info?.movingRequest}
-              movingType={data?.info?.movingType}
-              movingDate={data?.info?.movingDate}
-              departure={data.info.departure}
-              arrival={data.info.arrival}
-              comment={data.info.comment}
-            />
+            {!isLoading && data ? (
+              <>
+                <CostInfo
+                  movingRequest={data?.info?.movingRequest}
+                  movingType={data?.info?.movingType}
+                  movingDate={data?.info?.movingDate}
+                  departure={data.info.departure}
+                  arrival={data.info.arrival}
+                  comment={data.info.comment}
+                />
 
-            <ReceivedList list={data.list} />
+                <ReceivedList list={data.list} />
+              </>
+            ) : (
+              <div className={style.noContents}>
+                {isLoading && <LoadingSpinner />}
+              </div>
+            )}
           </div>
         </div>
       </div>
