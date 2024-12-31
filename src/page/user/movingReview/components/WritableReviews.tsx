@@ -6,6 +6,7 @@ import style from './WritableReviews.module.css';
 import { useMedia } from '../../../../lib/function/useMediaQuery';
 import { useGetMovedEstimates } from '../../../../lib/useQueries/estimate';
 import { ChipType } from '../../../../types/cardTypes';
+import LoadingSpinner from '../../../../components/loading/LoadingSpinner';
 
 interface WritableReviewsProps {
   setIsModalOpen: (value: boolean) => void;
@@ -44,20 +45,9 @@ export default function WritableReviews({
     setIsModalOpen(true);
   };
 
-  // 페이지에 해당하는 데이터 필터링 - mockData 대신 연동할 데이터
-  const paginatedData = data?.list.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
-
   // 로딩 중일 때 처리
   if (isLoading) {
-    return <div>로딩 중...</div>;
-  }
-
-  // data가 없을 때 처리
-  if (!data) {
-    return <div>데이터를 불러올 수 없습니다.</div>;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -65,11 +55,12 @@ export default function WritableReviews({
       {data.total !== 0 ? (
         <div className={style.container}>
           <div className={style.cardContainer}>
-            {paginatedData.map((mover: Estimate, index: number) => (
+            {data?.list.map((mover: Estimate, moverId: number) => (
               <DriverCard
-                key={index}
+                key={moverId}
                 list={mover}
                 type='review'
+                disabled={mover.isReviewWritten}
                 reviewBtn={() => handleModalOpen(mover)}
               />
             ))}

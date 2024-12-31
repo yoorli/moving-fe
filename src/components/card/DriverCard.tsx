@@ -22,6 +22,7 @@ export default function DriverCard({
   reviewBtn, // 리뷰 작성하기 버튼
   costListBtn, // 견적 목록하기 버튼
   onClick, // onClick prop 추가
+  disabled = false,
   type,
   styles,
   list,
@@ -30,6 +31,7 @@ export default function DriverCard({
 }: DriverProfileProps & {
   onClick?: () => void;
   showPrice?: boolean;
+  disabled?: boolean;
 }) {
   const isPc = useMedia().pc;
   const chipList: ChipType[] = [];
@@ -115,10 +117,10 @@ export default function DriverCard({
       ) : (
         <DriverProfile list={list} type={type} styles={styles} />
       )}
-      {type === 'cost' && showPrice && list.price && (
+      {type === 'cost' && showPrice && (
         <div className={style.cost}>
           <span className={style.text}>견적 금액</span>
-          {formatCurrency(list.price)}
+          {formatCurrency(list?.price)}
         </div>
       )}
 
@@ -157,7 +159,7 @@ export default function DriverCard({
               ? '미확정'
               : type === 'cancel'
                 ? '취소'
-                : list.price && formatCurrency(list.price)}
+                : formatCurrency(list?.price)}
           </div>
           <div className={style.costBtn}>
             {type === 'waiting' && (
@@ -190,6 +192,7 @@ export default function DriverCard({
             text='리뷰 작성하기'
             btnStyle='solid640pxBlue300'
             onClick={reviewBtn}
+            disabled={disabled}
           />
         </div>
       )}
