@@ -36,12 +36,14 @@ export default function ReceivedList({ list }: MoverList) {
             </div>
           ))
         ) : (
-          <NoContents
-            image='file'
-            contentText='받은 견적서가 없습니다'
-            hasButton={true}
-            buttonHandler={direction_costCall}
-          />
+          <div className={style.noContents}>
+            <NoContents
+              image='file'
+              contentText='받은 견적서가 없습니다'
+              hasButton={true}
+              buttonHandler={direction_costCall}
+            />
+          </div>
         )}
       </div>
     </div>

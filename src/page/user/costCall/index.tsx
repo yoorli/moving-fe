@@ -31,7 +31,7 @@ export default function UserCostCallPage() {
 
   return (
     <>
-      {!isLoading && !data?.isConfirmed ? (
+      {!isLoading && data?.isConfirmed ? (
         <>
           <Navigation
             isSelectOption={isSelectOption}

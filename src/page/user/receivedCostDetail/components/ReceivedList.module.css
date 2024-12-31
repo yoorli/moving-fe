@@ -25,6 +25,13 @@
   border-radius: 16px;
 }
 
+.noContents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
 @media (max-width: 1199px) and (min-width: 744px) {
   .info {
     font-size: 16px;
