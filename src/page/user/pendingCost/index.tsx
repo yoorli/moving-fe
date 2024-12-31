@@ -10,6 +10,7 @@ import {
   useGetUserEstimateReq,
 } from '../../../lib/useQueries/estimateReq';
 import { useUpdateEstimateConfirmed } from '../../../lib/useQueries/estimate';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 // interface infoProps {
 //   estimateReqId: number; // 견적 요청 ID
@@ -140,7 +141,9 @@ export default function PendingCost() {
           )}
         </div>
       ) : (
-        <div>{isLoading ? '로딩 중...' : '데이터를 불러올 수 없습니다.'}</div>
+        <div>
+          {isLoading ? <LoadingSpinner /> : '데이터를 불러올 수 없습니다.'}
+        </div>
       )}
     </>
   );
