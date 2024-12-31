@@ -7,6 +7,7 @@ import { useMedia } from '../../../../lib/function/useMediaQuery';
 import { useGetMyReviewList } from '../../../../lib/useQueries/review';
 import { ChipType } from '../../../../types/cardTypes';
 import { getNotificationDate } from '../../../../lib/function/utils';
+import LoadingSpinner from '../../../../components/loading/LoadingSpinner';
 
 interface Review {
   reviewId: number; // 리뷰 아이디
@@ -34,24 +35,15 @@ export default function MyReview() {
     pageSize: itemsPerPage,
   });
 
-  console.log(data);
-
-  const paginatedData = data?.list.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
-
-  console.log(paginatedData);
-
   // 로딩 중일 때 처리
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <LoadingSpinner />;
   }
 
   return (
     <div className={style.container}>
       <div className={style.cardContainer}>
-        {paginatedData.map((review: Review, index: number) => (
+        {data?.list.map((review: Review, index: number) => (
           <UserCard
             key={index}
             list={{

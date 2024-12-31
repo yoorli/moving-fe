@@ -8,6 +8,7 @@ import { useGetMoverProfile } from '../../../lib/useQueries/driver';
 import { useGetMoverReviewList } from '../../../lib/useQueries/review';
 import { useState } from 'react';
 import Pagination from '../../../components/pagination/Pagination';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 // export type ServiceRegionType =
 //   | 'SEOUL'
@@ -52,7 +53,7 @@ export default function MyPage() {
     useDirection();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  const { data } = useGetMoverProfile();
+  const { data, isLoading } = useGetMoverProfile();
   console.log(data?.data);
 
   const {
@@ -62,6 +63,10 @@ export default function MyPage() {
   } = useGetMoverReviewList(data?.data.id || 0, currentPage, itemsPerPage);
 
   console.log(reviewData);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>
@@ -76,7 +81,7 @@ export default function MyPage() {
           />
           <div className={style.line} />
           {isReviewLoading ? (
-            <div>리뷰 데이터를 로딩 중...</div>
+            <LoadingSpinner thin={true} />
           ) : reviewError ? (
             <div>리뷰 데이터를 가져오는 중 오류가 발생...</div>
           ) : reviewData ? (
