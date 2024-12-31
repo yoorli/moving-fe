@@ -10,9 +10,10 @@ import Toast from '../../../components/toast/Toast';
 
 import { useGetEstimateDetail } from '../../../lib/useQueries/estimate';
 import { EstimateConsumer, EstimateMover } from '../../../types/apiTypes';
-
+import logoTextLarge from '../../../assets/images/img_logo_text_large.svg';
 import style from './index.module.css';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 // 타입 가드 함수
 function isEstimateMover(
@@ -76,12 +77,22 @@ export default function DriverCostDetailPage() {
 
   return (
     <>
+      <Helmet>
+        <title>{`견적 상세`}</title>
+        <meta name='description' content={`견적서 공유하기`} />
+        <meta property='og:title' content={`견적서 공유하기`} />
+        <meta
+          property='og:description'
+          content={`이 견적서는 ${user.customerName}님 요청입니다.`}
+        />
+        <meta property='og:image' content={logoTextLarge} />
+      </Helmet>
       <div className={style.container}>
         <nav className={style.navigation}>견적 상세</nav>
         <div className={style.mainContainer}>
           <div className={style.contents}>
             <UserCard list={user} />
-            {!isPc && isEstimateMover(user) && (
+            {!isPc && isEstimateMover(user) && user.customerName && (
               <div className={style.share}>
                 <SnsShare
                   nickname={user.customerName}
@@ -115,10 +126,10 @@ export default function DriverCostDetailPage() {
               />
             )}
           </div>
-          {isPc && isEstimateMover(user) && (
+          {isPc && isEstimateMover(user) && user.customerName && (
             <div className={style.share}>
               <SnsShare
-                nickname={user?.customerName}
+                nickname={user.customerName}
                 type='shareEstimate'
                 onClick={handleSnsShareClick}
               />
