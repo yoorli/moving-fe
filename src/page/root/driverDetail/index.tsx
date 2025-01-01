@@ -1,22 +1,25 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import style from "./index.module.css";
-import DriverCard from "../../../components/card/DriverCard";
-import Review from "../../../components/review/Review";
-import FixedBottomTab from "../searchDriver/components/FixedBottomTab";
-import Button from "../../../components/btn/Button";
-import Pagination from "../../../components/pagination/Pagination";
-import { useGetMoverDetail } from "../../../lib/useQueries/driver";
-import { useGetMoverReviewList } from "../../../lib/useQueries/review";
-import { useRequestAssignedEstimate } from "../../../lib/useQueries/assignedEstimateReq";
-import { ChipProps } from "../../../components/chip/Chip";
-import { translateServiceRegion, translateServiceType } from "../searchDriver/EnumMapper";
-import HeartIcon from "../../../assets/icons/ic_full_heart_small.svg";
-import HeartEmptyIcon from "../../../assets/icons/ic_empty_heart_small.svg";
-import ModalContainer from "../../../components/modal/ModalContainer";
-import { toggleFavoriteMover } from "../../../lib/api/favorite";
-import LoadingSpinner from "../../../components/loading/LoadingSpinner";
-import { AuthContext } from "../../../context/authContext";
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import style from './index.module.css';
+import DriverCard from '../../../components/card/DriverCard';
+import Review from '../../../components/review/Review';
+import FixedBottomTab from '../searchDriver/components/FixedBottomTab';
+import Button from '../../../components/btn/Button';
+import Pagination from '../../../components/pagination/Pagination';
+import { useGetMoverDetail } from '../../../lib/useQueries/driver';
+import { useGetMoverReviewList } from '../../../lib/useQueries/review';
+import { useRequestAssignedEstimate } from '../../../lib/useQueries/assignedEstimateReq';
+import { ChipProps } from '../../../components/chip/Chip';
+import {
+  translateServiceRegion,
+  translateServiceType,
+} from '../searchDriver/EnumMapper';
+import HeartIcon from '../../../assets/icons/ic_full_heart_small.svg';
+import HeartEmptyIcon from '../../../assets/icons/ic_empty_heart_small.svg';
+import ModalContainer from '../../../components/modal/ModalContainer';
+import { toggleFavoriteMover } from '../../../lib/api/favorite';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import { AuthContext } from '../../../context/authContext';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -44,13 +47,13 @@ const DriverDetailPage = () => {
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
     if (driver) {
-      console.log("기사님 상세 데이터:", driver);
+      console.log('기사님 상세 데이터:', driver);
       setIsFavorite(driver.isFavorite);
       setIsAssigned(driver.isAssigned);
     }
@@ -75,7 +78,7 @@ const DriverDetailPage = () => {
 
   const transformedDriver = {
     ...driver,
-    serviceType: driver.serviceType.map((type) => type as ChipProps["type"]),
+    serviceType: driver.serviceType.map((type) => type as ChipProps['type']),
     profileImg: driver.profileImg || undefined,
   };
 
@@ -88,7 +91,7 @@ const DriverDetailPage = () => {
       const response = await toggleFavoriteMover(driver.id);
       setIsFavorite(response.isFavorite);
     } catch (error) {
-      console.error("찜 상태 변경 중 오류 발생:", error);
+      console.error('찜 상태 변경 중 오류 발생:', error);
     }
   };
 
@@ -105,7 +108,7 @@ const DriverDetailPage = () => {
   };
 
   const handleModalButtonClick = () => {
-    navigate("/user/costCall");
+    navigate('/user/costCall');
   };
 
   return (
@@ -145,21 +148,22 @@ const DriverDetailPage = () => {
               <>
                 <Review
                   totalReviews={reviewData.reviewStats.totalReviews}
-                  averageRating={Object.entries(reviewData.reviewStats.reviewCount)
-                    .reduce(
+                  averageRating={
+                    Object.entries(reviewData.reviewStats.reviewCount).reduce(
                       (acc, [score, count]) =>
                         acc + Number(score) * Number(count),
-                      0
-                    ) / reviewData.reviewStats.totalReviews}
+                      0,
+                    ) / reviewData.reviewStats.totalReviews
+                  }
                   reviewStats={reviewData.reviewStats.reviewCount}
                   reviews={reviewData.reviews.list}
                 />
                 <div
                   style={{
-                    marginTop: "60px",
-                    marginBottom: "60px",
-                    display: "flex",
-                    justifyContent: "center",
+                    marginTop: '60px',
+                    marginBottom: '60px',
+                    display: 'flex',
+                    justifyContent: 'center',
                   }}
                 >
                   <Pagination
@@ -180,17 +184,17 @@ const DriverDetailPage = () => {
             <h2>{driver.moverName} 기사님에게 지정 견적을 요청해보세요!</h2>
             <div className={style.rightButtons}>
               <Button
-                text="기사님 찜하기"
-                btnStyle="outlined354pxLine200"
+                text='기사님 찜하기'
+                btnStyle='outlined354pxLine200'
                 src={isFavorite ? HeartIcon : HeartEmptyIcon}
                 srcLocationFront
-                alt="찜하기 아이콘"
+                alt='찜하기 아이콘'
                 className={style.heartButton}
                 onClick={handleFavoriteToggle}
               />
               <Button
-                text={isAssigned ? "지정 견적 요청 완료" : "지정 견적 요청하기"}
-                btnStyle="solid354pxBlue300"
+                text={isAssigned ? '지정 견적 요청 완료' : '지정 견적 요청하기'}
+                btnStyle='solid354pxBlue300'
                 className={style.requestButton}
                 disabled={isAssigned}
                 onClick={handleAssignRequest}
@@ -208,26 +212,28 @@ const DriverDetailPage = () => {
           setIsAssigned={setIsAssigned}
           isConfirmed={driver.isConfirmed}
           setModalOpen={setIsModalOpen}
+          isLoggedIn={isLoggedIn} // 로그인 상태 전달
+          setLoginModalOpen={setIsLoginModalOpen} // 로그인 모달 열기 위한 함수 전달
         />
       )}
       {isModalOpen && (
         <ModalContainer
-          title="지정 견적 요청하기"
+          title='지정 견적 요청하기'
           isText={true}
-          text="일반 견적 요청을 먼저 진행해주세요."
-          buttonText="일반 견적 요청하기"
+          text='일반 견적 요청을 먼저 진행해주세요.'
+          buttonText='일반 견적 요청하기'
           closeBtnClick={() => setIsModalOpen(false)}
           buttonClick={handleModalButtonClick}
         />
       )}
       {isLoginModalOpen && (
         <ModalContainer
-          title="로그인 후 이용해주세요"
+          title='로그인 후 이용해주세요'
           isText={true}
-          text="서비스를 이용하시려면 로그인이 필요합니다."
-          buttonText="로그인 하기"
+          text='서비스를 이용하시려면 로그인이 필요합니다.'
+          buttonText='로그인 하기'
           closeBtnClick={() => setIsLoginModalOpen(false)}
-          buttonClick={() => navigate("/user/login")}
+          buttonClick={() => navigate('/user/login')}
         />
       )}
     </div>

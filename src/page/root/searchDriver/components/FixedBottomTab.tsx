@@ -14,6 +14,8 @@ interface FixedBottomTabProps {
   setIsFavorite: React.Dispatch<React.SetStateAction<boolean>>;
   setIsAssigned: React.Dispatch<React.SetStateAction<boolean>>;
   moverId: number;
+  isLoggedIn: boolean;
+  setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>; // 로그인 모달 열기 위한 함수 전달
 }
 
 const FixedBottomTab = ({
@@ -24,10 +26,17 @@ const FixedBottomTab = ({
   isConfirmed,
   setModalOpen,
   moverId,
+  isLoggedIn,
+  setLoginModalOpen,
 }: FixedBottomTabProps) => {
   const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
 
   const handleFavoriteToggle = async () => {
+    if (!isLoggedIn) {
+      setLoginModalOpen(true);
+      return;
+    }
+
     try {
       const response = await axios.post("/favorite", { moverId });
       setIsFavorite(response.data.isFavorite);
@@ -37,6 +46,11 @@ const FixedBottomTab = ({
   };
 
   const handleAssignRequest = async () => {
+    if (!isLoggedIn) {
+      setLoginModalOpen(true);
+      return;
+    }
+
     if (!isAssigned && isConfirmed) {
       try {
         await requestAssignedEstimate(moverId); // 지정 견적 요청 API 호출
