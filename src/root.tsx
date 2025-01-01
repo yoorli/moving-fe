@@ -60,10 +60,6 @@ const router = createBrowserRouter([
             path: '/driver/signup',
             element: <DriverSignupPage />,
           },
-          {
-            path: 'costDetail/:id',
-            element: <CostDetail />, // 견적 상세 페이지
-          },
         ],
       },
       {
@@ -92,6 +88,10 @@ const router = createBrowserRouter([
               {
                 path: 'receivedCost/:id',
                 element: <ReceivedCostDetail />,
+              },
+              {
+                path: 'costDetail/:id',
+                element: <CostDetail />, // 견적 상세 페이지
               },
             ],
           },

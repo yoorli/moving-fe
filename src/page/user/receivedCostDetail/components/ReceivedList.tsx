@@ -10,7 +10,7 @@ export default function ReceivedList({ list }: MoverList) {
 
   const handleCardClick = (estimateId?: number) => {
     if (estimateId) {
-      navigate(`/costDetail/${estimateId}`);
+      navigate(`/user/costDetail/${estimateId}`);
     } else {
       console.warn('견적 id가 없는 상태');
     }
