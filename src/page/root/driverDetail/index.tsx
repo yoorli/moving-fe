@@ -17,9 +17,9 @@ import {
 import HeartIcon from '../../../assets/icons/ic_full_heart_small.svg';
 import HeartEmptyIcon from '../../../assets/icons/ic_empty_heart_small.svg';
 import ModalContainer from '../../../components/modal/ModalContainer';
-import { toggleFavoriteMover } from '../../../lib/api/favorite';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 import { AuthContext } from '../../../context/authContext';
+import { toggleFavoriteMover } from '../../../lib/api/favorite';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,8 +34,8 @@ const DriverDetailPage = () => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
   const [isAssigned, setIsAssigned] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -90,6 +90,9 @@ const DriverDetailPage = () => {
     try {
       const response = await toggleFavoriteMover(driver.id);
       setIsFavorite(response.isFavorite);
+
+      // 찜 상태 변경 후
+      window.location.reload();
     } catch (error) {
       console.error('찜 상태 변경 중 오류 발생:', error);
     }
@@ -212,8 +215,8 @@ const DriverDetailPage = () => {
           setIsAssigned={setIsAssigned}
           isConfirmed={driver.isConfirmed}
           setModalOpen={setIsModalOpen}
-          isLoggedIn={isLoggedIn} // 로그인 상태 전달
-          setLoginModalOpen={setIsLoginModalOpen} // 로그인 모달 열기 위한 함수 전달
+          isLoggedIn={isLoggedIn}
+          setLoginModalOpen={setIsLoginModalOpen}
         />
       )}
       {isModalOpen && (

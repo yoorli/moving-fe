@@ -40,6 +40,8 @@ const FixedBottomTab = ({
     try {
       const response = await axios.post("/favorite", { moverId });
       setIsFavorite(response.data.isFavorite);
+
+      window.location.reload();
     } catch (error) {
       console.error("찜하기 API 호출 중 오류 발생:", error);
     }
@@ -72,7 +74,7 @@ const FixedBottomTab = ({
           alt="찜하기 아이콘"
           srcLocationFront
           className={style.heartButton}
-          onClick={handleFavoriteToggle}
+          onClick={handleFavoriteToggle} // 찜 상태 토글 클릭 시 호출
         />
         <Button
           text={isAssigned ? "지정 견적 요청 완료" : "지정 견적 요청하기"}
