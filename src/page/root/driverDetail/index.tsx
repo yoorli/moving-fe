@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import style from "./index.module.css";
 import DriverCard from "../../../components/card/DriverCard";
@@ -16,16 +16,21 @@ import HeartEmptyIcon from "../../../assets/icons/ic_empty_heart_small.svg";
 import ModalContainer from "../../../components/modal/ModalContainer";
 import { toggleFavoriteMover } from "../../../lib/api/favorite";
 import LoadingSpinner from "../../../components/loading/LoadingSpinner";
+import { AuthContext } from "../../../context/authContext";
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
+  const { userValue } = useContext(AuthContext);
+  const isLoggedIn = !!userValue.user; // 로그인 여부 확인
 
   const { data: driver, isLoading, error } = useGetMoverDetail(Number(id));
   const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
 
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isAssigned, setIsAssigned] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -75,6 +80,10 @@ const DriverDetailPage = () => {
   };
 
   const handleFavoriteToggle = async () => {
+    if (!isLoggedIn) {
+      setIsLoginModalOpen(true);
+      return;
+    }
     try {
       const response = await toggleFavoriteMover(driver.id);
       setIsFavorite(response.isFavorite);
@@ -84,6 +93,10 @@ const DriverDetailPage = () => {
   };
 
   const handleAssignRequest = () => {
+    if (!isLoggedIn) {
+      setIsLoginModalOpen(true);
+      return;
+    }
     if (!isAssigned && driver.isConfirmed) {
       requestAssignedEstimate(driver.id);
     } else if (!driver.isConfirmed) {
@@ -205,6 +218,16 @@ const DriverDetailPage = () => {
           buttonText="일반 견적 요청하기"
           closeBtnClick={() => setIsModalOpen(false)}
           buttonClick={handleModalButtonClick}
+        />
+      )}
+      {isLoginModalOpen && (
+        <ModalContainer
+          title="로그인 후 이용해주세요"
+          isText={true}
+          text="서비스를 이용하시려면 로그인이 필요합니다."
+          buttonText="로그인 하기"
+          closeBtnClick={() => setIsLoginModalOpen(false)}
+          buttonClick={() => navigate("/user/login")}
         />
       )}
     </div>
