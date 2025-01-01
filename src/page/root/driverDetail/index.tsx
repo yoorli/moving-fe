@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import style from "./DriverDetail.module.css";
+import style from "./index.module.css";
 import DriverCard from "../../../components/card/DriverCard";
 import Review from "../../../components/review/Review";
 import FixedBottomTab from "../searchDriver/components/FixedBottomTab";
@@ -15,6 +15,7 @@ import HeartIcon from "../../../assets/icons/ic_full_heart_small.svg";
 import HeartEmptyIcon from "../../../assets/icons/ic_empty_heart_small.svg";
 import ModalContainer from "../../../components/modal/ModalContainer";
 import { toggleFavoriteMover } from "../../../lib/api/favorite";
+import LoadingSpinner from "../../../components/loading/LoadingSpinner";
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -51,7 +52,12 @@ const DriverDetailPage = () => {
   }, [driver]);
 
   if (isLoading) {
-    return <div className={style.container}>로딩 중...</div>;
+    return (
+      <div className={style.outerContainer}>
+        <div className={style.noPadding}></div>
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   if (error || !driver) {
@@ -206,3 +212,4 @@ const DriverDetailPage = () => {
 };
 
 export default DriverDetailPage;
+
