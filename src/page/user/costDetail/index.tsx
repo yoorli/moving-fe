@@ -11,6 +11,7 @@ import HeartIcon from "../../../assets/icons/ic_full_heart_small.svg";
 import style from "./index.module.css";
 import { useGetEstimateDetail, useUpdateEstimateConfirmed } from "../../../lib/useQueries/estimate";
 import { EstimateConsumer } from "../../../types/apiTypes";
+import LoadingSpinner from "../../../components/loading/LoadingSpinner";
 
 const CostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -39,8 +40,11 @@ const CostDetail = () => {
 
   if (!estimate) {
     return (
-      <div className={style.container}>
-        <p>해당 견적 데이터를 찾을 수 없습니다.</p>
+      <div className={style.outerContainer}>
+        <div className={style.noPadding}>
+          <Tab firstText="견적 상세" />
+        </div>
+        <LoadingSpinner />
       </div>
     );
   }
@@ -86,7 +90,7 @@ const CostDetail = () => {
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>견적가</h2>
             <p className={style.costValue}>
-            {estimate.price != null ? `${estimate.price.toLocaleString()} 원` : "가격 정보 없음"}
+              {estimate.price != null ? `${estimate.price.toLocaleString()} 원` : "가격 정보 없음"}
             </p>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>{estimate.moverName} 기사님의 코멘트</h2>
