@@ -23,7 +23,7 @@ import ServiceRandingPage from './page/root';
 import DriverRegisterPage from './page/driver/register';
 import MyPage from './page/driver/myPage';
 import DriverCostHandlerPage from './page/driver/costHandler';
-import SearchDriverForGuest from './page/root/searchDriver';
+import SearchDriver from './page/root/searchDriver';
 import { AuthProvider } from './context/authContext';
 import DriverDetailPage from './page/root/driverDetail/index';
 import DriverCostDetailPage from './page/driver/costDetail';
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
           { path: '/', element: <ServiceRandingPage /> },
           {
             path: '/searchDriver',
-            element: <SearchDriverForGuest />, // 비회원용 기사님 찾기 페이지
+            element: <SearchDriver />
           },
           {
             path: '/driver/:id',

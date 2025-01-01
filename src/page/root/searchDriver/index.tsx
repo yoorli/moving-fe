@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGetMoverList } from '../../../lib/useQueries/driver';
 import { useGetFavoriteMover } from '../../../lib/useQueries/favorite';
@@ -9,6 +9,7 @@ import SortDropdown from './components/SortDropdown';
 import DriverSearch from './components/DriverSearch';
 import DriverCard from '../../../components/card/DriverCard';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import { AuthContext } from '../../../context/authContext';
 import style from './index.module.css';
 import {
   translations,
@@ -31,7 +32,7 @@ const SORT_OPTIONS = [
   { label: '확정 많은순', value: 'confirmationCount' },
 ];
 
-const SearchDriverForGuest = () => {
+const SearchDriver = () => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
   const [selectedRegionLabel, setSelectedRegionLabel] = useState<string>('지역');
   const [selectedServiceLabel, setSelectedServiceLabel] = useState<string>('서비스');
@@ -39,16 +40,16 @@ const SearchDriverForGuest = () => {
   const [sortOption, setSortOption] = useState<'reviewCount' | 'averageScore' | 'career' | 'confirmationCount'>('reviewCount');
   const [isMediumScreen, setIsMediumScreen] = useState<boolean>(window.innerWidth <= 1199);
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth <= 744);
+  const { userValue } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const queryParams = {
     sortBy: sortOption,
-    keyword: searchKeyword || undefined, // 검색어가 없으면 제외
-    selectedServiceRegion: selectedRegionLabel !== '지역' ? translations[selectedRegionLabel] : undefined, // 선택 안 하면 제외
-    selectedServiceType: selectedServiceLabel !== '서비스' ? translations[selectedServiceLabel] : undefined, // 선택 안 하면 제외
+    keyword: searchKeyword || undefined,
+    selectedServiceRegion: selectedRegionLabel !== '지역' ? translations[selectedRegionLabel] : undefined,
+    selectedServiceType: selectedServiceLabel !== '서비스' ? translations[selectedServiceLabel] : undefined,
   };
 
-  // 기사님 전체 리스트 API 연동
   const { data: moverList, isLoading: isMoverLoading } = useGetMoverList(queryParams);
 
   useEffect(() => {
@@ -56,9 +57,8 @@ const SearchDriverForGuest = () => {
       console.log('기사님 전체리스트:', moverList);
       console.log('기사님 리스트:', moverList.list || []);
     }
-  }, [moverList]); // moverList 변경 시 실행
+  }, [moverList]);
 
-  // 찜한 기사님 API 연동
   const { data: favoriteMoverData, isLoading: isFavoriteLoading } = useGetFavoriteMover();
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const SearchDriverForGuest = () => {
       console.log('찜한 기사님 호출 API:', favoriteMoverData);
       console.log('찜한 기사님 리스트:', favoriteMoverData.data?.list || []);
     }
-  }, [favoriteMoverData]); // favoriteMoverData 변경 시 실행
+  }, [favoriteMoverData]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -77,12 +77,6 @@ const SearchDriverForGuest = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  useEffect(() => {
-    console.log(
-      `https://moving-be-render.onrender.com/mover/list?sortBy=${queryParams.sortBy}&keyword=${queryParams.keyword || ''}&selectedServiceRegion=${queryParams.selectedServiceRegion || ''}&selectedServiceType=${queryParams.selectedServiceType || ''}`
-    );
-  }, [queryParams]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
@@ -104,7 +98,12 @@ const SearchDriverForGuest = () => {
     setOpenFilter((prev) => (prev === filterName ? null : filterName));
   };
 
-  const handleCardClick = (id: number) => {
+  const handleDriverCardClick = (id: number) => {
+    navigate(`/driver/${id}`);
+  };
+
+  const handleMoverCardClick = (id: number | undefined) => {
+    if (id === undefined) return; // id가 undefined인 경우 클릭 무시
     navigate(`/driver/${id}`);
   };
 
@@ -138,6 +137,59 @@ const SearchDriverForGuest = () => {
     </>
   );
 
+  const renderFavoriteDrivers = () => {
+    const favoriteMoverList: Mover[] = favoriteMoverData?.data?.list || [];
+
+    if (!userValue.user || Object.keys(userValue.user).length === 0) {
+      return (
+        <div
+          style={{
+            fontWeight: 600,
+            fontSize: '20px',
+            lineHeight: '32px',
+            marginTop: '20px',
+          }}
+        >
+          로그인 후 이용 가능한 서비스입니다
+        </div>
+      );
+    }
+
+    if (favoriteMoverList.length === 0) {
+      return (
+        <div
+          style={{
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '28px',
+            marginTop: '20px',
+            textAlign: 'center',
+          }}
+        >
+          찜한 기사님이 없습니다.
+        </div>
+      );
+    }
+
+    return (
+      <div className={style.favoriteDriversContainer}>
+        {favoriteMoverList.slice(0, 3).map((user: Mover) => (
+          <DriverCard
+            key={user.id}
+            list={{
+              ...user,
+              profileImg: user.profileImg || undefined,
+              serviceType: user.serviceType.map((type: string) => type as ChipProps['type']),
+            }}
+            type="dibs"
+            styles="small"
+            onClick={() => handleMoverCardClick(user.moverId)}
+          />
+        ))}
+      </div>
+    );
+  };
+
   const renderDriverCards = () => (
     <div
       className={`${style.cardContainer} ${
@@ -156,36 +208,11 @@ const SearchDriverForGuest = () => {
             profileImg: user.profileImg || undefined,
             serviceType: user.serviceType.map((type: string) => type as ChipProps['type']),
           }}
-          onClick={() => handleCardClick(user.id)}
+          onClick={() => handleDriverCardClick(user.id)}
         />
       ))}
     </div>
   );
-
-  const renderFavoriteDrivers = () => {
-    const favoriteMoverList: Mover[] = favoriteMoverData?.data?.list || [];
-    if (favoriteMoverList.length === 0) {
-      return <div>찜한 기사님이 없습니다.</div>;
-    }
-
-    return (
-      <div className={style.favoriteDriversContainer}>
-        {favoriteMoverList.slice(0, 3).map((user: Mover) => (
-          <DriverCard
-            key={user.id}
-            list={{
-              ...user,
-              profileImg: user.profileImg || undefined,
-              serviceType: user.serviceType.map((type: string) => type as ChipProps['type']),
-            }}
-            type="dibs"
-            styles="small"
-            onClick={() => handleCardClick(user.id)}
-          />
-        ))}
-      </div>
-    );
-  };
 
   return (
     <div className={style.outerContainer}>
@@ -260,5 +287,5 @@ const SearchDriverForGuest = () => {
   );
 };
 
-export default SearchDriverForGuest;
+export default SearchDriver;
 

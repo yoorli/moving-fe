@@ -27,6 +27,7 @@ export interface Mover {
   isAssigned: boolean; // 지정 견적 요청
   isFavorite: boolean; // 찜 여부
   estimateId?: number; // 견적 ID 추가
+  moverId?: number;
 }
 
 export interface MoverList {
