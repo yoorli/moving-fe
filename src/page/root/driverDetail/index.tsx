@@ -28,7 +28,12 @@ const DriverDetailPage = () => {
   const { userValue } = useContext(AuthContext);
   const isLoggedIn = !!userValue.user; // 로그인 여부 확인
 
-  const { data: driver, isLoading, error, refetch } = useGetMoverDetail(Number(id)); // refetch 추가
+  const {
+    data: driver,
+    isLoading,
+    error,
+    refetch,
+  } = useGetMoverDetail(Number(id)); // refetch 추가
   const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
   const { mutate: toggleFavorite } = useToggleFavoriteMover();
 
@@ -54,7 +59,6 @@ const DriverDetailPage = () => {
 
   useEffect(() => {
     if (driver) {
-      console.log('기사님 상세 데이터:', driver);
       setIsFavorite(driver.isFavorite);
       setIsAssigned(driver.isAssigned);
     }
@@ -254,4 +258,3 @@ const DriverDetailPage = () => {
 };
 
 export default DriverDetailPage;
-

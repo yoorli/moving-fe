@@ -28,12 +28,6 @@ export function useGetMoverReviewList(moverId: number, page = 1, pageSize = 5) {
 export function useCreateReview() {
   const mutation = useMutation({
     mutationFn: (data: ReviewData) => createReview(data),
-    onSuccess: (data) => {
-      console.log('your review has been successfully created', data);
-    },
-    onError: (error) => {
-      console.error('Error on creating Review', error);
-    },
   });
 
   return mutation;

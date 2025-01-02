@@ -7,7 +7,7 @@ import {
   PaginationParams,
 } from '../../types/apiTypes';
 
-const PATH = `/estimate`;
+const PATH = '/estimate';
 
 /**
  * 유저-대기 중인 견적 조회 /estimate

@@ -36,7 +36,6 @@ export function useRequestAssignedEstimate() {
   return useMutation({
     mutationFn: (moverId: number) => requestAssignedEstimate(moverId),
     onSuccess: async () => {
-      console.log('지정 견적 요청 성공');
       await queryClient.invalidateQueries({ queryKey: ['moverDetail'] }); // 성공 후 데이터 갱신
     },
     onError: (error) => {

@@ -1,6 +1,6 @@
-import React from "react";
-import style from "./SortDropdown.module.css";
-import inactiveIcon from "../../../../assets/icons/ic_inactive_filter_medium.svg";
+import React from 'react';
+import style from './SortDropdown.module.css';
+import inactiveIcon from '../../../../assets/icons/ic_inactive_filter_medium.svg';
 
 interface SortDropdownProps {
   placeholder: string;
@@ -17,12 +17,12 @@ const SortDropdown = ({
   onSelect,
   isOpen,
   onToggle,
-  className = "",
+  className = '',
 }: SortDropdownProps) => {
   return (
     <div className={`${style.container} ${className}`}>
       <div
-        className={`${style.filterBox} ${isOpen ? style.active : ""}`}
+        className={`${style.filterBox} ${isOpen ? style.active : ''}`}
         onClick={onToggle}
       >
         <span className={style.selectedText}>{placeholder}</span>

@@ -34,40 +34,41 @@ const SORT_OPTIONS = [
 
 const SearchDriver = () => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
-  const [selectedRegionLabel, setSelectedRegionLabel] = useState<string>('지역');
-  const [selectedServiceLabel, setSelectedServiceLabel] = useState<string>('서비스');
+  const [selectedRegionLabel, setSelectedRegionLabel] =
+    useState<string>('지역');
+  const [selectedServiceLabel, setSelectedServiceLabel] =
+    useState<string>('서비스');
   const [searchKeyword, setSearchKeyword] = useState<string>('');
-  const [sortOption, setSortOption] = useState<'reviewCount' | 'averageScore' | 'career' | 'confirmationCount'>('reviewCount');
-  const [isMediumScreen, setIsMediumScreen] = useState<boolean>(window.innerWidth <= 1199);
-  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth <= 744);
+  const [sortOption, setSortOption] = useState<
+    'reviewCount' | 'averageScore' | 'career' | 'confirmationCount'
+  >('reviewCount');
+  const [isMediumScreen, setIsMediumScreen] = useState<boolean>(
+    window.innerWidth <= 1199,
+  );
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(
+    window.innerWidth <= 744,
+  );
   const { userValue } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const queryParams = {
     sortBy: sortOption,
     keyword: searchKeyword || undefined,
-    selectedServiceRegion: selectedRegionLabel !== '지역' ? translations[selectedRegionLabel] : undefined,
-    selectedServiceType: selectedServiceLabel !== '서비스' ? translations[selectedServiceLabel] : undefined,
+    selectedServiceRegion:
+      selectedRegionLabel !== '지역'
+        ? translations[selectedRegionLabel]
+        : undefined,
+    selectedServiceType:
+      selectedServiceLabel !== '서비스'
+        ? translations[selectedServiceLabel]
+        : undefined,
   };
 
-  const { data: moverList, isLoading: isMoverLoading } = useGetMoverList(queryParams);
+  const { data: moverList, isLoading: isMoverLoading } =
+    useGetMoverList(queryParams);
 
-  useEffect(() => {
-    if (moverList) {
-      console.log('기사님 전체리스트:', moverList);
-      console.log('기사님 리스트:', moverList.list || []);
-    }
-  }, [moverList]);
-
-  const { data: favoriteMoverData, isLoading: isFavoriteLoading } = useGetFavoriteMover();
-
-  useEffect(() => {
-    if (favoriteMoverData) {
-      console.log('찜한 기사님 호출 엔드포인트: /favorite/me');
-      console.log('찜한 기사님 호출 API:', favoriteMoverData);
-      console.log('찜한 기사님 리스트:', favoriteMoverData.data?.list || []);
-    }
-  }, [favoriteMoverData]);
+  const { data: favoriteMoverData, isLoading: isFavoriteLoading } =
+    useGetFavoriteMover();
 
   useEffect(() => {
     const handleResize = () => {
@@ -91,7 +92,9 @@ const SearchDriver = () => {
   };
 
   const handleSortSelect = (value: string) => {
-    setSortOption(value as 'reviewCount' | 'averageScore' | 'career' | 'confirmationCount');
+    setSortOption(
+      value as 'reviewCount' | 'averageScore' | 'career' | 'confirmationCount',
+    );
   };
 
   const handleToggleFilter = (filterName: string) => {
@@ -127,7 +130,10 @@ const SearchDriver = () => {
         />
       </div>
       <SortDropdown
-        placeholder={SORT_OPTIONS.find((option) => option.value === sortOption)?.label || '리뷰 많은순'}
+        placeholder={
+          SORT_OPTIONS.find((option) => option.value === sortOption)?.label ||
+          '리뷰 많은순'
+        }
         options={SORT_OPTIONS}
         isOpen={openFilter === FILTER_TYPES.SORT}
         onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
@@ -179,10 +185,12 @@ const SearchDriver = () => {
             list={{
               ...user,
               profileImg: user.profileImg || undefined,
-              serviceType: user.serviceType.map((type: string) => type as ChipProps['type']),
+              serviceType: user.serviceType.map(
+                (type: string) => type as ChipProps['type'],
+              ),
             }}
-            type="dibs"
-            styles="small"
+            type='dibs'
+            styles='small'
             onClick={() => handleMoverCardClick(user.moverId)}
           />
         ))}
@@ -206,7 +214,9 @@ const SearchDriver = () => {
           list={{
             ...user,
             profileImg: user.profileImg || undefined,
-            serviceType: user.serviceType.map((type: string) => type as ChipProps['type']),
+            serviceType: user.serviceType.map(
+              (type: string) => type as ChipProps['type'],
+            ),
           }}
           onClick={() => handleDriverCardClick(user.id)}
         />
@@ -217,7 +227,7 @@ const SearchDriver = () => {
   return (
     <div className={style.outerContainer}>
       <div className={style.noPadding}>
-        <Tab firstText="기사님 찾기" />
+        <Tab firstText='기사님 찾기' />
       </div>
       {isMoverLoading || isFavoriteLoading ? (
         <LoadingSpinner />
@@ -234,19 +244,23 @@ const SearchDriver = () => {
               <>
                 <div className={style.leftFilters}>
                   <FilterDropdown
-                    title="지역을 선택해주세요"
+                    title='지역을 선택해주세요'
                     placeholder={selectedRegionLabel}
                     items={REGION_ITEMS}
-                    onSelect={(label) => handleSelect(FILTER_TYPES.REGION, label)}
+                    onSelect={(label) =>
+                      handleSelect(FILTER_TYPES.REGION, label)
+                    }
                     isRegion
                     isOpen={openFilter === FILTER_TYPES.REGION}
                     onToggle={() => handleToggleFilter(FILTER_TYPES.REGION)}
                   />
                   <FilterDropdown
-                    title="어떤 서비스가 필요하세요?"
+                    title='어떤 서비스가 필요하세요?'
                     placeholder={selectedServiceLabel}
                     items={SERVICE_ITEMS}
-                    onSelect={(label) => handleSelect(FILTER_TYPES.SERVICE, label)}
+                    onSelect={(label) =>
+                      handleSelect(FILTER_TYPES.SERVICE, label)
+                    }
                     isOpen={openFilter === FILTER_TYPES.SERVICE}
                     onToggle={() => handleToggleFilter(FILTER_TYPES.SERVICE)}
                   />
@@ -255,7 +269,10 @@ const SearchDriver = () => {
                 </div>
                 <div className={style.rightFilters}>
                   <SortDropdown
-                    placeholder={SORT_OPTIONS.find((option) => option.value === sortOption)?.label || '리뷰 많은순'}
+                    placeholder={
+                      SORT_OPTIONS.find((option) => option.value === sortOption)
+                        ?.label || '리뷰 많은순'
+                    }
                     options={SORT_OPTIONS}
                     isOpen={openFilter === FILTER_TYPES.SORT}
                     onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
@@ -263,7 +280,7 @@ const SearchDriver = () => {
                   />
                   {!isMediumScreen && (
                     <DriverSearch
-                      placeholder="검색어를 입력하세요"
+                      placeholder='검색어를 입력하세요'
                       onChange={handleSearchChange}
                     />
                   )}
@@ -275,7 +292,7 @@ const SearchDriver = () => {
           {isMediumScreen && (
             <div className={style.searchBarCompact}>
               <DriverSearch
-                placeholder="검색어를 입력하세요"
+                placeholder='검색어를 입력하세요'
                 onChange={handleSearchChange}
               />
             </div>
@@ -288,4 +305,3 @@ const SearchDriver = () => {
 };
 
 export default SearchDriver;
-

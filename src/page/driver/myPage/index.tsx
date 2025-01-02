@@ -54,15 +54,11 @@ export default function MyPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const { data, isLoading } = useGetMoverProfile();
-  console.log(data?.data);
-
   const {
     data: reviewData,
     isLoading: isReviewLoading,
     error: reviewError,
   } = useGetMoverReviewList(data?.data.id || 0, currentPage, itemsPerPage);
-
-  console.log(reviewData);
 
   if (isLoading) {
     return <LoadingSpinner />;

@@ -32,6 +32,8 @@
     "react/jsx-uses-vars": "warn", // JSX에서 사용한 변수가 정의되지 않으면 경고
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }], // JSX 파일 확장자는 .tsx로 제한
 
+    "quotes": ["error", "single", { "avoidEscape": true }],
+
     // TypeScript 관련 규칙
     "@typescript-eslint/explicit-module-boundary-types": "off", // 함수 반환 타입 강제하지 않음
     "@typescript-eslint/no-explicit-any": "off", // any 사용 허용
