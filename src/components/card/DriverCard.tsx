@@ -48,6 +48,8 @@ export default function DriverCard({
         [style.cardPType]: type === 'profile',
         [style.cardCDType]: type === 'cost' || type === 'dibs',
         [style.cardPRType]: type === 'review',
+        [style.cardWType]: type === 'waiting',
+        [style.cardCType]: type === 'confirm' || type === 'notConfirm' || type === 'cancel',
         [style.cardPSmall]: styles === 'small',
       })}
       onClick={onClick} // 최상단 div에 onClick 이벤트 추가

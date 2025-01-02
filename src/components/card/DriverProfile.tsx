@@ -25,6 +25,16 @@ export default function DriverProfile({
   const { direction_driverDetail } = useDirection();
   const id = Number(user.moverId);
 
+  const handleProfileClick = () => {
+    if (
+      type === 'waiting' ||
+      type === 'confirm' ||
+      type === 'review' ||
+      type === 'dibs'
+    )
+      return direction_driverDetail(id);
+  };
+
   return (
     <div
       className={classNames(style.profile, {
@@ -33,7 +43,7 @@ export default function DriverProfile({
         [style.profileWType]: type === 'waiting' || type === 'confirm',
         [style.profileSmall]: styles === 'small',
       })}
-      onClick={()=>direction_driverDetail(id)}
+      onClick={() => handleProfileClick()}
     >
       <div
         className={classNames(style.profileImage, {
