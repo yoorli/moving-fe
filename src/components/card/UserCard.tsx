@@ -47,13 +47,15 @@ export default function UserCard({
       <div className={style.top}>
         {/* 칩 */}
         <div className={style.chipBox}>
-          {chips.map((row, rowIndex) => (
-            <div key={rowIndex} className={style.chip}>
-              {row.map((chip, chipIndex) => (
-                <Chip key={chipIndex} type={chip} />
-              ))}
-            </div>
-          ))}
+          {chips
+            .map((row) => row.sort((a, b) => (a < b ? -1 : 1)))
+            .map((row, rowIndex) => (
+              <div key={rowIndex} className={style.chip}>
+                {row.map((chip, chipIndex) => (
+                  <Chip key={chipIndex} type={chip} />
+                ))}
+              </div>
+            ))}
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
