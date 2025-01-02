@@ -1,6 +1,6 @@
-import style from "./FilterDropdownMedium.module.css";
-import activeIconMedium from "../../../../assets/icons/ic_active_filter_medium.svg";
-import inactiveIconMedium from "../../../../assets/icons/ic_inactive_filter_medium.svg";
+import style from './FilterDropdownMedium.module.css';
+import activeIconMedium from '../../../../assets/icons/ic_active_filter_medium.svg';
+import inactiveIconMedium from '../../../../assets/icons/ic_inactive_filter_medium.svg';
 
 interface DropdownItem {
   label: string;
@@ -31,12 +31,12 @@ const FilterDropdownMedium = ({
   return (
     <div className={style.container}>
       <div
-        className={`${style.filterBox} ${isOpen ? style.active : ""} ${
+        className={`${style.filterBox} ${isOpen ? style.active : ''} ${
           isRegion ? style.region : style.service
         }`}
         onClick={onToggle}
       >
-        <span className={`${style.selectedText} ${isOpen ? style.activeText : ""}`}>
+        <span className={`${style.selectedText} ${isOpen ? style.activeText : ''}`}>
           {placeholder}
         </span>
         <img

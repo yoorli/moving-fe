@@ -41,10 +41,6 @@ export default function UserMovingReview() {
         onSuccess: () => {
           handleModalClose();
           setCurrentTab('second');
-          console.log(reviewValue, '리뷰 등록 성공');
-        },
-        onError: () => {
-          console.log('리뷰 등록 중 오류가 발생했습니다.');
         },
       });
     }

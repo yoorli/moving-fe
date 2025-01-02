@@ -1,6 +1,6 @@
-import style from "./FilterDropdown.module.css";
-import activeIcon from "../../../../assets/icons/ic_active_filter.svg";
-import inactiveIcon from "../../../../assets/icons/ic_inactive_filter.svg";
+import style from './FilterDropdown.module.css';
+import activeIcon from '../../../../assets/icons/ic_active_filter.svg';
+import inactiveIcon from '../../../../assets/icons/ic_inactive_filter.svg';
 
 interface DropdownItem {
   label: string;
@@ -34,10 +34,10 @@ const FilterDropdown = ({
     <div className={style.container}>
       <p className={style.title}>{title}</p>
       <div
-        className={`${style.filterBox} ${isOpen ? style.active : ""}`}
+        className={`${style.filterBox} ${isOpen ? style.active : ''}`}
         onClick={onToggle}
       >
-        <span className={`${style.selectedText} ${isOpen ? style.activeText : ""}`}>
+        <span className={`${style.selectedText} ${isOpen ? style.activeText : ''}`}>
           {placeholder}
         </span>
         <img

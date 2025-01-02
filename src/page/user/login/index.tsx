@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import style from '../../../components/page/login/index.module.css';
 import { loginValidation } from '../../../lib/function/validation';
@@ -12,6 +12,7 @@ import { UserLoginTop } from '../../../components/page/auth/AuthTop';
 import { UserLoginBottom } from '../../../components/page/auth/AuthBottom';
 import { auth } from '../../../lib/api/auth';
 import { isAxiosError } from 'axios';
+import { AuthContext } from '../../../context/authContext';
 
 type FormLogin = {
   email: string;
@@ -24,6 +25,15 @@ type FormValidation = {
 };
 
 export default function UserLoginPage() {
+  const {
+    userValue: { user, isPending },
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!isPending && user) {
+      window.location.href = '/';
+    }
+  }, [user, isPending]);
   const [values, setValues] = useState<FormLogin>({
     email: '',
     password: '',
@@ -42,7 +52,7 @@ export default function UserLoginPage() {
     password: '',
   });
 
-  const [isPending, setIsPending] = useState<boolean>(false);
+  const [isLoginPending, setIsLoginPending] = useState<boolean>(false);
 
   const inputHeandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
@@ -66,7 +76,7 @@ export default function UserLoginPage() {
       validation.password
     ) {
       try {
-        setIsPending(true);
+        setIsLoginPending(true);
         await auth.post('/user/login', values);
         window.location.href = '/';
       } catch (e) {
@@ -84,7 +94,7 @@ export default function UserLoginPage() {
           });
         }
       } finally {
-        setIsPending(false);
+        setIsLoginPending(false);
       }
     } else {
       return;
@@ -124,7 +134,7 @@ export default function UserLoginPage() {
               }
             />
             <AuthBtn
-              context={isPending ? 'loading...' : '로그인'}
+              context={isLoginPending ? 'loading...' : '로그인'}
               validation={
                 !!values.email &&
                 !!values.password &&

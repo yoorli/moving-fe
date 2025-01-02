@@ -27,8 +27,6 @@ export default function UserCostCallPage() {
 
   const { data, isLoading } = useGetCustomer();
 
-  console.log(data);
-
   return (
     <>
       {!isLoading && data?.isConfirmed ? (

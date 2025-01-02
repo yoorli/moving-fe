@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   createEstimateReq,
   deleteEstimateReq,
@@ -45,12 +45,6 @@ export function useDeleteEstimateReq() {
 export function useCreateEstimateReq() {
   const mutation = useMutation({
     mutationFn: (data: FormValues) => createEstimateReq(data),
-    onSuccess: (data) => {
-      console.log('Estimate created successfully:', data);
-    },
-    onError: (error) => {
-      console.error('Error creating estimate:', error);
-    },
   });
 
   return mutation;
@@ -72,5 +66,6 @@ export function useGetMoverEstimateReq(queryParams: estimateQueryParams) {
   return useQuery({
     queryKey: ['estimateReq', queryParams],
     queryFn: () => getMoverEstimateReq(queryParams),
+    placeholderData: keepPreviousData,
   });
 }

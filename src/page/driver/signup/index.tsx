@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import style from '../../../components/page/signup/index.module.css';
 import { Link } from 'react-router-dom';
 import { signupValidation } from '../../../lib/function/validation';
@@ -11,6 +11,7 @@ import { DriverSignupTop } from '../../../components/page/auth/AuthTop';
 import { DriverSignupBottom } from '../../../components/page/auth/AuthBottom';
 import { auth } from '../../../lib/api/auth';
 import { isAxiosError } from 'axios';
+import { AuthContext } from '../../../context/authContext';
 
 type FormLogin = {
   name: string;
@@ -29,6 +30,15 @@ type FormValidation = {
 };
 
 export default function DriverSignupPage() {
+  const {
+    userValue: { user, isPending },
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!isPending && user) {
+      window.location.href = '/';
+    }
+  }, [user, isPending]);
   const [values, setValues] = useState<FormLogin>({
     name: '',
     email: '',
@@ -51,7 +61,7 @@ export default function DriverSignupPage() {
     email: '',
   });
 
-  const [isPending, setIsPending] = useState<boolean>(false);
+  const [isSignupPending, setIsSignupPending] = useState<boolean>(false);
 
   const inputHeandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
@@ -90,7 +100,7 @@ export default function DriverSignupPage() {
       };
 
       try {
-        setIsPending(true);
+        setIsSignupPending(true);
         const response = await auth.post(
           '/user/signup?userType=MOVER',
           request,
@@ -112,7 +122,7 @@ export default function DriverSignupPage() {
           });
         }
       } finally {
-        setIsPending(false);
+        setIsSignupPending(false);
       }
     } else {
       return;
@@ -174,7 +184,7 @@ export default function DriverSignupPage() {
               errorMessage='비밀번호가 일치하지 않습니다.'
             />
             <AuthBtn
-              context={isPending ? 'loading...' : '시작하기'}
+              context={isSignupPending ? 'loading...' : '시작하기'}
               validation={
                 !!values.email &&
                 !!values.password &&
