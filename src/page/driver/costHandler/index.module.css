@@ -93,6 +93,13 @@
   justify-content: center;
 }
 
+.noContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 560px;
+}
+
 @media (max-width: 743px) {
   .mainContainer {
     margin-top: 24px;

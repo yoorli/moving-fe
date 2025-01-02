@@ -7,6 +7,7 @@ import {
   translateServiceType,
 } from '../../lib/function/utils';
 import { DriverProfileProps } from '../../types/cardTypes';
+import useDirection from '../../lib/function/direction';
 
 import style from './DriverProfile.module.css';
 
@@ -20,6 +21,10 @@ export default function DriverProfile({
   list: user,
 }: DriverProfileProps) {
   const isPc = useMedia().pc;
+
+  const { direction_driverDetail } = useDirection();
+  const id = Number(user.moverId);
+
   return (
     <div
       className={classNames(style.profile, {
@@ -28,6 +33,7 @@ export default function DriverProfile({
         [style.profileWType]: type === 'waiting' || type === 'confirm',
         [style.profileSmall]: styles === 'small',
       })}
+      onClick={()=>direction_driverDetail(id)}
     >
       <div
         className={classNames(style.profileImage, {

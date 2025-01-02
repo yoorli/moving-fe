@@ -101,7 +101,7 @@ export default function DriverCostCallPage() {
     setParams({
       page: currentPage,
       pageSize: itemsPerPage,
-      type: types,
+      type: types.filter((item) => item !== 'ASSIGN'),
       isAssigned: newState.ASSIGN,
     });
   };

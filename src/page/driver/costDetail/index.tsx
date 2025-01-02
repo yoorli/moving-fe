@@ -1,19 +1,21 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 import UserCard from '../../../components/card/UserCard';
 import SnsShare from '../../../components/snsShare/SnsShare';
 import CostInfo from '../../../components/costInfo/CostInfo';
+import NoContents from '../../../components/noContents/NoContents';
+import Toast from '../../../components/toast/Toast';
 
 import { useMedia } from '../../../lib/function/useMediaQuery';
 import { formatCurrency } from '../../../lib/function/utils';
-import Toast from '../../../components/toast/Toast';
-
 import { useGetEstimateDetail } from '../../../lib/useQueries/estimate';
 import { EstimateConsumer, EstimateMover } from '../../../types/apiTypes';
-import logoTextLarge from '../../../assets/images/img_logo_text_large.svg';
+
 import style from './index.module.css';
-import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
+import logoTextLarge from '../../../assets/images/img_logo_text_large.svg';
 
 // 타입 가드 함수
 function isEstimateMover(
@@ -54,7 +56,11 @@ export default function DriverCostDetailPage() {
   }
 
   if (!user) {
-    return <div>데이터가 없습니다.</div>;
+    return (
+    <div className={style.noContent}>
+      <NoContents image='file' />
+    </div>
+    )
   }
 
   const info = isEstimateMover(user)
