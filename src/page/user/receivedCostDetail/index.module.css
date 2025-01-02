@@ -18,6 +18,9 @@
   padding: 48px 40px;
 }
 
+.loading {
+  display: flex;
+}
 @media (max-width: 1199px) and (min-width: 744px) {
   .layout {
     max-width: 1199px;
