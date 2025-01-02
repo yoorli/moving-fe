@@ -14,7 +14,7 @@ export default function UserLayout() {
   } = useContext(AuthContext);
   useEffect(() => {
     if (!isPending && user) {
-      if (user.userType !== 'CUSTOMER') {
+      if (user.userType === 'MOVER') {
         window.location.href = '/';
       }
     }
