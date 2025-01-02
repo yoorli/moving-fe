@@ -55,54 +55,80 @@ export default function PendingCost() {
   const { mutate } = useDeleteEstimateReq();
   const { mutate: confirmEstimate } = useUpdateEstimateConfirmed();
 
-  console.log(data);
-  console.log(error);
+  const renderTabs = () => (
+    <Tab
+      selectable={true}
+      firstText='대기 중인 견적'
+      secondText='받았던 견적'
+      selectedTab={currentTab}
+      onTabChange={handleTabChange}
+      tabChangeType='route'
+      firstTabRoute={direction_pendingCost}
+      secondTabRoute={direction_receivedCost}
+    />
+  );
 
   const handleTabChange = (selectedTab: 'first' | 'second') => {
     setCurrentTab(selectedTab);
   };
 
+  // 모달 닫기 버튼
   const handleModalClose = () => {
     setIsCancelModalOpen(false);
     setIsConfirmModalOpen(false);
   };
 
+  // 견적 요청 취소
   const cancelCostCall = () => {
-    // 요청 지우는 API??
-    mutate(data?.estimateReqId);
-    direction_costCall();
-    // mutate(data.estimateReqId, {
-    //   onSuccess: () => {
-    //     direction_costCall(); // 삭제 후 동작
-    //     handleModalClose();   // 모달 닫기
-    //   },
-    //   onError: (error) => {
-    //     console.error('견적 요청 삭제 실패:', error);
-    //   },
-    // });
+    // mutate(data?.estimateReqId);
+    // direction_costCall();
+    mutate(data.estimateReqId, {
+      onSuccess: () => {
+        direction_costCall(); // 삭제 후 동작
+        handleModalClose(); // 모달 닫기
+      },
+      onError: (error) => {
+        console.error('견적 요청 삭제 실패:', error.message);
+      },
+    });
   };
 
+  // 견적 확정 버튼
   const confirmCost = () => {
-    // 견적 확정 API??
     if (selectedEstimateId) {
       confirmEstimate(selectedEstimateId);
       direction_receivedCostDetail(data?.estimateReqId); // estimateReqid를 넘겨줘서 받았던 견적 상세로
     }
   };
 
+  if (isLoading) {
+    return (
+      <>
+        {renderTabs()}
+        <LoadingSpinner />;
+      </>
+    );
+  } else if (!data?.estimateReqId) {
+    return (
+      <>
+        {renderTabs()}
+        <div className={style.noContents}>
+          <NoContents
+            image='file'
+            contentText={error?.message}
+            hasButton={true}
+            buttonText='견적 요청하러 가기'
+            buttonHandler={direction_costCall}
+          />
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
-      <Tab
-        selectable={true}
-        firstText='대기 중인 견적'
-        secondText='받았던 견적'
-        selectedTab={currentTab}
-        onTabChange={handleTabChange}
-        tabChangeType='route'
-        firstTabRoute={direction_pendingCost}
-        secondTabRoute={direction_receivedCost}
-      />
-      {!isLoading && data ? (
+      {renderTabs()}
+      {!data.isConfirmed ? (
         <div className={style.overlay}>
           <div className={style.container}>
             <CostInfo
@@ -144,17 +170,13 @@ export default function PendingCost() {
         </div>
       ) : (
         <div className={style.noContents}>
-          {isLoading ? (
-            <LoadingSpinner />
-          ) : (
-            <NoContents
-              image='file'
-              contentText={error?.message}
-              hasButton={true}
-              buttonText='견적 요청하러 가기'
-              buttonHandler={direction_costCall}
-            />
-          )}
+          <NoContents
+            image='file'
+            contentText='확정된 견적입니다.'
+            hasButton={true}
+            buttonText='받았던 요청 보기'
+            buttonHandler={direction_receivedCost}
+          />
         </div>
       )}
     </>
