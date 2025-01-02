@@ -16,6 +16,7 @@ import { EstimateConsumer, EstimateMover } from '../../../types/apiTypes';
 import style from './index.module.css';
 
 import logoTextLarge from '../../../assets/images/img_logo_text_large.svg';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 // 타입 가드 함수
 function isEstimateMover(
@@ -48,7 +49,11 @@ export default function DriverCostDetailPage() {
   }
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return (
+      <div className={style.loadingSpinner}>
+        <LoadingSpinner thin={true} />
+      </div>
+    );
   }
 
   if (error) {

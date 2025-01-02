@@ -18,6 +18,7 @@ import style from './index.module.css';
 
 import icCheckLarge from '../../../assets/icons/ic_check_large.svg';
 import icCheckMedium from '../../../assets/icons/ic_check_medium.svg';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 interface User {
   estimateId: number;
@@ -46,15 +47,27 @@ export default function DriverCostHandlerPage() {
   const currentPage = pageState[currentTab].currentPage;
   const itemsPerPage = pageState[currentTab].itemsPerPage;
 
-  const { data: aData, isLoading: aLoading, refetch: refetchA } = useGetEstimateList({
+  const {
+    data: aData,
+    isLoading: aLoading,
+    refetch: refetchA,
+  } = useGetEstimateList({
     page: pageState.first.currentPage,
     pageSize: pageState.first.itemsPerPage,
   });
-  const { data: cData, isLoading: cLoading, refetch: refetchC } = useGetEstimateConfirmed({
+  const {
+    data: cData,
+    isLoading: cLoading,
+    refetch: refetchC,
+  } = useGetEstimateConfirmed({
     page: pageState.second.currentPage,
     pageSize: pageState.second.itemsPerPage,
   });
-  const { data: rData, isLoading: rLoading, refetch: refetchR } = useGetEstimateReject({
+  const {
+    data: rData,
+    isLoading: rLoading,
+    refetch: refetchR,
+  } = useGetEstimateReject({
     page: pageState.third.currentPage,
     pageSize: pageState.third.itemsPerPage,
   });
@@ -154,9 +167,12 @@ export default function DriverCostHandlerPage() {
   const isLoading = currentTabData.isLoading;
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return (
+      <div className={style.loadingSpinner}>
+        <LoadingSpinner thin={true} />
+      </div>
+    );
   }
-
 
   return (
     <div className={style.container}>
