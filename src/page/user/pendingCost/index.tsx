@@ -10,6 +10,8 @@ import {
   useGetUserEstimateReq,
 } from '../../../lib/useQueries/estimateReq';
 import { useUpdateEstimateConfirmed } from '../../../lib/useQueries/estimate';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import NoContents from '../../../components/noContents/NoContents';
 
 // interface infoProps {
 //   estimateReqId: number; // 견적 요청 ID
@@ -49,11 +51,12 @@ export default function PendingCost() {
     direction_costCall,
     direction_receivedCostDetail,
   } = useDirection();
-  const { data, isLoading } = useGetUserEstimateReq();
+  const { data, isLoading, error } = useGetUserEstimateReq();
   const { mutate } = useDeleteEstimateReq();
   const { mutate: confirmEstimate } = useUpdateEstimateConfirmed();
 
   console.log(data);
+  console.log(error);
 
   const handleTabChange = (selectedTab: 'first' | 'second') => {
     setCurrentTab(selectedTab);
@@ -140,7 +143,19 @@ export default function PendingCost() {
           )}
         </div>
       ) : (
-        <div>{isLoading ? '로딩 중...' : '데이터를 불러올 수 없습니다.'}</div>
+        <div className={style.noContents}>
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <NoContents
+              image='file'
+              contentText={error?.message}
+              hasButton={true}
+              buttonText='견적 요청하러 가기'
+              buttonHandler={direction_costCall}
+            />
+          )}
+        </div>
       )}
     </>
   );

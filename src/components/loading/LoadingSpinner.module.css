@@ -1,0 +1,51 @@
+.overlay {
+  display: flex;
+  gap: 10px;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.thin {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 8px solid var(--gray-200);
+  border-bottom-color: var(--blue-200);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: rotation 1s linear infinite;
+}
+
+.font {
+  color: var(--gray-200);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1199px) {
+  .spinner {
+    border: 7px solid var(--gray-200);
+    width: 42px;
+    height: 42px;
+  }
+
+  .font {
+    font-size: 16px;
+  }
+}

@@ -1,4 +1,4 @@
-import { ChipType } from "./cardTypes";
+import { ChipType } from './cardTypes';
 
 //assignedEstimateReq + estimate, estimateReq /useQueries-assignedEstimateReq,estimate
 export interface PaginationParams {
@@ -26,6 +26,11 @@ export interface Mover {
   favoriteCount: number;
   isAssigned: boolean; // 지정 견적 요청
   isFavorite: boolean; // 찜 여부
+  estimateId?: number; // 견적 ID 추가
+}
+
+export interface MoverList {
+  list: Mover[];
 }
 
 export interface MoverListResponse {
@@ -57,6 +62,7 @@ export interface EstimateUser extends EstimateParams {
   movingRequest: string;
   customerComment?: string;
   moverComment?: string;
+  customerName?: string;
 }
 
 export interface EstimateConsumer extends EstimateUser {
@@ -75,7 +81,6 @@ export interface EstimateConsumer extends EstimateUser {
 }
 
 export interface EstimateMover extends EstimateUser {
-  customerName: string;
   detailDeparture?: string;
   detailArrival?: string;
 }

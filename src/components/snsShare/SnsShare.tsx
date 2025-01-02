@@ -14,18 +14,28 @@ import style from './SnsShare.module.css';
 interface SnsShareProps {
   nickname: string;
   type?: string;
+  onClick?: () => void;
 }
 
-const SnsShare = ({ nickname, type }: SnsShareProps) => {
+const SnsShare = ({ nickname, type, onClick }: SnsShareProps) => {
   const { pc } = useMedia();
   const location = useLocation();
 
   const url = `http://localhost:3004${location.pathname}`;
 
+  const handleCopyClipBoard = async (url: string) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      if (onClick) onClick();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <div>
-        <div className={classNames(style.text, {[style.otherText] : type})}>
+        <div className={classNames(style.text, { [style.otherText]: type })}>
           {type ? '견적서 공유하기' : '나만 알기 아쉬운 기사님인가요?'}
         </div>
         <div className={style.imgs}>
@@ -33,6 +43,7 @@ const SnsShare = ({ nickname, type }: SnsShareProps) => {
             src={pc ? icShareLarge : icShareMedium}
             alt='링크 복사'
             className={style.img}
+            onClick={() => handleCopyClipBoard(url)}
           />
           <img
             src={pc ? icShareKakaoLarge : icShareKakaoMedium}

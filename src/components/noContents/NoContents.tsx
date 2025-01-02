@@ -7,6 +7,7 @@ interface noContentsProps {
   image: 'file' | 'car';
   hasButton?: boolean;
   emptyWritableReviews?: boolean;
+  contentText?: string;
   buttonText?: string;
   buttonHandler?: () => void;
 }
@@ -15,6 +16,7 @@ export default function NoContents({
   image,
   hasButton = false,
   emptyWritableReviews = false,
+  contentText = '아직 받은 요청이 없어요!',
   buttonText,
   buttonHandler,
 }: noContentsProps) {
@@ -30,9 +32,10 @@ export default function NoContents({
           진행 중인 견적 완료 후 새로운 견적을 받아 보세요.
         </>
       );
+    else if (hasButton && contentText) return `${contentText}`
     else if (hasButton) return '아직 등록된 리뷰가 없어요!';
     else if (emptyWritableReviews) return '작성 가능한 리뷰가 없어요!';
-    return '아직 받은 요청이 없어요!';
+    return `${contentText}`;
   };
 
   const selectedImage = () => {

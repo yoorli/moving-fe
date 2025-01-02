@@ -10,7 +10,7 @@ import { PaginationParams } from '../../types/apiTypes';
 /* 작성한 리뷰 리스트 조회 */
 export function useGetMyReviewList({ page, pageSize }: PaginationParams) {
   return useQuery({
-    queryKey: ['myReview'],
+    queryKey: ['myReview', page, pageSize],
     queryFn: () => getMyReviewList({ page, pageSize }),
   });
 }

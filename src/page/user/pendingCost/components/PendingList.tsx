@@ -4,6 +4,8 @@ import DriverCard from '../../../../components/card/DriverCard';
 import style from './PendingList.module.css';
 import { useGetPendingEstimate } from '../../../../lib/useQueries/estimate';
 import { ChipType } from '../../../../types/cardTypes';
+import LoadingSpinner from '../../../../components/loading/LoadingSpinner';
+import NoContents from '../../../../components/noContents/NoContents';
 
 interface PendingListProps {
   setIsConfirmModalOpen: (value: boolean) => void; // Modal 열기
@@ -49,29 +51,29 @@ export default function PendingList({
     setIsConfirmModalOpen(true);
   };
 
-  const detailbtn = (cardData: any) => {
+  const detailbtn = (estimateId: number) => {
     console.log('받았던 견적_견적 상세 페이지로 리다이렉트');
-    navigate(`/user/costDetail/${cardData.id}`, { state: cardData }); // 카드 데이터 전달
+    navigate(`/costDetail/${estimateId}`); // estimateId로 경로 설정
   };
 
   // 로딩 중일 때 처리
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <LoadingSpinner thin={true} />;
   }
 
   return (
     <div className={style.container}>
-      <div className={style.cardContainer}>
+      {data?.list.length !== 0 ? <div className={style.cardContainer}>
         {data?.list.map((cost: PendingListType) => (
           <DriverCard
             key={cost.estimateId}
             list={cost}
             type='waiting'
             confirmCostBtn={() => confirmCostBtn(cost.estimateId)}
-            detailBtn={() => detailbtn(cost)} // 카드 데이터 전달
+            detailBtn={() => detailbtn(cost.estimateId)}
           />
         ))}
-      </div>
+      </div> : <NoContents image='car' contentText='대기 중인 견적이 없어요!'/>}
     </div>
   );
 }

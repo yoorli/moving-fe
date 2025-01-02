@@ -79,7 +79,7 @@ export function useUpdateEstimateConfirmed() {
 /* 작성 가능한 리뷰(이사 완료 리스트) 조회 */
 export function useGetMovedEstimates({ page, pageSize }: PaginationParams) {
   return useQuery({
-    queryKey: ['completionEstimates'],
+    queryKey: ['completionEstimates', page, pageSize],
     queryFn: () => getMovedEstimates({ page, pageSize }),
   });
 }
