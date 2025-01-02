@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useMedia } from '../../../../lib/function/useMediaQuery';
 import DriverCard from '../../../../components/card/DriverCard';
-import { MoverList, Mover } from '../mockData';
+import { MoverList, Mover } from '../type';
 import style from './ReceivedList.module.css';
 import NoContents from '../../../../components/noContents/NoContents';
 import useDirection from '../../../../lib/function/direction';
