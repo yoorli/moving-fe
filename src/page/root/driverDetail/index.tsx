@@ -9,6 +9,7 @@ import Pagination from '../../../components/pagination/Pagination';
 import { useGetMoverDetail } from '../../../lib/useQueries/driver';
 import { useGetMoverReviewList } from '../../../lib/useQueries/review';
 import { useRequestAssignedEstimate } from '../../../lib/useQueries/assignedEstimateReq';
+import { useToggleFavoriteMover } from '../../../lib/useQueries/favorite';
 import { ChipProps } from '../../../components/chip/Chip';
 import {
   translateServiceRegion,
@@ -19,7 +20,6 @@ import HeartEmptyIcon from '../../../assets/icons/ic_empty_heart_small.svg';
 import ModalContainer from '../../../components/modal/ModalContainer';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 import { AuthContext } from '../../../context/authContext';
-import { toggleFavoriteMover } from '../../../lib/api/favorite';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -28,8 +28,9 @@ const DriverDetailPage = () => {
   const { userValue } = useContext(AuthContext);
   const isLoggedIn = !!userValue.user; // 로그인 여부 확인
 
-  const { data: driver, isLoading, error } = useGetMoverDetail(Number(id));
+  const { data: driver, isLoading, error, refetch } = useGetMoverDetail(Number(id)); // refetch 추가
   const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
+  const { mutate: toggleFavorite } = useToggleFavoriteMover();
 
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,6 +60,47 @@ const DriverDetailPage = () => {
     }
   }, [driver]);
 
+  const handleFavoriteToggle = () => {
+    if (!driver) {
+      console.error('기사님 데이터가 없습니다.');
+      return;
+    }
+
+    if (!isLoggedIn) {
+      setIsLoginModalOpen(true);
+      return;
+    }
+
+    toggleFavorite(driver.id, {
+      onSuccess: () => {
+        setIsFavorite((prev) => !prev);
+        refetch(); // 찜 상태 변경 후 데이터 새로고침
+      },
+    });
+  };
+
+  const handleAssignRequest = () => {
+    if (!driver) {
+      console.error('기사님 데이터가 없습니다.');
+      return;
+    }
+
+    if (!isLoggedIn) {
+      setIsLoginModalOpen(true);
+      return;
+    }
+
+    if (!isAssigned && driver.isConfirmed) {
+      requestAssignedEstimate(driver.id);
+    } else if (!driver.isConfirmed) {
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleModalButtonClick = () => {
+    navigate('/user/costCall');
+  };
+
   if (isLoading) {
     return (
       <div className={style.outerContainer}>
@@ -80,38 +122,6 @@ const DriverDetailPage = () => {
     ...driver,
     serviceType: driver.serviceType.map((type) => type as ChipProps['type']),
     profileImg: driver.profileImg || undefined,
-  };
-
-  const handleFavoriteToggle = async () => {
-    if (!isLoggedIn) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-    try {
-      const response = await toggleFavoriteMover(driver.id);
-      setIsFavorite(response.isFavorite);
-
-      // 찜 상태 변경 후
-      window.location.reload();
-    } catch (error) {
-      console.error('찜 상태 변경 중 오류 발생:', error);
-    }
-  };
-
-  const handleAssignRequest = () => {
-    if (!isLoggedIn) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-    if (!isAssigned && driver.isConfirmed) {
-      requestAssignedEstimate(driver.id);
-    } else if (!driver.isConfirmed) {
-      setIsModalOpen(true);
-    }
-  };
-
-  const handleModalButtonClick = () => {
-    navigate('/user/costCall');
   };
 
   return (

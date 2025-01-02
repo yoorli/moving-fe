@@ -17,6 +17,8 @@ export function useToggleFavoriteMover() {
     mutationFn: toggleFavoriteMover,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['favoriteMover'] });
+      queryClient.invalidateQueries({ queryKey: ['moverDetail'] });
     },
   });
 }
+

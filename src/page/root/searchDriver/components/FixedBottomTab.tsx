@@ -3,8 +3,7 @@ import style from "./FixedBottomTab.module.css";
 import Button from "../../../../components/btn/Button";
 import HeartIcon from "../../../../assets/icons/ic_full_heart_small.svg";
 import HeartEmptyIcon from "../../../../assets/icons/ic_empty_heart_small.svg";
-import axios from "../../../../lib/api/axios";
-import { useRequestAssignedEstimate } from "../../../../lib/useQueries/assignedEstimateReq";
+import { useToggleFavoriteMover } from "../../../../lib/useQueries/favorite";
 
 interface FixedBottomTabProps {
   isFavorite: boolean;
@@ -15,7 +14,7 @@ interface FixedBottomTabProps {
   setIsAssigned: React.Dispatch<React.SetStateAction<boolean>>;
   moverId: number;
   isLoggedIn: boolean;
-  setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>; // 로그인 모달 열기 위한 함수 전달
+  setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FixedBottomTab = ({
@@ -29,22 +28,19 @@ const FixedBottomTab = ({
   isLoggedIn,
   setLoginModalOpen,
 }: FixedBottomTabProps) => {
-  const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
+  const { mutate: toggleFavorite } = useToggleFavoriteMover();
 
-  const handleFavoriteToggle = async () => {
+  const handleFavoriteToggle = () => {
     if (!isLoggedIn) {
       setLoginModalOpen(true);
       return;
     }
 
-    try {
-      const response = await axios.post("/favorite", { moverId });
-      setIsFavorite(response.data.isFavorite);
-
-      window.location.reload();
-    } catch (error) {
-      console.error("찜하기 API 호출 중 오류 발생:", error);
-    }
+    toggleFavorite(moverId, {
+      onSuccess: () => {
+        setIsFavorite((prev) => !prev);
+      },
+    });
   };
 
   const handleAssignRequest = async () => {
@@ -54,12 +50,7 @@ const FixedBottomTab = ({
     }
 
     if (!isAssigned && isConfirmed) {
-      try {
-        await requestAssignedEstimate(moverId); // 지정 견적 요청 API 호출
-        setIsAssigned(true); // 요청 성공 시 견적 요청 상태 업데이트
-      } catch (error) {
-        console.error("지정 견적 요청 중 오류 발생:", error);
-      }
+      setIsAssigned(true);
     } else if (!isConfirmed) {
       setModalOpen(true);
     }
@@ -74,7 +65,7 @@ const FixedBottomTab = ({
           alt="찜하기 아이콘"
           srcLocationFront
           className={style.heartButton}
-          onClick={handleFavoriteToggle} // 찜 상태 토글 클릭 시 호출
+          onClick={handleFavoriteToggle}
         />
         <Button
           text={isAssigned ? "지정 견적 요청 완료" : "지정 견적 요청하기"}
@@ -89,3 +80,4 @@ const FixedBottomTab = ({
 };
 
 export default FixedBottomTab;
+
