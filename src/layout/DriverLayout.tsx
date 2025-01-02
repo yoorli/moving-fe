@@ -13,7 +13,6 @@ export default function DriverLayout() {
   } = useContext(AuthContext);
   useEffect(() => {
     if (!isPending && user) {
-      console.log(user);
       if (user.userType === 'CUSTOMER') {
         window.location.href = '/';
       }
