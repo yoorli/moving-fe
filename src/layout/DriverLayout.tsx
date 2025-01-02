@@ -2,11 +2,23 @@ import { Outlet } from 'react-router-dom';
 import style from './DriverLayout.module.css';
 import { DriverNav } from '../components/nav/Nav';
 import { DriverMenuModal } from '../components/nav/NavMenuModal';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { useMedia } from '../lib/function/useMediaQuery';
 import { HelmetProvider } from 'react-helmet-async';
+import { AuthContext } from '../context/authContext';
 
 export default function DriverLayout() {
+  const {
+    userValue: { user, isPending },
+  } = useContext(AuthContext);
+  useEffect(() => {
+    if (!isPending && user) {
+      if (user.userType === 'CUSTOMER') {
+        window.location.href = '/';
+      }
+    }
+  }, [user, isPending]);
+
   const menuRef = useRef<HTMLDivElement | null>(null);
   const profileRef = useRef<HTMLDivElement | null>(null);
   const notificationRef = useRef<HTMLDivElement | null>(null);
