@@ -55,9 +55,6 @@ export default function PendingCost() {
   const { mutate } = useDeleteEstimateReq();
   const { mutate: confirmEstimate } = useUpdateEstimateConfirmed();
 
-  console.log(data);
-  console.log(error);
-
   const handleTabChange = (selectedTab: 'first' | 'second') => {
     setCurrentTab(selectedTab);
   };

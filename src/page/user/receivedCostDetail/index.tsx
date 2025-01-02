@@ -53,7 +53,11 @@ export default function ReceivedCostDetail() {
               </>
             ) : (
               <div className={style.noContents}>
-                {isLoading && <LoadingSpinner />}
+                {isLoading && (
+                  <div className={style.loading}>
+                    <LoadingSpinner />
+                  </div>
+                )}
               </div>
             )}
           </div>

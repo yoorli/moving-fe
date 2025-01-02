@@ -1,8 +1,8 @@
-import React from "react";
-import style from "./CostDetailBottomTab.module.css";
-import Button from "../../../../components/btn/Button";
-import HeartEmptyIcon from "../../../../assets/icons/ic_empty_heart_small.svg";
-import HeartIcon from "../../../../assets/icons/ic_full_heart_small.svg";
+import React from 'react';
+import style from './CostDetailBottomTab.module.css';
+import Button from '../../../../components/btn/Button';
+import HeartEmptyIcon from '../../../../assets/icons/ic_empty_heart_small.svg';
+import HeartIcon from '../../../../assets/icons/ic_full_heart_small.svg';
 
 interface CostDetailBottomTabProps {
   isFavorite: boolean;
@@ -40,10 +40,10 @@ function CostDetailBottomTab({
           className={style.heartButton}
           onClick={handleFavoriteToggle}
         />
-        <div style={{ height: "16px" }}></div>
+        <div style={{ height: '16px' }}></div>
         <Button
-          btnStyle={isConfirmed ? "outlined314pxBlue300" : "solid314pxBlue300"}
-          text={isConfirmed ? "견적 확정 완료" : "견적 확정하기"}
+          btnStyle={isConfirmed ? 'outlined314pxBlue300' : 'solid314pxBlue300'}
+          text={isConfirmed ? '견적 확정 완료' : '견적 확정하기'}
           className={style.confirmButton}
           disabled={isConfirmed}
           onClick={handleConfirmClick}

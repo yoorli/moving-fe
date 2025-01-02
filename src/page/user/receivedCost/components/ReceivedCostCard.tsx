@@ -1,6 +1,6 @@
 import style from './ReceivedCostCard.module.css';
 import DriverCard from '../../../../components/card/DriverCard';
-import { DriverDataDetail, DriverData } from '../mock';
+import { DriverDataDetail, DriverData } from '../type';
 import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 export interface Props {

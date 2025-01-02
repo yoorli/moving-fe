@@ -89,9 +89,9 @@ export default function DriverCostDetailPage() {
   return (
     <>
       <Helmet>
-        <title>{`견적 상세`}</title>
-        <meta name='description' content={`견적서 공유하기`} />
-        <meta property='og:title' content={`견적서 공유하기`} />
+        <title>{'견적 상세'}</title>
+        <meta name='description' content={'견적서 공유하기'} />
+        <meta property='og:title' content={'견적서 공유하기'} />
         <meta
           property='og:description'
           content={`이 견적서는 ${user.customerName}님 요청입니다.`}

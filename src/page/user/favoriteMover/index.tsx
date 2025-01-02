@@ -22,9 +22,6 @@ interface Mover {
 export default function UserFavoriteMover() {
   const { data, isLoading } = useGetFavoriteMover();
 
-  console.log(data);
-  console.log(data?.data);
-
   return (
     <>
       <Tab firstText='찜한 기사님' />

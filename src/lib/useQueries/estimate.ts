@@ -65,13 +65,8 @@ export function useGetPendingEstimate() {
 /* 견적 확정(견적 요청 상태 변경) */
 export function useUpdateEstimateConfirmed() {
   const mutation = useMutation({
-    mutationFn: (estimateRequestId: number) => updateEstimateConfirmed(estimateRequestId),
-    onSuccess: (data) => {
-      console.log('견적 확정 성공', data);
-    },
-    onError: (error) => {
-      console.error('견적 확정 에러 발생', error);
-    },
+    mutationFn: (estimateRequestId: number) =>
+      updateEstimateConfirmed(estimateRequestId),
   });
   return mutation;
 }
