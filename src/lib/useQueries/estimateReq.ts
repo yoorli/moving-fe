@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useMutation, useQuery } from '@tanstack/react-query';
 import {
   createEstimateReq,
   deleteEstimateReq,
@@ -69,5 +69,6 @@ export function useGetMoverEstimateReq(queryParams: estimateQueryParams) {
   return useQuery({
     queryKey: ['estimateReq', queryParams],
     queryFn: () => getMoverEstimateReq(queryParams),
+    placeholderData: keepPreviousData,
   });
 }
