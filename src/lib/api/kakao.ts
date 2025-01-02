@@ -23,7 +23,7 @@ export async function fetchAddress(
   size: number,
 ) {
   try {
-    const res = await instance.get(`/address.json`, {
+    const res = await instance.get('/address.json', {
       params: {
         query: keyword,
         page: currentPage,

@@ -32,41 +32,41 @@ const SORT_OPTIONS = [
 
 const SearchDriverForGuest = () => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
-  const [selectedRegionLabel, setSelectedRegionLabel] = useState<string>('지역');
-  const [selectedServiceLabel, setSelectedServiceLabel] = useState<string>('서비스');
+  const [selectedRegionLabel, setSelectedRegionLabel] =
+    useState<string>('지역');
+  const [selectedServiceLabel, setSelectedServiceLabel] =
+    useState<string>('서비스');
   const [searchKeyword, setSearchKeyword] = useState<string>('');
-  const [sortOption, setSortOption] = useState<'reviewCount' | 'averageScore' | 'career' | 'confirmationCount'>('reviewCount');
-  const [isMediumScreen, setIsMediumScreen] = useState<boolean>(window.innerWidth <= 1199);
-  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth <= 744);
+  const [sortOption, setSortOption] = useState<
+    'reviewCount' | 'averageScore' | 'career' | 'confirmationCount'
+  >('reviewCount');
+  const [isMediumScreen, setIsMediumScreen] = useState<boolean>(
+    window.innerWidth <= 1199,
+  );
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(
+    window.innerWidth <= 744,
+  );
   const navigate = useNavigate();
 
   const queryParams = {
     sortBy: sortOption,
     keyword: searchKeyword || undefined, // 검색어가 없으면 제외
-    selectedServiceRegion: selectedRegionLabel !== '지역' ? translations[selectedRegionLabel] : undefined, // 선택 안 하면 제외
-    selectedServiceType: selectedServiceLabel !== '서비스' ? translations[selectedServiceLabel] : undefined, // 선택 안 하면 제외
+    selectedServiceRegion:
+      selectedRegionLabel !== '지역'
+        ? translations[selectedRegionLabel]
+        : undefined, // 선택 안 하면 제외
+    selectedServiceType:
+      selectedServiceLabel !== '서비스'
+        ? translations[selectedServiceLabel]
+        : undefined, // 선택 안 하면 제외
   };
 
   // 기사님 전체 리스트 API 연동
   const { data: moverList, isLoading } = useGetMoverList(queryParams);
 
-  useEffect(() => {
-    if (moverList) {
-      console.log('기사님 전체리스트:', moverList); // 기사님 전체 리스트 출력
-      console.log('기사님 리스트:', moverList.list || []); // 리스트만 출력
-    }
-  }, [moverList]); // moverList 변경 시 실행
-
   // 찜한 기사님 API 연동
-  const { data: favoriteMoverData, isLoading: isFavoriteLoading } = useGetFavoriteMover();
-
-  useEffect(() => {
-    if (favoriteMoverData) {
-      console.log('찜한 기사님 호출 엔드포인트: /favorite/me');
-      console.log('찜한 기사님 호출 API:', favoriteMoverData);
-      console.log('찜한 기사님 리스트:', favoriteMoverData.data?.list || []);
-    }
-  }, [favoriteMoverData]); // favoriteMoverData 변경 시 실행
+  const { data: favoriteMoverData, isLoading: isFavoriteLoading } =
+    useGetFavoriteMover();
 
   useEffect(() => {
     const handleResize = () => {
@@ -76,12 +76,6 @@ const SearchDriverForGuest = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  useEffect(() => {
-    console.log(
-      `https://moving-be-render.onrender.com/mover/list?sortBy=${queryParams.sortBy}&keyword=${queryParams.keyword || ''}&selectedServiceRegion=${queryParams.selectedServiceRegion || ''}&selectedServiceType=${queryParams.selectedServiceType || ''}`
-    );
-  }, [queryParams]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
@@ -96,7 +90,9 @@ const SearchDriverForGuest = () => {
   };
 
   const handleSortSelect = (value: string) => {
-    setSortOption(value as 'reviewCount' | 'averageScore' | 'career' | 'confirmationCount');
+    setSortOption(
+      value as 'reviewCount' | 'averageScore' | 'career' | 'confirmationCount',
+    );
   };
 
   const handleToggleFilter = (filterName: string) => {
@@ -127,7 +123,10 @@ const SearchDriverForGuest = () => {
         />
       </div>
       <SortDropdown
-        placeholder={SORT_OPTIONS.find((option) => option.value === sortOption)?.label || '리뷰 많은순'}
+        placeholder={
+          SORT_OPTIONS.find((option) => option.value === sortOption)?.label ||
+          '리뷰 많은순'
+        }
         options={SORT_OPTIONS}
         isOpen={openFilter === FILTER_TYPES.SORT}
         onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
@@ -156,7 +155,9 @@ const SearchDriverForGuest = () => {
             list={{
               ...user,
               profileImg: user.profileImg || undefined,
-              serviceType: user.serviceType.map((type: string) => type as ChipProps['type']),
+              serviceType: user.serviceType.map(
+                (type: string) => type as ChipProps['type'],
+              ),
             }}
             onClick={() => handleCardClick(user.id)}
           />
@@ -183,10 +184,12 @@ const SearchDriverForGuest = () => {
             list={{
               ...user,
               profileImg: user.profileImg || undefined,
-              serviceType: user.serviceType.map((type: string) => type as ChipProps['type']),
+              serviceType: user.serviceType.map(
+                (type: string) => type as ChipProps['type'],
+              ),
             }}
-            type="dibs"
-            styles="small"
+            type='dibs'
+            styles='small'
             onClick={() => handleCardClick(user.id)}
           />
         ))}
@@ -197,7 +200,7 @@ const SearchDriverForGuest = () => {
   return (
     <div className={style.outerContainer}>
       <div className={style.noPadding}>
-        <Tab firstText="기사님 찾기" />
+        <Tab firstText='기사님 찾기' />
       </div>
       <div
         className={`${style.container} ${isMediumScreen ? style.compactLayout : ''}`}
@@ -211,7 +214,7 @@ const SearchDriverForGuest = () => {
             <>
               <div className={style.leftFilters}>
                 <FilterDropdown
-                  title="지역을 선택해주세요"
+                  title='지역을 선택해주세요'
                   placeholder={selectedRegionLabel}
                   items={REGION_ITEMS}
                   onSelect={(label) => handleSelect(FILTER_TYPES.REGION, label)}
@@ -220,10 +223,12 @@ const SearchDriverForGuest = () => {
                   onToggle={() => handleToggleFilter(FILTER_TYPES.REGION)}
                 />
                 <FilterDropdown
-                  title="어떤 서비스가 필요하세요?"
+                  title='어떤 서비스가 필요하세요?'
                   placeholder={selectedServiceLabel}
                   items={SERVICE_ITEMS}
-                  onSelect={(label) => handleSelect(FILTER_TYPES.SERVICE, label)}
+                  onSelect={(label) =>
+                    handleSelect(FILTER_TYPES.SERVICE, label)
+                  }
                   isOpen={openFilter === FILTER_TYPES.SERVICE}
                   onToggle={() => handleToggleFilter(FILTER_TYPES.SERVICE)}
                 />
@@ -232,7 +237,10 @@ const SearchDriverForGuest = () => {
               </div>
               <div className={style.rightFilters}>
                 <SortDropdown
-                  placeholder={SORT_OPTIONS.find((option) => option.value === sortOption)?.label || '리뷰 많은순'}
+                  placeholder={
+                    SORT_OPTIONS.find((option) => option.value === sortOption)
+                      ?.label || '리뷰 많은순'
+                  }
                   options={SORT_OPTIONS}
                   isOpen={openFilter === FILTER_TYPES.SORT}
                   onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
@@ -240,7 +248,7 @@ const SearchDriverForGuest = () => {
                 />
                 {!isMediumScreen && (
                   <DriverSearch
-                    placeholder="검색어를 입력하세요"
+                    placeholder='검색어를 입력하세요'
                     onChange={handleSearchChange}
                   />
                 )}
@@ -252,7 +260,7 @@ const SearchDriverForGuest = () => {
         {isMediumScreen && (
           <div className={style.searchBarCompact}>
             <DriverSearch
-              placeholder="검색어를 입력하세요"
+              placeholder='검색어를 입력하세요'
               onChange={handleSearchChange}
             />
           </div>
@@ -264,4 +272,3 @@ const SearchDriverForGuest = () => {
 };
 
 export default SearchDriverForGuest;
-

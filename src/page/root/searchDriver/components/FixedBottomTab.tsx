@@ -1,10 +1,10 @@
-import React from "react";
-import style from "./FixedBottomTab.module.css";
-import Button from "../../../../components/btn/Button";
-import HeartIcon from "../../../../assets/icons/ic_full_heart_small.svg";
-import HeartEmptyIcon from "../../../../assets/icons/ic_empty_heart_small.svg";
-import axios from "../../../../lib/api/axios";
-import { useRequestAssignedEstimate } from "../../../../lib/useQueries/assignedEstimateReq";
+import React from 'react';
+import style from './FixedBottomTab.module.css';
+import Button from '../../../../components/btn/Button';
+import HeartIcon from '../../../../assets/icons/ic_full_heart_small.svg';
+import HeartEmptyIcon from '../../../../assets/icons/ic_empty_heart_small.svg';
+import axios from '../../../../lib/api/axios';
+import { useRequestAssignedEstimate } from '../../../../lib/useQueries/assignedEstimateReq';
 
 interface FixedBottomTabProps {
   isFavorite: boolean;
@@ -29,10 +29,10 @@ const FixedBottomTab = ({
 
   const handleFavoriteToggle = async () => {
     try {
-      const response = await axios.post("/favorite", { moverId });
+      const response = await axios.post('/favorite', { moverId });
       setIsFavorite(response.data.isFavorite);
     } catch (error) {
-      console.error("찜하기 API 호출 중 오류 발생:", error);
+      console.error('찜하기 API 호출 중 오류 발생:', error);
     }
   };
 
@@ -42,7 +42,7 @@ const FixedBottomTab = ({
         await requestAssignedEstimate(moverId); // 지정 견적 요청 API 호출
         setIsAssigned(true); // 요청 성공 시 견적 요청 상태 업데이트
       } catch (error) {
-        console.error("지정 견적 요청 중 오류 발생:", error);
+        console.error('지정 견적 요청 중 오류 발생:', error);
       }
     } else if (!isConfirmed) {
       setModalOpen(true);
@@ -61,7 +61,7 @@ const FixedBottomTab = ({
           onClick={handleFavoriteToggle}
         />
         <Button
-          text={isAssigned ? "지정 견적 요청 완료" : "지정 견적 요청하기"}
+          text={isAssigned ? '지정 견적 요청 완료' : '지정 견적 요청하기'}
           btnStyle="solid354pxBlue300"
           disabled={isAssigned}
           className={style.requestButton}

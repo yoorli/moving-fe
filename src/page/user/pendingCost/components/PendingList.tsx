@@ -43,16 +43,12 @@ export default function PendingList({
   const navigate = useNavigate();
   const { data, isLoading } = useGetPendingEstimate();
 
-  console.log(data);
-
   const confirmCostBtn = (estimateId: number) => {
-    console.log('견적 확정하기 모달 띄우기');
     setSelectedEstimateId(estimateId);
     setIsConfirmModalOpen(true);
   };
 
   const detailbtn = (estimateId: number) => {
-    console.log('받았던 견적_견적 상세 페이지로 리다이렉트');
     navigate(`/costDetail/${estimateId}`); // estimateId로 경로 설정
   };
 
@@ -63,17 +59,21 @@ export default function PendingList({
 
   return (
     <div className={style.container}>
-      {data?.list.length !== 0 ? <div className={style.cardContainer}>
-        {data?.list.map((cost: PendingListType) => (
-          <DriverCard
-            key={cost.estimateId}
-            list={cost}
-            type='waiting'
-            confirmCostBtn={() => confirmCostBtn(cost.estimateId)}
-            detailBtn={() => detailbtn(cost.estimateId)}
-          />
-        ))}
-      </div> : <NoContents image='car' contentText='대기 중인 견적이 없어요!'/>}
+      {data?.list.length !== 0 ? (
+        <div className={style.cardContainer}>
+          {data?.list.map((cost: PendingListType) => (
+            <DriverCard
+              key={cost.estimateId}
+              list={cost}
+              type='waiting'
+              confirmCostBtn={() => confirmCostBtn(cost.estimateId)}
+              detailBtn={() => detailbtn(cost.estimateId)}
+            />
+          ))}
+        </div>
+      ) : (
+        <NoContents image='car' contentText='대기 중인 견적이 없어요!' />
+      )}
     </div>
   );
 }
