@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { getMoverDetail, getMoverList, getMoverProfile } from '../api/driver';
 
 interface UseMoverListParams {
@@ -13,6 +13,7 @@ export function useGetMoverList(params: UseMoverListParams) {
   return useQuery({
     queryKey: ['moverList', params],
     queryFn: () => getMoverList(params),
+    placeholderData: keepPreviousData, // 이전 데이터를 유지하면서 새 데이터를 로딩
   });
 }
 

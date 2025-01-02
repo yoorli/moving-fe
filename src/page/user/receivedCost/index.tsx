@@ -5,12 +5,17 @@ import useDirection from '../../../lib/function/direction';
 import ReceivedCostCard from './components/ReceivedCostCard';
 import { useGetEstimateReqList } from '../../../lib/useQueries/estimateReq';
 import Pagination from '../../../components/pagination/Pagination';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import NoContents from '../../../components/noContents/NoContents';
 
 export default function ReceivedCost() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('second');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data } = useGetEstimateReqList({ page: currentPage, pageSize: 8 });
+  const { data, isLoading } = useGetEstimateReqList({
+    page: currentPage,
+    pageSize: 8,
+  });
 
   const handleTabChange = (selectedTab: 'first' | 'second') => {
     setCurrentTab(selectedTab);
@@ -20,11 +25,8 @@ export default function ReceivedCost() {
     direction_pendingCost,
     direction_receivedCost,
     direction_receivedCostDetail,
+    direction_costCall,
   } = useDirection();
-
-  if (!data || !data.total) {
-    return <div>No data available</div>;
-  }
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function ReceivedCost() {
         secondTabRoute={direction_receivedCost}
       />
       <div className={style.container}>
-        {data.total > 0 ? (
+        {!isLoading && data ? (
           <div>
             <ReceivedCostCard
               redirect={direction_receivedCostDetail}
@@ -55,7 +57,19 @@ export default function ReceivedCost() {
             </div>
           </div>
         ) : (
-          <div>받은 견적이 없습니다</div>
+          <div className={style.noContents}>
+            {isLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <NoContents
+                image='file'
+                contentText='견적 요청 내역이 없습니다.'
+                hasButton={true}
+                buttonText='견적 요청하러 가기'
+                buttonHandler={direction_costCall}
+              />
+            )}
+          </div>
         )}
       </div>
     </>

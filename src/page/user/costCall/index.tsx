@@ -4,6 +4,8 @@ import NoContents from '../../../components/noContents/NoContents';
 import style from './index.module.css';
 import CostCallContent from './components/CostCallContent';
 import useDirection from '../../../lib/function/direction';
+import { useGetCustomer } from '../../../lib/useQueries/customer';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 export interface SelectValues {
   movingType: boolean;
@@ -23,18 +25,33 @@ export default function UserCostCallPage() {
     arrival: false,
   });
 
+  const { data, isLoading } = useGetCustomer();
+
+  console.log(data);
+
   return (
     <>
-      <Navigation isSelectOption={isSelectOption} isSubmitted={isSubmitted} />
-      <div className={style.container}>
-        <div className={style.mainContent}>
-          {!isSubmitted ? (
-            <CostCallContent
-              isSelectOption={isSelectOption}
-              setIsSelectOption={setIsSelectOption}
-              setIsSubmitted={setIsSubmitted}
-              redirect={direction_pendingCost}
-            />
+      {!isLoading && data?.isConfirmed ? (
+        <>
+          <Navigation
+            isSelectOption={isSelectOption}
+            isSubmitted={isSubmitted}
+          />
+          <div className={style.container}>
+            <div className={style.mainContent}>
+              <CostCallContent
+                isSelectOption={isSelectOption}
+                setIsSelectOption={setIsSelectOption}
+                setIsSubmitted={setIsSubmitted}
+                redirect={direction_pendingCost}
+              />
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className={style.noContents}>
+          {isLoading ? (
+            <LoadingSpinner />
           ) : (
             <NoContents
               image='car'
@@ -44,7 +61,7 @@ export default function UserCostCallPage() {
             />
           )}
         </div>
-      </div>
+      )}
     </>
   );
 }

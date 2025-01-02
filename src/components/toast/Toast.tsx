@@ -32,11 +32,10 @@ function Toast({ text, autoDismiss, dismissDuration = 3000 }: ToastProps) {
 
   return (
     <div className={style.toastContainer}>
-      <img className={style.icon} src={icInfoLarge} alt="info" />
+      <img className={style.icon} src={icInfoLarge} alt='info' />
       <span className={style.toastText}>{text}</span>
     </div>
   );
 }
 
 export default Toast;
-

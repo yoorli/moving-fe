@@ -22,7 +22,9 @@
 
 .noContents {
   display: flex;
-  height: 760px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 @media (max-width: 1199px) and (min-width: 744px) {

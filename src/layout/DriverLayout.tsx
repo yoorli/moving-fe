@@ -4,6 +4,7 @@ import { DriverNav } from '../components/nav/Nav';
 import { DriverMenuModal } from '../components/nav/NavMenuModal';
 import React, { useState, useRef, useEffect } from 'react';
 import { useMedia } from '../lib/function/useMediaQuery';
+import { HelmetProvider } from 'react-helmet-async';
 
 export default function DriverLayout() {
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -44,24 +45,26 @@ export default function DriverLayout() {
 
   return (
     <>
-      <div className={style.container}>
-        <div className={style.wrapper}>
-          <DriverNav
-            menuRef={menuRef}
-            profileRef={profileRef}
-            notificationRef={notificationRef}
-            modalController={() => toggleModal('menu')}
-            profileController={() => toggleModal('profile')}
-            notificationController={() => toggleModal('notification')}
-            profileModal={activeModal === 'profile'}
-            notificationModal={activeModal === 'notification'}
-          />
-          <Outlet />
+      <HelmetProvider>
+        <div className={style.container}>
+          <div className={style.wrapper}>
+            <DriverNav
+              menuRef={menuRef}
+              profileRef={profileRef}
+              notificationRef={notificationRef}
+              modalController={() => toggleModal('menu')}
+              profileController={() => toggleModal('profile')}
+              notificationController={() => toggleModal('notification')}
+              profileModal={activeModal === 'profile'}
+              notificationModal={activeModal === 'notification'}
+            />
+            <Outlet />
+          </div>
         </div>
-      </div>
-      {!pc && activeModal === 'menu' && (
-        <DriverMenuModal modalController={() => toggleModal('menu')} />
-      )}
+        {!pc && activeModal === 'menu' && (
+          <DriverMenuModal modalController={() => toggleModal('menu')} />
+        )}
+      </HelmetProvider>
     </>
   );
 }
