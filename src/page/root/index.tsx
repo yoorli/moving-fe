@@ -7,10 +7,15 @@ import mobileLanding2 from '../../assets/images/img_landing_02_medium.svg';
 import mobileLanding3 from '../../assets/images/img_landing_03_medium.svg';
 import useDirection from '../../lib/function/direction';
 import { useMedia } from '../../lib/function/useMediaQuery';
+import { AuthContext } from '../../context/authContext';
+import { useContext } from 'react';
 
 export default function ServiceRandingPage() {
   const { direction_userLogin, direction_userSignup } = useDirection();
   const { pc, tablet, mobile } = useMedia();
+  const {
+    userValue: { user, isPending },
+  } = useContext(AuthContext);
 
   if (pc) {
     return (
@@ -27,14 +32,16 @@ export default function ServiceRandingPage() {
               <img src={pcLanding3} alt='' />
             </div>
           </div>
-          <div className={style.bottom}>
-            <div onClick={direction_userLogin} className={style.btn}>
-              로그인
+          {!isPending && !user ? (
+            <div className={style.bottom}>
+              <div onClick={direction_userLogin} className={style.btn}>
+                로그인
+              </div>
+              <div onClick={direction_userSignup} className={style.btnWhite}>
+                회원가입
+              </div>
             </div>
-            <div onClick={direction_userSignup} className={style.btnWhite}>
-              회원가입
-            </div>
-          </div>
+          ) : null}
         </div>
       </div>
     );
@@ -51,14 +58,16 @@ export default function ServiceRandingPage() {
             <img src={mobileLanding2} alt='' />
             <img src={mobileLanding3} alt='' />
           </div>
-          <div className={style.bottom}>
-            <div onClick={direction_userLogin} className={style.btn}>
-              로그인
+          {!isPending && !user ? (
+            <div className={style.bottom}>
+              <div onClick={direction_userLogin} className={style.btn}>
+                로그인
+              </div>
+              <div onClick={direction_userSignup} className={style.btnWhite}>
+                회원가입
+              </div>
             </div>
-            <div onClick={direction_userSignup} className={style.btnWhite}>
-              회원가입
-            </div>
-          </div>
+          ) : null}
         </div>
       </div>
     );
@@ -75,14 +84,16 @@ export default function ServiceRandingPage() {
             <img src={mobileLanding2} alt='' />
             <img src={mobileLanding3} alt='' />
           </div>
-          <div className={style.bottom}>
-            <div onClick={direction_userLogin} className={style.btn}>
-              로그인
+          {!isPending && !user ? (
+            <div className={style.bottom}>
+              <div onClick={direction_userLogin} className={style.btn}>
+                로그인
+              </div>
+              <div onClick={direction_userSignup} className={style.btnWhite}>
+                회원가입
+              </div>
             </div>
-            <div onClick={direction_userSignup} className={style.btnWhite}>
-              회원가입
-            </div>
-          </div>
+          ) : null}
         </div>
       </div>
     );
