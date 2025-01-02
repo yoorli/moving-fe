@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGetMoverList } from '../../../lib/useQueries/driver';
 import { useGetFavoriteMover } from '../../../lib/useQueries/favorite';
@@ -8,6 +8,8 @@ import FilterDropdownMedium from './components/FilterDropdownMedium';
 import SortDropdown from './components/SortDropdown';
 import DriverSearch from './components/DriverSearch';
 import DriverCard from '../../../components/card/DriverCard';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import { AuthContext } from '../../../context/authContext';
 import style from './index.module.css';
 import {
   translations,
@@ -30,7 +32,7 @@ const SORT_OPTIONS = [
   { label: '확정 많은순', value: 'confirmationCount' },
 ];
 
-const SearchDriverForGuest = () => {
+const SearchDriver = () => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
   const [selectedRegionLabel, setSelectedRegionLabel] =
     useState<string>('지역');
@@ -46,25 +48,25 @@ const SearchDriverForGuest = () => {
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(
     window.innerWidth <= 744,
   );
+  const { userValue } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const queryParams = {
     sortBy: sortOption,
-    keyword: searchKeyword || undefined, // 검색어가 없으면 제외
+    keyword: searchKeyword || undefined,
     selectedServiceRegion:
       selectedRegionLabel !== '지역'
         ? translations[selectedRegionLabel]
-        : undefined, // 선택 안 하면 제외
+        : undefined,
     selectedServiceType:
       selectedServiceLabel !== '서비스'
         ? translations[selectedServiceLabel]
-        : undefined, // 선택 안 하면 제외
+        : undefined,
   };
 
-  // 기사님 전체 리스트 API 연동
-  const { data: moverList, isLoading } = useGetMoverList(queryParams);
+  const { data: moverList, isLoading: isMoverLoading } =
+    useGetMoverList(queryParams);
 
-  // 찜한 기사님 API 연동
   const { data: favoriteMoverData, isLoading: isFavoriteLoading } =
     useGetFavoriteMover();
 
@@ -99,7 +101,12 @@ const SearchDriverForGuest = () => {
     setOpenFilter((prev) => (prev === filterName ? null : filterName));
   };
 
-  const handleCardClick = (id: number) => {
+  const handleDriverCardClick = (id: number) => {
+    navigate(`/driver/${id}`);
+  };
+
+  const handleMoverCardClick = (id: number | undefined) => {
+    if (id === undefined) return; // id가 undefined인 경우 클릭 무시
     navigate(`/driver/${id}`);
   };
 
@@ -136,44 +143,38 @@ const SearchDriverForGuest = () => {
     </>
   );
 
-  const renderDriverCards = () => (
-    <div
-      className={`${style.cardContainer} ${
-        isMediumScreen
-          ? isSmallScreen
-            ? style.smallScreen
-            : style.compact
-          : style.rightFilters
-      }`}
-    >
-      {isLoading ? (
-        <div>로딩 중...</div>
-      ) : (
-        moverList?.list.map((user: Mover) => (
-          <DriverCard
-            key={user.id}
-            list={{
-              ...user,
-              profileImg: user.profileImg || undefined,
-              serviceType: user.serviceType.map(
-                (type: string) => type as ChipProps['type'],
-              ),
-            }}
-            onClick={() => handleCardClick(user.id)}
-          />
-        ))
-      )}
-    </div>
-  );
-
   const renderFavoriteDrivers = () => {
-    if (isFavoriteLoading) {
-      return <div>로딩 중...</div>;
+    const favoriteMoverList: Mover[] = favoriteMoverData?.data?.list || [];
+
+    if (!userValue.user || Object.keys(userValue.user).length === 0) {
+      return (
+        <div
+          style={{
+            fontWeight: 600,
+            fontSize: '20px',
+            lineHeight: '32px',
+            marginTop: '20px',
+          }}
+        >
+          로그인 후 이용 가능한 서비스입니다
+        </div>
+      );
     }
 
-    const favoriteMoverList: Mover[] = favoriteMoverData?.data?.list || [];
     if (favoriteMoverList.length === 0) {
-      return <div>찜한 기사님이 없습니다.</div>;
+      return (
+        <div
+          style={{
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '28px',
+            marginTop: '20px',
+            textAlign: 'center',
+          }}
+        >
+          찜한 기사님이 없습니다.
+        </div>
+      );
     }
 
     return (
@@ -190,85 +191,117 @@ const SearchDriverForGuest = () => {
             }}
             type='dibs'
             styles='small'
-            onClick={() => handleCardClick(user.id)}
+            onClick={() => handleMoverCardClick(user.moverId)}
           />
         ))}
       </div>
     );
   };
 
+  const renderDriverCards = () => (
+    <div
+      className={`${style.cardContainer} ${
+        isMediumScreen
+          ? isSmallScreen
+            ? style.smallScreen
+            : style.compact
+          : style.rightFilters
+      }`}
+    >
+      {moverList?.list.map((user: Mover) => (
+        <DriverCard
+          key={user.id}
+          list={{
+            ...user,
+            profileImg: user.profileImg || undefined,
+            serviceType: user.serviceType.map(
+              (type: string) => type as ChipProps['type'],
+            ),
+          }}
+          onClick={() => handleDriverCardClick(user.id)}
+        />
+      ))}
+    </div>
+  );
+
   return (
     <div className={style.outerContainer}>
       <div className={style.noPadding}>
         <Tab firstText='기사님 찾기' />
       </div>
-      <div
-        className={`${style.container} ${isMediumScreen ? style.compactLayout : ''}`}
-      >
+      {isMoverLoading || isFavoriteLoading ? (
+        <LoadingSpinner />
+      ) : (
         <div
-          className={`${style.filterRow} ${isMediumScreen ? style.compactFilterRow : ''}`}
+          className={`${style.container} ${isMediumScreen ? style.compactLayout : ''}`}
         >
-          {isMediumScreen ? (
-            renderFilters()
-          ) : (
-            <>
-              <div className={style.leftFilters}>
-                <FilterDropdown
-                  title='지역을 선택해주세요'
-                  placeholder={selectedRegionLabel}
-                  items={REGION_ITEMS}
-                  onSelect={(label) => handleSelect(FILTER_TYPES.REGION, label)}
-                  isRegion
-                  isOpen={openFilter === FILTER_TYPES.REGION}
-                  onToggle={() => handleToggleFilter(FILTER_TYPES.REGION)}
-                />
-                <FilterDropdown
-                  title='어떤 서비스가 필요하세요?'
-                  placeholder={selectedServiceLabel}
-                  items={SERVICE_ITEMS}
-                  onSelect={(label) =>
-                    handleSelect(FILTER_TYPES.SERVICE, label)
-                  }
-                  isOpen={openFilter === FILTER_TYPES.SERVICE}
-                  onToggle={() => handleToggleFilter(FILTER_TYPES.SERVICE)}
-                />
-                <div className={style.favoriteDrivers}>찜한 기사님</div>
-                {renderFavoriteDrivers()}
-              </div>
-              <div className={style.rightFilters}>
-                <SortDropdown
-                  placeholder={
-                    SORT_OPTIONS.find((option) => option.value === sortOption)
-                      ?.label || '리뷰 많은순'
-                  }
-                  options={SORT_OPTIONS}
-                  isOpen={openFilter === FILTER_TYPES.SORT}
-                  onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
-                  onSelect={handleSortSelect}
-                />
-                {!isMediumScreen && (
-                  <DriverSearch
-                    placeholder='검색어를 입력하세요'
-                    onChange={handleSearchChange}
+          <div
+            className={`${style.filterRow} ${isMediumScreen ? style.compactFilterRow : ''}`}
+          >
+            {isMediumScreen ? (
+              renderFilters()
+            ) : (
+              <>
+                <div className={style.leftFilters}>
+                  <FilterDropdown
+                    title='지역을 선택해주세요'
+                    placeholder={selectedRegionLabel}
+                    items={REGION_ITEMS}
+                    onSelect={(label) =>
+                      handleSelect(FILTER_TYPES.REGION, label)
+                    }
+                    isRegion
+                    isOpen={openFilter === FILTER_TYPES.REGION}
+                    onToggle={() => handleToggleFilter(FILTER_TYPES.REGION)}
                   />
-                )}
-                {!isMediumScreen && renderDriverCards()}
-              </div>
-            </>
-          )}
-        </div>
-        {isMediumScreen && (
-          <div className={style.searchBarCompact}>
-            <DriverSearch
-              placeholder='검색어를 입력하세요'
-              onChange={handleSearchChange}
-            />
+                  <FilterDropdown
+                    title='어떤 서비스가 필요하세요?'
+                    placeholder={selectedServiceLabel}
+                    items={SERVICE_ITEMS}
+                    onSelect={(label) =>
+                      handleSelect(FILTER_TYPES.SERVICE, label)
+                    }
+                    isOpen={openFilter === FILTER_TYPES.SERVICE}
+                    onToggle={() => handleToggleFilter(FILTER_TYPES.SERVICE)}
+                  />
+                  <div className={style.favoriteDrivers}>찜한 기사님</div>
+                  {renderFavoriteDrivers()}
+                </div>
+                <div className={style.rightFilters}>
+                  <SortDropdown
+                    placeholder={
+                      SORT_OPTIONS.find((option) => option.value === sortOption)
+                        ?.label || '리뷰 많은순'
+                    }
+                    options={SORT_OPTIONS}
+                    isOpen={openFilter === FILTER_TYPES.SORT}
+                    onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
+                    onSelect={handleSortSelect}
+                  />
+                  {!isMediumScreen && (
+                    <DriverSearch
+                      placeholder='검색어를 입력하세요'
+                      onChange={handleSearchChange}
+                    />
+                  )}
+                  {!isMediumScreen && renderDriverCards()}
+                </div>
+              </>
+            )}
           </div>
-        )}
-        {isMediumScreen && renderDriverCards()}
-      </div>
+          {isMediumScreen && (
+            <div className={style.searchBarCompact}>
+              <DriverSearch
+                placeholder='검색어를 입력하세요'
+                onChange={handleSearchChange}
+              />
+            </div>
+          )}
+          {isMediumScreen && renderDriverCards()}
+        </div>
+      )}
     </div>
   );
 };
 
-export default SearchDriverForGuest;
+export default SearchDriver;

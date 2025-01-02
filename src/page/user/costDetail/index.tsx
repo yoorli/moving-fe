@@ -14,6 +14,7 @@ import {
   useUpdateEstimateConfirmed,
 } from '../../../lib/useQueries/estimate';
 import { EstimateConsumer } from '../../../types/apiTypes';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 const CostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -41,8 +42,11 @@ const CostDetail = () => {
 
   if (!estimate) {
     return (
-      <div className={style.container}>
-        <p>해당 견적 데이터를 찾을 수 없습니다.</p>
+      <div className={style.outerContainer}>
+        <div className={style.noPadding}>
+          <Tab firstText='견적 상세' />
+        </div>
+        <LoadingSpinner />
       </div>
     );
   }
