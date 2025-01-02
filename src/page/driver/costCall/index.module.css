@@ -71,6 +71,12 @@
   flex-direction: column;
 }
 
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  height: 50vh;
+}
+
 .noContent {
   display: flex;
   flex-direction: column;

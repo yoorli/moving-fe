@@ -14,6 +14,7 @@ import { useGetMoverEstimateReq } from '../../../lib/useQueries/estimateReq';
 import style from './index.module.css';
 
 import filter from '../../../assets/icons/ic_filter_medium.svg';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 export default function DriverCostCallPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -182,7 +183,9 @@ export default function DriverCostCallPage() {
             </div>
           </div>
           {isLoading ? (
-            <div>로딩 중...</div>
+            <div className={style.loadingSpinner}>
+              <LoadingSpinner thin={true} />
+            </div>
           ) : isNoContents || list.length === 0 ? ( // NoContents 상태 확인
             <div className={style.noContent}>
               <NoContents image='file' />

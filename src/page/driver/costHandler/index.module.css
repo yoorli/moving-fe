@@ -100,6 +100,11 @@
   height: 560px;
 }
 
+.loadingSpinner {
+  display: flex;
+  height: 90vh;
+}
+
 @media (max-width: 743px) {
   .mainContainer {
     margin-top: 24px;
