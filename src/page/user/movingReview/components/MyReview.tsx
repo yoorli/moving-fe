@@ -2,7 +2,6 @@ import { useState } from 'react';
 import UserCard from '../../../../components/card/UserCard';
 import Pagination from '../../../../components/pagination/Pagination';
 import style from './MyReview.module.css';
-import { reviewMockData } from './reviewMockData';
 import { useMedia } from '../../../../lib/function/useMediaQuery';
 import { useGetMyReviewList } from '../../../../lib/useQueries/review';
 import { ChipType } from '../../../../types/cardTypes';
@@ -35,6 +34,8 @@ export default function MyReview() {
     pageSize: itemsPerPage,
   });
 
+  console.log(isLoading);
+
   // 로딩 중일 때 처리
   if (isLoading) {
     return <LoadingSpinner />;
@@ -57,7 +58,7 @@ export default function MyReview() {
       </div>
       <Pagination
         currentPage={currentPage}
-        data={reviewMockData.total}
+        data={data.total}
         itemsPerPage={itemsPerPage}
         onPageChange={setCurrentPage}
       />
