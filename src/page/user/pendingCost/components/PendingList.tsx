@@ -72,7 +72,9 @@ export default function PendingList({
           ))}
         </div>
       ) : (
-        <NoContents image='car' contentText='대기 중인 견적이 없어요!' />
+        <div className={style.noContents}>
+          <NoContents image='car' contentText='대기 중인 견적이 없어요!' />
+        </div>
       )}
     </div>
   );
