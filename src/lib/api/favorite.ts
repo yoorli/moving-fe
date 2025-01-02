@@ -15,5 +15,5 @@ export async function getFavoriteMover() {
  */
 export async function toggleFavoriteMover(moverId: number): Promise<{ isFavorite: boolean }> {
   const res = await axios.post(PATH, { moverId });
-  return res.data; // { isFavorite: true/false }
+  return res.data;
 }

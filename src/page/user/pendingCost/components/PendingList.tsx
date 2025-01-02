@@ -53,7 +53,7 @@ export default function PendingList({
 
   const detailbtn = (estimateId: number) => {
     console.log('받았던 견적_견적 상세 페이지로 리다이렉트');
-    navigate(`/costDetail/${estimateId}`); // estimateId로 경로 설정
+    navigate(`/user/costDetail/${estimateId}`); // estimateId로 경로 설정
   };
 
   // 로딩 중일 때 처리

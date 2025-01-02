@@ -3,8 +3,7 @@ import style from "./FixedBottomTab.module.css";
 import Button from "../../../../components/btn/Button";
 import HeartIcon from "../../../../assets/icons/ic_full_heart_small.svg";
 import HeartEmptyIcon from "../../../../assets/icons/ic_empty_heart_small.svg";
-import axios from "../../../../lib/api/axios";
-import { useRequestAssignedEstimate } from "../../../../lib/useQueries/assignedEstimateReq";
+import { useToggleFavoriteMover } from "../../../../lib/useQueries/favorite";
 
 interface FixedBottomTabProps {
   isFavorite: boolean;
@@ -14,6 +13,8 @@ interface FixedBottomTabProps {
   setIsFavorite: React.Dispatch<React.SetStateAction<boolean>>;
   setIsAssigned: React.Dispatch<React.SetStateAction<boolean>>;
   moverId: number;
+  isLoggedIn: boolean;
+  setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FixedBottomTab = ({
@@ -24,26 +25,32 @@ const FixedBottomTab = ({
   isConfirmed,
   setModalOpen,
   moverId,
+  isLoggedIn,
+  setLoginModalOpen,
 }: FixedBottomTabProps) => {
-  const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
+  const { mutate: toggleFavorite } = useToggleFavoriteMover();
 
-  const handleFavoriteToggle = async () => {
-    try {
-      const response = await axios.post("/favorite", { moverId });
-      setIsFavorite(response.data.isFavorite);
-    } catch (error) {
-      console.error("찜하기 API 호출 중 오류 발생:", error);
+  const handleFavoriteToggle = () => {
+    if (!isLoggedIn) {
+      setLoginModalOpen(true);
+      return;
     }
+
+    toggleFavorite(moverId, {
+      onSuccess: () => {
+        setIsFavorite((prev) => !prev);
+      },
+    });
   };
 
   const handleAssignRequest = async () => {
+    if (!isLoggedIn) {
+      setLoginModalOpen(true);
+      return;
+    }
+
     if (!isAssigned && isConfirmed) {
-      try {
-        await requestAssignedEstimate(moverId); // 지정 견적 요청 API 호출
-        setIsAssigned(true); // 요청 성공 시 견적 요청 상태 업데이트
-      } catch (error) {
-        console.error("지정 견적 요청 중 오류 발생:", error);
-      }
+      setIsAssigned(true);
     } else if (!isConfirmed) {
       setModalOpen(true);
     }
@@ -73,3 +80,4 @@ const FixedBottomTab = ({
 };
 
 export default FixedBottomTab;
+
