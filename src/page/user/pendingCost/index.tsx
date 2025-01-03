@@ -26,7 +26,7 @@ export default function PendingCost() {
     direction_costCall,
     direction_receivedCostDetail,
   } = useDirection();
-  const { data, isLoading, error } = useGetUserEstimateReq();
+  const { data, isLoading, isFetching } = useGetUserEstimateReq();
   const { mutate } = useDeleteEstimateReq();
   const { mutate: confirmEstimate } = useUpdateEstimateConfirmed();
 
@@ -74,21 +74,21 @@ export default function PendingCost() {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <>
         {renderTabs()}
         <LoadingSpinner />;
       </>
     );
-  } else if (!data?.estimateReqId) {
+  } else if (!data || !data?.estimateReqId) {
     return (
       <>
         {renderTabs()}
         <div className={style.noContents}>
           <NoContents
             image='file'
-            contentText={error?.message}
+            contentText={data?.message}
             hasButton={true}
             buttonText='견적 요청하러 가기'
             buttonHandler={direction_costCall}
