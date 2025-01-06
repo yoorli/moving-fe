@@ -10,44 +10,6 @@ import { useState } from 'react';
 import Pagination from '../../../components/pagination/Pagination';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
-// export type ServiceRegionType =
-//   | 'SEOUL'
-//   | 'GYEONGGI'
-//   | 'INCHEON'
-//   | 'GANGWON'
-//   | 'CHUNGBUK'
-//   | 'CHUNGNAM'
-//   | 'SEJONG'
-//   | 'DAEJEON'
-//   | 'JEONBUK'
-//   | 'JEONNAM'
-//   | 'GWANGJU'
-//   | 'GYEONGBUK'
-//   | 'GYEONGNAM'
-//   | 'DAEGU'
-//   | 'ULSAN'
-//   | 'BUSAN'
-//   | 'JEJU';
-
-// interface DriverProfile {
-//   id: number;
-//   userId: number;
-//   profileImg: string;
-//   moverName: string;
-//   career: number;
-//   summary: string;
-//   description: string;
-//   confirmationCount: number;
-//   serviceType: ChipType[];
-//   serviceRegion: ServiceRegionType[];
-//   reviewStats: {
-//     averageScore: number;
-//     totalReviews: number;
-//   };
-//   favoriteCount: number;
-//   isAssigned?: boolean;
-// }
-
 export default function MyPage() {
   const { direction_driverEditProfile, direction_driverEditInfo } =
     useDirection();
