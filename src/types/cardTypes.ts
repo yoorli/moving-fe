@@ -34,6 +34,7 @@ export interface BaseProps {
     price?: number; // 견적가
     createAt?: string; // 작성일
     profileImg?: string; // 기사 프로필 이미지 *
+    moverId?: number; // 기사 아이디
     reviewStats?: {
       averageScore?: number; // 평점
       totalReviews?: number; // 리뷰 갯수
@@ -53,7 +54,6 @@ export interface DriverProfileProps extends BaseProps {
   reviewBtn?: () => void; //리뷰 작성하기 버튼
   costListBtn?: () => void; //견적 목록보기 버튼
   list: BaseProps['list'] & {
-    moverId?: number; // 기사 아이디
     estimateId?: number; // 견적 id
     estimateReqId?: number;
     career?: number; // 경력

@@ -81,6 +81,10 @@
   min-height: 32px;
 }
 
+.chipBoxSmall {
+  min-height: 24px;
+}
+
 .chip {
   display: flex;
   gap: 12px;

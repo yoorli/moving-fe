@@ -49,7 +49,8 @@ export default function DriverCard({
         [style.cardCDType]: type === 'cost' || type === 'dibs',
         [style.cardPRType]: type === 'review',
         [style.cardWType]: type === 'waiting',
-        [style.cardCType]: type === 'confirm' || type === 'notConfirm' || type === 'cancel',
+        [style.cardCType]:
+          type === 'confirm' || type === 'notConfirm' || type === 'cancel',
         [style.cardPSmall]: styles === 'small',
       })}
       onClick={onClick} // 최상단 div에 onClick 이벤트 추가
@@ -86,11 +87,13 @@ export default function DriverCard({
         </div>
       ) : (
         // 칩
-        <div className={style.chipBox}>
+        <div
+          className={classNames(style.chipBox, {
+            [style.chipBoxSmall]: styles === 'small',
+          })}
+        >
           {chips
-            .map(
-              (row) => row.sort((a, b) => (a < b ? -1 : 1))
-            )
+            .map((row) => row.sort((a, b) => (a < b ? -1 : 1)))
             .map((row, rowIndex) => (
               <div key={rowIndex} className={style.chip}>
                 {row.map((chip, chipIndex) => (
