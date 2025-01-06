@@ -6,6 +6,7 @@ import { useContext, useState, useRef, useEffect } from 'react';
 import {
   UserMenuModal,
   NonLoginMenuModal,
+  DriverMenuModal,
 } from '../components/nav/NavMenuModal';
 import { DriverNav, NonLoginNav, UserNav } from '../components/nav/Nav';
 import { useMedia } from '../lib/function/useMediaQuery';
@@ -91,7 +92,10 @@ export default function RendingLayout() {
       </div>
 
       {!pc && activeModal === 'menu' && user ? (
-        <UserMenuModal modalController={() => toggleModal('menu')} />
+        user.userType === 'CUSTOMER' ?
+        ( <UserMenuModal modalController={() => toggleModal('menu')} />)
+        :(<DriverMenuModal modalController={() => toggleModal('menu')} />)
+
       ) : !pc && activeModal === 'menu' && !user ? (
         <NonLoginMenuModal modalController={() => toggleModal('menu')} />
       ) : null}
