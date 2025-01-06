@@ -31,7 +31,7 @@ export default function WritableReviews({
 }: WritableReviewsProps) {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { pc, tablet, mobile } = useMedia();
+  const { pc, tablet, mobile, mobileWithChipMaxFour } = useMedia();
 
   const itemsPerPage = pc ? 6 : tablet ? 4 : mobile ? 4 : 6; // 페이지당 아이템 수
 
@@ -60,6 +60,7 @@ export default function WritableReviews({
                 key={moverId}
                 list={mover}
                 type='review'
+                count={mobileWithChipMaxFour ? 3 : 6}
                 disabled={mover.isReviewWritten}
                 reviewBtn={() => handleModalOpen(mover)}
               />
