@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DriverCard from '../../../components/card/DriverCard';
 import CostDetailBottomTab from '../costDetail/components/CostDetailBottomTab';
 import CostInfo from '../../../components/costInfo/CostInfo';
@@ -26,6 +26,8 @@ const CostDetail = () => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
+
+    const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
@@ -78,6 +80,11 @@ const CostDetail = () => {
     }
   };
 
+  const handleMoverCardClick = (id: number | undefined) => {
+    if (id === undefined) return; // id가 undefined인 경우 클릭 무시
+    navigate(`/driver/${id}`);
+  };
+
   return (
     <div className={style.outerContainer}>
       <div className={style.noPadding}>
@@ -86,7 +93,10 @@ const CostDetail = () => {
 
       <div className={style.container}>
         <div className={style.leftFilters}>
-          <DriverCard list={estimate} type='cost' showPrice={false} />
+          <DriverCard
+            list={estimate}
+            onClick={() => handleMoverCardClick(estimate.moverId)}
+          />
           <div className={style.section}>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>견적가</h2>

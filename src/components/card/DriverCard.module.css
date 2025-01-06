@@ -7,10 +7,12 @@
   display: flex;
   flex-direction: column;
   background-color: var(--gray-50);
+  cursor: pointer;
 }
 
 .cardPType {
   background-color: var(--background-200);
+  cursor: default;
 }
 
 .cardCDType {
@@ -19,6 +21,15 @@
 
 .cardPRType {
   gap: 32px;
+  cursor: default;
+}
+
+.cardWType {
+  cursor: default;
+}
+
+.cardCType {
+  cursor: default;
 }
 
 .cardPSmall {
@@ -69,6 +80,10 @@
   flex-direction: column;
   gap: 12px;
   min-height: 32px;
+}
+
+.chipBoxSmall {
+  min-height: 24px;
 }
 
 .chip {

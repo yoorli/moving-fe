@@ -6,7 +6,6 @@
   padding: 16px 18px;
   border: 1px solid var(--line-100);
   border-radius: 6px;
-  cursor: pointer;
 }
 
 .profilePType {
@@ -16,6 +15,7 @@
 
 .profileRType {
   border: none;
+  cursor: pointer;
 }
 
 .region {
@@ -25,6 +25,7 @@
 
 .profileWType {
   height: 92px;
+  cursor: pointer;
 }
 
 .profileSmall {

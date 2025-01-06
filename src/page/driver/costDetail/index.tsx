@@ -7,6 +7,7 @@ import SnsShare from '../../../components/snsShare/SnsShare';
 import CostInfo from '../../../components/costInfo/CostInfo';
 import NoContents from '../../../components/noContents/NoContents';
 import Toast from '../../../components/toast/Toast';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 import { useMedia } from '../../../lib/function/useMediaQuery';
 import { formatCurrency } from '../../../lib/function/utils';
@@ -16,7 +17,6 @@ import { EstimateConsumer, EstimateMover } from '../../../types/apiTypes';
 import style from './index.module.css';
 
 import logoTextLarge from '../../../assets/images/img_logo_text_large.svg';
-import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 // 타입 가드 함수
 function isEstimateMover(
