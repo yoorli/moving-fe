@@ -7,7 +7,7 @@ const INITCONTEXT: any = {}; // 말 그대로 초기값. 새로 시작하거나 
 export const AuthContext = createContext<any>(INITCONTEXT);
 
 export function AuthProvider() {
-  const [userValue, setUserValue] = useState({
+  const [userValue, setUserValue] = useState<{isPending: boolean, user: any}>({
     isPending: false,
     user: {},
   });
@@ -24,7 +24,10 @@ export function AuthProvider() {
         user: response.data,
       }));
     } catch (e) {
-      console.log(e);
+      setUserValue((prev) => ({
+        ...prev,
+        user: undefined
+      }));
     } finally {
       setUserValue((prev) => ({
         ...prev,
