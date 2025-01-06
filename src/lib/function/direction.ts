@@ -47,6 +47,9 @@ export default function useDirection() {
   const direction_receivedCostDetail = (id: number) => {
     nav(`/user/receivedCost/${id}`);
   };
+  const direction_userCostDetail = (id: number) => {
+    nav(`/user/costDetail/${id}`);
+  };
 
   const direction_favoriteMover = () => {
     nav('/user/favoriteMover');
@@ -84,6 +87,7 @@ export default function useDirection() {
     direction_userEditInfo,
     direction_driverCostCall,
     direction_receivedCostDetail,
+    direction_userCostDetail,
     direction_favoriteMover,
     direction_movingReview,
     direction_costHandler,
