@@ -33,6 +33,10 @@
   font-weight: 600;
 }
 
+.modalTitleCancel {
+  cursor: pointer;
+}
+
 .searchContainer {
   margin-top: 40px;
   position: relative;
