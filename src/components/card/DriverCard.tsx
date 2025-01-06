@@ -6,7 +6,7 @@ import Button from '../btn/Button';
 import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
-import { formatCurrency, getChips } from '../../lib/function/utils';
+import { checkImg, formatCurrency, getChips } from '../../lib/function/utils';
 import { ChipType, DriverProfileProps } from '../../types/cardTypes';
 
 import style from './DriverCard.module.css';
@@ -60,7 +60,7 @@ export default function DriverCard({
           {!isPc && (
             <div className={style.profileImage}>
               <img
-                src={list.profileImg}
+                src={checkImg(list.profileImg)}
                 alt={`${list.moverName}'s profile`}
                 className={style.avatar}
               />

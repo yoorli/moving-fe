@@ -2,6 +2,7 @@ import classNames from 'classnames';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
 import {
+  checkImg,
   formatCurrency,
   translateServiceRegion,
   translateServiceType,
@@ -55,11 +56,13 @@ export default function DriverProfile({
         })}
       >
         <img
-          src={user.profileImg}
+          src={checkImg(user.profileImg)}
           alt={`${user.moverName}'s profile`}
           className={classNames(style.avatar, {
             [style.avatarLarge]:
-              (type === 'profile' || type === 'dibs' || type === 'review') &&
+              (type === 'profile' ||
+                (type === 'dibs' && styles !== 'small') ||
+                type === 'review') &&
               isPc,
           })}
         />

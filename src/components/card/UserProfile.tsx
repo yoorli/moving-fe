@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { formatCurrency } from '../../lib/function/utils';
+import { checkImg, formatCurrency } from '../../lib/function/utils';
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { UserProfileProps } from '../../types/cardTypes';
 import useDirection from '../../lib/function/direction';
@@ -102,7 +102,7 @@ export default function UserProfile({ type, list: user }: UserProfileProps) {
         <div className={style.reviewProfile} onClick={() => direction_driverDetail(Number(user.moverId))}>
           <div className={style.profileImage}>
             <img
-              src={user.profileImg}
+              src={checkImg(user.profileImg)}
               alt={`${user.moverName}'s profile`}
               className={style.avatar}
             />

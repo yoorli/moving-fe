@@ -1,4 +1,23 @@
 import { ChipType } from '../../types/cardTypes';
+import avatarBlue from '../../assets/images/img_avatar_blue_medium.svg';
+import avatarGreen from '../../assets/images/img_avatar_green_medium.svg';
+import avatarPink from '../../assets/images/img_avatar_pink_medium.svg';
+import avatarPurple from '../../assets/images/img_avatar_purple_medium.svg';
+import avatarYellow from '../../assets/images/img_avatar_yellow_medium.svg';
+
+export const checkImg = (img: any) => {
+  const defaultImg: Record<number, string> = {
+    1: avatarBlue,
+    2: avatarGreen,
+    3: avatarPink,
+    4: avatarPurple,
+    5: avatarYellow,
+  };
+  const randomImgKey = Math.floor(Math.random() * 5) + 1;
+
+  if (img) return img;
+  else return defaultImg[randomImgKey];
+};
 
 // 시간 변환
 // type => yyyy. mm. dd / ss초 전 표시 x

@@ -12,6 +12,7 @@
 
 .cardPType {
   background-color: var(--background-200);
+  cursor: default;
 }
 
 .cardCDType {
