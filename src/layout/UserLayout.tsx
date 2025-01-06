@@ -1,13 +1,25 @@
 import { Outlet } from 'react-router-dom';
 import style from './UserLayout.module.css';
 import '../style/globals.css';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 
 import { UserMenuModal } from '../components/nav/NavMenuModal';
 import { UserNav } from '../components/nav/Nav';
 import { useMedia } from '../lib/function/useMediaQuery';
+import { AuthContext } from '../context/authContext';
 
 export default function UserLayout() {
+  const {
+    userValue: { user, isPending },
+  } = useContext(AuthContext);
+  useEffect(() => {
+    if (!isPending && user) {
+      if (user.userType === 'MOVER') {
+        window.location.href = '/';
+      }
+    }
+  }, [user, isPending]);
+
   const menuRef = useRef<HTMLDivElement | null>(null);
   const profileRef = useRef<HTMLDivElement | null>(null);
   const notificationRef = useRef<HTMLDivElement | null>(null);

@@ -20,7 +20,7 @@
   padding: 16px 0;
 
   font-weight: 600;
-  font-size: 20px;
+  font-size: 24px;
 
   color: var(--gray-400);
 
@@ -51,7 +51,6 @@
 @media (max-width: 1199px) and (min-width: 744px) {
   .container {
     max-width: 1199px;
-    /* padding 수정 확정되면 이 부분 수정 */
     padding: 0 72px;
   }
 
@@ -62,7 +61,7 @@
   }
 
   .selectedContent {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .active {
@@ -93,7 +92,7 @@
   }
 
   .selectedContent {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .active {

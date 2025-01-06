@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  min-height: 50vh;
 }
 
 .cardContainer {
@@ -8,10 +9,22 @@
   gap: 48px 24px;
 }
 
+.noContents {
+  min-height: 50vh;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 1199px) and (min-width: 744px) {
   .cardContainer {
     grid-template-columns: repeat(1, 1fr);
     gap: 32px;
+  }
+
+  .noContents {
+    height: 60vh;
   }
 }
 
