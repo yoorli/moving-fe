@@ -23,11 +23,11 @@ export function useMedia() {
   });
 
   const mobileWithChipSearDriverSecond = useMediaQuery({
-    query: '(min-width: 422px) and (max-width: 560px)',
+    query: '(min-width: 476px) and (max-width: 560px)',
   });
 
   const mobileWithChipSearDriveLast = useMediaQuery({
-    query: ' (max-width: 423px)',
+    query: ' (max-width: 475px)',
   });
 
   return {
