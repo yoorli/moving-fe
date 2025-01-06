@@ -33,6 +33,7 @@ export interface BaseProps {
     arrival?: string; // 도착지
     price?: number; // 견적가
     createAt?: string; // 작성일
+    updatedAt?: string; // 작성일
     profileImg?: string; // 기사 프로필 이미지 *
     moverId?: number; // 기사 아이디
     reviewStats?: {

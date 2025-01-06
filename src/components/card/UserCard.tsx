@@ -59,11 +59,15 @@ export default function UserCard({
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
-            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
+            {list.createAt ||
+              (list.updatedAt &&
+                getNotificationDate(list.createAt || list.updatedAt, 'noSec'))}
           </div>
         ) : (
           <div className={style.createAtRType}>
-            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
+            {list.createAt ||
+              (list.updatedAt &&
+                getNotificationDate(list.createAt || list.updatedAt, 'noSec'))}
           </div>
         )}
       </div>
