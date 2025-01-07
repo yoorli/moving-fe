@@ -19,6 +19,7 @@ import {
 import { ChipProps } from '../../../components/chip/Chip';
 import { Mover } from '../../../types/apiTypes';
 import { useGetPendingEstimate } from '../../../lib/useQueries/estimate';
+import { useMedia } from '../../../lib/function/useMediaQuery';
 
 const FILTER_TYPES = {
   REGION: 'region',
@@ -50,6 +51,12 @@ const SearchDriver = () => {
     window.innerWidth <= 744,
   );
   const { userValue } = useContext(AuthContext);
+  const {
+    mobileWithChipSearDriver,
+    mobileWithChipSearDriverSecond,
+    mobileWithChipSearDriveLast,
+  } = useMedia();
+
   const navigate = useNavigate();
 
   const queryParams = {
@@ -209,6 +216,7 @@ const SearchDriver = () => {
             type='dibs'
             styles='small'
             onClick={() => handleMoverCardClick(user.moverId)}
+            count={2}
           />
         ))}
       </div>
@@ -236,6 +244,15 @@ const SearchDriver = () => {
             ),
           }}
           onClick={() => handleDriverCardClick(user.id)}
+          count={
+            mobileWithChipSearDriver
+              ? 4
+              : mobileWithChipSearDriverSecond
+                ? 4
+                : mobileWithChipSearDriveLast
+                  ? 3
+                  : 6
+          }
         />
       ))}
     </div>

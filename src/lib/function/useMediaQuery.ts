@@ -18,6 +18,18 @@ export function useMedia() {
   // max 칩 4개까지 있는 경우 모바일에서의 칩 나열
   const mobileWithChipMaxFour = useMediaQuery({ query: '(max-width: 466px' });
 
+  const mobileWithChipSearDriver = useMediaQuery({
+    query: '(min-width: 1191px) and (max-width: 1214px)',
+  });
+
+  const mobileWithChipSearDriverSecond = useMediaQuery({
+    query: '(min-width: 476px) and (max-width: 560px)',
+  });
+
+  const mobileWithChipSearDriveLast = useMediaQuery({
+    query: ' (max-width: 475px)',
+  });
+
   return {
     pc,
     tablet,
@@ -25,5 +37,8 @@ export function useMedia() {
     mobileWithChip,
     mobileWithChipSecond,
     mobileWithChipMaxFour,
+    mobileWithChipSearDriver,
+    mobileWithChipSearDriverSecond,
+    mobileWithChipSearDriveLast,
   };
 }

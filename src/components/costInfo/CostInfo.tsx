@@ -72,7 +72,7 @@ export default function CostInfo({
         </div>
         <div className={style.requestContainer}>
           <div className={style.infoTitle}>요청 사항</div>
-          <div className={style.request}>{comment}</div>
+          {comment ? comment : '요청 사항이 없습니다.'}
         </div>
         {hasButton && (
           <div className={style.button}>

@@ -4,7 +4,6 @@ import Tab from '../../../components/tab/Tab';
 import style from './index.module.css';
 
 import ReceivedList from './components/ReceivedList';
-// import { mockData } from './mockData';
 import { useGetEstimate } from '../../../lib/useQueries/estimate';
 import useDirection from '../../../lib/function/direction';
 import CostInfo from '../../../components/costInfo/CostInfo';

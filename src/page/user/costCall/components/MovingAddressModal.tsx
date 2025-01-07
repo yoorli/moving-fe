@@ -48,7 +48,7 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
     setInputValue(e.target.value);
   };
 
-  const size = pc ? 5 : 3;
+  const size = 3;
 
   const { addressList, meta, isLoading, error } = useMovingAddressList(
     address,
