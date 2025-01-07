@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useGetMoverList } from '../../../lib/useQueries/driver';
 import { useGetFavoriteMover } from '../../../lib/useQueries/favorite';
 import Tab from '../../../components/tab/Tab';
@@ -35,6 +35,25 @@ const SORT_OPTIONS = [
 ];
 
 const SearchDriver = () => {
+   const {
+    mobileWithChipSearDriver,
+    mobileWithChipSearDriverSecond,
+    mobileWithChipSearDriveLast,
+  } = useMedia();
+  const { userValue } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (
+      !userValue?.isPending &&
+      userValue?.user?.Customer &&
+      userValue?.user?.Customer?.region === 'NULL' &&
+      userValue?.user?.Customer?.serviceType.length <= 0
+    ) {
+      navigate('/user/register');
+    }
+  }, [pathname]);
   const [openFilter, setOpenFilter] = useState<string | null>(null);
   const [selectedRegionLabel, setSelectedRegionLabel] =
     useState<string>('지역');
@@ -50,14 +69,7 @@ const SearchDriver = () => {
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(
     window.innerWidth <= 744,
   );
-  const { userValue } = useContext(AuthContext);
-  const {
-    mobileWithChipSearDriver,
-    mobileWithChipSearDriverSecond,
-    mobileWithChipSearDriveLast,
-  } = useMedia();
 
-  const navigate = useNavigate();
 
   const queryParams = {
     sortBy: sortOption,
