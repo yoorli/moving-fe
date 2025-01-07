@@ -4,7 +4,10 @@ import IcXLarge from '../../assets/icons/ic_x_large.svg';
 import { getNotificationDate } from '../../lib/function/utils';
 
 import { Notification } from './mockData';
-import { useGetNotification } from '../../lib/useQueries/notification';
+import {
+  useGetNotification,
+  useCreateNotificationRead,
+} from '../../lib/useQueries/notification';
 // import { useLinkClickHandler } from 'react-router-dom';
 import useDirection from '../../lib/function/direction';
 
@@ -31,20 +34,27 @@ export function NotificationModal({ modalController, user }: Props) {
   };
 
   const { data } = useGetNotification();
+  const { mutate } = useCreateNotificationRead();
 
   const clickHandler = (notification: any) => {
     if (!notification) {
       return;
     }
 
+    const notificationId = notification.id;
+
     if (notification.estimateRequestId) {
-      if (user.Customer) direction_pendingCost();
-      if (user.Mover) direction_costHandler();
+      mutate(notificationId);
+      if (user.userType === 'CUSTOMER') direction_pendingCost();
+      else direction_costHandler();
     } else if (notification.estimateId) {
-      if (user.Customer) direction_userCostDetail(notification.estimateId);
-      if (user.Mover) direction_costHandler();
+      mutate(notificationId);
+      if (user.userType === 'CUSTOMER')
+        direction_userCostDetail(notification.estimateId);
+      else direction_costHandler();
     } else if (notification.assignedEstimateRequestId) {
-      if (user.Mover) direction_driverCostCall();
+      mutate(notificationId);
+      if (user.userType === 'MOVER') direction_driverCostCall();
     }
   };
 
@@ -54,7 +64,7 @@ export function NotificationModal({ modalController, user }: Props) {
         <div>알림</div>
         <img
           src={IcXLarge}
-          alt=''
+          alt='닫기 버튼'
           className={style.titleCancel}
           onClick={directionAndPopModal}
         />

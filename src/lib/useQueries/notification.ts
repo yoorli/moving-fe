@@ -10,9 +10,11 @@ export function useGetNotification() {
 }
 
 // 알림 읽음 처리 (POST)
-export function useCreateNotificationRead(notificationId: number) {
+export function useCreateNotificationRead() {
   const mutation = useMutation({
-    mutationFn: () => createNotificationRead(notificationId),
+    // mutationFn은 이제 notificationId를 인자로 받도록 변경
+    mutationFn: (notificationId: number) =>
+      createNotificationRead(notificationId),
   });
 
   return mutation;
