@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import style from './UserLayout.module.css';
 import '../style/globals.css';
 import { useState, useRef, useEffect, useContext } from 'react';
@@ -9,16 +9,30 @@ import { useMedia } from '../lib/function/useMediaQuery';
 import { AuthContext } from '../context/authContext';
 
 export default function UserLayout() {
+  const nav = useNavigate();
+  const { pathname } = useLocation();
   const {
     userValue: { user, isPending },
   } = useContext(AuthContext);
+
   useEffect(() => {
     if (!isPending && user) {
       if (user.userType === 'MOVER') {
         window.location.href = '/';
-      }
+      } // 회원 유형에 따른 접근 제한
     }
   }, [user, isPending]);
+
+  useEffect(() => {
+    if (
+      !isPending &&
+      user?.Customer &&
+      user?.Customer?.region === 'NULL' &&
+      user?.Customer?.serviceType.length <= 0
+    ) {
+      nav('/user/register');
+    }
+  }, [pathname]);
 
   const menuRef = useRef<HTMLDivElement | null>(null);
   const profileRef = useRef<HTMLDivElement | null>(null);

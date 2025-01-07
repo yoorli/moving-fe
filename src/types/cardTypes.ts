@@ -66,7 +66,12 @@ export interface DriverProfileProps extends BaseProps {
 }
 
 // UserCard, UserProfile
-type UserProfileType = 'receive' | 'review' | 'confirmedCost' | 'modal';
+type UserProfileType =
+  | 'receive'
+  | 'review'
+  | 'allCost'
+  | 'confirmedCost'
+  | 'modal';
 
 export interface UserProfileProps extends BaseProps {
   type?: UserProfileType;

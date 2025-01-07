@@ -60,12 +60,26 @@
 
   .navIcon {
     cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
   }
 
   .navIconText {
     font-weight: 500;
     font-size: 18px;
     color: var(--black-400);
+  }
+
+  .navIconAlarm {
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    background-color: var(--blue-300);
+    z-index: 10;
+    top: 16%;
+    left: 10%;
+    border-radius: 100%;
   }
 }
 @media (max-width: 1199px) and (min-width: 744px) {
@@ -128,12 +142,26 @@
 
   .navIcon {
     cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
   }
 
   .navIconText {
     font-weight: 500;
     font-size: 18px;
     color: var(--black-400);
+  }
+
+  .navIconAlarm {
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    background-color: var(--blue-300);
+    z-index: 10;
+    top: 3%;
+    left: 10%;
+    border-radius: 100%;
   }
 }
 
@@ -206,7 +234,9 @@
   .navIconProfile {
     box-sizing: border-box;
     margin-left: 16px;
-
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
     cursor: pointer;
   }
 
@@ -225,5 +255,16 @@
     font-size: 18px;
     color: var(--black-400);
     text-align: center;
+  }
+
+  .navIconAlarm {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    background-color: var(--blue-300);
+    z-index: 10;
+    top: 0%;
+    left: 12%;
+    border-radius: 100%;
   }
 }
