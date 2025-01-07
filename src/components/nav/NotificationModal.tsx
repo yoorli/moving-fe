@@ -82,7 +82,7 @@ export function NotificationModal({ modalController, user }: Props) {
                   className={style.itemContent}
                   onClick={() => clickHandler(notification)}
                 >
-                  <span className={style.blueText}>
+                  <span className={style.contents}>
                     {notification.contents}
                   </span>
                 </div>

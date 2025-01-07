@@ -72,8 +72,18 @@
     font-weight: 500;
   }
 
-  .blueText {
-    color: var(--blue-300);
+  .noContent {
+    font-weight: 600;
+    color: #1e90ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 7vh;
+  }
+
+  .contents {
+    font-weight: 600;
+    color: #1e90ff;
   }
 }
 
@@ -152,8 +162,18 @@
     font-weight: 500;
   }
 
-  .blueText {
-    color: var(--blue-300);
+  .noContent {
+    font-weight: 600;
+    color: #1e90ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 7vh;
+  }
+
+  .contents {
+    font-weight: 600;
+    color: #1e90ff;
   }
 }
 
@@ -233,15 +253,17 @@
     justify-content: flex-end;
   }
 
-  .blueText {
-    color: var(--blue-300);
-  }
-
   .noContent {
-    color: var(--blue-300);
+    font-weight: 600;
+    color: #1e90ff;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 7vh;
+  }
+
+  .contents {
+    font-weight: 600;
+    color: #1e90ff;
   }
 }
