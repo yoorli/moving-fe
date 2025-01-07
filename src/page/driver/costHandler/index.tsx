@@ -130,7 +130,7 @@ export default function DriverCostHandlerPage() {
   };
 
   useEffect(() => {
-    const itemsPerPage = isTablet || isMobile ? 3 : 6;
+    const itemsPerPage = isPc ? 6 : isTablet ? 4 : 3;
     if (itemsPerPage !== pageState.first.itemsPerPage) {
       setPageState((prevState) => {
         const updatedState = { ...prevState };
