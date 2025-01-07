@@ -1,4 +1,4 @@
-import { useQuery, keepPreviousData } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getMoverDetail, getMoverList, getMoverProfile } from '../api/driver';
 
 interface UseMoverListParams {
@@ -9,13 +9,13 @@ interface UseMoverListParams {
 }
 
 /* GET - 기사님 리스트 조회 */
-export function useGetMoverList(params: UseMoverListParams) {
+export function useGetMoverList(params: UseMoverListParams & { page: number }) {
   return useQuery({
     queryKey: ['moverList', params],
     queryFn: () => getMoverList(params),
-    placeholderData: keepPreviousData, // 이전 데이터를 유지하면서 새 데이터를 로딩
   });
 }
+
 
 /* GET - 기사님 프로필 상세 조회 */
 export function useGetMoverDetail(moverId: number) {
