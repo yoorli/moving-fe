@@ -193,7 +193,13 @@ export default function DriverCostHandlerPage() {
                 <div key={index} className={style.card}>
                   <UserCard
                     list={user}
-                    type={currentTab === 'third' ? undefined : 'confirmedCost'}
+                    type={
+                      currentTab === 'third'
+                        ? undefined
+                        : currentTab === 'second'
+                          ? 'confirmedCost'
+                          : 'allCost'
+                    }
                   />
                   {user.comment && (
                     <div
