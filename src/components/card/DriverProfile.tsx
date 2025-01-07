@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
@@ -25,6 +26,12 @@ export default function DriverProfile({
 
   const { direction_driverDetail } = useDirection();
   const id = Number(user.moverId);
+
+  const [profileImg, setProfileImg] = useState<string | null>(null);
+
+  useEffect(() => {
+    setProfileImg(checkImg(user.profileImg));
+  }, [user.profileImg]);
 
   const handleProfileClick = () => {
     if (
@@ -56,7 +63,7 @@ export default function DriverProfile({
         })}
       >
         <img
-          src={checkImg(user.profileImg)}
+          src={profileImg || ''}
           alt={`${user.moverName}'s profile`}
           className={classNames(style.avatar, {
             [style.avatarLarge]:
