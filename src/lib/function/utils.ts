@@ -122,3 +122,47 @@ export const translateServiceRegion = (serviceRegion: string[]): string[] => {
     '알 수 없는 지역'
   );
 };
+
+//한글에서 영어로 바꾸는 함수가 필요해서 만들었습니다.
+export const serviceTypeReverseMapper: Record<string, string> = {
+  소형이사: 'SMALL',
+  가정이사: 'HOUSE',
+  사무실이사: 'OFFICE',
+};
+
+//한글에서 영어로 바꾸는 함수가 필요해서 만들었습니다.
+export const serviceRegionReverseMapper: Record<string, string> = {
+  서울: 'SEOUL',
+  경기: 'GYEONGGI',
+  인천: 'INCHEON',
+  강원: 'GANGWON',
+  충북: 'CHUNGBUK',
+  충남: 'CHUNGNAM',
+  세종: 'SEJONG',
+  대전: 'DAEJEON',
+  전북: 'JEONBUK',
+  전남: 'JEONNAM',
+  광주: 'GWANGJU',
+  경북: 'GYEONGBUK',
+  경남: 'GYEONGNAM',
+  대구: 'DAEGU',
+  울산: 'ULSAN',
+  부산: 'BUSAN',
+  제주: 'JEJU',
+};
+
+// 제공 서비스 타입 번역(한 -> 양)
+export const translateServiceReverseType = (
+  serviceType: string[],
+): string[] => {
+  return serviceType.map(
+    (type) => serviceTypeMapper[type] || '알 수 없는 유형',
+  );
+};
+
+// 가능한 서비스 지역 번역(영 -> 한)
+export const translateServiceReverseRegion = (
+  serviceRegion: string,
+): string => {
+  return serviceRegionReverseMapper[serviceRegion];
+};

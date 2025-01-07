@@ -104,7 +104,6 @@ export const signupValidation = (
 export const editValidation = (
   name: string,
   value?: string,
-  oldPassword?: string,
   newPassword?: string,
 ) => {
   if (name === 'name') {
@@ -117,7 +116,7 @@ export const editValidation = (
     return phoneValidation(value);
   }
   if (name === 'currentPassword') {
-    return passwordEqualValidation(value, oldPassword);
+    return passwordValidation(value);
   }
   if (name === 'newPassword') {
     return passwordValidation(value);

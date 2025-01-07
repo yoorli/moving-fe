@@ -175,7 +175,7 @@ export function UserNav({
             <img
               onClick={profileController}
               className={style.navIconProfile}
-              src={profile}
+              src={user?.Customer?.profileImage ?? profile}
               alt=''
             />
             <span className={style.navIconText}>{user?.name}</span>
@@ -212,7 +212,7 @@ export function UserNav({
             <img
               onClick={profileController}
               className={style.navIcon}
-              src={profileMobile}
+              src={user?.Customer?.profileImage ?? profileMobile}
               alt=''
             />
             {profileModal ? (
@@ -257,7 +257,7 @@ export function UserNav({
             <img
               onClick={profileController}
               className={style.navIcon}
-              src={profile}
+              src={user?.Customer?.profileImage ?? profile}
               alt=''
             />
             {profileModal ? (

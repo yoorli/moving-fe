@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TextBtn } from '../../../components/page/edit/EditBtn';
 import style from './index.module.css';
 import { UserRegisterFormValidation, UserRegisterFormValues } from './type';
 import { ServiceRegion } from '../../../components/page/register/Region';
 import RegisterMidComponent from './components/Mid';
+import { translateServiceReverseRegion } from '../../../lib/function/utils';
+import { auth } from '../../../lib/api/auth';
+import { isAxiosError } from 'axios';
+import { AuthContext } from '../../../context/authContext';
 
 export default function UserRegisterPage() {
+  const {
+    userValue: { user, isPending },
+  } = useContext(AuthContext);
+  useEffect(() => {
+    if (!isPending && user && user?.Customer?.profileImage) {
+      window.location.href = '/';
+    }
+  }, [user, isPending]);
+
   const [preview, setPreview] = useState<string | undefined>();
   const [values, setValues] = useState<UserRegisterFormValues>({
     image: null,
@@ -67,6 +80,55 @@ export default function UserRegisterPage() {
       }
     }
   };
+
+  const [isLoginPending, setIsLoginPending] = useState<boolean>(false);
+
+  const profileRegister = async () => {
+    if (
+      validation.region &&
+      validation.image &&
+      !!values.region &&
+      values.image &&
+      (!!values.small || !!values.house || !!values.office)
+    ) {
+      const keys = Object.keys(values) as [];
+
+      const formData = {
+        region: translateServiceReverseRegion(values.region as string),
+        profileImage: values.image,
+        serviceType: keys
+          .filter((data) => {
+            const service = ['office', 'small', 'house'];
+            return service.includes(data);
+          })
+          .filter((data) => {
+            return values[data] === 'on';
+          })
+          .map((data) => (data as string).toUpperCase()),
+      };
+
+      try {
+        setIsLoginPending(true);
+        await auth.patch('/customer/profile', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        alert('회원가입이 완료 되었습니다.');
+        window.location.href = '/';
+      } catch (e) {
+        if (isAxiosError(e)) {
+          const data = e.response?.data;
+
+          alert(data);
+        }
+      } finally {
+        setIsLoginPending(false);
+      }
+    } else {
+      return;
+    }
+  };
   return (
     <div className={style.container}>
       <div className={style.wrapper}>
@@ -80,14 +142,17 @@ export default function UserRegisterPage() {
           values={values}
           validation={validation}
           inputHeandler={inputHeandler}
-          preview={preview}
+          preview={preview ?? user?.Customer?.profileImage}
         />
         <div className={style.bottom}>
           <TextBtn
-            text='시작하기'
+            onClick={profileRegister}
+            text={isLoginPending ? 'loading...' : '시작하기'}
             validation={
               validation.region &&
+              validation.image &&
               !!values.region &&
+              !!values.image &&
               (!!values.small || !!values.house || !!values.office)
             }
           />

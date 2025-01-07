@@ -6,12 +6,13 @@ import eyeOpen from '../../assets/icons/ic_eye_open.svg';
 type NomalInputType = {
   title: string;
   placeholder: string;
-  value: string;
+  value?: string;
   type?: string;
   name: string;
   inputHeandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  validation: boolean;
+  validation?: boolean;
   errorMessage: string;
+  readonly?: boolean
 };
 
 type NomalTextAreaType = {
@@ -33,6 +34,7 @@ export const NomalInputComponent = ({
   inputHeandler,
   validation,
   errorMessage,
+  readonly
 }: NomalInputType) => {
   return (
     <div className={style.container}>
@@ -47,6 +49,7 @@ export const NomalInputComponent = ({
         type={type}
         id={name}
         name={name}
+        readOnly={readonly}
       />
       {!validation && value ? (
         <span className={style.invaild}>{errorMessage}</span>

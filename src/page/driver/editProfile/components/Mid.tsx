@@ -28,8 +28,8 @@ export default function DriverregisterMid({
     <div className={style.mid}>
       <div className={style.left}>
         <NomalInputComponent
-          title='이름*'
-          placeholder='기사님 성함을 입력해 주세요'
+          title='별명*'
+          placeholder='별명을 입력해 주세요'
           value={values.name}
           name='name'
           inputHeandler={inputHeandler}
