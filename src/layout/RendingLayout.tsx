@@ -92,10 +92,11 @@ export default function RendingLayout() {
       </div>
 
       {!pc && activeModal === 'menu' && user ? (
-        user?.userType === 'CUSTOMER' ?
-        ( <UserMenuModal modalController={() => toggleModal('menu')} />)
-        :(<DriverMenuModal modalController={() => toggleModal('menu')} />)
-
+        user?.userType === 'CUSTOMER' ? (
+          <UserMenuModal modalController={() => toggleModal('menu')} />
+        ) : (
+          <DriverMenuModal modalController={() => toggleModal('menu')} />
+        )
       ) : !pc && activeModal === 'menu' && !user ? (
         <NonLoginMenuModal modalController={() => toggleModal('menu')} />
       ) : null}
