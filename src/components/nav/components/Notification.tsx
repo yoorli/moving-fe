@@ -24,11 +24,6 @@ export function Notification({
 }: Props) {
   const { pc } = useMedia();
   const { data } = useGetNotification();
-  // const {
-  //   userValue: { user },
-  // } = useContext(AuthContext);
-
-  console.log(data?.list.length);
 
   const ringAlarm = () => {
     return (
