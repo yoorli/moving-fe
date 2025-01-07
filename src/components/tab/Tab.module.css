@@ -20,7 +20,7 @@
   padding: 16px 0;
 
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
 
   color: var(--gray-400);
 
@@ -61,7 +61,7 @@
   }
 
   .selectedContent {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .active {
@@ -92,7 +92,7 @@
   }
 
   .selectedContent {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .active {
