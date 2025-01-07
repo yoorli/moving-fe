@@ -153,7 +153,7 @@ export default function DriverRegisterPage() {
         region: translateServiceReverseRegionArray(values.region as string[]),
         nickname: values.name,
         career: values.history,
-        summanry: values.introduce_simple,
+        summary: values.introduce_simple,
         description: values.introduce_detail,
       };
       try {
