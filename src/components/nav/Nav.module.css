@@ -60,6 +60,9 @@
 
   .navIcon {
     cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
   }
 
   .navIconText {
@@ -128,6 +131,9 @@
 
   .navIcon {
     cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
   }
 
   .navIconText {
@@ -206,7 +212,9 @@
   .navIconProfile {
     box-sizing: border-box;
     margin-left: 16px;
-
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
     cursor: pointer;
   }
 
