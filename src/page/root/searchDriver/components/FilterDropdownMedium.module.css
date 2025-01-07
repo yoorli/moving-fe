@@ -12,7 +12,8 @@
     border-radius: 8px;
     background-color: #fff;
     cursor: pointer;
-    transition: border-color 0.2s, background-color 0.2s;
+    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 .filterBox.region {
@@ -48,6 +49,7 @@
 .filterBox.active {
     border: 1px solid #1b92ff;
     background-color: #f5faff;
+    box-shadow: 0 2px 4px rgba(27, 146, 255, 0.12);
 }
 
 .dropdown {
@@ -58,6 +60,13 @@
     border: 1px solid #dedede;
     border-radius: 16px;
     z-index: 10;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s, z-index 0.2s;
+}
+
+.dropdownOpen {
+    z-index: 2000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .regionDropdown {
@@ -90,7 +99,6 @@
 }
 
 .dropdownItem:hover {
-    background-color: #f5faff;
-    color: #1b92ff;
+    background-color: #f0f0f0;
+    color: #1f1f1f;
 }
-
