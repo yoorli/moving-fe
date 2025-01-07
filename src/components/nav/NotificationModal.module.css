@@ -229,9 +229,19 @@
     color: var(--gray-300);
     font-size: 14px;
     font-weight: 500;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .blueText {
     color: var(--blue-300);
+  }
+
+  .noContent {
+    color: var(--blue-300);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 7vh;
   }
 }

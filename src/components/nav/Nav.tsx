@@ -167,7 +167,10 @@ export function UserNav({
               onClick={notificationController}
             />
             {notificationModal ? (
-              <NotificationModal modalController={notificationController} />
+              <NotificationModal
+                modalController={notificationController}
+                user={user}
+              />
             ) : null}
           </div>
 
@@ -204,7 +207,10 @@ export function UserNav({
               onClick={notificationController}
             />
             {notificationModal ? (
-              <NotificationModal modalController={notificationController} />
+              <NotificationModal
+                modalController={notificationController}
+                user={user}
+              />
             ) : null}
           </div>
 
@@ -249,7 +255,10 @@ export function UserNav({
               onClick={notificationController}
             />
             {notificationModal ? (
-              <NotificationModal modalController={notificationController} />
+              <NotificationModal
+                modalController={notificationController}
+                user={user}
+              />
             ) : null}
           </div>
 
@@ -344,7 +353,10 @@ export function DriverNav({
               onClick={notificationController}
             />
             {notificationModal ? (
-              <NotificationModal modalController={notificationController} />
+              <NotificationModal
+                modalController={notificationController}
+                user={user}
+              />
             ) : null}
           </div>
 
@@ -381,7 +393,10 @@ export function DriverNav({
               onClick={notificationController}
             />
             {notificationModal ? (
-              <NotificationModal modalController={notificationController} />
+              <NotificationModal
+                modalController={notificationController}
+                user={user}
+              />
             ) : null}
           </div>
 
@@ -426,7 +441,10 @@ export function DriverNav({
               onClick={notificationController}
             />
             {notificationModal ? (
-              <NotificationModal modalController={notificationController} />
+              <NotificationModal
+                modalController={notificationController}
+                user={user}
+              />
             ) : null}
           </div>
 

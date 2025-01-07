@@ -1,9 +1,19 @@
-import axios from 'axios';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { getNotification, createNotificationRead } from '../api/notification';
 
-const PATH = '/notification';
+// 알림 상세 조회 (GET)
+export function useGetNotification() {
+  return useQuery({
+    queryKey: ['notification'],
+    queryFn: getNotification,
+  });
+}
 
-/* /:id GET - 기사 프로필 상세 조회 */
-export async function getMoverMe(moverId: number) {
-  const res = await axios.get(`${PATH}/${moverId}/detail`);
-  return res.data;
+// 알림 읽음 처리 (POST)
+export function useCreateNotificationRead(notificationId: number) {
+  const mutation = useMutation({
+    mutationFn: () => createNotificationRead(notificationId),
+  });
+
+  return mutation;
 }
