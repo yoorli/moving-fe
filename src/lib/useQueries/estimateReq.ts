@@ -30,8 +30,7 @@ export function useDeleteEstimateReq() {
   const mutation = useMutation({
     mutationKey: ['estimateReq'],
     mutationFn: (estimateReqId: number) => deleteEstimateReq(estimateReqId),
-    onSuccess: (data) => {
-      console.log('견적 요청 삭제(상태 변경) 성공', data);
+    onSuccess: () => {
       queryClient.setQueryData(['estimateReq'], []);
     },
     onError: (error) => {
