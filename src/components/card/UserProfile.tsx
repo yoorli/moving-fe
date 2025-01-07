@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 
-import { formatCurrency } from '../../lib/function/utils';
+import { checkImg, formatCurrency } from '../../lib/function/utils';
 import { useMedia } from '../../lib/function/useMediaQuery';
 import { UserProfileProps } from '../../types/cardTypes';
+import useDirection from '../../lib/function/direction';
 
 import style from './UserProfile.module.css';
 
@@ -51,6 +52,9 @@ export function getStars(rating: number) {
 export default function UserProfile({ type, list: user }: UserProfileProps) {
   const isPc = useMedia().pc;
   const isMobile = useMedia().mobile;
+
+  const { direction_driverDetail } = useDirection();
+
   return (
     <>
       {type !== 'review' ? (
@@ -95,10 +99,10 @@ export default function UserProfile({ type, list: user }: UserProfileProps) {
           </div>
         </div>
       ) : (
-        <div className={style.reviewProfile}>
+        <div className={style.reviewProfile} onClick={() => direction_driverDetail(Number(user.moverId))}>
           <div className={style.profileImage}>
             <img
-              src={user.profileImg}
+              src={checkImg(user.profileImg)}
               alt={`${user.moverName}'s profile`}
               className={style.avatar}
             />

@@ -6,7 +6,7 @@ import Button from '../btn/Button';
 import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
-import { formatCurrency, getChips } from '../../lib/function/utils';
+import { checkImg, formatCurrency, getChips } from '../../lib/function/utils';
 import { ChipType, DriverProfileProps } from '../../types/cardTypes';
 
 import style from './DriverCard.module.css';
@@ -48,6 +48,9 @@ export default function DriverCard({
         [style.cardPType]: type === 'profile',
         [style.cardCDType]: type === 'cost' || type === 'dibs',
         [style.cardPRType]: type === 'review',
+        [style.cardWType]: type === 'waiting',
+        [style.cardCType]:
+          type === 'confirm' || type === 'notConfirm' || type === 'cancel',
         [style.cardPSmall]: styles === 'small',
       })}
       onClick={onClick} // 최상단 div에 onClick 이벤트 추가
@@ -57,7 +60,7 @@ export default function DriverCard({
           {!isPc && (
             <div className={style.profileImage}>
               <img
-                src={list.profileImg}
+                src={checkImg(list.profileImg)}
                 alt={`${list.moverName}'s profile`}
                 className={style.avatar}
               />
@@ -84,18 +87,24 @@ export default function DriverCard({
         </div>
       ) : (
         // 칩
-        <div className={style.chipBox}>
-          {chips.map((row, rowIndex) => (
-            <div key={rowIndex} className={style.chip}>
-              {row.map((chip, chipIndex) => (
-                <Chip
-                  key={chipIndex}
-                  type={chip}
-                  size={type === 'dibs' ? 'favorite' : 'noFavorite'}
-                />
-              ))}
-            </div>
-          ))}
+        <div
+          className={classNames(style.chipBox, {
+            [style.chipBoxSmall]: styles === 'small',
+          })}
+        >
+          {chips
+            .map((row) => row.sort((a, b) => (a < b ? -1 : 1)))
+            .map((row, rowIndex) => (
+              <div key={rowIndex} className={style.chip}>
+                {row.map((chip, chipIndex) => (
+                  <Chip
+                    key={chipIndex}
+                    type={chip}
+                    size={type === 'dibs' ? 'favorite' : 'noFavorite'}
+                  />
+                ))}
+              </div>
+            ))}
         </div>
       )}
       {(type === 'cost' || type === undefined || type === 'dibs') && (

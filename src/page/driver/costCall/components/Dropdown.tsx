@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import vectorDownSmall from '../../../../assets/icons/ic_vector_down_small.svg';
 
@@ -10,6 +10,7 @@ interface DropdownProps {
 
 export default function Dropdown({ setSortItem: setSortItem }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [selectedOption, setSelectedOption] = useState('이사 빠른순');
 
   const selectOption = (option: string) => {
@@ -22,13 +23,26 @@ export default function Dropdown({ setSortItem: setSortItem }: DropdownProps) {
     setIsOpen(!isOpen);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div>
       <button className={style.dropdown} onClick={dropdownHandler}>
         {selectedOption} <img src={vectorDownSmall} alt='vectorDownSmall' />{' '}
       </button>
       {isOpen && (
-        <div className={style.menu}>
+        <div ref={dropdownRef} className={style.menu}>
           <div
             onClick={() => selectOption('이사 빠른순')}
             className={style.text}

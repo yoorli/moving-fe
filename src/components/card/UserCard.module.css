@@ -27,7 +27,7 @@
   gap: 12px;
 }
 
-.chip { 
+.chip {
   display: flex;
   gap: 12px;
 }
@@ -147,5 +147,15 @@
     font-weight: 400;
     line-height: 18px;
     color: vaR(--gray-300);
+  }
+
+  .labelBox {
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .label {
+    min-width: 61px;
   }
 }

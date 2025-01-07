@@ -5,6 +5,7 @@ import UserCard from '../../../components/card/UserCard';
 import Pagination from '../../../components/pagination/Pagination';
 import Button from '../../../components/btn/Button';
 import NoContents from '../../../components/noContents/NoContents';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 import useDirection from '../../../lib/function/direction';
 import { useMedia } from '../../../lib/function/useMediaQuery';
@@ -18,7 +19,6 @@ import style from './index.module.css';
 
 import icCheckLarge from '../../../assets/icons/ic_check_large.svg';
 import icCheckMedium from '../../../assets/icons/ic_check_medium.svg';
-import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 interface User {
   estimateId: number;
@@ -130,7 +130,7 @@ export default function DriverCostHandlerPage() {
   };
 
   useEffect(() => {
-    const itemsPerPage = isTablet || isMobile ? 3 : 6;
+    const itemsPerPage = isPc ? 6 : isTablet ? 4 : 3;
     if (itemsPerPage !== pageState.first.itemsPerPage) {
       setPageState((prevState) => {
         const updatedState = { ...prevState };
@@ -193,7 +193,13 @@ export default function DriverCostHandlerPage() {
                 <div key={index} className={style.card}>
                   <UserCard
                     list={user}
-                    type={currentTab === 'third' ? undefined : 'confirmedCost'}
+                    type={
+                      currentTab === 'third'
+                        ? undefined
+                        : currentTab === 'second'
+                          ? 'confirmedCost'
+                          : 'allCost'
+                    }
                   />
                   {user.comment && (
                     <div

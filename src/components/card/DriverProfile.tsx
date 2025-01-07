@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
 import {
+  checkImg,
   formatCurrency,
   translateServiceRegion,
   translateServiceType,
@@ -25,6 +27,22 @@ export default function DriverProfile({
   const { direction_driverDetail } = useDirection();
   const id = Number(user.moverId);
 
+  const [profileImg, setProfileImg] = useState<string | null>(null);
+
+  useEffect(() => {
+    setProfileImg(checkImg(user.profileImg));
+  }, [user.profileImg]);
+
+  const handleProfileClick = () => {
+    if (
+      type === 'waiting' ||
+      type === 'confirm' ||
+      type === 'review' ||
+      type === 'dibs'
+    )
+      return direction_driverDetail(id);
+  };
+
   return (
     <div
       className={classNames(style.profile, {
@@ -33,7 +51,7 @@ export default function DriverProfile({
         [style.profileWType]: type === 'waiting' || type === 'confirm',
         [style.profileSmall]: styles === 'small',
       })}
-      onClick={()=>direction_driverDetail(id)}
+      onClick={() => handleProfileClick()}
     >
       <div
         className={classNames(style.profileImage, {
@@ -45,11 +63,13 @@ export default function DriverProfile({
         })}
       >
         <img
-          src={user.profileImg}
+          src={profileImg || ''}
           alt={`${user.moverName}'s profile`}
           className={classNames(style.avatar, {
             [style.avatarLarge]:
-              (type === 'profile' || type === 'dibs' || type === 'review') &&
+              (type === 'profile' ||
+                (type === 'dibs' && styles !== 'small') ||
+                type === 'review') &&
               isPc,
           })}
         />

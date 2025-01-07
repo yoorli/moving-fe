@@ -1,11 +1,10 @@
-import { useNavigate } from 'react-router-dom';
 import DriverCard from '../../../../components/card/DriverCard';
-// import { mockData } from './mockData';
 import style from './PendingList.module.css';
 import { useGetPendingEstimate } from '../../../../lib/useQueries/estimate';
 import { ChipType } from '../../../../types/cardTypes';
 import LoadingSpinner from '../../../../components/loading/LoadingSpinner';
 import NoContents from '../../../../components/noContents/NoContents';
+import useDirection from '../../../../lib/function/direction';
 
 interface PendingListProps {
   setIsConfirmModalOpen: (value: boolean) => void; // Modal 열기
@@ -40,8 +39,8 @@ export default function PendingList({
   setIsConfirmModalOpen,
   setSelectedEstimateId,
 }: PendingListProps) {
-  const navigate = useNavigate();
   const { data, isLoading } = useGetPendingEstimate();
+  const { direction_userCostDetail } = useDirection();
 
   const confirmCostBtn = (estimateId: number) => {
     setSelectedEstimateId(estimateId);
@@ -49,7 +48,7 @@ export default function PendingList({
   };
 
   const detailbtn = (estimateId: number) => {
-    navigate(`/user/costDetail/${estimateId}`); // estimateId로 경로 설정
+    direction_userCostDetail(estimateId);
   };
 
   // 로딩 중일 때 처리
@@ -72,7 +71,9 @@ export default function PendingList({
           ))}
         </div>
       ) : (
-        <NoContents image='car' contentText='대기 중인 견적이 없어요!' />
+        <div className={style.noContents}>
+          <NoContents image='car' contentText='대기 중인 견적이 없어요!' />
+        </div>
       )}
     </div>
   );

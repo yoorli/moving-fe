@@ -7,6 +7,7 @@ import Pagination from '../../../components/pagination/Pagination';
 import Search from '../../../components/search/Search';
 import NoContents from '../../../components/noContents/NoContents';
 import ModalContainer from '../../../components/modal/ModalContainer';
+import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 import { useMedia } from '../../../lib/function/useMediaQuery';
 import { useGetMoverEstimateReq } from '../../../lib/useQueries/estimateReq';
@@ -14,7 +15,6 @@ import { useGetMoverEstimateReq } from '../../../lib/useQueries/estimateReq';
 import style from './index.module.css';
 
 import filter from '../../../assets/icons/ic_filter_medium.svg';
-import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 export default function DriverCostCallPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -41,7 +41,7 @@ export default function DriverCostCallPage() {
 
   const isPc = useMedia().pc;
 
-  const { data, isLoading } = useGetMoverEstimateReq(params);
+  const { data, isFetching } = useGetMoverEstimateReq(params);
 
   const list = data?.list;
   const totalItems = data?.total || 0;
@@ -182,7 +182,7 @@ export default function DriverCostCallPage() {
               </div>
             </div>
           </div>
-          {isLoading ? (
+          {isFetching ? (
             <div className={style.loadingSpinner}>
               <LoadingSpinner thin={true} />
             </div>

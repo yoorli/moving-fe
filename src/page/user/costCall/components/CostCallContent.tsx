@@ -70,8 +70,11 @@ export default function UserCostCallPage({
   const modalBtnClick = () => {
     setIsSubmitted(true);
     setIsModalOpen(false);
-    mutate(values);
-    redirect();
+    mutate(values, {
+      onSuccess: () => {
+        redirect();
+      },
+    });
   };
 
   return (

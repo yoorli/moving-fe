@@ -4,10 +4,18 @@
 
   min-width: 100vw;
   min-height: 100vh;
+  background-color: var(--background-100);
 }
 
 .pagination {
   display: flex;
   margin: 0 auto;
   justify-content: center;
+}
+
+.noContents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

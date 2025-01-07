@@ -9,7 +9,7 @@
 }
 
 .main {
-  max-width: 1400px;
+  max-width: 1700px;
   width: 100%;
   margin: 0 auto;
   background-color: var(--gray-50);
@@ -21,6 +21,14 @@
 .loading {
   display: flex;
 }
+
+.noContents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 @media (max-width: 1199px) and (min-width: 744px) {
   .layout {
     max-width: 1199px;

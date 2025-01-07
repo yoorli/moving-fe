@@ -31,6 +31,10 @@ export default function UserCard({
     return <div className={style.cardError}>데이터가 없습니다.</div>;
   }
 
+  if(type === 'confirmedCost') {
+    chipList.push('CONFIRM');
+  }
+
   if (list.isConfirmed) chipList.push('CONFIRM');
   if (list.movingType) chipList.push(list.movingType);
   list.serviceType?.map((type) => chipList.push(type));
@@ -47,21 +51,27 @@ export default function UserCard({
       <div className={style.top}>
         {/* 칩 */}
         <div className={style.chipBox}>
-          {chips.map((row, rowIndex) => (
-            <div key={rowIndex} className={style.chip}>
-              {row.map((chip, chipIndex) => (
-                <Chip key={chipIndex} type={chip} />
-              ))}
-            </div>
-          ))}
+          {chips
+            .map((row) => row.sort((a, b) => (a < b ? -1 : 1)))
+            .map((row, rowIndex) => (
+              <div key={rowIndex} className={style.chip}>
+                {row.map((chip, chipIndex) => (
+                  <Chip key={chipIndex} type={chip} />
+                ))}
+              </div>
+            ))}
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
-            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
+            {list.createAt ||
+              (list.updatedAt &&
+                getNotificationDate(list.createAt || list.updatedAt, 'noSec'))}
           </div>
         ) : (
           <div className={style.createAtRType}>
-            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
+            {list.createAt ||
+              (list.updatedAt &&
+                getNotificationDate(list.createAt || list.updatedAt, 'noSec'))}
           </div>
         )}
       </div>
@@ -90,7 +100,7 @@ export default function UserCard({
         </div>
       )}
 
-      {type === 'confirmedCost' && (
+      {(type === 'allCost' || type === 'confirmedCost') && (
         <div className={style.cost}>
           <span className={style.text}>견적 금액 </span>{' '}
           {list.price && formatCurrency(list.price)}

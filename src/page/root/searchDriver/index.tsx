@@ -18,6 +18,8 @@ import {
 } from '../searchDriver/utils/Constants';
 import { ChipProps } from '../../../components/chip/Chip';
 import { Mover } from '../../../types/apiTypes';
+import { useGetPendingEstimate } from '../../../lib/useQueries/estimate';
+import { useMedia } from '../../../lib/function/useMediaQuery';
 
 const FILTER_TYPES = {
   REGION: 'region',
@@ -33,6 +35,11 @@ const SORT_OPTIONS = [
 ];
 
 const SearchDriver = () => {
+   const {
+    mobileWithChipSearDriver,
+    mobileWithChipSearDriverSecond,
+    mobileWithChipSearDriveLast,
+  } = useMedia();
   const { userValue } = useContext(AuthContext);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -63,6 +70,7 @@ const SearchDriver = () => {
     window.innerWidth <= 744,
   );
 
+
   const queryParams = {
     sortBy: sortOption,
     keyword: searchKeyword || undefined,
@@ -81,6 +89,8 @@ const SearchDriver = () => {
 
   const { data: favoriteMoverData, isLoading: isFavoriteLoading } =
     useGetFavoriteMover();
+
+  const { data: pendingMoverList } = useGetPendingEstimate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -121,6 +131,20 @@ const SearchDriver = () => {
     if (id === undefined) return; // id가 undefined인 경우 클릭 무시
     navigate(`/driver/${id}`);
   };
+
+  //견적대기 항목 추가
+  if (pendingMoverList && moverList) {
+    for (let i = 0; i < pendingMoverList.list.length; i++) {
+      const pendingMover = pendingMoverList.list[i];
+      const matchedMover = moverList.list.find((mover) => {
+        return mover.id === pendingMover.moverId;
+      });
+
+      if (matchedMover && !matchedMover.serviceType.includes('WAITING')) {
+        matchedMover.serviceType.push('WAITING');
+      }
+    }
+  }
 
   const renderFilters = () => (
     <>
@@ -204,6 +228,7 @@ const SearchDriver = () => {
             type='dibs'
             styles='small'
             onClick={() => handleMoverCardClick(user.moverId)}
+            count={2}
           />
         ))}
       </div>
@@ -231,6 +256,15 @@ const SearchDriver = () => {
             ),
           }}
           onClick={() => handleDriverCardClick(user.id)}
+          count={
+            mobileWithChipSearDriver
+              ? 4
+              : mobileWithChipSearDriverSecond
+                ? 4
+                : mobileWithChipSearDriveLast
+                  ? 3
+                  : 6
+          }
         />
       ))}
     </div>
