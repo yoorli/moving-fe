@@ -109,7 +109,7 @@ export default function UserEditProfilePage() {
             'Content-Type': 'multipart/form-data',
           },
         });
-        alert('프로필 수정이 완료 되었습니다.');
+        alert('프로필 수정이 완료되었습니다.');
         window.location.href = '/';
       } catch (e) {
         if (isAxiosError(e)) {

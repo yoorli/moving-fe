@@ -160,9 +160,18 @@ export const translateServiceReverseType = (
   );
 };
 
-// 가능한 서비스 지역 번역(영 -> 한)
+// 가능한 서비스 지역 번역(한 -> 영)
 export const translateServiceReverseRegion = (
   serviceRegion: string,
 ): string => {
   return serviceRegionReverseMapper[serviceRegion];
+};
+
+export const translateServiceReverseRegionArray = (
+  serviceRegion: string[],
+): string[] => {
+  return (
+    serviceRegion.map((region) => serviceRegionReverseMapper[region]) ||
+    '알 수 없는 지역'
+  );
 };

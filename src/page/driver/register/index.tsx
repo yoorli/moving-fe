@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TextBtn } from '../../../components/page/edit/EditBtn';
 import DriverregisterMid from './components/Mid';
 import style from './index.module.css';
 import { DriverRegisterFormValue, DriverRegisterValidation } from './type';
 import { driverRegisterValidation } from '../../../lib/function/validation';
 import { ServiceRegion } from '../../../components/page/register/Region';
+import { translateServiceReverseRegionArray } from '../../../lib/function/utils';
+import { auth } from '../../../lib/api/auth';
+import { isAxiosError } from 'axios';
+import { AuthContext } from '../../../context/authContext';
 
 export default function DriverRegisterPage() {
+  const {
+    userValue: { user, isPending },
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!isPending && user && user?.Mover?.profileImage) {
+      window.location.href = '/';
+    }
+  }, [user, isPending]);
+
   const [preview, setPreview] = useState<string | undefined>();
   const [values, setValues] = useState<DriverRegisterFormValue>({
     image: null,
-    name: '',
+    name: '', // 별명입니다.
     history: '',
     introduce_detail: '',
     introduce_simple: '',
@@ -108,6 +122,62 @@ export default function DriverRegisterPage() {
       [name]: driverRegisterValidation(name, value),
     });
   };
+
+  const [isLoginPending, setIsLoginPending] = useState<boolean>(false);
+  const profileRegister = async () => {
+    if (
+      validation.name &&
+      validation.history &&
+      validation.introduce_simple &&
+      validation.introduce_detail &&
+      validation.region &&
+      !!values.name &&
+      !!values.history &&
+      !!values.introduce_simple &&
+      !!values.introduce_detail &&
+      values.region.length > 0 &&
+      (!!values.small || !!values.house || !!values.office)
+    ) {
+      const keys = Object.keys(values) as [];
+      const formData = {
+        profileImage: values.image,
+        serviceType: keys
+          .filter((data) => {
+            const service = ['office', 'small', 'house'];
+            return service.includes(data);
+          })
+          .filter((data) => {
+            return values[data] === 'on';
+          })
+          .map((data) => (data as string).toUpperCase()),
+        region: translateServiceReverseRegionArray(values.region as string[]),
+        nickname: values.name,
+        career: values.history,
+        summanry: values.introduce_simple,
+        description: values.introduce_detail,
+      };
+      try {
+        setIsLoginPending(true);
+        await auth.patch('/mover/profile', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        alert('회원가입이 완료되었습니다.');
+        window.location.href = '/';
+      } catch (e) {
+        if (isAxiosError(e)) {
+          const data = e.response?.data;
+
+          alert(data);
+        }
+      } finally {
+        setIsLoginPending(false);
+      }
+    } else {
+      return;
+    }
+  };
   return (
     <div className={style.container}>
       <div className={style.wrapper}>
@@ -120,13 +190,14 @@ export default function DriverRegisterPage() {
         <DriverregisterMid
           values={values}
           validation={validation}
-          preview={preview}
+          preview={preview ?? user?.Mover?.profileImage}
           inputHeandler={inputHeandler}
           textAreaHeandler={textAreaHeandler}
         />
         <div className={style.bottom}>
           <TextBtn
-            text='시작하기'
+            onClick={profileRegister}
+            text={isLoginPending ? 'loading...' : '시작하기'}
             validation={
               validation.name &&
               validation.history &&

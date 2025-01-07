@@ -40,13 +40,14 @@ export default function DriverregisterMid({
         <ImgUpload preview={preview} inputHeandler={inputHeandler} />
         <hr className={style.rightLine} />
         <NomalInputComponent
-          title='경력*'
+          title='경력(년)*'
           placeholder='경력을 입력해 주세요'
           value={values.history}
           name='history'
           inputHeandler={inputHeandler}
           validation={validation.history}
-          errorMessage='8자리 이상 입력해 주세요.'
+          type='number'
+          errorMessage='경력을 입력해 주세요.'
         />
         <hr className={style.rightLine} />
         <NomalInputComponent
