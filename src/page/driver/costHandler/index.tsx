@@ -130,7 +130,7 @@ export default function DriverCostHandlerPage() {
   };
 
   useEffect(() => {
-    const itemsPerPage = isTablet || isMobile ? 3 : 6;
+    const itemsPerPage = isPc ? 6 : isTablet ? 4 : 3;
     if (itemsPerPage !== pageState.first.itemsPerPage) {
       setPageState((prevState) => {
         const updatedState = { ...prevState };
@@ -193,7 +193,13 @@ export default function DriverCostHandlerPage() {
                 <div key={index} className={style.card}>
                   <UserCard
                     list={user}
-                    type={currentTab === 'third' ? undefined : 'confirmedCost'}
+                    type={
+                      currentTab === 'third'
+                        ? undefined
+                        : currentTab === 'second'
+                          ? 'confirmedCost'
+                          : 'allCost'
+                    }
                   />
                   {user.comment && (
                     <div

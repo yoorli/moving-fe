@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import style from './Mid.module.css';
 
@@ -8,6 +8,7 @@ import {
 } from '../../../../components/input/AuthInput';
 
 import { DriverEditInfoForm, DriverEditInfoValidation } from '../type';
+import { AuthContext } from '../../../../context/authContext';
 
 type Props = {
   values: DriverEditInfoForm;
@@ -21,6 +22,10 @@ export default function DriverregisterMid({
   values,
   validation,
 }: Props) {
+  const {
+      userValue: { user },
+    } = useContext(AuthContext);
+
   return (
     <div className={style.mid}>
       <div className={style.left}>
@@ -31,17 +36,16 @@ export default function DriverregisterMid({
           name='name'
           inputHeandler={inputHeandler}
           validation={validation.name}
-          errorMessage='2글자 이상, 10자 이하로 입력해주세요.'
+          errorMessage='성함을 입력해주세요.'
         />
         <hr className={style.rightLine} />
         <NomalInputComponent
           title='이메일'
-          placeholder='이메일을 입력해 주세요'
-          value={values.email}
+          placeholder={`${user?.email ?? 'loading...'}`}
           name='email'
           inputHeandler={inputHeandler}
-          validation={validation.email}
           errorMessage='이메일 형식이 아닙니다.'
+          readonly={true}
         />
         <hr className={style.rightLine} />
         <NomalInputComponent

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   InvisibleInputComponent,
   NomalInputComponent,
@@ -6,6 +6,7 @@ import {
 
 import style from './Mid.module.css';
 import { UserEditInfoFormValidation, UserEditInfoFormValues } from '../type';
+import { AuthContext } from '../../../../context/authContext';
 
 export default function EditMidComponent({
   values,
@@ -16,6 +17,9 @@ export default function EditMidComponent({
   validation: UserEditInfoFormValidation;
   inputHeandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
+  const {
+    userValue: { user },
+  } = useContext(AuthContext);
   return (
     <div className={style.mid}>
       <div className={style.left}>
@@ -31,12 +35,11 @@ export default function EditMidComponent({
         <hr className={style.rightLine} />
         <NomalInputComponent
           title='이메일'
-          placeholder='이메일을 입력해 주세요'
-          value={values.email}
+          placeholder={`${user?.email ?? 'loading...'}`}
           name='email'
           inputHeandler={inputHeandler}
-          validation={validation.email}
           errorMessage='이메일 형식이 아닙니다.'
+          readonly={true}
         />
         <hr className={style.rightLine} />
         <NomalInputComponent

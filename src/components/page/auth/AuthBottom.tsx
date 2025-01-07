@@ -22,19 +22,41 @@ export const UserLoginBottom = () => {
       <div className={style.snsIcon}>
         {pc ? (
           <>
-            <img src={google} alt='' />
-            <a href='https://moving-be-render.onrender.com/user/kakao?userType=CUSTOMER'>
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/google?userType=CUSTOMER`}
+            >
+              <img src={google} alt='' />
+            </a>
+
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=CUSTOMER`}
+            >
               <img src={kakao} alt='' />
             </a>
-            <img src={naver} alt='' />
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/naver?userType=CUSTOMER`}
+            >
+              <img src={naver} alt='' />
+            </a>
           </>
         ) : (
           <>
-            <img src={googleMedium} alt='' />
-            <a href='https://moving-be-render.onrender.com/user/kakao?userType=CUSTOMER'>
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/google?userType=CUSTOMER`}
+            >
+              <img src={googleMedium} alt='' />
+            </a>
+
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=CUSTOMER`}
+            >
               <img src={kakaoMedium} alt='' />
             </a>
-            <img src={naverMedium} alt='' />
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/naver?userType=CUSTOMER`}
+            >
+              <img src={naverMedium} alt='' />
+            </a>
           </>
         )}
       </div>
@@ -50,19 +72,41 @@ export const DriverLoginBottom = () => {
       <div className={style.snsIcon}>
         {pc ? (
           <>
-            <img src={google} alt='' />
-            <a href='https://moving-be-render.onrender.com/user/kakao?userType=MOVER'>
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/google?userType=MOVER`}
+            >
+              <img src={google} alt='' />
+            </a>
+
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=MOVER`}
+            >
               <img src={kakao} alt='' />
             </a>
-            <img src={naver} alt='' />
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/naver?userType=MOVER`}
+            >
+              <img src={naver} alt='' />
+            </a>
           </>
         ) : (
           <>
-            <img src={googleMedium} alt='' />
-            <a href='https://moving-be-render.onrender.com/user/kakao?userType=MOVER'>
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/google?userType=MOVER`}
+            >
+              <img src={googleMedium} alt='' />
+            </a>
+
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=MOVER`}
+            >
               <img src={kakaoMedium} alt='' />
             </a>
-            <img src={naverMedium} alt='' />
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/naver?userType=MOVER`}
+            >
+              <img src={naverMedium} alt='' />
+            </a>
           </>
         )}
       </div>
@@ -78,19 +122,41 @@ export const UserSignupBottom = () => {
       <div className={style.snsIcon}>
         {pc ? (
           <>
-            <img src={google} alt='' />
-            <a href='https://moving-be-render.onrender.com/user/kakao?userType=CUSTOMER'>
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/google?userType=CUSTOMER`}
+            >
+              <img src={google} alt='' />
+            </a>
+
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=CUSTOMER`}
+            >
               <img src={kakao} alt='' />
             </a>
-            <img src={naver} alt='' />
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=CUSTOMER`}
+            >
+              <img src={naver} alt='' />
+            </a>
           </>
         ) : (
           <>
-            <img src={googleMedium} alt='' />
-            <a href='https://moving-be-render.onrender.com/user/kakao?userType=CUSTOMER'>
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/google?userType=CUSTOMER`}
+            >
+              <img src={googleMedium} alt='' />
+            </a>
+
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=CUSTOMER`}
+            >
               <img src={kakaoMedium} alt='' />
             </a>
-            <img src={naverMedium} alt='' />
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=CUSTOMER`}
+            >
+              <img src={naverMedium} alt='' />
+            </a>
           </>
         )}
       </div>
@@ -106,19 +172,39 @@ export const DriverSignupBottom = () => {
       <div className={style.snsIcon}>
         {pc ? (
           <>
-            <img src={google} alt='' />
-            <a href='https://moving-be-render.onrender.com/user/kakao?userType=MOVER'>
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/google?userType=MOVER`}
+            >
+              <img src={google} alt='' />
+            </a>
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=MOVER`}
+            >
               <img src={kakao} alt='' />
             </a>
-            <img src={naver} alt='' />
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=MOVER`}
+            >
+              <img src={naver} alt='' />
+            </a>
           </>
         ) : (
           <>
-            <img src={googleMedium} alt='' />
-            <a href='https://moving-be-render.onrender.com/user/kakao?userType=MOVER'>
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/google?userType=MOVER`}
+            >
               <img src={kakaoMedium} alt='' />
             </a>
-            <img src={naverMedium} alt='' />
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/kakao?userType=MOVER`}
+            >
+              <img src={kakaoMedium} alt='' />
+            </a>
+            <a
+              href={`${process.env.REACT_APP_API_URL}/user/naver?userType=MOVER`}
+            >
+              <img src={naverMedium} alt='' />
+            </a>
           </>
         )}
       </div>

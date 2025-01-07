@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import style from './DriverLayout.module.css';
 import { DriverNav } from '../components/nav/Nav';
 import { DriverMenuModal } from '../components/nav/NavMenuModal';
@@ -8,6 +8,8 @@ import { HelmetProvider } from 'react-helmet-async';
 import { AuthContext } from '../context/authContext';
 
 export default function DriverLayout() {
+  const nav = useNavigate();
+  const { pathname } = useLocation();
   const {
     userValue: { user, isPending },
   } = useContext(AuthContext);
@@ -18,6 +20,17 @@ export default function DriverLayout() {
       }
     }
   }, [user, isPending]);
+
+  useEffect(() => {
+    if (
+      !isPending &&
+      user?.Mover &&
+      user?.Mover?.serviceRegion.length <= 0 &&
+      user?.Mover?.serviceType.length <= 0
+    ) {
+      nav('/driver/register');
+    }
+  }, [pathname]);
 
   const menuRef = useRef<HTMLDivElement | null>(null);
   const profileRef = useRef<HTMLDivElement | null>(null);
