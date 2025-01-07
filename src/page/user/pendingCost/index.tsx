@@ -30,8 +30,6 @@ export default function PendingCost() {
   const { mutate } = useDeleteEstimateReq();
   const { mutate: confirmEstimate } = useUpdateEstimateConfirmed();
 
-  console.log(data);
-
   const renderTabs = () => (
     <Tab
       selectable={true}
