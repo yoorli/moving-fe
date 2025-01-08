@@ -87,6 +87,12 @@
   font-weight: 600;
 }
 
+.mobileBorder {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid #f2f2f2;
+}
+
 .section {
   margin-top: 40px;
 }
@@ -112,6 +118,7 @@
   line-height: 32px;
   color: #1f1f1f;
   margin-bottom: 32px;
+  margin-top: 24px;
 }
 
 .description {
@@ -195,4 +202,3 @@
     display: none;
   }
 }
-
