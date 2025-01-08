@@ -8,6 +8,7 @@ import { useGetEstimate } from '../../../lib/useQueries/estimate';
 import useDirection from '../../../lib/function/direction';
 import CostInfo from '../../../components/costInfo/CostInfo';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import ModalContainer from '../../../components/modal/ModalContainer';
 
 export default function ReceivedCostDetail() {
   const { direction_pendingCost, direction_receivedCost } = useDirection();
@@ -19,7 +20,11 @@ export default function ReceivedCostDetail() {
 
   const { id } = useParams<{ id: string }>();
 
-  const { data, isLoading } = useGetEstimate(id ?? '');
+  const { data, isLoading, error } = useGetEstimate(id ?? '');
+
+  const modalBtnClick = () => {
+    window.location.reload();
+  };
 
   return (
     <>
@@ -61,6 +66,17 @@ export default function ReceivedCostDetail() {
             )}
           </div>
         </div>
+        {error && (
+          <ModalContainer
+            title='에러 메시지'
+            isText={true}
+            text={error.message}
+            buttonText='확인'
+            closeBtnClick={() => modalBtnClick()}
+            buttonClick={modalBtnClick}
+            btnColorRed={true}
+          />
+        )}
       </div>
     </>
   );

@@ -42,7 +42,10 @@ export function NotificationModal({ modalController, user }: Props) {
 
     const notificationId = notification.id;
 
-    if (notification.estimateRequestId) {
+    if (notification.assignedEstimateRequestId) {
+      mutate(notificationId);
+      if (user.userType === 'MOVER') direction_driverCostCall();
+    } else if (notification.estimateRequestId) {
       mutate(notificationId);
       if (user.userType === 'CUSTOMER') direction_pendingCost();
       else direction_costHandler();
@@ -51,9 +54,6 @@ export function NotificationModal({ modalController, user }: Props) {
       if (user.userType === 'CUSTOMER')
         direction_userCostDetail(notification.estimateId);
       else direction_costHandler();
-    } else if (notification.assignedEstimateRequestId) {
-      mutate(notificationId);
-      if (user.userType === 'MOVER') direction_driverCostCall();
     }
   };
 

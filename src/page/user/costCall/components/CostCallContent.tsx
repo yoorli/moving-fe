@@ -65,16 +65,20 @@ export default function UserCostCallPage({
     values.departure !== null
   );
 
-  const { mutate } = useCreateEstimateReq();
+  const { mutate, error } = useCreateEstimateReq();
 
   const modalBtnClick = () => {
     setIsSubmitted(true);
     setIsModalOpen(false);
-    mutate(values, {
-      onSuccess: () => {
-        redirect();
-      },
-    });
+    if (!error) {
+      mutate(values, {
+        onSuccess: () => {
+          redirect();
+        },
+      });
+    } else {
+      redirect();
+    }
   };
 
   return (
@@ -123,6 +127,17 @@ export default function UserCostCallPage({
           buttonText='견적 확정하기'
           closeBtnClick={() => setIsModalOpen(false)}
           buttonClick={modalBtnClick}
+        />
+      )}
+      {error && (
+        <ModalContainer
+          title='에러 메시지'
+          isText={true}
+          text={error.message}
+          buttonText='확인'
+          closeBtnClick={() => setIsModalOpen(false)}
+          buttonClick={modalBtnClick}
+          btnColorRed={true}
         />
       )}
     </div>
