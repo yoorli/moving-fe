@@ -17,6 +17,7 @@ import { useToggleFavoriteMover } from '../../../lib/useQueries/favorite';
 import { useMedia } from '../../../lib/function/useMediaQuery';
 import { EstimateConsumer } from '../../../types/apiTypes';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import SnsShare from '../../../components/snsShare/SnsShare';
 
 const CostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -128,8 +129,17 @@ const CostDetail = () => {
             showPrice={false}
             count={mobileWithChipCostDetail ? 3 : 6}
           />
+
+          {isMobileView && estimate.isReqConfirmed && (
+            <>
+              <div className={style.border}></div>
+              <div className={style.mobileSpacing}></div>
+              <SnsShare nickname={estimate.moverName} type="shareEstimate" />
+              <div className={style.border}></div>
+            </>
+          )}
+
           <div className={style.section}>
-            <div className={style.border}></div>
             <h2 className={style.sectionTitle}>견적가</h2>
             <p className={style.costValue}>
               {estimate.price != null
@@ -157,7 +167,11 @@ const CostDetail = () => {
         {!isMobileView && (
           <div className={style.rightFilters}>
             {estimate.isReqConfirmed ? (
-              <p className={style.shareEstimateText}>견적서 공유하기</p>
+              <>
+                <div className={style.snsShareDesktop}>
+                <SnsShare nickname={estimate.moverName} type="shareEstimate" />
+                </div>
+              </>
             ) : (
               <>
                 <Button
@@ -178,6 +192,10 @@ const CostDetail = () => {
                   disabled={isConfirmed}
                   onClick={handleConfirmClick}
                 />
+                <div className={style.border}></div>
+                <div className={style.snsShareDesktop}>
+                <SnsShare nickname={estimate.moverName} type="shareEstimate" />
+                </div>
               </>
             )}
           </div>
@@ -198,4 +216,3 @@ const CostDetail = () => {
 };
 
 export default CostDetail;
-
