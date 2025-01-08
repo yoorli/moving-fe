@@ -166,6 +166,7 @@ export default function CallList({ list }: CallListProps) {
                 text='반려 사유를 입력해 주세요'
                 basicText='최소 10자 이상 입력해주세요'
                 isTextArea={true}
+                limit={10}
                 onChange={(value) => setComment(String(value))}
                 setIsBtnActive={setIsBtnActive}
               />
