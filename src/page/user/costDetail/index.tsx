@@ -122,7 +122,13 @@ const CostDetail = () => {
       </div>
 
       <div className={style.container}>
-        <div className={style.leftFilters}>
+        <div
+          className={`${style.leftFilters} ${
+            isMobileView && !estimate.isReqConfirmed
+              ? style.isReqNotConfirmed
+              : ''
+          }`}
+        >
           <DriverCard
             list={estimate}
             type='cost'
@@ -130,11 +136,12 @@ const CostDetail = () => {
             count={mobileWithChipCostDetail ? 3 : 6}
           />
 
-          {isMobileView && estimate.isReqConfirmed && (
+          {isMobileView && (
             <>
               <div className={style.border}></div>
-              <div className={style.mobileSpacing}></div>
-              <SnsShare nickname={estimate.moverName} type="shareEstimate" />
+              <div style={{ height: '24px' }}></div>
+              <SnsShare nickname={estimate.moverName} type='shareEstimate' />
+              <div style={{ height: '24px' }}></div>
               <div className={style.border}></div>
             </>
           )}
@@ -153,6 +160,7 @@ const CostDetail = () => {
             <p className={style.comment}>
               {estimate.moverComment || '기사님의 코멘트입니다.'}
             </p>
+            <div className={style.border}></div>
             <div className={style.costInfoWrapper}>
               <CostInfo {...costInfoData} />
             </div>
@@ -169,7 +177,10 @@ const CostDetail = () => {
             {estimate.isReqConfirmed ? (
               <>
                 <div className={style.snsShareDesktop}>
-                <SnsShare nickname={estimate.moverName} type="shareEstimate" />
+                  <SnsShare
+                    nickname={estimate.moverName}
+                    type='shareEstimate'
+                  />
                 </div>
               </>
             ) : (
@@ -192,10 +203,10 @@ const CostDetail = () => {
                   disabled={isConfirmed}
                   onClick={handleConfirmClick}
                 />
-                <div className={style.border}></div>
-                <div className={style.snsShareDesktop}>
-                <SnsShare nickname={estimate.moverName} type="shareEstimate" />
-                </div>
+                <div style={{ height: '40px' }}></div>
+                <div style={{ border: '1px solid #FAFAFA', width: '100%' }}></div>
+                <div style={{ height: '40px' }}></div>
+                <SnsShare nickname={estimate.moverName} type='shareEstimate' />
               </>
             )}
           </div>
@@ -216,3 +227,4 @@ const CostDetail = () => {
 };
 
 export default CostDetail;
+
