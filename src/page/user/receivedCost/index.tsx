@@ -7,12 +7,13 @@ import { useGetEstimateReqList } from '../../../lib/useQueries/estimateReq';
 import Pagination from '../../../components/pagination/Pagination';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 import NoContents from '../../../components/noContents/NoContents';
+import ModalContainer from '../../../components/modal/ModalContainer';
 
 export default function ReceivedCost() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('second');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading } = useGetEstimateReqList({
+  const { data, isLoading, error } = useGetEstimateReqList({
     page: currentPage,
     pageSize: 8,
   });
@@ -27,6 +28,10 @@ export default function ReceivedCost() {
     direction_receivedCostDetail,
     direction_costCall,
   } = useDirection();
+
+  const modalBtnClick = () => {
+    window.location.reload();
+  };
 
   return (
     <>
@@ -70,6 +75,17 @@ export default function ReceivedCost() {
               />
             )}
           </div>
+        )}
+        {error && (
+          <ModalContainer
+            title='에러 메시지'
+            isText={true}
+            text={error.message}
+            buttonText='확인'
+            closeBtnClick={() => modalBtnClick()}
+            buttonClick={modalBtnClick}
+            btnColorRed={true}
+          />
         )}
       </div>
     </>
