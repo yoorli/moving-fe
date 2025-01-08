@@ -30,9 +30,10 @@ interface User {
 
 interface CallListProps {
   list: User[];
+  refetchList: () => void;
 }
 
-export default function CallList({ list }: CallListProps) {
+export default function CallList({ list, refetchList }: CallListProps) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달
   const [modalContent, setModalContent] = useState(true); // true : 견적보내기 / false : 반려
   const [isCommentOpen, setIsCommentOpen] = useState(false); // 요구사항
@@ -78,12 +79,33 @@ export default function CallList({ list }: CallListProps) {
         estimateRequestId: user.estimateReqId,
         price: estimatePrice,
         comment: comment,
-      });
+      },
+      {
+        onSuccess: () => {
+          refetchList(); // 데이터 갱신
+          setIsModalOpen(false);
+          resetModalState();
+        },
+        onError: () => {
+          alert('견적 보내기에 실패했습니다.');
+        },
+      },
+    );
     } else {
-      updateEstimateReject(user.estimateReqId);
+      updateEstimateReject(user.estimateReqId, {
+        onSuccess: () => {
+          refetchList(); // 데이터 갱신
+          setIsModalOpen(false);
+          resetModalState();
+        },
+        onError: () => {
+          alert('요청 반려에 실패했습니다.');
+        },
+      });
     }
+  };
 
-    setIsModalOpen(false);
+  const resetModalState = () => {
     setEstimatePrice(0);
     setComment('');
     setIsBtnActive([false, false]);
