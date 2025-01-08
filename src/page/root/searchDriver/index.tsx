@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useGetMoverList } from '../../../lib/useQueries/driver';
 import { useGetFavoriteMover } from '../../../lib/useQueries/favorite';
 import Tab from '../../../components/tab/Tab';
@@ -35,6 +35,19 @@ const SORT_OPTIONS = [
 ];
 
 const SearchDriver = () => {
+  const { userValue } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const {
+    mobileWithChipSearDriver,
+    mobileWithChipSearDriverSecond,
+    mobileWithChipSearDriveLast,
+  } = useMedia();
+
+  const [page, setPage] = useState<number>(1);
+  const [movers, setMovers] = useState<Mover[]>([]);
+  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
+  const [pendingKeyword, setPendingKeyword] = useState<string>('');
   const [openFilter, setOpenFilter] = useState<string | null>(null);
   const [selectedRegionLabel, setSelectedRegionLabel] =
     useState<string>('지역');
@@ -50,14 +63,6 @@ const SearchDriver = () => {
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(
     window.innerWidth <= 744,
   );
-  const { userValue } = useContext(AuthContext);
-  const {
-    mobileWithChipSearDriver,
-    mobileWithChipSearDriverSecond,
-    mobileWithChipSearDriveLast,
-  } = useMedia();
-
-  const navigate = useNavigate();
 
   const queryParams = {
     sortBy: sortOption,
@@ -70,15 +75,26 @@ const SearchDriver = () => {
       selectedServiceLabel !== '서비스'
         ? translations[selectedServiceLabel]
         : undefined,
+    page,
+    limit: 10,
   };
 
   const { data: moverList, isLoading: isMoverLoading } =
     useGetMoverList(queryParams);
-
   const { data: favoriteMoverData, isLoading: isFavoriteLoading } =
     useGetFavoriteMover();
-
   const { data: pendingMoverList } = useGetPendingEstimate();
+
+  useEffect(() => {
+    if (
+      !userValue?.isPending &&
+      userValue?.user?.Customer &&
+      userValue?.user?.Customer?.region === 'NULL' &&
+      userValue?.user?.Customer?.serviceType.length <= 0
+    ) {
+      navigate('/user/register');
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -89,8 +105,72 @@ const SearchDriver = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    if (moverList) {
+      setMovers((prevMovers) => {
+        if (page === 1) {
+          return moverList.list;
+        }
+        return [...prevMovers, ...moverList.list]; // 페이지가 증가하면 데이터를 누적
+      });
+      setHasNextPage(moverList.currentPage < moverList.totalPages);
+    }
+  }, [moverList, page]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        if (hasNextPage) {
+          handleLoadMore(); // 스크롤이 맨 아래에 도달하면 다음 페이지 로드
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasNextPage]);
+
+  useEffect(() => {
+    if (pendingMoverList && moverList) {
+      for (let i = 0; i < pendingMoverList.list.length; i++) {
+        const pendingMover = pendingMoverList.list[i];
+        const matchedMover = moverList.list.find((mover) => {
+          return mover.id === pendingMover.moverId;
+        });
+
+        if (matchedMover && !matchedMover.serviceType.includes('WAITING')) {
+          matchedMover.serviceType.push('WAITING');
+        }
+      }
+    }
+  }, [pendingMoverList, moverList]);
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchKeyword(e.target.value);
+    setPendingKeyword(e.target.value);
+  };
+
+  const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setSearchKeyword(pendingKeyword); // 검색 실행
+      setPage(1);
+      setMovers([]);
+    }
+  };
+
+  const handleLoadMore = () => {
+    console.log('현재 페이지:', page);
+    console.log('다음 페이지 존재:', hasNextPage);
+
+    if (hasNextPage) {
+      setPage((prevPage) => {
+        const nextPage = prevPage + 1;
+        console.log('다음 페이지로 이동:', nextPage);
+        return nextPage;
+      });
+    }
   };
 
   const handleSelect = (type: string, label: string) => {
@@ -116,23 +196,9 @@ const SearchDriver = () => {
   };
 
   const handleMoverCardClick = (id: number | undefined) => {
-    if (id === undefined) return; // id가 undefined인 경우 클릭 무시
+    if (id === undefined) return;
     navigate(`/driver/${id}`);
   };
-
-  //견적대기 항목 추가
-  if (pendingMoverList && moverList) {
-    for (let i = 0; i < pendingMoverList.list.length; i++) {
-      const pendingMover = pendingMoverList.list[i];
-      const matchedMover = moverList.list.find((mover) => {
-        return mover.id === pendingMover.moverId;
-      });
-
-      if (matchedMover && !matchedMover.serviceType.includes('WAITING')) {
-        matchedMover.serviceType.push('WAITING');
-      }
-    }
-  }
 
   const renderFilters = () => (
     <>
@@ -162,7 +228,10 @@ const SearchDriver = () => {
         isOpen={openFilter === FILTER_TYPES.SORT}
         onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
         onSelect={handleSortSelect}
-        className={style.sortDropdown}
+        className={`${style.sortDropdown} ${
+          openFilter === FILTER_TYPES.SORT ? style.dropdownOpen : ''
+        }`}
+        hasWrapper={window.innerWidth > 1199}
       />
     </>
   );
@@ -205,7 +274,7 @@ const SearchDriver = () => {
       <div className={style.favoriteDriversContainer}>
         {favoriteMoverList.slice(0, 3).map((user: Mover) => (
           <DriverCard
-            key={user.id}
+            key={`${user.id}-${user.moverId || 'no-moverId'}`}
             list={{
               ...user,
               profileImg: user.profileImg || undefined,
@@ -223,40 +292,44 @@ const SearchDriver = () => {
     );
   };
 
-  const renderDriverCards = () => (
-    <div
-      className={`${style.cardContainer} ${
-        isMediumScreen
-          ? isSmallScreen
-            ? style.smallScreen
-            : style.compact
-          : style.rightFilters
-      }`}
-    >
-      {moverList?.list.map((user: Mover) => (
-        <DriverCard
-          key={user.id}
-          list={{
-            ...user,
-            profileImg: user.profileImg || undefined,
-            serviceType: user.serviceType.map(
-              (type: string) => type as ChipProps['type'],
-            ),
-          }}
-          onClick={() => handleDriverCardClick(user.id)}
-          count={
-            mobileWithChipSearDriver
-              ? 4
-              : mobileWithChipSearDriverSecond
+  const renderDriverCards = () => {
+    console.log('기사님 카드:', { movers, hasNextPage });
+
+    return (
+      <div
+        className={`${style.cardContainer} ${
+          isMediumScreen
+            ? isSmallScreen
+              ? style.smallScreen
+              : style.compact
+            : style.rightFilters
+        }`}
+      >
+        {movers.map((user: Mover) => (
+          <DriverCard
+            key={`${user.id}-${user.moverId || 'no-moverId'}`}
+            list={{
+              ...user,
+              profileImg: user.profileImg || undefined,
+              serviceType: user.serviceType.map(
+                (type: string) => type as ChipProps['type'],
+              ),
+            }}
+            onClick={() => handleDriverCardClick(user.id)}
+            count={
+              mobileWithChipSearDriver
                 ? 4
-                : mobileWithChipSearDriveLast
-                  ? 3
-                  : 6
-          }
-        />
-      ))}
-    </div>
-  );
+                : mobileWithChipSearDriverSecond
+                  ? 4
+                  : mobileWithChipSearDriveLast
+                    ? 3
+                    : 6
+            }
+          />
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className={style.outerContainer}>
@@ -302,23 +375,36 @@ const SearchDriver = () => {
                   {renderFavoriteDrivers()}
                 </div>
                 <div className={style.rightFilters}>
-                  <SortDropdown
-                    placeholder={
-                      SORT_OPTIONS.find((option) => option.value === sortOption)
-                        ?.label || '리뷰 많은순'
-                    }
-                    options={SORT_OPTIONS}
-                    isOpen={openFilter === FILTER_TYPES.SORT}
-                    onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
-                    onSelect={handleSortSelect}
-                  />
-                  {!isMediumScreen && (
-                    <DriverSearch
-                      placeholder='검색어를 입력하세요'
-                      onChange={handleSearchChange}
+                  <div className={style.sortSection}>
+                    <SortDropdown
+                      placeholder={
+                        SORT_OPTIONS.find(
+                          (option) => option.value === sortOption,
+                        )?.label || '리뷰 많은순'
+                      }
+                      options={SORT_OPTIONS}
+                      isOpen={openFilter === FILTER_TYPES.SORT}
+                      onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
+                      onSelect={handleSortSelect}
                     />
+                  </div>
+
+                  {!isMediumScreen && (
+                    <div className={style.searchSection}>
+                      <DriverSearch
+                        placeholder='기사님을 검색하세요'
+                        value={pendingKeyword} // 입력 중인 검색어
+                        onChange={handleSearchChange}
+                        onKeyPress={handleSearchKeyPress}
+                      />
+                    </div>
                   )}
-                  {!isMediumScreen && renderDriverCards()}
+
+                  {!isMediumScreen && (
+                    <div className={style.cardSection}>
+                      {renderDriverCards()}
+                    </div>
+                  )}
                 </div>
               </>
             )}
@@ -326,8 +412,10 @@ const SearchDriver = () => {
           {isMediumScreen && (
             <div className={style.searchBarCompact}>
               <DriverSearch
-                placeholder='검색어를 입력하세요'
+                placeholder='기사님을 검색하세요'
+                value={pendingKeyword} // 입력 중인 검색어
                 onChange={handleSearchChange}
+                onKeyPress={handleSearchKeyPress}
               />
             </div>
           )}

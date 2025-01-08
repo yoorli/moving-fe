@@ -7,10 +7,11 @@ export const CancelBtn = () => {
 type Props = {
   validation: boolean;
   text: string;
+  onClick?: ()=>void
 };
-export const TextBtn = ({ validation, text }: Props) => {
+export const TextBtn = ({ validation, text ,onClick}: Props) => {
   return (
-    <div className={`${style.edit} ${style[validation ? 'complete' : '']}`}>
+    <div onClick={onClick }className={`${style.edit} ${style[validation ? 'complete' : '']}`}>
       {text}
     </div>
   );

@@ -1,5 +1,4 @@
 import DriverCard from '../../../components/card/DriverCard';
-// import { ChipType } from '../../../types/cardTypes';
 import Review from '../../../components/review/Review';
 import Tab from '../../../components/tab/Tab';
 import useDirection from '../../../lib/function/direction';
@@ -9,6 +8,7 @@ import { useGetMoverReviewList } from '../../../lib/useQueries/review';
 import { useState } from 'react';
 import Pagination from '../../../components/pagination/Pagination';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import NoContents from '../../../components/noContents/NoContents';
 
 export default function MyPage() {
   const { direction_driverEditProfile, direction_driverEditInfo } =
@@ -26,6 +26,8 @@ export default function MyPage() {
     return <LoadingSpinner />;
   }
 
+  const totalReviewNum = reviewData?.reviewStats.totalReviews;
+
   return (
     <>
       <Tab firstText='마이페이지' />
@@ -41,8 +43,10 @@ export default function MyPage() {
           {isReviewLoading ? (
             <LoadingSpinner thin={true} />
           ) : reviewError ? (
-            <div>리뷰 데이터를 가져오는 중 오류가 발생...</div>
-          ) : reviewData ? (
+            <div className={style.noContents}>
+              <NoContents image='file' contentText='일시적인 오류로 리뷰를 가져오지 못했습니다!' />
+            </div>
+          ) : reviewData && totalReviewNum !== 0 ? (
             <>
               <Review
                 totalReviews={reviewData.reviewStats.totalReviews}
@@ -73,7 +77,9 @@ export default function MyPage() {
               </div>
             </>
           ) : (
-            <div>리뷰 데이터를 불러오지 못했습니다.</div>
+            <div className={style.noContents}>
+              <NoContents image='file' contentText='아직 리뷰가 없습니다!' />
+            </div>
           )}
         </div>
       </div>

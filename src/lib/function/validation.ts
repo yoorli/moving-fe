@@ -104,7 +104,6 @@ export const signupValidation = (
 export const editValidation = (
   name: string,
   value?: string,
-  oldPassword?: string,
   newPassword?: string,
 ) => {
   if (name === 'name') {
@@ -117,7 +116,7 @@ export const editValidation = (
     return phoneValidation(value);
   }
   if (name === 'currentPassword') {
-    return passwordEqualValidation(value, oldPassword);
+    return passwordValidation(value);
   }
   if (name === 'newPassword') {
     return passwordValidation(value);
@@ -133,7 +132,7 @@ export const driverRegisterValidation = (name: string, value?: string) => {
     return upperLowerValidation(value);
   }
   if (name === 'history') {
-    return upperValidation(value, 8);
+    return upperLowerValidation(value, 2, 1);
   }
   if (name === 'introduce_simple') {
     return upperValidation(value, 8);

@@ -28,8 +28,8 @@ export default function DriverregisterMid({
     <div className={style.mid}>
       <div className={style.left}>
         <NomalInputComponent
-          title='이름*'
-          placeholder='기사님 성함을 입력해 주세요'
+          title='별명*'
+          placeholder='별명을 입력해 주세요'
           value={values.name}
           name='name'
           inputHeandler={inputHeandler}
@@ -40,13 +40,14 @@ export default function DriverregisterMid({
         <ImgUpload preview={preview} inputHeandler={inputHeandler} />
         <hr className={style.rightLine} />
         <NomalInputComponent
-          title='경력*'
+          title='경력(년)*'
           placeholder='경력을 입력해 주세요'
           value={values.history}
           name='history'
           inputHeandler={inputHeandler}
           validation={validation.history}
-          errorMessage='8자리 이상 입력해 주세요.'
+          type='number'
+          errorMessage='경력을 입력해 주세요.'
         />
         <hr className={style.rightLine} />
         <NomalInputComponent

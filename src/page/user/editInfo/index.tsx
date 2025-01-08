@@ -5,11 +5,12 @@ import { editValidation } from '../../../lib/function/validation';
 
 import EditMidComponent from './components/Mid';
 import { UserEditInfoFormValidation, UserEditInfoFormValues } from './type';
+import { auth } from '../../../lib/api/auth';
+import { isAxiosError } from 'axios';
 
 export default function UserEditInfoPage() {
   const [values, setValues] = useState<UserEditInfoFormValues>({
     name: '',
-    email: '',
     phoneNumber: '',
     currentPassword: '',
     newPassword: '',
@@ -18,7 +19,6 @@ export default function UserEditInfoPage() {
 
   const [validation, setValidation] = useState<UserEditInfoFormValidation>({
     name: true,
-    email: true,
     phoneNumber: true,
     currentPassword: true,
     newPassword: true,
@@ -27,7 +27,6 @@ export default function UserEditInfoPage() {
 
   const inputHeandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
-    const oldPassword = 'test1234@';
     const { newPassword } = values; // 비밀번호 확인 용
     setValues({
       ...values,
@@ -36,10 +35,64 @@ export default function UserEditInfoPage() {
 
     setValidation({
       ...validation,
-      [name]: editValidation(name, value, oldPassword, newPassword),
+      [name]: editValidation(name, value, newPassword),
     });
   };
 
+  const [isLoginPending, setIsLoginPending] = useState<boolean>(false);
+
+  const [errorMessage, setErrorMessage] = useState<{
+    password: string;
+  }>({
+    password: '',
+  });
+  const editSubmit = async () => {
+    if (
+      !!values.newPassword &&
+      !!values.name &&
+      !!values.phoneNumber &&
+      !!values.confirmNewPassword &&
+      validation.newPassword &&
+      validation.name &&
+      validation.phoneNumber &&
+      validation.confirmNewPassword
+    ) {
+      const formData = {
+        name: values.name,
+        phoneNumber: values.phoneNumber,
+        usedPassword: values.currentPassword,
+        newPassword: values.newPassword,
+      };
+      try {
+        setIsLoginPending(true);
+        const response = await auth.patch('/customer/info', formData);
+        alert(response.data.message);
+        window.location.href = '/';
+      } catch (e) {
+        if (isAxiosError(e)) {
+          const data = e.response?.data;
+          if (data.type === 'password') {
+            setValidation({
+              ...validation,
+              currentPassword: false,
+            });
+          } else {
+            alert(data.message);
+            window.location.href = '/';
+          }
+
+          setErrorMessage({
+            ...errorMessage,
+            [data.type]: data.message,
+          });
+        }
+      } finally {
+        setIsLoginPending(false);
+      }
+    } else {
+      return;
+    }
+  };
   return (
     <span className={style.container}>
       <div className={style.wrapper}>
@@ -54,16 +107,15 @@ export default function UserEditInfoPage() {
         <div className={style.bottom}>
           <CancelBtn />
           <TextBtn
-            text='수정하기'
+            onClick={editSubmit}
+            text={isLoginPending ? 'loading...' : '수정하기'}
             validation={
               validation.name &&
-              validation.email &&
               validation.phoneNumber &&
               validation.currentPassword &&
               validation.newPassword &&
               validation.confirmNewPassword &&
               !!values.name &&
-              !!values.email &&
               !!values.phoneNumber &&
               !!values.currentPassword &&
               !!values.newPassword &&

@@ -1,6 +1,5 @@
 export type DriverEditInfoForm = {
   name: string;
-  email: string;
   phoneNumber: string;
   currentPassword: string;
   newPassword: string;
@@ -9,7 +8,6 @@ export type DriverEditInfoForm = {
 
 export type DriverEditInfoValidation = {
   name: boolean;
-  email: boolean;
   phoneNumber: boolean;
   currentPassword: boolean;
   newPassword: boolean;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import DriverCard from '../../../components/card/DriverCard';
 import CostDetailBottomTab from '../costDetail/components/CostDetailBottomTab';
 import CostInfo from '../../../components/costInfo/CostInfo';
@@ -13,21 +13,25 @@ import {
   useGetEstimateDetail,
   useUpdateEstimateConfirmed,
 } from '../../../lib/useQueries/estimate';
+import { useToggleFavoriteMover } from '../../../lib/useQueries/favorite';
+import { useMedia } from '../../../lib/function/useMediaQuery';
 import { EstimateConsumer } from '../../../types/apiTypes';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 
 const CostDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: estimate } = useGetEstimateDetail(Number(id), 'consumer') as {
-    data: EstimateConsumer;
-  };
+  const { mobileWithChipCostDetail } = useMedia();
+
+  const { data: estimate, refetch } = useGetEstimateDetail(
+    Number(id),
+    'consumer',
+  ) as { data: EstimateConsumer; refetch: () => void };
+  const toggleFavoriteMutation = useToggleFavoriteMover();
   const { mutate: updateEstimateConfirmed } = useUpdateEstimateConfirmed();
 
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-
-    const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
@@ -37,10 +41,53 @@ const CostDetail = () => {
 
   useEffect(() => {
     if (estimate) {
+      console.log('견적 상세 데이터:', estimate);
       setIsFavorite(estimate.isFavorite);
       setIsConfirmed(estimate.isConfirmed);
     }
   }, [estimate]);
+
+  const handleFavoriteToggle = () => {
+    if (!estimate) return;
+
+    console.log('기사님 찜하기 상태 변경 요청:', {
+      moverId: estimate.moverId,
+      현재찜하기상태: isFavorite,
+    });
+
+    toggleFavoriteMutation.mutate(estimate.moverId, {
+      onSuccess: (data) => {
+        console.log('기사님 찜하기 상태 변경 성공:', data);
+
+        setIsFavorite(data.isFavorite);
+
+        // 상태가 변경되었을 경우에만 refetch 호출
+        if (data.isFavorite !== estimate.isFavorite) {
+          console.log('최신 데이터');
+          refetch();
+        }
+      },
+      onError: (error) => {
+        console.error('기사님 찜하기 상태 변경 실패:', error);
+      },
+    });
+  };
+
+  const handleConfirmClick = () => {
+    if (!isConfirmed) {
+      console.log('견적 확정 요청:', { estimateId: estimate?.estimateId });
+
+      updateEstimateConfirmed(Number(estimate.estimateId), {
+        onSuccess: () => {
+          console.log('견적 확정 성공');
+          setIsConfirmed(true);
+        },
+        onError: (error) => {
+          console.error('견적 확정 실패:', error);
+        },
+      });
+    }
+  };
 
   if (!estimate) {
     return (
@@ -59,31 +106,13 @@ const CostDetail = () => {
     isConfirmed,
     movingRequest: estimate.movingRequest || '정보 없음',
     movingType: estimate.movingType || 'HOUSE',
-    movingDate: estimate.movingDate || '2023-10-15',
+    movingDate: estimate.movingDate || '2025-01-15',
     departure: estimate.departure || '서울특별시 강남구',
     arrival: estimate.arrival || '경기도 성남시',
     comment: estimate.customerComment || '추가 요청 사항 없음',
   };
 
   const shouldShowToast = estimate.isReqConfirmed && !isConfirmed;
-
-  const handleConfirmClick = () => {
-    if (!isConfirmed) {
-      updateEstimateConfirmed(Number(estimate.estimateId), {
-        onSuccess: () => {
-          setIsConfirmed(true); // 성공 시 확정 상태 업데이트
-        },
-        onError: (error) => {
-          console.error('견적 확정 실패:', error); // 실패 시
-        },
-      });
-    }
-  };
-
-  const handleMoverCardClick = (id: number | undefined) => {
-    if (id === undefined) return; // id가 undefined인 경우 클릭 무시
-    navigate(`/driver/${id}`);
-  };
 
   return (
     <div className={style.outerContainer}>
@@ -95,7 +124,9 @@ const CostDetail = () => {
         <div className={style.leftFilters}>
           <DriverCard
             list={estimate}
-            onClick={() => handleMoverCardClick(estimate.moverId)}
+            type='cost'
+            showPrice={false}
+            count={mobileWithChipCostDetail ? 3 : 6}
           />
           <div className={style.section}>
             <div className={style.border}></div>
@@ -112,11 +143,9 @@ const CostDetail = () => {
             <p className={style.comment}>
               {estimate.moverComment || '기사님의 코멘트입니다.'}
             </p>
-
             <div className={style.costInfoWrapper}>
               <CostInfo {...costInfoData} />
             </div>
-
             {shouldShowToast && (
               <div className={style.toastWrapper}>
                 <Toast text='확정하지 않은 견적이에요!' />
@@ -128,18 +157,18 @@ const CostDetail = () => {
         {!isMobileView && (
           <div className={style.rightFilters}>
             {estimate.isReqConfirmed ? (
-              <p className={style.shareText}>견적서 공유하기</p>
+              <p className={style.shareEstimateText}>견적서 공유하기</p>
             ) : (
               <>
                 <Button
-                  text='견적 찜하기'
+                  text='기사님 찜하기'
                   btnStyle='outlined354pxLine200'
                   src={isFavorite ? HeartIcon : HeartEmptyIcon}
                   srcLocationFront
                   className={style.heartButton}
-                  onClick={() => setIsFavorite(!isFavorite)}
+                  onClick={handleFavoriteToggle}
                 />
-                <div style={{ height: '32px' }}></div>
+                <div style={{ height: '32px' }} />
                 <Button
                   text={isConfirmed ? '견적 확정 완료' : '견적 확정하기'}
                   btnStyle={
@@ -158,9 +187,8 @@ const CostDetail = () => {
       {isMobileView && (
         <CostDetailBottomTab
           isFavorite={isFavorite}
-          setIsFavorite={setIsFavorite}
+          handleFavoriteToggle={handleFavoriteToggle}
           isConfirmed={isConfirmed}
-          setIsConfirmed={setIsConfirmed}
           isReqConfirmed={estimate.isReqConfirmed}
           handleConfirmClick={handleConfirmClick}
         />
@@ -170,3 +198,4 @@ const CostDetail = () => {
 };
 
 export default CostDetail;
+

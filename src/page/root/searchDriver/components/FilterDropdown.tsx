@@ -1,3 +1,4 @@
+import React from 'react';
 import style from './FilterDropdown.module.css';
 import activeIcon from '../../../../assets/icons/ic_active_filter.svg';
 import inactiveIcon from '../../../../assets/icons/ic_inactive_filter.svg';
@@ -48,7 +49,7 @@ const FilterDropdown = ({
       </div>
       {isOpen && (
         <div
-          className={`${style.dropdown} ${
+          className={`${style.dropdown} ${isOpen ? style.dropdownOpen : ''} ${
             isRegion ? style.regionDropdown : style.serviceDropdown
           }`}
         >
@@ -68,4 +69,3 @@ const FilterDropdown = ({
 };
 
 export default FilterDropdown;
-

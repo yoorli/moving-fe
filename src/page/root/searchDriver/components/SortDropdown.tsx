@@ -6,9 +6,10 @@ interface SortDropdownProps {
   placeholder: string;
   options: { label: string; value: string }[];
   onSelect: (value: string) => void;
-  isOpen: boolean; // 외부에서 열림 상태를 관리
-  onToggle: () => void; // 외부에서 열림 상태 토글
+  isOpen: boolean;
+  onToggle: () => void;
   className?: string;
+  hasWrapper?: boolean;
 }
 
 const SortDropdown = ({
@@ -18,7 +19,38 @@ const SortDropdown = ({
   isOpen,
   onToggle,
   className = '',
+  hasWrapper = true, // 기본값 true
 }: SortDropdownProps) => {
+  if (!hasWrapper) {
+    // 1199px 이하일 경우
+    return (
+      <div
+        className={`${style.filterBox} ${isOpen ? style.active : ''} ${className}`}
+        onClick={onToggle}
+      >
+        <span className={style.selectedText}>{placeholder}</span>
+        <img src={inactiveIcon} alt="Toggle" className={style.icon} />
+        {isOpen && (
+          <div className={style.dropdown}>
+            {options.map((option, index) => (
+              <div
+                key={index}
+                className={style.dropdownItem}
+                onClick={() => {
+                  onSelect(option.value);
+                  onToggle();
+                }}
+              >
+                {option.label}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // 1200px 이상일 경우
   return (
     <div className={`${style.container} ${className}`}>
       <div
@@ -28,7 +60,6 @@ const SortDropdown = ({
         <span className={style.selectedText}>{placeholder}</span>
         <img src={inactiveIcon} alt="Toggle" className={style.icon} />
       </div>
-
       {isOpen && (
         <div className={style.dropdown}>
           {options.map((option, index) => (
@@ -36,8 +67,8 @@ const SortDropdown = ({
               key={index}
               className={style.dropdownItem}
               onClick={() => {
-                onSelect(option.value); // 선택한 정렬 값 전달
-                onToggle(); // 드롭다운 닫기
+                onSelect(option.value);
+                onToggle();
               }}
             >
               {option.label}
@@ -48,6 +79,7 @@ const SortDropdown = ({
     </div>
   );
 };
+
 
 export default SortDropdown;
 

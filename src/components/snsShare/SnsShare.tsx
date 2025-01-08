@@ -8,6 +8,7 @@ import icShareFacebookLarge from '../../assets/icons/ic_share_facebook_large.svg
 import icShareFacebookMedium from '../../assets/icons/ic_share_facebook_medium.svg';
 import icShareLarge from '../../assets/icons/ic_share_large.svg';
 import icShareMedium from '../../assets/icons/ic_share_medium.svg';
+
 import { useMedia } from '../../lib/function/useMediaQuery';
 import style from './SnsShare.module.css';
 
@@ -21,14 +22,14 @@ const SnsShare = ({ nickname, type, onClick }: SnsShareProps) => {
   const { pc } = useMedia();
   const location = useLocation();
 
-  const url = `http://localhost:3004${location.pathname}`;
+  const url = `https://moving-fe-teal.vercel.app${location.pathname}`;
 
   const handleCopyClipBoard = async (url: string) => {
     try {
       await navigator.clipboard.writeText(url);
       if (onClick) onClick();
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      await navigator.clipboard.writeText('');
     }
   };
 

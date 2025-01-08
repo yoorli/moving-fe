@@ -3,6 +3,7 @@
   max-width: 1920px;
   flex-direction: column;
   width: 100%;
+  overflow: visible;
 }
 
 .noPadding {
@@ -14,6 +15,7 @@
   flex-direction: column;
   padding: 20px 120px;
   position: relative;
+  overflow: visible;
 }
 
 .compactLayout {
@@ -26,7 +28,7 @@
   align-items: flex-start;
   gap: 60px;
   position: relative;
-  z-index: 500; /* 필터 영역이 카드보다 위로 오도록 설정 => 아직 해결이 안됨*/
+  overflow: visible;
 }
 
 .compactFilterRow {
@@ -48,12 +50,12 @@
   flex-direction: row;
   gap: 12px;
   position: relative;
-  z-index: 500; /* 필터 우선순위를 높임 */
 }
 
 .leftFilters {
   max-width: 328px;
   flex: 1;
+  position: relative;
 }
 
 .favoriteDrivers {
@@ -72,15 +74,42 @@
 }
 
 .rightFilters {
-  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   flex: 1;
   position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.sortSection {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 .sortDropdown {
-  margin-left: auto;
   position: relative;
-  z-index: 400;
+}
+
+.dropdownOpen {
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #1b92ff;
+  background-color: #f5faff;
+}
+
+.searchSection {
+  width: 100%;
+  position: relative;
+}
+
+.cardSection {
+  position: relative;
+  z-index: 1;
 }
 
 .searchBarCompact {
@@ -99,22 +128,6 @@
   gap: 48px;
   width: 100%;
   position: relative;
-  z-index: 100;
-}
-
-.cardContainer.rightFilters {
-  margin-top: 0;
-  gap: 48px;
-}
-
-.cardContainer.compact {
-  margin-top: 24px;
-  gap: 30px;
-}
-
-.cardContainer.smallScreen {
-  margin-top: 24px;
-  gap: 24px;
 }
 
 .cardSpacing {
@@ -125,11 +138,10 @@
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 1000;
   background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
-  overflow: hidden;
+  z-index: 10;
 }
 
 .dropdownItem {
@@ -137,10 +149,29 @@
   font-size: 14px;
   color: #333;
   cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .dropdownItem:hover {
-  background-color: #f5f5f5;
+  background-color: #f0f0f0;
+  color: #1f1f1f;
+}
+
+.loadMoreButton {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 @media (max-width: 1199px) and (min-width: 744px) {

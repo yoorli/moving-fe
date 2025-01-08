@@ -34,8 +34,6 @@ export default function MyReview() {
     pageSize: itemsPerPage,
   });
 
-  console.log(isLoading);
-
   // 로딩 중일 때 처리
   if (isLoading) {
     return <LoadingSpinner />;
@@ -50,6 +48,7 @@ export default function MyReview() {
             list={{
               ...review,
               reviewStats: { averageScore: review.score },
+              createAt: `작성일 ${getNotificationDate(review.createAt, 'noSec')}`,
               movingDate: getNotificationDate(review.movingDate, 'noSec'),
             }}
             type='review'
