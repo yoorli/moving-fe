@@ -65,18 +65,18 @@ export default function ReceivedCostDetail() {
               </div>
             )}
           </div>
-          {error && (
-            <ModalContainer
-              title='에러 메시지'
-              isText={true}
-              text={error.message}
-              buttonText='확인'
-              closeBtnClick={() => modalBtnClick()}
-              buttonClick={modalBtnClick}
-              btnColorRed={true}
-            />
-          )}
         </div>
+        {error && (
+          <ModalContainer
+            title='에러 메시지'
+            isText={true}
+            text={error.message}
+            buttonText='확인'
+            closeBtnClick={() => modalBtnClick()}
+            buttonClick={modalBtnClick}
+            btnColorRed={true}
+          />
+        )}
       </div>
     </>
   );
