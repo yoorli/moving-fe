@@ -35,6 +35,8 @@ interface CallListProps {
 
 export default function CallList({ list, refetchList }: CallListProps) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false); // 모달
+  const [error, setError] = useState('');
   const [modalContent, setModalContent] = useState(true); // true : 견적보내기 / false : 반려
   const [isCommentOpen, setIsCommentOpen] = useState(false); // 요구사항
   const [userIndex, setUserIndex] = useState<number>(); // 선택된 카드 index
@@ -75,22 +77,24 @@ export default function CallList({ list, refetchList }: CallListProps) {
     const user = list[userIndex];
 
     if (modalContent) {
-      createEstimate({
-        estimateRequestId: user.estimateReqId,
-        price: estimatePrice,
-        comment: comment,
-      },
-      {
-        onSuccess: () => {
-          refetchList(); // 데이터 갱신
-          setIsModalOpen(false);
-          resetModalState();
+      createEstimate(
+        {
+          estimateRequestId: user.estimateReqId,
+          price: estimatePrice,
+          comment: comment,
         },
-        onError: () => {
-          alert('견적 보내기에 실패했습니다.');
+        {
+          onSuccess: () => {
+            refetchList(); // 데이터 갱신
+            setIsModalOpen(false);
+            resetModalState();
+          },
+          onError: (error) => {
+            setError(error.message)
+            setIsErrorModalOpen(true)
+          },
         },
-      },
-    );
+      );
     } else {
       updateEstimateReject(user.estimateReqId, {
         onSuccess: () => {
@@ -98,11 +102,13 @@ export default function CallList({ list, refetchList }: CallListProps) {
           setIsModalOpen(false);
           resetModalState();
         },
-        onError: () => {
-          alert('요청 반려에 실패했습니다.');
+        onError: (error) => {
+          setError(error.message)
+          setIsErrorModalOpen(true)
         },
       });
     }
+    setIsModalOpen(false)
   };
 
   const resetModalState = () => {
@@ -195,6 +201,17 @@ export default function CallList({ list, refetchList }: CallListProps) {
             )}
           </div>
         </ModalContainer>
+      )}
+      {isErrorModalOpen && (
+        <ModalContainer
+          title='에러 메시지'
+          isText={true}
+          text={error}
+          buttonText='확인'
+          closeBtnClick={() => setIsErrorModalOpen(!isErrorModalOpen)}
+          buttonClick={() => setIsErrorModalOpen(!isErrorModalOpen)}
+          btnColorRed={true}
+        />
       )}
     </div>
   );
