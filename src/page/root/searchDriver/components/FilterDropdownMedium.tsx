@@ -47,7 +47,7 @@ const FilterDropdownMedium = ({
       </div>
       {isOpen && (
         <div
-          className={`${style.dropdown} ${
+          className={`${style.dropdown} ${isOpen ? style.dropdownOpen : ''} ${
             isRegion ? style.regionDropdown : style.serviceDropdown
           }`}
         >

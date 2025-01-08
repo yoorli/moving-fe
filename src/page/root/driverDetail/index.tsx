@@ -19,7 +19,9 @@ import HeartIcon from '../../../assets/icons/ic_full_heart_small.svg';
 import HeartEmptyIcon from '../../../assets/icons/ic_empty_heart_small.svg';
 import ModalContainer from '../../../components/modal/ModalContainer';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import NoContents from '../../../components/noContents/NoContents';
 import { AuthContext } from '../../../context/authContext';
+import { useMedia } from '../../../lib/function/useMediaQuery';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -28,12 +30,7 @@ const DriverDetailPage = () => {
   const { userValue } = useContext(AuthContext);
   const isLoggedIn = !!userValue.user; // 로그인 여부 확인
 
-  const {
-    data: driver,
-    isLoading,
-    error,
-    refetch,
-  } = useGetMoverDetail(Number(id)); // refetch 추가
+  const { data: driver, isLoading, error, refetch } = useGetMoverDetail(Number(id));
   const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
   const { mutate: toggleFavorite } = useToggleFavoriteMover();
 
@@ -44,6 +41,10 @@ const DriverDetailPage = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+
+  const {
+    mobileWithChipDriverDetail
+  } = useMedia();
 
   const {
     data: reviewData,
@@ -133,7 +134,10 @@ const DriverDetailPage = () => {
       <div className={style.noPadding}></div>
       <div className={style.container}>
         <div className={style.leftFilters}>
-          <DriverCard list={transformedDriver} />
+          <DriverCard
+            list={transformedDriver}
+            count={mobileWithChipDriverDetail ? 3 : 6}
+          />
           <div className={style.section}>
             <div className={style.border}></div>
             <h2 className={style.sectionTitle}>상세설명</h2>
@@ -160,8 +164,10 @@ const DriverDetailPage = () => {
             {isReviewLoading ? (
               <div>리뷰 데이터를 로딩 중입니다...</div>
             ) : reviewError ? (
-              <div>리뷰 데이터를 가져오는 중 오류가 발생했습니다.</div>
-            ) : reviewData ? (
+              <div className={style.noContents}>
+                <NoContents image="file" contentText="일시적인 오류로 리뷰를 가져오지 못했습니다!" />
+              </div>
+            ) : reviewData && reviewData.reviewStats.totalReviews !== 0 ? (
               <>
                 <Review
                   totalReviews={reviewData.reviewStats.totalReviews}
@@ -169,7 +175,7 @@ const DriverDetailPage = () => {
                     Object.entries(reviewData.reviewStats.reviewCount).reduce(
                       (acc, [score, count]) =>
                         acc + Number(score) * Number(count),
-                      0,
+                      0
                     ) / reviewData.reviewStats.totalReviews
                   }
                   reviewStats={reviewData.reviewStats.reviewCount}
@@ -192,7 +198,9 @@ const DriverDetailPage = () => {
                 </div>
               </>
             ) : (
-              <div>리뷰 데이터를 불러오지 못했습니다.</div>
+              <div className={style.noContents}>
+                <NoContents image="file" contentText="아직 리뷰가 없습니다!" />
+              </div>
             )}
           </div>
         </div>
@@ -258,3 +266,4 @@ const DriverDetailPage = () => {
 };
 
 export default DriverDetailPage;
+

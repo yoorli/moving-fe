@@ -30,6 +30,14 @@ export function useMedia() {
     query: ' (max-width: 475px)',
   });
 
+  const mobileWithChipDriverDetail = useMediaQuery({
+    query: '(max-width: 420px)',
+  });
+
+  const mobileWithChipCostDetail= useMediaQuery({
+    query: '(max-width: 420px)',
+  });
+
   return {
     pc,
     tablet,
@@ -40,5 +48,7 @@ export function useMedia() {
     mobileWithChipSearDriver,
     mobileWithChipSearDriverSecond,
     mobileWithChipSearDriveLast,
+    mobileWithChipDriverDetail,
+    mobileWithChipCostDetail
   };
 }

@@ -6,25 +6,19 @@ import HeartIcon from '../../../../assets/icons/ic_full_heart_small.svg';
 
 interface CostDetailBottomTabProps {
   isFavorite: boolean;
-  setIsFavorite: React.Dispatch<React.SetStateAction<boolean>>;
+  handleFavoriteToggle: () => void;
   isConfirmed: boolean;
-  setIsConfirmed: React.Dispatch<React.SetStateAction<boolean>>;
   isReqConfirmed: boolean;
   handleConfirmClick: () => void;
 }
 
-function CostDetailBottomTab({
+const CostDetailBottomTab = ({
   isFavorite,
-  setIsFavorite,
+  handleFavoriteToggle,
   isConfirmed,
   isReqConfirmed,
   handleConfirmClick,
-}: CostDetailBottomTabProps) {
-  const handleFavoriteToggle = () => {
-    setIsFavorite(!isFavorite);
-  };
-
-  // isReqConfirmed가 true면 아무것도 렌더링하지 않음
+}: CostDetailBottomTabProps) => {
   if (isReqConfirmed) {
     return null;
   }
@@ -51,7 +45,7 @@ function CostDetailBottomTab({
       </div>
     </div>
   );
-}
+};
 
 export default CostDetailBottomTab;
 
