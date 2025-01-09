@@ -44,7 +44,7 @@
   text-align: center;
 }
 
-.shareText {
+.shareEstimateText {
   font-weight: 600;
   font-size: 20px;
   line-height: 32px;
@@ -56,13 +56,22 @@
 }
 
 .border {
-  margin: 40px 0;
+  margin: 24px 0;
   border-top: 1px solid #f2f2f2;
+}
+
+.mobileBorder {
+  margin-top: 24px;
+  border-top: 1px solid #f2f2f2;
+}
+
+.mobileSpacing {
+  margin-top: 24px;
 }
 
 .sectionTitle {
   font-weight: 600;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 32px;
   color: #1f1f1f;
   margin-bottom: 32px;
@@ -70,7 +79,7 @@
 
 .costValue {
   font-weight: 700;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 46px;
   color: #1f1f1f;
   margin-top: 32px;
@@ -78,7 +87,7 @@
 
 .comment {
   font-weight: 700;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 46px;
   color: #1f1f1f;
   margin-top: 32px;
@@ -92,6 +101,42 @@
   margin-top: 22px;
 }
 
+.snsShareMobile {
+  margin-top: 24px;
+}
+
+.snsShareDesktop {
+  margin-top: 0;
+}
+
+.heartButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  border: 1px solid #e6e6e6;
+  background-color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.confirmButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--blue-300);
+  color: var(--gray-50);
+  font-size: 16px;
+  font-weight: 600;
+}
+
 @media (max-width: 1199px) and (min-width: 744px) {
   .container {
     flex-direction: column;
@@ -103,6 +148,7 @@
     max-width: 100%;
     width: 100%;
     margin-top: 0;
+    position: relative;
   }
 
   .rightFilters {
@@ -115,6 +161,15 @@
 
   .toastWrapper {
     margin-top: 8px;
+  }
+
+  .mobileSpacing {
+    margin-top: 24px;
+  }
+
+  .mobileBorder {
+    margin-top: 24px;
+    border-top: 1px solid #f2f2f2;
   }
 }
 
@@ -134,5 +189,13 @@
   .toastWrapper {
     margin-top: 8px;
   }
-}
 
+  .mobileSpacing {
+    margin-top: 24px;
+  }
+
+  .mobileBorder {
+    margin-top: 24px;
+    border-top: 1px solid #f2f2f2;
+  }
+}

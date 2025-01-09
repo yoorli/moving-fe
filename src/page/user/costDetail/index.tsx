@@ -17,6 +17,7 @@ import { useToggleFavoriteMover } from '../../../lib/useQueries/favorite';
 import { useMedia } from '../../../lib/function/useMediaQuery';
 import { EstimateConsumer } from '../../../types/apiTypes';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import SnsShare from '../../../components/snsShare/SnsShare';
 
 const CostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -121,15 +122,31 @@ const CostDetail = () => {
       </div>
 
       <div className={style.container}>
-        <div className={style.leftFilters}>
+        <div
+          className={`${style.leftFilters} ${
+            isMobileView && !estimate.isReqConfirmed
+              ? style.isReqNotConfirmed
+              : ''
+          }`}
+        >
           <DriverCard
             list={estimate}
             type='cost'
             showPrice={false}
             count={mobileWithChipCostDetail ? 3 : 6}
           />
+
+          {isMobileView && (
+            <>
+              <div className={style.border}></div>
+              <div style={{ height: '24px' }}></div>
+              <SnsShare nickname={estimate.moverName} type='shareEstimate' />
+              <div style={{ height: '24px' }}></div>
+              <div className={style.border}></div>
+            </>
+          )}
+
           <div className={style.section}>
-            <div className={style.border}></div>
             <h2 className={style.sectionTitle}>견적가</h2>
             <p className={style.costValue}>
               {estimate.price != null
@@ -143,6 +160,7 @@ const CostDetail = () => {
             <p className={style.comment}>
               {estimate.moverComment || '기사님의 코멘트입니다.'}
             </p>
+            <div className={style.border}></div>
             <div className={style.costInfoWrapper}>
               <CostInfo {...costInfoData} />
             </div>
@@ -157,7 +175,14 @@ const CostDetail = () => {
         {!isMobileView && (
           <div className={style.rightFilters}>
             {estimate.isReqConfirmed ? (
-              <p className={style.shareEstimateText}>견적서 공유하기</p>
+              <>
+                <div className={style.snsShareDesktop}>
+                  <SnsShare
+                    nickname={estimate.moverName}
+                    type='shareEstimate'
+                  />
+                </div>
+              </>
             ) : (
               <>
                 <Button
@@ -178,6 +203,10 @@ const CostDetail = () => {
                   disabled={isConfirmed}
                   onClick={handleConfirmClick}
                 />
+                <div style={{ height: '40px' }}></div>
+                <div style={{ border: '1px solid #FAFAFA', width: '100%' }}></div>
+                <div style={{ height: '40px' }}></div>
+                <SnsShare nickname={estimate.moverName} type='shareEstimate' />
               </>
             )}
           </div>

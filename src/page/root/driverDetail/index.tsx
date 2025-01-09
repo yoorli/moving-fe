@@ -22,6 +22,7 @@ import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 import NoContents from '../../../components/noContents/NoContents';
 import { AuthContext } from '../../../context/authContext';
 import { useMedia } from '../../../lib/function/useMediaQuery';
+import SnsShare from '../../../components/snsShare/SnsShare';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -51,6 +52,12 @@ const DriverDetailPage = () => {
     isLoading: isReviewLoading,
     error: reviewError,
   } = useGetMoverReviewList(Number(id), currentPage, itemsPerPage);
+
+  useEffect(() => {
+    if (driver) {
+      console.log('기사 상세 페이지:', driver);
+    }
+  }, [driver]);
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
@@ -140,6 +147,14 @@ const DriverDetailPage = () => {
           />
           <div className={style.section}>
             <div className={style.border}></div>
+            {isMobileView && (
+              <>
+                <div style={{ marginTop: '24px' }}>
+                  <SnsShare nickname={driver.moverName} />
+                </div>
+                <div className={style.mobileBorder}></div>
+              </>
+            )}
             <h2 className={style.sectionTitle}>상세설명</h2>
             <p className={style.description}>{driver.description}</p>
             <div className={style.border}></div>
@@ -224,7 +239,11 @@ const DriverDetailPage = () => {
                 disabled={isAssigned}
                 onClick={handleAssignRequest}
               />
+               <div className={style.border}></div>
             </div>
+              <div>
+                <SnsShare nickname={driver.moverName} />
+              </div>
           </div>
         )}
       </div>
