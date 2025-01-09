@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 import UserCard from '../../../components/card/UserCard';
@@ -16,8 +16,6 @@ import { EstimateConsumer, EstimateMover } from '../../../types/apiTypes';
 
 import style from './index.module.css';
 
-import logoTextLarge from '../../../assets/images/img_logo_text_large.svg';
-
 // 타입 가드 함수
 function isEstimateMover(
   user: EstimateConsumer | EstimateMover,
@@ -28,6 +26,10 @@ function isEstimateMover(
 export default function DriverCostDetailPage() {
   const isPc = useMedia().pc;
   const id = useParams().id;
+
+  const location = useLocation();
+
+  const url = `${process.env.REACT_APP_API_URL}${location.pathname}`;
 
   const [showToast, setShowToast] = useState(false); // Toast 표시 여부 관리
 
@@ -62,10 +64,10 @@ export default function DriverCostDetailPage() {
 
   if (!user) {
     return (
-    <div className={style.noContent}>
-      <NoContents image='file' />
-    </div>
-    )
+      <div className={style.noContent}>
+        <NoContents image='file' />
+      </div>
+    );
   }
 
   const info = isEstimateMover(user)
@@ -89,14 +91,18 @@ export default function DriverCostDetailPage() {
   return (
     <>
       <Helmet>
-        <title>{'견적 상세'}</title>
-        <meta name='description' content={'견적서 공유하기'} />
-        <meta property='og:title' content={'견적서 공유하기'} />
+        <meta property='og:url' content={url} />
+        <meta property='og:title' content='견적서 공유하기' />
+        <meta property='og:type' content='website' />
+        <meta
+          property='og:image'
+          content={`${process.env.REACT_APP_API_URL}/images/img_logo_text_large.svg`}
+        />
         <meta
           property='og:description'
-          content={`이 견적서는 ${user.customerName}님 요청입니다.`}
+          content={`이 견적서는 ${user.customerName || '고객'}님 요청입니다.`}
         />
-        <meta property='og:image' content={logoTextLarge} />
+        <title>견적 상세</title>
       </Helmet>
       <div className={style.container}>
         <nav className={style.navigation}>견적 상세</nav>

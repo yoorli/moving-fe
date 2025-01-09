@@ -22,7 +22,7 @@ const SnsShare = ({ nickname, type, onClick }: SnsShareProps) => {
   const { pc } = useMedia();
   const location = useLocation();
 
-  const url = `https://moving-fe-teal.vercel.app${location.pathname}`;
+  const url = `${process.env.REACT_APP_API_URL}${location.pathname}`;
 
   const handleCopyClipBoard = async (url: string) => {
     try {

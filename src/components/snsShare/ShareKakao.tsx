@@ -1,5 +1,4 @@
 const { Kakao } = window;
-import logoTextLarge from '../../assets/images/img_logo_text_large.svg';
 
 const shareKakao = (resultUrl: string, nickname: string, type?: string) => {
   if (!resultUrl || !nickname) {
@@ -7,9 +6,9 @@ const shareKakao = (resultUrl: string, nickname: string, type?: string) => {
     return;
   }
 
-  const BASE_URL = 'https://moving-fe-teal.vercel.app';
+  const BASE_URL = `${process.env.REACT_APP_API_URL}`;
   const fullUrl = `${BASE_URL}${resultUrl}`;
-  const imageUrl = logoTextLarge;
+  const imageUrl = `${BASE_URL}/images/img_logo_text_large.svg`;
   const text = type
     ? `${nickname} 고객님의 견적서가 도착했습니다! 무빙에서 확인해 보세요!`
     : `${nickname} 기사님을 추천합니다! 무빙에서 확인해 보세요!`;
