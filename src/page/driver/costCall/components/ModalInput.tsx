@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { formatCurrency } from '../../../../lib/function/utils';
@@ -48,19 +48,20 @@ export default function ModalInput({
     }
   };
 
-  const handleBtnActive = () => {
-    setIsBtnActive((prev: boolean[]) => {
-      const updatedActiveArr = [...prev];
-
-      if (!isTextArea) {
-        const rawValue = value.replace(/,/g, '');
-        updatedActiveArr[0] = Number(rawValue) >= limit;
-      } else {
-        updatedActiveArr[1] = value.length >= limit;
-      }
-      return updatedActiveArr;
-    });
-  };
+  useEffect(() => {
+    if (setIsBtnActive) {
+      setIsBtnActive((prev: boolean[]) => {
+        const updatedActiveArr = [...prev];
+        if (!isTextArea) {
+          const rawValue = value.replace(/,/g, '');
+          updatedActiveArr[0] = Number(rawValue) >= limit;
+        } else {
+          updatedActiveArr[1] = value.length >= limit; // 상태 업데이트 후 정확히 판단
+        }
+        return updatedActiveArr;
+      });
+    }
+  }, [value, isTextArea, limit, setIsBtnActive]);
 
   return (
     <div className={style.textInput}>
@@ -69,17 +70,16 @@ export default function ModalInput({
         <textarea
           className={classNames(style.input, { [style.textArea]: isTextArea })}
           placeholder={basicText}
+          value={value}
           onChange={handleChange}
-          onBlur={handleBtnActive}
         />
       ) : (
         <input
           className={style.input}
           type='text'
           placeholder={basicText}
-          onChange={handleChange}
           value={value}
-          onBlur={handleBtnActive}
+          onChange={handleChange}
         />
       )}
     </div>

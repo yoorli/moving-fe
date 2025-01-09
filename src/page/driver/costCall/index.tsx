@@ -41,7 +41,7 @@ export default function DriverCostCallPage() {
 
   const isPc = useMedia().pc;
 
-  const { data, isFetching } = useGetMoverEstimateReq(params);
+  const { data, isFetching, refetch } = useGetMoverEstimateReq(params);
 
   const list = data?.list;
   const totalItems = data?.total || 0;
@@ -193,7 +193,7 @@ export default function DriverCostCallPage() {
           ) : (
             <>
               <div className={style.mainContent}>
-                <CallList list={list} />
+                <CallList list={list} refetchList={refetch} />
               </div>
               <div className={style.pagination}>
                 <Pagination {...page} />
