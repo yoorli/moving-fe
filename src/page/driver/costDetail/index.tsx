@@ -15,6 +15,7 @@ import { useGetEstimateDetail } from '../../../lib/useQueries/estimate';
 import { EstimateConsumer, EstimateMover } from '../../../types/apiTypes';
 
 import style from './index.module.css';
+import { ENV } from '../../../lib/api/STORAGE_KEY';
 
 // 타입 가드 함수
 function isEstimateMover(
@@ -29,7 +30,7 @@ export default function DriverCostDetailPage() {
 
   const location = useLocation();
 
-  const url = `${process.env.REACT_APP_API_URL}${location.pathname}`;
+  const url = `${ENV.API_RENDER}${location.pathname}`;
 
   const [showToast, setShowToast] = useState(false); // Toast 표시 여부 관리
 

@@ -1,9 +1,11 @@
+import { ENV } from '../api/STORAGE_KEY';
+
 function NotificationConnect() {
   const EventSourcePolyfill =
     (window as any).EventSourcePolyfill || EventSource;
 
   const connect = () => {
-    const baseUrl = process.env.REACT_APP_API_URL;
+    const baseUrl = ENV.API_RENDER;
     const eventSource = new EventSourcePolyfill(
       baseUrl + '/notification/stream',
       {

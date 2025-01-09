@@ -25,6 +25,7 @@ import { useMedia } from '../../../lib/function/useMediaQuery';
 import SnsShare from '../../../components/snsShare/SnsShare';
 import { Helmet } from 'react-helmet-async';
 import Toast from '../../../components/toast/Toast';
+import { ENV } from '../../../lib/api/STORAGE_KEY';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -141,7 +142,7 @@ const DriverDetailPage = () => {
     profileImg: driver.profileImg || undefined,
   };
 
-  const url = `${process.env.REACT_APP_API_URL}${location.pathname}`;
+  const url = `${ENV.API_RENDER}${location.pathname}`;
 
   const handleSnsShareClick = () => {
     setShowToast(true);

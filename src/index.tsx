@@ -6,8 +6,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import './style/globals.css';
 
 import router from './root';
+import { ENV } from './lib/api/STORAGE_KEY';
 
-window.Kakao.init(process.env.REACT_APP_JAVASCRIPT_API_KEY);
+window.Kakao.init(ENV.KAKAO_CLIENT_JAVASCRIPT_KEY);
 window.Kakao.isInitialized();
 
 const root = ReactDOM.createRoot(

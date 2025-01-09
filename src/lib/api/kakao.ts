@@ -4,6 +4,7 @@ import {
   AddressValues,
   MetaValues,
 } from '../../page/user/costCall/components/MovingAddressModal';
+import { ENV } from './STORAGE_KEY';
 
 interface AddressListData {
   documents: AddressValues[];
@@ -13,7 +14,7 @@ interface AddressListData {
 const instance = axios.create({
   baseURL: 'https://dapi.kakao.com/v2/local/search',
   headers: {
-    Authorization: `KakaoAK ${process.env.REACT_APP_REST_API_KEY}`,
+    Authorization: `KakaoAK ${ENV.KAKAO_CLIENT_REST_KEY}`,
   },
 });
 
