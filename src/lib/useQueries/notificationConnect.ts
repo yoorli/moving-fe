@@ -5,7 +5,7 @@ function NotificationConnect() {
     (window as any).EventSourcePolyfill || EventSource;
 
   const connect = () => {
-    const baseUrl = ENV.API_RENDER;
+    const baseUrl = ENV.API_REACT_APP;
     const eventSource = new EventSourcePolyfill(
       baseUrl + '/notification/stream',
       {

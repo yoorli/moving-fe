@@ -23,27 +23,27 @@ export const UserLoginBottom = () => {
       <div className={style.snsIcon}>
         {pc ? (
           <>
-            <a href={`${ENV.API_RENDER}/user/google?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/google?userType=CUSTOMER`}>
               <img src={google} alt='' />
             </a>
 
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=CUSTOMER`}>
               <img src={kakao} alt='' />
             </a>
-            <a href={`${ENV.API_RENDER}/user/naver?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/naver?userType=CUSTOMER`}>
               <img src={naver} alt='' />
             </a>
           </>
         ) : (
           <>
-            <a href={`${ENV.API_RENDER}/user/google?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/google?userType=CUSTOMER`}>
               <img src={googleMedium} alt='' />
             </a>
 
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=CUSTOMER`}>
               <img src={kakaoMedium} alt='' />
             </a>
-            <a href={`${ENV.API_RENDER}/user/naver?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/naver?userType=CUSTOMER`}>
               <img src={naverMedium} alt='' />
             </a>
           </>
@@ -61,27 +61,27 @@ export const DriverLoginBottom = () => {
       <div className={style.snsIcon}>
         {pc ? (
           <>
-            <a href={`${ENV.API_RENDER}/user/google?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/google?userType=MOVER`}>
               <img src={google} alt='' />
             </a>
 
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=MOVER`}>
               <img src={kakao} alt='' />
             </a>
-            <a href={`${ENV.API_RENDER}/user/naver?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/naver?userType=MOVER`}>
               <img src={naver} alt='' />
             </a>
           </>
         ) : (
           <>
-            <a href={`${ENV.API_RENDER}/user/google?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/google?userType=MOVER`}>
               <img src={googleMedium} alt='' />
             </a>
 
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=MOVER`}>
               <img src={kakaoMedium} alt='' />
             </a>
-            <a href={`${ENV.API_RENDER}/user/naver?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/naver?userType=MOVER`}>
               <img src={naverMedium} alt='' />
             </a>
           </>
@@ -99,27 +99,27 @@ export const UserSignupBottom = () => {
       <div className={style.snsIcon}>
         {pc ? (
           <>
-            <a href={`${ENV.API_RENDER}/user/google?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/google?userType=CUSTOMER`}>
               <img src={google} alt='' />
             </a>
 
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=CUSTOMER`}>
               <img src={kakao} alt='' />
             </a>
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=CUSTOMER`}>
               <img src={naver} alt='' />
             </a>
           </>
         ) : (
           <>
-            <a href={`${ENV.API_RENDER}/user/google?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/google?userType=CUSTOMER`}>
               <img src={googleMedium} alt='' />
             </a>
 
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=CUSTOMER`}>
               <img src={kakaoMedium} alt='' />
             </a>
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=CUSTOMER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=CUSTOMER`}>
               <img src={naverMedium} alt='' />
             </a>
           </>
@@ -137,25 +137,25 @@ export const DriverSignupBottom = () => {
       <div className={style.snsIcon}>
         {pc ? (
           <>
-            <a href={`${ENV.API_RENDER}/user/google?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/google?userType=MOVER`}>
               <img src={google} alt='' />
             </a>
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=MOVER`}>
               <img src={kakao} alt='' />
             </a>
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=MOVER`}>
               <img src={naver} alt='' />
             </a>
           </>
         ) : (
           <>
-            <a href={`${ENV.API_RENDER}/user/google?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/google?userType=MOVER`}>
               <img src={kakaoMedium} alt='' />
             </a>
-            <a href={`${ENV.API_RENDER}/user/kakao?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/kakao?userType=MOVER`}>
               <img src={kakaoMedium} alt='' />
             </a>
-            <a href={`${ENV.API_RENDER}/user/naver?userType=MOVER`}>
+            <a href={`${ENV.API_REACT_APP}/user/naver?userType=MOVER`}>
               <img src={naverMedium} alt='' />
             </a>
           </>

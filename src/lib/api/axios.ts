@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ENV } from './STORAGE_KEY';
 
-const API_URL = ENV.API_RENDER;
+const API_URL = ENV.API_REACT_APP;
 
 const instance = axios.create({
   baseURL: API_URL,

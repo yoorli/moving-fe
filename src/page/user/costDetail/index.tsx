@@ -118,7 +118,7 @@ const CostDetail = () => {
 
   const shouldShowToast = estimate.isReqConfirmed && !isConfirmed;
 
-  const url = `${ENV.API_RENDER}${location.pathname}`;
+  const url = `${ENV.API_REACT_APP}${location.pathname}`;
 
   const handleSnsShareClick = () => {
     setShowToast(true);
