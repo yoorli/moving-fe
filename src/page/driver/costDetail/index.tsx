@@ -96,7 +96,7 @@ export default function DriverCostDetailPage() {
         <meta property='og:type' content='website' />
         <meta
           property='og:image'
-          content={`${process.env.REACT_APP_API_URL}/images/img_logo_text_large.svg`}
+          content='%PUBLIC_URL%/img_logo_icon_text_xlarge.svg'
         />
         <meta
           property='og:description'
@@ -139,7 +139,7 @@ export default function DriverCostDetailPage() {
               <Toast
                 text='링크 복사가 완료됐습니다.'
                 autoDismiss={true}
-                dismissDuration={50000000}
+                type='copy'
               />
             )}
           </div>

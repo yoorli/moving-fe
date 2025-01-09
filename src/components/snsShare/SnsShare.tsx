@@ -23,6 +23,7 @@ const SnsShare = ({ nickname, type, onClick }: SnsShareProps) => {
   const location = useLocation();
 
   const url = `${process.env.REACT_APP_API_URL}${location.pathname}`;
+  const path = `${location.pathname}`;
 
   const handleCopyClipBoard = async (url: string) => {
     try {
@@ -49,7 +50,7 @@ const SnsShare = ({ nickname, type, onClick }: SnsShareProps) => {
           <img
             src={pc ? icShareKakaoLarge : icShareKakaoMedium}
             onClick={() => {
-              ShareKakao(url, nickname, type);
+              ShareKakao(path, nickname, type);
             }}
             alt='카카오톡 공유'
             className={style.img}

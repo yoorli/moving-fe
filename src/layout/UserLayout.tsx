@@ -7,6 +7,7 @@ import { UserMenuModal } from '../components/nav/NavMenuModal';
 import { UserNav } from '../components/nav/Nav';
 import { useMedia } from '../lib/function/useMediaQuery';
 import { AuthContext } from '../context/authContext';
+import { HelmetProvider } from 'react-helmet-async';
 
 export default function UserLayout() {
   const nav = useNavigate();
@@ -72,24 +73,26 @@ export default function UserLayout() {
 
   return (
     <>
-      <div className={style.container}>
-        <div className={style.wrapper}>
-          <UserNav
-            menuRef={menuRef}
-            profileRef={profileRef}
-            notificationRef={notificationRef}
-            modalController={() => toggleModal('menu')}
-            profileController={() => toggleModal('profile')}
-            notificationController={() => toggleModal('notification')}
-            profileModal={activeModal === 'profile'}
-            notificationModal={activeModal === 'notification'}
-          />
-          <Outlet />
+      <HelmetProvider>
+        <div className={style.container}>
+          <div className={style.wrapper}>
+            <UserNav
+              menuRef={menuRef}
+              profileRef={profileRef}
+              notificationRef={notificationRef}
+              modalController={() => toggleModal('menu')}
+              profileController={() => toggleModal('profile')}
+              notificationController={() => toggleModal('notification')}
+              profileModal={activeModal === 'profile'}
+              notificationModal={activeModal === 'notification'}
+            />
+            <Outlet />
+          </div>
         </div>
-      </div>
-      {!pc && activeModal === 'menu' && (
-        <UserMenuModal modalController={() => toggleModal('menu')} />
-      )}
+        {!pc && activeModal === 'menu' && (
+          <UserMenuModal modalController={() => toggleModal('menu')} />
+        )}
+      </HelmetProvider>
     </>
   );
 }
