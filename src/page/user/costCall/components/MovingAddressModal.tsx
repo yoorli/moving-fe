@@ -69,8 +69,8 @@ export default function AddressModal({ setValue, type, onClose }: ModalProps) {
       selectedAddress?.road_address?.address_name ??
         '정확한 주소를 입력해 주세요',
     );
-    if (selectAddress === '정확한 주소를 입력해 주세요') setIndex(null);
-    else setIndex(i);
+
+    setIndex(i);
   };
 
   const handleSelectClick = (
