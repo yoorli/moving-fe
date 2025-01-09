@@ -19,6 +19,7 @@ import { EstimateConsumer } from '../../../types/apiTypes';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 import SnsShare from '../../../components/snsShare/SnsShare';
 import { Helmet } from 'react-helmet-async';
+import { ENV } from '../../../lib/api/STORAGE_KEY';
 
 const CostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -117,7 +118,7 @@ const CostDetail = () => {
 
   const shouldShowToast = estimate.isReqConfirmed && !isConfirmed;
 
-  const url = `${process.env.REACT_APP_API_URL}${location.pathname}`;
+  const url = `${ENV.API_REACT_APP}${location.pathname}`;
 
   const handleSnsShareClick = () => {
     setShowToast(true);

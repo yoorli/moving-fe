@@ -1,3 +1,5 @@
+import { ENV } from '../../lib/api/STORAGE_KEY';
+
 const { Kakao } = window;
 
 const shareKakao = (resultUrl: string, nickname: string, type?: string) => {
@@ -6,7 +8,7 @@ const shareKakao = (resultUrl: string, nickname: string, type?: string) => {
     return;
   }
 
-  const BASE_URL = `${process.env.REACT_APP_API_URL}`;
+  const BASE_URL = `${ENV.API_REACT_APP}`;
   const fullUrl = `${BASE_URL}${resultUrl}`;
   const imageUrl = '%PUBLIC_URL%/img_logo_icon_text_xlarge.svg';
   const text = type
