@@ -2,10 +2,10 @@ function NotificationConnect() {
   const EventSourcePolyfill =
     (window as any).EventSourcePolyfill || EventSource;
 
-  // EventSource 연결 함수
   const connect = () => {
+    const baseUrl = process.env.REACT_APP_API_URL;
     const eventSource = new EventSourcePolyfill(
-      'https://3.36.98.92.nip.io/notification/stream',
+      baseUrl + '/notification/stream',
       {
         withCredentials: true,
       },
