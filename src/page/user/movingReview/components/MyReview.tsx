@@ -42,9 +42,9 @@ export default function MyReview() {
   return (
     <div className={style.container}>
       <div className={style.cardContainer}>
-        {data?.list.map((review: Review, index: number) => (
+        {data?.list.map((review: Review, reviewId: number) => (
           <UserCard
-            key={index}
+            key={reviewId}
             list={{
               ...review,
               reviewStats: { averageScore: review.score },
