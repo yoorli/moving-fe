@@ -27,18 +27,29 @@ import SearchDriver from './page/root/searchDriver';
 import { AuthProvider } from './context/authContext';
 import DriverDetailPage from './page/root/driverDetail/index';
 import DriverCostDetailPage from './page/driver/costDetail';
+import NotFound from './components/404/NotFound';
 
 const router = createBrowserRouter([
   {
     element: <AuthProvider />,
     children: [
       {
+        // 404 Not Found
+        element: <RendingLayout />, // 모든 유형의 Nav를 처리할 수 있습니다.
+        children: [
+          {
+            path: '*',
+            element: <NotFound />,
+          },
+        ],
+      },
+      {
         element: <RendingLayout />,
         children: [
           { path: '/', element: <ServiceRandingPage /> },
           {
             path: '/searchDriver',
-            element: <SearchDriver />
+            element: <SearchDriver />,
           },
           {
             path: '/driver/:id',
@@ -60,6 +71,10 @@ const router = createBrowserRouter([
             path: '/driver/signup',
             element: <DriverSignupPage />,
           },
+          // {
+          //   path: '*',
+          //   element: <NotFound />, // 404 Not Found
+          // },
         ],
       },
       {

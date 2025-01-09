@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const auth = axios.create({
-  baseURL: 'https://moving-be-render.onrender.com/',
+  baseURL: `${process.env.REACT_APP_API_URL}`,
   headers: {
     'Content-Type': 'application/json',
   },
