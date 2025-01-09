@@ -152,6 +152,10 @@ const SearchDriver = () => {
     }
   }, [pendingMoverList, moverList]);
 
+  useEffect(() => {
+    console.log('기사님 카드:', { movers, hasNextPage });
+  }, [page]); // page 변경 시에만 실행
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPendingKeyword(e.target.value);
   };
@@ -329,7 +333,6 @@ const SearchDriver = () => {
   };
 
   const renderDriverCards = () => {
-    console.log('기사님 카드:', { movers, hasNextPage });
 
     return (
       <div
@@ -343,7 +346,7 @@ const SearchDriver = () => {
       >
         {movers.map((user: Mover) => (
           <DriverCard
-            key={`${user.id}-${user.moverId || 'no-moverId'}`}
+            key={`${user.id}-${user.id || 'no-moverId'}`}
             list={{
               ...user,
               profileImg: user.profileImg || undefined,
