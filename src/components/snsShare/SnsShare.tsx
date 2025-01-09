@@ -11,6 +11,7 @@ import icShareMedium from '../../assets/icons/ic_share_medium.svg';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
 import style from './SnsShare.module.css';
+import { ENV } from '../../lib/api/STORAGE_KEY';
 
 interface SnsShareProps {
   nickname: string;
@@ -22,7 +23,7 @@ const SnsShare = ({ nickname, type, onClick }: SnsShareProps) => {
   const { pc } = useMedia();
   const location = useLocation();
 
-  const url = `https://moving-fe-teal.vercel.app${location.pathname}`;
+  const url = `${ENV.API_FRONT}${location.pathname}`;
   const path = `${location.pathname}`;
 
   const handleCopyClipBoard = async (url: string) => {
@@ -33,8 +34,6 @@ const SnsShare = ({ nickname, type, onClick }: SnsShareProps) => {
       await navigator.clipboard.writeText('');
     }
   };
-
-  console.log(path);
 
   return (
     <>
