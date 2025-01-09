@@ -16,12 +16,11 @@ function NotificationConnect() {
       console.error('SSE connection error:', error);
       eventSource.close();
       setTimeout(() => {
-        connect(); // 재연결 시도
-      }, 5000); // 5초 후 재연결 시도
+        connect();
+      }, 5000);
     };
   };
 
-  // 처음 연결 시도
   connect();
 }
 
