@@ -27,7 +27,7 @@ export default function MyReview() {
 
   const { pc, tablet, mobile } = useMedia();
 
-  const itemsPerPage = pc ? 6 : tablet ? 4 : mobile ? 4 : 6; // 페이지당 아이템 수
+  const itemsPerPage = pc ? 6 : tablet || mobile ? 4 : 6; // 페이지당 아이템 수
 
   const { data, isLoading } = useGetMyReviewList({
     page: currentPage,
@@ -39,16 +39,26 @@ export default function MyReview() {
     return <LoadingSpinner />;
   }
 
+  const totalPages =
+    data && itemsPerPage ? Math.ceil(data.total / itemsPerPage) : 0;
+
+  if (currentPage > totalPages) {
+    setCurrentPage(totalPages);
+  }
+
+  // console.log(data.list);
+  // console.log(data.list.reverse())
+
   return (
     <div className={style.container}>
       <div className={style.cardContainer}>
-        {data?.list.map((review: Review, reviewId: number) => (
+        {data?.list.slice().map((review: Review, reviewId: number) => (
           <UserCard
             key={reviewId}
             list={{
               ...review,
               reviewStats: { averageScore: review.score },
-              createAt: `${getNotificationDate(review.createAt)}`,
+              createAt: review.createAt,
               movingDate: getNotificationDate(review.movingDate, 'noSec'),
             }}
             type='review'

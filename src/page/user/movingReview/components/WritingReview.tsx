@@ -31,10 +31,14 @@ export default function WritingReview({
     <div className={style.container}>
       <div className={style.mover}>
         <div className={style.chipContainer}>
-          {mover.serviceType?.map((type: string, index: number) => (
-            <Chip key={index} type={type as ChipType} />
-          ))}
-          {mover.isAssigned && <Chip type='ASSIGN' />}
+          <div className={style.serviceChip}>
+            {mover.serviceType?.map((type: string, index: number) => (
+              <Chip key={index} type={type as ChipType} />
+            ))}
+          </div>
+          <div className={style.assignedChip}>
+            {mover.isAssigned && <Chip type='ASSIGN' />}
+          </div>
         </div>
         <DriverProfile list={mover} type='review' />
       </div>

@@ -16,6 +16,11 @@
   gap: 12px;
 }
 
+.serviceChip {
+  display: flex;
+  gap: 12px;
+}
+
 .smallContainer {
   display: flex;
   flex-direction: column;
@@ -67,5 +72,25 @@
 
   .textArea::placeholder {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 744px) {
+  .chipContainer {
+    flex-direction: column;
+  }
+
+  .assignedChip {
+    max-width: 107px;
+  }
+}
+
+@media (max-width: 438px) {
+  .chipContainer {
+    flex-direction: column;
+  }
+
+  .assignedChip {
+    max-width: 107px;
   }
 }
