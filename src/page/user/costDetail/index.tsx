@@ -192,7 +192,11 @@ const CostDetail = () => {
               <div className={style.costInfoWrapper}>
                 <CostInfo {...costInfoData} />
                 {showToast && (
-                  <Toast text='링크 복사가 완료됐습니다.' autoDismiss={true} />
+                  <Toast
+                    text='링크 복사가 완료됐습니다.'
+                    autoDismiss={true}
+                    type='copy'
+                  />
                 )}
               </div>
               {shouldShowToast && (

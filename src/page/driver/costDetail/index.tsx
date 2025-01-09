@@ -136,7 +136,11 @@ export default function DriverCostDetailPage() {
               </div>
             </>
             {showToast && (
-              <Toast text='링크 복사가 완료됐습니다.' autoDismiss={true} />
+              <Toast
+                text='링크 복사가 완료됐습니다.'
+                autoDismiss={true}
+                type='copy'
+              />
             )}
           </div>
           {isPc && isEstimateMover(user) && user.customerName && (

@@ -1,4 +1,17 @@
 .toastContainer {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #4da9ff;
+  background-color: #e9f4ff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  height: 74px;
+  padding: 24px 32px;
+  bottom: 10px;
+}
+
+.toastCopyContainer {
   position: fixed;
   width: 90%;
   box-sizing: border-box;
@@ -61,5 +74,9 @@
   .toastText {
     font-size: 13px;
     line-height: 22px;
+  }
+
+  .toastCopyContainer {
+    width: 93%;
   }
 }
