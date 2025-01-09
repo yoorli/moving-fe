@@ -131,7 +131,9 @@ export default function DriverCostHandlerPage() {
 
   useEffect(() => {
     const itemsPerPage = isPc ? 6 : isTablet ? 4 : 3;
+
     if (itemsPerPage !== pageState.first.itemsPerPage) {
+      // 무한 렌더링 때문에 조건문 추가 - itemsPerPage 비교
       setPageState((prevState) => {
         const updatedState = { ...prevState };
         Object.keys(updatedState).forEach((key) => {
@@ -139,6 +141,18 @@ export default function DriverCostHandlerPage() {
             updatedState[key as keyof typeof prevState].itemsPerPage !==
             itemsPerPage
           ) {
+            const totalPages =
+              currentTabData && itemsPerPage
+                ? Math.ceil(currentTabData.total / itemsPerPage)
+                : 0;
+
+            // 현재 페이지가 전체 페이지를 초과하면 마지막 페이지로 설정
+            updatedState[key as keyof typeof prevState].currentPage =
+              updatedState[key as keyof typeof prevState].currentPage >
+              totalPages
+                ? totalPages
+                : updatedState[key as keyof typeof prevState].currentPage;
+
             updatedState[key as keyof typeof prevState].itemsPerPage =
               itemsPerPage;
           }
@@ -146,7 +160,7 @@ export default function DriverCostHandlerPage() {
         return updatedState;
       });
     }
-  }, [isPc, isTablet, isMobile]);
+  }, [isPc, isTablet, isMobile, tabData]);
 
   useEffect(() => {
     if (isCommentOpen.length !== currentTabData.list.length) {
