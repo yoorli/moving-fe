@@ -161,6 +161,7 @@
   color: var(--gray-50);
   font-weight: 600;
   font-size: 20px;
+  line-height: 32px;
 }
 
 /* 프로필 수정 - 수정하기 */
@@ -288,10 +289,10 @@
     font-size: 16px;
   }
 
-.solid280pxBackground200,
-.solid280pxBlue300 {
-  max-width: unset;
-}
+  .solid280pxBackground200,
+  .solid280pxBlue300 {
+    max-width: unset;
+  }
 
   .solid123pxBlue100 {
     height: 40px;

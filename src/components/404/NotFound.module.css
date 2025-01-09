@@ -1,0 +1,160 @@
+.overlay {
+  padding: 12rem 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.notFound {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 150px;
+  color: var(--blue-300);
+}
+
+.warning {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--blue-300);
+}
+
+.solution {
+  font-size: 15px;
+  color: var(--gray-400);
+  margin-bottom: 20px;
+}
+
+.spinner {
+  width: 114px;
+  height: 114px;
+  position: relative;
+  background: var(--blue-300);
+  border-radius: 50%;
+  transform: rotate(45deg);
+  animation: rotate 2s linear infinite;
+}
+
+.spinner:before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 25px;
+  height: 50px;
+  background: var(--gray-50);
+  transform: skew(5deg, 60deg) translate(-50%, -5%);
+}
+
+.spinner:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--blue-300);
+  transform: translate(-50%, -50%);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(45deg);
+  }
+  30%,
+  50%,
+  70% {
+    transform: rotate(230deg);
+  }
+  40%,
+  60%,
+  80% {
+    transform: rotate(240deg);
+  }
+  100% {
+    transform: rotate(245deg);
+  }
+}
+
+/* .spinner {
+  width: 110px;
+  height: 110px;
+  position: relative;
+  border-radius: 50%;
+  box-shadow: -10px 8px 0 18px inset var(--blue-300);
+  animation: rotate 2s ease-in infinite alternate;
+}
+.spinner::before {
+  content: '';
+  position: absolute;
+  left: 34px;
+  bottom: 36px;
+  background: var(--blue-300);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  animation: scale 1s ease-in infinite alternate;
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(750deg);
+  }
+}
+@keyframes scale {
+  100% {
+    transform: scale(0.5) translateY(5px);
+  }
+} */
+
+@media (max-width: 743px) {
+  .notFound {
+    font-size: 110px;
+  }
+
+  .warning {
+    font-size: 32px;
+  }
+
+  .solution {
+    font-size: 12px;
+  }
+
+  .spinner {
+    width: 84px;
+    height: 84px;
+    position: relative;
+    background: var(--blue-300);
+    border-radius: 50%;
+    transform: rotate(45deg);
+    animation: rotate 2s linear infinite;
+  }
+
+  .spinner:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 19px;
+    height: 38px;
+    background: var(--gray-50);
+    transform: skew(5deg, 60deg) translate(-50%, -5%);
+  }
+
+  .spinner:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--blue-300);
+    transform: translate(-50%, -50%);
+  }
+}
