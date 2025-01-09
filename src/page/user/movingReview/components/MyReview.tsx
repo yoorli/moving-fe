@@ -48,7 +48,6 @@ export default function MyReview() {
             list={{
               ...review,
               reviewStats: { averageScore: review.score },
-              createAt: `${getNotificationDate(review.createAt)}`,
               movingDate: getNotificationDate(review.movingDate, 'noSec'),
             }}
             type='review'

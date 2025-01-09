@@ -31,7 +31,7 @@ export default function UserCard({
     return <div className={style.cardError}>데이터가 없습니다.</div>;
   }
 
-  if(type === 'confirmedCost') {
+  if (type === 'confirmedCost') {
     chipList.push('CONFIRM');
   }
 
@@ -69,9 +69,7 @@ export default function UserCard({
           </div>
         ) : (
           <div className={style.createAtRType}>
-            {list.createAt ||
-              (list.updatedAt &&
-                getNotificationDate(list.createAt || list.updatedAt, 'noSec'))}
+            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
           </div>
         )}
       </div>
