@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './Search.module.css';
 
 interface SearchProps {
   placeholder: string;
-  searchTerm: string;
   setSearchTerm: (searchTerm: string) => void;
 }
 
-const Search = ({ placeholder, searchTerm, setSearchTerm }: SearchProps) => {
+const Search = ({ placeholder, setSearchTerm }: SearchProps) => {
+  const [term, setTerm] = useState('');
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    setTerm(e.target.value);
+    if(!e.target.value) setSearchTerm(e.target.value)
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setSearchTerm(e.currentTarget.value);
+    }
   };
 
   return (
@@ -19,8 +26,9 @@ const Search = ({ placeholder, searchTerm, setSearchTerm }: SearchProps) => {
         type='text'
         placeholder={placeholder}
         className={style.searchInput}
-        value={searchTerm}
+        value={term}
         onChange={handleInputChange}
+        onKeyDown={handleKeyPress}
       />
     </div>
   );
