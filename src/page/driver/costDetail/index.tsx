@@ -15,7 +15,6 @@ import { useGetEstimateDetail } from '../../../lib/useQueries/estimate';
 import { EstimateConsumer, EstimateMover } from '../../../types/apiTypes';
 
 import style from './index.module.css';
-import { ENV } from '../../../lib/api/STORAGE_KEY';
 
 // 타입 가드 함수
 function isEstimateMover(
@@ -30,7 +29,7 @@ export default function DriverCostDetailPage() {
 
   const location = useLocation();
 
-  const url = `${ENV.API_REACT_APP}${location.pathname}`;
+  const url = `https://moving-fe-teal.vercel.app${location.pathname}`;
 
   const [showToast, setShowToast] = useState(false); // Toast 표시 여부 관리
 

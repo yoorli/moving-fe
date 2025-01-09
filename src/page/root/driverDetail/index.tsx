@@ -25,7 +25,6 @@ import { useMedia } from '../../../lib/function/useMediaQuery';
 import SnsShare from '../../../components/snsShare/SnsShare';
 import { Helmet } from 'react-helmet-async';
 import Toast from '../../../components/toast/Toast';
-import { ENV } from '../../../lib/api/STORAGE_KEY';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -142,7 +141,7 @@ const DriverDetailPage = () => {
     profileImg: driver.profileImg || undefined,
   };
 
-  const url = `${ENV.API_REACT_APP}${location.pathname}`;
+  const url = `https://moving-fe-teal.vercel.app${location.pathname}`;
 
   const handleSnsShareClick = () => {
     setShowToast(true);
