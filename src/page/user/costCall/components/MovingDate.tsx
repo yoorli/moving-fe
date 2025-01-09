@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Calendar } from 'react-calendar';
-import { format } from 'date-fns';
+import { format, addDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import pageStyle from '../index.module.css';
 import Button from '../../../../components/btn/Button';
@@ -18,6 +18,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
   const [date, setDate] = useState<DateValue>(null);
 
   const today = new Date();
+  const tomorrow = addDays(today, 1);
 
   const handleSelectClick = (date: Date | null) => {
     if (date) {
@@ -81,7 +82,7 @@ export default function CalenderTest({ onClick, value }: CalendarTestProps) {
             view='month'
             prev2Label={null}
             next2Label={null}
-            minDate={today}
+            minDate={tomorrow}
             tileContent={addContent}
             formatDay={(locale, date) => format(date, 'd')}
             formatMonthYear={(locale, date) => format(date, 'yyyy. MM')}
