@@ -27,10 +27,11 @@ export default function ReceivedCost() {
     direction_receivedCost,
     direction_receivedCostDetail,
     direction_costCall,
+    direction_root,
   } = useDirection();
 
   const modalBtnClick = () => {
-    window.location.reload();
+    direction_root();
   };
 
   return (
@@ -46,7 +47,7 @@ export default function ReceivedCost() {
         secondTabRoute={direction_receivedCost}
       />
       <div className={style.container}>
-        {!isLoading && data ? (
+        {!isLoading && data.total > 0 ? (
           <div>
             <ReceivedCostCard
               redirect={direction_receivedCostDetail}

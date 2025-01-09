@@ -5,7 +5,7 @@ function NotificationConnect() {
   // EventSource 연결 함수
   const connect = () => {
     const eventSource = new EventSourcePolyfill(
-      'https://moving-be-render.onrender.com/notification/stream',
+      'https://3.36.98.92.nip.io/notification/stream',
       {
         withCredentials: true,
       },
