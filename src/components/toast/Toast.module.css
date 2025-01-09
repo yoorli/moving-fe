@@ -1,15 +1,18 @@
 .toastContainer {
-  position: sticky;
-  width: 100%;
+  position: fixed;
+  width: 90%;
   box-sizing: border-box;
   border: 1px solid #4da9ff;
   background-color: #e9f4ff;
+  transform: translateX(-50%);
+  bottom: 50px;
   border-radius: 12px;
+  left: 50%;
   display: flex;
   align-items: center;
   height: 74px;
   padding: 24px 32px;
-  bottom: 10px;
+  z-index: 10;
 }
 
 .icon {

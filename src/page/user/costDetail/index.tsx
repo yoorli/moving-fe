@@ -18,6 +18,7 @@ import { useMedia } from '../../../lib/function/useMediaQuery';
 import { EstimateConsumer } from '../../../types/apiTypes';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 import SnsShare from '../../../components/snsShare/SnsShare';
+import { Helmet } from 'react-helmet-async';
 
 const CostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -33,6 +34,7 @@ const CostDetail = () => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
@@ -115,116 +117,152 @@ const CostDetail = () => {
 
   const shouldShowToast = estimate.isReqConfirmed && !isConfirmed;
 
+  const url = `${process.env.REACT_APP_API_URL}${location.pathname}`;
+
+  const handleSnsShareClick = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
   return (
-    <div className={style.outerContainer}>
-      <div className={style.noPadding}>
-        <Tab firstText='견적 상세' />
-      </div>
-
-      <div className={style.container}>
-        <div
-          className={`${style.leftFilters} ${
-            isMobileView && !estimate.isReqConfirmed
-              ? style.isReqNotConfirmed
-              : ''
-          }`}
-        >
-          <DriverCard
-            list={estimate}
-            type='cost'
-            showPrice={false}
-            count={mobileWithChipCostDetail ? 3 : 6}
-          />
-
-          {isMobileView && (
-            <>
-              <div className={style.border}></div>
-              <div style={{ height: '24px' }}></div>
-              <SnsShare nickname={estimate.moverName} type='shareEstimate' />
-              <div style={{ height: '24px' }}></div>
-              <div className={style.border}></div>
-            </>
-          )}
-
-          <div className={style.section}>
-            <h2 className={style.sectionTitle}>견적가</h2>
-            <p className={style.costValue}>
-              {estimate.price != null
-                ? `${estimate.price.toLocaleString()} 원`
-                : '가격 정보 없음'}
-            </p>
-            <div className={style.border}></div>
-            <h2 className={style.sectionTitle}>
-              {estimate.moverName} 기사님의 코멘트
-            </h2>
-            <p className={style.comment}>
-              {estimate.moverComment || '기사님의 코멘트입니다.'}
-            </p>
-            <div className={style.border}></div>
-            <div className={style.costInfoWrapper}>
-              <CostInfo {...costInfoData} />
-            </div>
-            {shouldShowToast && (
-              <div className={style.toastWrapper}>
-                <Toast text='확정하지 않은 견적이에요!' />
-              </div>
-            )}
-          </div>
+    <>
+      <Helmet>
+        <meta property='og:url' content={url} />
+        <meta property='og:title' content='기사님 견적 페이지 공유하기' />
+        <meta property='og:type' content='website' />
+        <meta
+          property='og:image'
+          content={`${process.env.REACT_APP_API_URL}/images/img_logo_text_large.svg`}
+        />
+        <meta
+          property='og:description'
+          content={`이 페이지는 ${estimate?.moverName} 기사님 견적 페이지입니다.`}
+        />
+        <title>기사님 견적 페이지</title>
+      </Helmet>
+      <div className={style.outerContainer}>
+        <div className={style.noPadding}>
+          <Tab firstText='견적 상세' />
         </div>
 
-        {!isMobileView && (
-          <div className={style.rightFilters}>
-            {estimate.isReqConfirmed ? (
+        <div className={style.container}>
+          <div
+            className={`${style.leftFilters} ${
+              isMobileView && !estimate.isReqConfirmed
+                ? style.isReqNotConfirmed
+                : ''
+            }`}
+          >
+            <DriverCard
+              list={estimate}
+              type='cost'
+              showPrice={false}
+              count={mobileWithChipCostDetail ? 3 : 6}
+            />
+
+            {isMobileView && (
               <>
-                <div className={style.snsShareDesktop}>
+                <div className={style.border}></div>
+                <div style={{ height: '24px' }}></div>
+                <SnsShare
+                  nickname={estimate.moverName}
+                  type='shareEstimate'
+                  onClick={handleSnsShareClick}
+                />
+                <div style={{ height: '24px' }}></div>
+                <div className={style.border}></div>
+              </>
+            )}
+
+            <div className={style.section}>
+              <h2 className={style.sectionTitle}>견적가</h2>
+              <p className={style.costValue}>
+                {estimate.price != null
+                  ? `${estimate.price.toLocaleString()} 원`
+                  : '가격 정보 없음'}
+              </p>
+              <div className={style.border}></div>
+              <h2 className={style.sectionTitle}>
+                {estimate.moverName} 기사님의 코멘트
+              </h2>
+              <p className={style.comment}>
+                {estimate.moverComment || '기사님의 코멘트입니다.'}
+              </p>
+              <div className={style.border}></div>
+              <div className={style.costInfoWrapper}>
+                <CostInfo {...costInfoData} />
+                {showToast && (
+                  <Toast text='링크 복사가 완료됐습니다.' autoDismiss={true} />
+                )}
+              </div>
+              {shouldShowToast && (
+                <div className={style.toastWrapper}>
+                  <Toast text='확정하지 않은 견적이에요!' />
+                </div>
+              )}
+            </div>
+          </div>
+
+          {!isMobileView && (
+            <div className={style.rightFilters}>
+              {estimate.isReqConfirmed ? (
+                <>
+                  <div className={style.snsShareDesktop}>
+                    <SnsShare
+                      nickname={estimate.moverName}
+                      type='shareEstimate'
+                      onClick={handleSnsShareClick}
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Button
+                    text='기사님 찜하기'
+                    btnStyle='outlined354pxLine200'
+                    src={isFavorite ? HeartIcon : HeartEmptyIcon}
+                    srcLocationFront
+                    className={style.heartButton}
+                    onClick={handleFavoriteToggle}
+                  />
+                  <div style={{ height: '32px' }} />
+                  <Button
+                    text={isConfirmed ? '견적 확정 완료' : '견적 확정하기'}
+                    btnStyle={
+                      isConfirmed ? 'outlined314pxBlue300' : 'solid314pxBlue300'
+                    }
+                    className={style.confirmButton}
+                    disabled={isConfirmed}
+                    onClick={handleConfirmClick}
+                  />
+                  <div style={{ height: '40px' }}></div>
+                  <div
+                    style={{ border: '1px solid #FAFAFA', width: '100%' }}
+                  ></div>
+                  <div style={{ height: '40px' }}></div>
                   <SnsShare
                     nickname={estimate.moverName}
                     type='shareEstimate'
+                    onClick={handleSnsShareClick}
                   />
-                </div>
-              </>
-            ) : (
-              <>
-                <Button
-                  text='기사님 찜하기'
-                  btnStyle='outlined354pxLine200'
-                  src={isFavorite ? HeartIcon : HeartEmptyIcon}
-                  srcLocationFront
-                  className={style.heartButton}
-                  onClick={handleFavoriteToggle}
-                />
-                <div style={{ height: '32px' }} />
-                <Button
-                  text={isConfirmed ? '견적 확정 완료' : '견적 확정하기'}
-                  btnStyle={
-                    isConfirmed ? 'outlined314pxBlue300' : 'solid314pxBlue300'
-                  }
-                  className={style.confirmButton}
-                  disabled={isConfirmed}
-                  onClick={handleConfirmClick}
-                />
-                <div style={{ height: '40px' }}></div>
-                <div style={{ border: '1px solid #FAFAFA', width: '100%' }}></div>
-                <div style={{ height: '40px' }}></div>
-                <SnsShare nickname={estimate.moverName} type='shareEstimate' />
-              </>
-            )}
-          </div>
+                </>
+              )}
+            </div>
+          )}
+        </div>
+
+        {isMobileView && (
+          <CostDetailBottomTab
+            isFavorite={isFavorite}
+            handleFavoriteToggle={handleFavoriteToggle}
+            isConfirmed={isConfirmed}
+            isReqConfirmed={estimate.isReqConfirmed}
+            handleConfirmClick={handleConfirmClick}
+          />
         )}
       </div>
-
-      {isMobileView && (
-        <CostDetailBottomTab
-          isFavorite={isFavorite}
-          handleFavoriteToggle={handleFavoriteToggle}
-          isConfirmed={isConfirmed}
-          isReqConfirmed={estimate.isReqConfirmed}
-          handleConfirmClick={handleConfirmClick}
-        />
-      )}
-    </div>
+    </>
   );
 };
 
 export default CostDetail;
-
