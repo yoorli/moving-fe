@@ -167,13 +167,6 @@ const DriverDetailPage = () => {
     profileImg: driver.profileImg || undefined,
   };
 
-  const url = `${ENV.API_FRONT}${location.pathname}`;
-
-  const handleSnsShareClick = () => {
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 50000000);
-  };
-
   return (
     <>
       <Helmet>
