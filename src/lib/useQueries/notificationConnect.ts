@@ -1,11 +1,13 @@
+import { ENV } from '../api/STORAGE_KEY';
+
 function NotificationConnect() {
   const EventSourcePolyfill =
     (window as any).EventSourcePolyfill || EventSource;
 
-  // EventSource 연결 함수
   const connect = () => {
+    const baseUrl = ENV.API_REACT_APP;
     const eventSource = new EventSourcePolyfill(
-      'https://3.36.98.92.nip.io/notification/stream',
+      baseUrl + '/notification/stream',
       {
         withCredentials: true,
       },
@@ -16,12 +18,11 @@ function NotificationConnect() {
       console.error('SSE connection error:', error);
       eventSource.close();
       setTimeout(() => {
-        connect(); // 재연결 시도
-      }, 5000); // 5초 후 재연결 시도
+        connect();
+      }, 5000);
     };
   };
 
-  // 처음 연결 시도
   connect();
 }
 

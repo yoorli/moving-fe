@@ -57,6 +57,12 @@ export default function MovingAddress({
     }));
   };
 
+  const isDisabled =
+    !addressValues.arrival ||
+    !addressValues.departure ||
+    addressValues.arrival === '정확한 주소를 입력해 주세요' ||
+    addressValues.departure === '정확한 주소를 입력해 주세요';
+
   const renderButton = (
     label: '출발지' | '도착지',
     value: string | null,
@@ -113,7 +119,7 @@ export default function MovingAddress({
             text='선택완료'
             btnStyle='solid640pxBlue300'
             onClick={handleSelectClick}
-            disabled={!(addressValues.arrival && addressValues.departure)}
+            disabled={isDisabled}
           />
         </div>
       )}
