@@ -16,6 +16,7 @@ import style from './DriverProfile.module.css';
 import fullHeartMedium from '../../assets/icons/ic_full_heart_medium.svg';
 import emptyHeartMedium from '../../assets/icons/ic_empty_heart_medium.svg';
 import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
+import profileLarge from '../../assets/icons/ic_profile_large.svg'
 
 export default function DriverProfile({
   styles,
@@ -63,7 +64,7 @@ export default function DriverProfile({
         })}
       >
         <img
-          src={profileImg || ''}
+          src={type === 'profile' ? profileLarge : profileImg || ''}
           alt={`${user.moverName}'s profile`}
           className={classNames(style.avatar, {
             [style.avatarLarge]:

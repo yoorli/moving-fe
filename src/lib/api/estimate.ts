@@ -82,7 +82,7 @@ export async function getEstimateDetail(
       serviceType: data.serviceType,
       isAssigned: data.isAssigned,
       summary: data.summary,
-      profileImg: data.profileImg || '/default-profile.png',
+      profileImg: data.profileImg,
       moverName: data.moverName,
       reviewStats: data.reviewStats,
       career: data.career,
