@@ -37,9 +37,7 @@ export default function DriverCostDetailPage() {
 
   const url = `${ENV.API_FRONT}${location.pathname}`;
 
-  const { direction_root } = useDirection();
-
-  const [showToast, setShowToast] = useState(false);
+  const [showToast, setShowToast] = useState(false); // Toast 표시 여부 관리
 
   const numericId = id ? Number(id) : null;
 
@@ -53,6 +51,8 @@ export default function DriverCostDetailPage() {
     setShowToast(true);
     setTimeout(() => setShowToast(false), 3000);
   };
+
+  const { direction_root } = useDirection();
 
   const handleErrorClick = () => {
     direction_root();
@@ -122,7 +122,7 @@ export default function DriverCostDetailPage() {
         <meta property='og:type' content='website' />
         <meta
           property='og:image'
-          content='%PUBLIC_URL%/img_logo_icon_text_xlarge.svg'
+          content='https://github.com/moving-team/moving-fe/blob/main/public/img_logo_icon_text_xlarge.jpg'
         />
         <meta
           property='og:description'
