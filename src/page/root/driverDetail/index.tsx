@@ -235,7 +235,7 @@ const DriverDetailPage = () => {
         <div className={style.container}>
           <div className={style.leftFilters}>
             <DriverCard
-              list={transformedDriver}
+              list={{...transformedDriver, isConfirmed:false}}
               count={mobileWithChipDriverDetail ? 3 : 6}
             />
             <div className={style.section}>
