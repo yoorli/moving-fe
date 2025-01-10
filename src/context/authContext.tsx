@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { auth } from '../lib/api/auth';
 
 const INITCONTEXT: any = {}; // 말 그대로 초기값. 새로 시작하거나 정상 흐름이 아닐경우를 상정한다.
@@ -7,6 +7,7 @@ const INITCONTEXT: any = {}; // 말 그대로 초기값. 새로 시작하거나 
 export const AuthContext = createContext<any>(INITCONTEXT);
 
 export function AuthProvider() {
+  const {pathname} = useLocation();
   const [userValue, setUserValue] = useState<{ isPending: boolean; user: any }>(
     {
       isPending: false,
@@ -39,7 +40,7 @@ export function AuthProvider() {
   };
   useEffect(() => {
     getUser();
-  }, []);
+  }, [pathname]);
 
   return (
     <AuthContext.Provider value={{ userValue }}>
