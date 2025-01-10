@@ -19,7 +19,7 @@ const passwordValidation = (password?: string) => {
   }
 };
 
-const upperLowerValidation = (name?: string, upper = 3, lower = 2) => {
+const upperLowerValidation = (name?: string, upper = 8, lower = 2) => {
   const length = name?.length;
   //값이 있을 경우에만 유효성 검사 실행.
   if (length && (length > upper || length < lower)) {
