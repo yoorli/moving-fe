@@ -60,6 +60,9 @@ const DriverDetailPage = () => {
   } = useGetMoverReviewList(Number(id), currentPage, itemsPerPage);
 
   const [showToast, setShowToast] = useState(false);
+  const [errorModalMessage, setErrorModalMessage] = useState<string | null>(
+    null,
+  );
 
   useEffect(() => {
     if (driver) {
@@ -108,7 +111,22 @@ const DriverDetailPage = () => {
     if (!isAssigned && driver.isConfirmed) {
       requestAssignedEstimate(driver.id, {
         onSuccess: () => setIsAssigned(true),
-        onError: (error) => console.error('지정 견적 요청 실패:', error),
+        onError: (error: any) => {
+          console.error('지정 견적 요청 실패:', error);
+
+          const status = error.response?.status || error.status;
+
+          if (status === 400) {
+            setErrorModalMessage(
+              `${driver?.moverName} 기사님의 서비스 지역이 아닙니다.`,
+            );
+          } else {
+            // 기타 에러 메시지
+            setErrorModalMessage(
+              '지정 견적 요청 중 알 수 없는 오류가 발생했습니다.',
+            );
+          }
+        },
       });
     } else if (!driver.isConfirmed) {
       setIsModalOpen(true);
@@ -299,6 +317,19 @@ const DriverDetailPage = () => {
             setLoginModalOpen={setIsLoginModalOpen}
           />
         )}
+
+        {errorModalMessage && (
+          <ModalContainer
+            title='지정 견적 요청 실패'
+            isText={true}
+            text={errorModalMessage}
+            buttonText='확인'
+            closeBtnClick={() => setErrorModalMessage(null)}
+            buttonClick={() => setErrorModalMessage(null)}
+            btnColorRed={true}
+          />
+        )}
+
         {isModalOpen && (
           <ModalContainer
             title='지정 견적 요청하기'
@@ -332,4 +363,3 @@ const DriverDetailPage = () => {
 };
 
 export default DriverDetailPage;
-
