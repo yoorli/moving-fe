@@ -8,7 +8,7 @@ const shareKakao = (resultUrl: string, nickname: string, type?: string) => {
     return;
   }
 
-  const BASE_URL = `${ENV.API_REACT_APP}`;
+  const BASE_URL = `${ENV.API_FRONT}`;
   const fullUrl = `${BASE_URL}${resultUrl}`;
   const imageUrl = '%PUBLIC_URL%/img_logo_icon_text_xlarge.svg';
   const text = type
