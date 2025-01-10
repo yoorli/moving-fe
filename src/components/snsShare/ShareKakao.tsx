@@ -10,7 +10,8 @@ const shareKakao = (resultUrl: string, nickname: string, type?: string) => {
 
   const BASE_URL = `${ENV.API_FRONT}`;
   const fullUrl = `${BASE_URL}${resultUrl}`;
-  const imageUrl = '%PUBLIC_URL%/img_logo_icon_text_xlarge.svg';
+  const imageUrl =
+    'https://github.com/moving-team/moving-fe/blob/main/public/img_logo_icon_text_xlarge.jpg';
   const text = type
     ? `${nickname} 고객님의 견적서가 도착했습니다! 무빙에서 확인해 보세요!`
     : `${nickname} 기사님을 추천합니다! 무빙에서 확인해 보세요!`;
