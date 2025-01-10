@@ -93,6 +93,7 @@
 }
 
 /* 견적 요청 - 받은 견적 보러가기 */
+/* NoContents */
 .solid196pxBlue300 {
   max-width: 196px;
   width: 100%;
@@ -285,8 +286,9 @@
   .solid280pxBackground200,
   .solid280pxBlue300,
   .outlinedRed200 {
-    height: 54px;
-    font-size: 16px;
+    height: 44px;
+    font-size: 14px;
+    border-radius: 12px;
   }
 
   .solid280pxBackground200,

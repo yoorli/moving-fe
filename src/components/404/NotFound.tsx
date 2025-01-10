@@ -1,10 +1,14 @@
 import Button from '../btn/Button';
 import style from './NotFound.module.css';
-import rightImg from '../../assets/icons/ic_vector_right_large.svg';
+import rightLargeImg from '../../assets/icons/ic_vector_right_large.svg';
+import rightMediumImg from '../../assets/icons/ic_vector_right_medium.svg';
 import useDirection from '../../lib/function/direction';
+import { useMedia } from '../../lib/function/useMediaQuery';
 
 export default function NotFound() {
   const { direction_root } = useDirection();
+
+  const { pc } = useMedia();
 
   return (
     <div className={style.overlay}>
@@ -21,7 +25,8 @@ export default function NotFound() {
         <Button
           btnStyle='solid180pxBlue300'
           text='무빙 홈으로'
-          src={rightImg}
+          className={style.homeBtn}
+          src={pc ? rightLargeImg : rightMediumImg}
           onClick={direction_root}
         />
       </div>

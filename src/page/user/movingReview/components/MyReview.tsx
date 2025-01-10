@@ -7,6 +7,7 @@ import { useGetMyReviewList } from '../../../../lib/useQueries/review';
 import { ChipType } from '../../../../types/cardTypes';
 import { getNotificationDate } from '../../../../lib/function/utils';
 import LoadingSpinner from '../../../../components/loading/LoadingSpinner';
+import NoContents from '../../../../components/noContents/NoContents';
 
 interface Review {
   reviewId: number; // 리뷰 아이디
@@ -47,26 +48,34 @@ export default function MyReview() {
   }
 
   return (
-    <div className={style.container}>
-      <div className={style.cardContainer}>
-        {data?.list.slice().map((review: Review, reviewId: number) => (
-          <UserCard
-            key={reviewId}
-            list={{
-              ...review,
-              reviewStats: { averageScore: review.score },
-              movingDate: getNotificationDate(review.movingDate, 'noSec'),
-            }}
-            type='review'
+    <>
+      {data.total !== 0 ? (
+        <div className={style.container}>
+          <div className={style.cardContainer}>
+            {data?.list.slice().map((review: Review, reviewId: number) => (
+              <UserCard
+                key={reviewId}
+                list={{
+                  ...review,
+                  reviewStats: { averageScore: review.score },
+                  movingDate: getNotificationDate(review.movingDate, 'noSec'),
+                }}
+                type='review'
+              />
+            ))}
+          </div>
+          <Pagination
+            currentPage={currentPage}
+            data={data.total}
+            itemsPerPage={itemsPerPage}
+            onPageChange={setCurrentPage}
           />
-        ))}
-      </div>
-      <Pagination
-        currentPage={currentPage}
-        data={data.total}
-        itemsPerPage={itemsPerPage}
-        onPageChange={setCurrentPage}
-      />
-    </div>
+        </div>
+      ) : (
+        <div className={style.noContents}>
+          <NoContents image='file' contentText='내가 쓴 리뷰가 없습니다.' />
+        </div>
+      )}
+    </>
   );
 }
