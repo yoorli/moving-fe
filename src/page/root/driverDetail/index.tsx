@@ -26,6 +26,9 @@ import SnsShare from '../../../components/snsShare/SnsShare';
 import { Helmet } from 'react-helmet-async';
 import Toast from '../../../components/toast/Toast';
 import { ENV } from '../../../lib/api/STORAGE_KEY';
+import PageError from '../../../components/pageError/PageError';
+import NotFound from '../../../components/404/NotFound';
+import noItems from '../../../assets/icons/ic_noItems.svg';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -110,18 +113,29 @@ const DriverDetailPage = () => {
 
     if (!isAssigned && driver.isConfirmed) {
       requestAssignedEstimate(driver.id, {
-        onSuccess: () => setIsAssigned(true),
+        onSuccess: (data) => {
+          if (data?.status === 200 && data?.success) {
+            refetch();
+            setIsAssigned(true); // 성공 시에만 true
+          } else {
+            setIsAssigned(false);
+            setErrorModalMessage(
+              `${driver?.moverName} 기사님의 서비스 지역이 아닙니다.`,
+            );
+          }
+        },
         onError: (error: any) => {
           console.error('지정 견적 요청 실패:', error);
 
           const status = error.response?.status || error.status;
+
+          setIsAssigned(false); // 에러 발생 시 상태 초기화
 
           if (status === 400) {
             setErrorModalMessage(
               `${driver?.moverName} 기사님의 서비스 지역이 아닙니다.`,
             );
           } else {
-            // 기타 에러 메시지
             setErrorModalMessage(
               '지정 견적 요청 중 알 수 없는 오류가 발생했습니다.',
             );
@@ -153,10 +167,23 @@ const DriverDetailPage = () => {
     );
   }
 
-  if (error || !driver) {
+  if (!driver) {
     return (
-      <div className={style.container}>
-        <p>해당 기사님을 찾을 수 없습니다.</p>
+      <div className={`${style.outerContainer} ${style.noDriverError}`}>
+        <PageError
+          image={noItems}
+          contentText='데이터를 불러오는 중 에러가 발생했습니다: 해당하는 기사님이 존재하지 않습니다.'
+          buttonText='홈으로 돌아가기'
+          buttonHandler={() => navigate('/')}
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={style.outerContainer}>
+        <NotFound />
       </div>
     );
   }
@@ -366,3 +393,4 @@ const DriverDetailPage = () => {
 };
 
 export default DriverDetailPage;
+
