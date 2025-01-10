@@ -34,6 +34,7 @@ export function getNotificationDate(inputDate: string | Date, type?: string) {
     if (hours > 0) return `${hours}시간 전`;
     if (minutes > 0) return `${minutes}분 전`;
     if (!type) return `${seconds}초 전`;
+    else return '방금';
   } else {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');

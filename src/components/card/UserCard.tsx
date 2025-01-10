@@ -15,6 +15,7 @@ import { ChipType, UserProfileProps } from '../../types/cardTypes';
 import style from './UserCard.module.css';
 
 import writing from '../../assets/icons/ic_writing_medium.svg';
+import { useEffect, useState } from 'react';
 
 export default function UserCard({
   sendCostBtn: sendCost,
@@ -26,6 +27,26 @@ export default function UserCard({
   const isPc = useMedia().pc;
 
   const chipList: ChipType[] = [];
+
+  const [time, setTime] = useState<string | undefined>();
+
+  useEffect(() => {
+    const updateTime = () => {
+      const date = list.createAt || list.updatedAt;
+      if (date) {
+        const currentTime = getNotificationDate(date, 'noSec');
+        setTime(currentTime);
+      }
+    };
+
+    updateTime();
+
+    const intervalId = setInterval(updateTime, 60000);
+
+    return () => {
+      clearInterval(intervalId); // 컴포넌트 언마운트 시 인터벌 제거
+    };
+  }, [list.createAt, list.updatedAt]);
 
   if (!list) {
     return <div className={style.cardError}>데이터가 없습니다.</div>;
@@ -63,14 +84,10 @@ export default function UserCard({
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
-            {list.createAt ||
-              (list.updatedAt &&
-                getNotificationDate(list.createAt || list.updatedAt, 'noSec'))}
+            {(list.updatedAt) && time}
           </div>
         ) : (
-          <div className={style.createAtRType}>
-            {list.createAt && getNotificationDate(list.createAt, 'noSec')}
-          </div>
+          <div className={style.createAtRType}>{list.createAt && time}</div>
         )}
       </div>
       <UserProfile type={type} list={list} />
@@ -110,7 +127,7 @@ export default function UserCard({
           <div className={style.review}>{list.content}</div>
           {!isPc && (
             <div className={style.createAtRTypeNoPc}>
-              {list.createAt && getNotificationDate(list.createAt, 'noSec')}
+              {list.createAt && time}
             </div>
           )}
         </>
