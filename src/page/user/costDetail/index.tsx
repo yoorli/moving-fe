@@ -166,7 +166,7 @@ const CostDetail = () => {
               type='cost'
               showPrice={false}
               count={mobileWithChipCostDetail ? 3 : 6}
-              onClick={()=>handleMoverCardClick}
+              onClick={() => handleMoverCardClick(estimate.moverId)}
             />
 
             {isMobileView && (
