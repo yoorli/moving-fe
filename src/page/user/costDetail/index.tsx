@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DriverCard from '../../../components/card/DriverCard';
 import CostDetailBottomTab from '../costDetail/components/CostDetailBottomTab';
 import CostInfo from '../../../components/costInfo/CostInfo';
@@ -33,6 +33,8 @@ const CostDetail = () => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setIsMobileView(window.innerWidth <= 1199);
@@ -115,6 +117,11 @@ const CostDetail = () => {
 
   const shouldShowToast = estimate.isReqConfirmed && !isConfirmed;
 
+  const handleMoverCardClick = (id: number | undefined) => {
+    if (id === undefined) return;
+    navigate(`/driver/${id}`);
+  };
+
   return (
     <div className={style.outerContainer}>
       <div className={style.noPadding}>
@@ -134,6 +141,7 @@ const CostDetail = () => {
             type='cost'
             showPrice={false}
             count={mobileWithChipCostDetail ? 3 : 6}
+            onClick={() => handleMoverCardClick(estimate.moverId)}
           />
 
           {isMobileView && (
