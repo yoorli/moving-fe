@@ -8,7 +8,10 @@ import { useGetEstimate } from '../../../lib/useQueries/estimate';
 import useDirection from '../../../lib/function/direction';
 import CostInfo from '../../../components/costInfo/CostInfo';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
-import ModalContainer from '../../../components/modal/ModalContainer';
+
+import PageError from '../../../components/pageError/PageError';
+
+import noItems from '../../../assets/icons/ic_noItems.svg';
 
 export default function ReceivedCostDetail() {
   const { direction_pendingCost, direction_receivedCost, direction_root } =
@@ -23,7 +26,7 @@ export default function ReceivedCostDetail() {
 
   const { data, isLoading, error } = useGetEstimate(id ?? '');
 
-  const modalBtnClick = () => {
+  const handleErrorClick = () => {
     direction_root();
   };
 
@@ -63,21 +66,23 @@ export default function ReceivedCostDetail() {
                     <LoadingSpinner />
                   </div>
                 )}
+                {error && (
+                  <div className={style.noContents}>
+                    <PageError
+                      image={noItems}
+                      contentTextFirst={
+                        '데이터를 불러오는 중 에러가 발생했습니다:'
+                      }
+                      contentTextSecond={`${error.message}`}
+                      buttonText='홈으로 돌아가기'
+                      buttonHandler={() => handleErrorClick()}
+                    />
+                  </div>
+                )}
               </div>
             )}
           </div>
         </div>
-        {error && (
-          <ModalContainer
-            title='에러 메시지'
-            isText={true}
-            text={error.message}
-            buttonText='확인'
-            closeBtnClick={() => modalBtnClick()}
-            buttonClick={modalBtnClick}
-            btnColorRed={true}
-          />
-        )}
       </div>
     </>
   );
