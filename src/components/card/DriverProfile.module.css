@@ -15,7 +15,6 @@
 
 .profileRType {
   border: none;
-  cursor: pointer;
 }
 
 .region {
@@ -25,12 +24,15 @@
 
 .profileWType {
   height: 92px;
-  cursor: pointer;
 }
 
 .profileSmall {
   gap: 12px;
   padding: 10px;
+}
+
+.pointerCursor {
+  cursor: pointer;
 }
 
 .profileImage {

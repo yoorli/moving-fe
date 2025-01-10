@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
@@ -17,7 +18,6 @@ import fullHeartMedium from '../../assets/icons/ic_full_heart_medium.svg';
 import emptyHeartMedium from '../../assets/icons/ic_empty_heart_medium.svg';
 import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
 import profileLarge from '../../assets/icons/ic_profile_large.svg';
-import { useParams } from 'react-router-dom';
 
 export default function DriverProfile({
   styles,
@@ -75,6 +75,11 @@ export default function DriverProfile({
         [style.profilePType]: type === 'profile',
         [style.profileRType]: type === 'review',
         [style.profileWType]: type === 'waiting' || type === 'confirm',
+        [style.pointerCursor]:
+          type === 'dibs' ||
+          type === 'waiting' ||
+          type === 'confirm' ||
+          type === 'review',
         [style.profileSmall]: styles === 'small',
       })}
       onClick={() => handleProfileClick()}
