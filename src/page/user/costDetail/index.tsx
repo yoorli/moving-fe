@@ -20,15 +20,22 @@ import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 import SnsShare from '../../../components/snsShare/SnsShare';
 import { Helmet } from 'react-helmet-async';
 import { ENV } from '../../../lib/api/STORAGE_KEY';
+import PageError from '../../../components/pageError/PageError';
+import noItems from '../../../assets/icons/ic_noItems.svg';
 
 const CostDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { mobileWithChipCostDetail } = useMedia();
 
-  const { data: estimate, refetch } = useGetEstimateDetail(
-    Number(id),
-    'consumer',
-  ) as { data: EstimateConsumer; refetch: () => void };
+  const {
+    data: estimate,
+    refetch,
+    error,
+  } = useGetEstimateDetail(Number(id), 'consumer') as {
+    data: EstimateConsumer;
+    refetch: () => void;
+    error: any;
+  };
   const toggleFavoriteMutation = useToggleFavoriteMover();
   const { mutate: updateEstimateConfirmed } = useUpdateEstimateConfirmed();
 
@@ -94,6 +101,24 @@ const CostDetail = () => {
       });
     }
   };
+
+  if (error) {
+    const errorMessage =
+      error.response?.status === 401
+        ? '데이터를 불러오는 중 에러가 발생했습니다: 권한이 없습니다.'
+        : '데이터를 불러오는 중 에러가 발생했습니다: 존재하지 않는 견적입니다.';
+
+    return (
+      <div className={`${style.outerContainer} ${style.errorContainer}`}>
+        <PageError
+          image={noItems}
+          contentText={errorMessage}
+          buttonText='홈으로 돌아가기'
+          buttonHandler={() => navigate('/')}
+        />
+      </div>
+    );
+  }
 
   if (!estimate) {
     return (
