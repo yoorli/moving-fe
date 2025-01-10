@@ -332,7 +332,13 @@ const DriverDetailPage = () => {
                   srcLocationFront
                   alt='찜하기 아이콘'
                   className={style.heartButton}
-                  onClick={handleFavoriteToggle}
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      setIsLoginModalOpen(true);
+                      return;
+                    }
+                    handleFavoriteToggle();
+                  }}
                 />
                 <Button
                   text={
@@ -341,7 +347,13 @@ const DriverDetailPage = () => {
                   btnStyle='solid354pxBlue300'
                   className={style.requestButton}
                   disabled={isAssigned}
-                  onClick={handleAssignRequest}
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      setIsLoginModalOpen(true);
+                      return;
+                    }
+                    handleAssignRequest();
+                  }}
                 />
                 <div className={style.border}></div>
               </div>
