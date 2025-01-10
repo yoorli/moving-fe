@@ -191,7 +191,7 @@ const DriverDetailPage = () => {
         <meta property='og:type' content='website' />
         <meta
           property='og:image'
-          content='%PUBLIC_URL%/img_logo_icon_text_xlarge.svg'
+          content='https://github.com/moving-team/moving-fe/blob/main/public/img_logo_icon_text_xlarge.jpg'
         />
         <meta
           property='og:description'
