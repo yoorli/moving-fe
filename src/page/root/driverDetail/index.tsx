@@ -32,7 +32,7 @@ const DriverDetailPage = () => {
   const navigate = useNavigate();
 
   const { userValue } = useContext(AuthContext);
-  const isLoggedIn = !!userValue.user; // 로그인 여부 확인
+  const isLoggedIn = !!userValue.user;
 
   const {
     data: driver,
@@ -41,7 +41,7 @@ const DriverDetailPage = () => {
     refetch,
   } = useGetMoverDetail(Number(id));
   const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
-  const { mutate: toggleFavorite } = useToggleFavoriteMover();
+  const toggleFavoriteMutation = useToggleFavoriteMover();
 
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,10 +58,16 @@ const DriverDetailPage = () => {
     isLoading: isReviewLoading,
     error: reviewError,
   } = useGetMoverReviewList(Number(id), currentPage, itemsPerPage);
+
   const [showToast, setShowToast] = useState(false);
+  const [errorModalMessage, setErrorModalMessage] = useState<string | null>(
+    null,
+  );
+
   useEffect(() => {
     if (driver) {
-      console.log('기사 상세 페이지:', driver);
+      setIsFavorite(driver.isFavorite);
+      setIsAssigned(driver.isAssigned);
     }
   }, [driver]);
 
@@ -73,8 +79,7 @@ const DriverDetailPage = () => {
 
   useEffect(() => {
     if (driver) {
-      setIsFavorite(driver.isFavorite);
-      setIsAssigned(driver.isAssigned);
+      console.log('기사 상세 데이터:', driver);
     }
   }, [driver]);
 
@@ -84,15 +89,15 @@ const DriverDetailPage = () => {
       return;
     }
 
-    if (!isLoggedIn) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-
-    toggleFavorite(driver.id, {
-      onSuccess: () => {
-        setIsFavorite((prev) => !prev);
-        refetch(); // 찜 상태 변경 후 데이터 새로고침
+    toggleFavoriteMutation.mutate(driver.id, {
+      onSuccess: (data) => {
+        setIsFavorite(data.isFavorite);
+        if (data.isFavorite !== driver.isFavorite) {
+          refetch();
+        }
+      },
+      onError: (error) => {
+        console.error('찜 상태 변경 실패:', error);
       },
     });
   };
@@ -103,13 +108,26 @@ const DriverDetailPage = () => {
       return;
     }
 
-    if (!isLoggedIn) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-
     if (!isAssigned && driver.isConfirmed) {
-      requestAssignedEstimate(driver.id);
+      requestAssignedEstimate(driver.id, {
+        onSuccess: () => setIsAssigned(true),
+        onError: (error: any) => {
+          console.error('지정 견적 요청 실패:', error);
+
+          const status = error.response?.status || error.status;
+
+          if (status === 400) {
+            setErrorModalMessage(
+              `${driver?.moverName} 기사님의 서비스 지역이 아닙니다.`,
+            );
+          } else {
+            // 기타 에러 메시지
+            setErrorModalMessage(
+              '지정 견적 요청 중 알 수 없는 오류가 발생했습니다.',
+            );
+          }
+        },
+      });
     } else if (!driver.isConfirmed) {
       setIsModalOpen(true);
     }
@@ -117,6 +135,13 @@ const DriverDetailPage = () => {
 
   const handleModalButtonClick = () => {
     navigate('/user/costCall');
+  };
+
+  const url = `${ENV.API_REACT_APP}${location.pathname}`;
+
+  const handleSnsShareClick = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 5000);
   };
 
   if (isLoading) {
@@ -254,13 +279,6 @@ const DriverDetailPage = () => {
                   />
                 </div>
               )}
-              {showToast && (
-                <Toast
-                  text='링크 복사가 완료됐습니다.'
-                  autoDismiss={true}
-                  type='copy'
-                />
-              )}
             </div>
           </div>
           {!isMobileView && (
@@ -287,11 +305,8 @@ const DriverDetailPage = () => {
                 />
                 <div className={style.border}></div>
               </div>
-              <div>
-                <SnsShare
-                  nickname={driver.moverName}
-                  onClick={handleSnsShareClick}
-                />
+              <div style={{ marginTop: '10px' }}>
+                <SnsShare nickname={driver.moverName} />
               </div>
             </div>
           )}
@@ -300,15 +315,28 @@ const DriverDetailPage = () => {
           <FixedBottomTab
             moverId={driver.id}
             isFavorite={isFavorite}
-            setIsFavorite={setIsFavorite}
+            handleFavoriteToggle={handleFavoriteToggle}
             isAssigned={isAssigned}
-            setIsAssigned={setIsAssigned}
+            handleAssignRequest={handleAssignRequest}
             isConfirmed={driver.isConfirmed}
             setModalOpen={setIsModalOpen}
             isLoggedIn={isLoggedIn}
             setLoginModalOpen={setIsLoginModalOpen}
           />
         )}
+
+        {errorModalMessage && (
+          <ModalContainer
+            title='지정 견적 요청 실패'
+            isText={true}
+            text={errorModalMessage}
+            buttonText='확인'
+            closeBtnClick={() => setErrorModalMessage(null)}
+            buttonClick={() => setErrorModalMessage(null)}
+            btnColorRed={true}
+          />
+        )}
+
         {isModalOpen && (
           <ModalContainer
             title='지정 견적 요청하기'
@@ -327,6 +355,13 @@ const DriverDetailPage = () => {
             buttonText='로그인 하기'
             closeBtnClick={() => setIsLoginModalOpen(false)}
             buttonClick={() => navigate('/user/login')}
+          />
+        )}
+        {showToast && (
+          <Toast
+            text='링크 복사가 완료됐습니다.'
+            autoDismiss={true}
+            type='copy'
           />
         )}
       </div>

@@ -96,7 +96,7 @@
 }
 
 .dropdownOpen {
-  z-index: 1000;
+  z-index: 1;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid #1b92ff;
   background-color: #f5faff;
@@ -110,6 +110,7 @@
 .cardSection {
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 .searchBarCompact {
