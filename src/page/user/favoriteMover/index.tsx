@@ -1,5 +1,6 @@
 import DriverCard from '../../../components/card/DriverCard';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import NoContents from '../../../components/noContents/NoContents';
 import Tab from '../../../components/tab/Tab';
 import { useGetFavoriteMover } from '../../../lib/useQueries/favorite';
 import { ChipType } from '../../../types/cardTypes';
@@ -22,6 +23,11 @@ interface Mover {
 export default function UserFavoriteMover() {
   const { data, isLoading } = useGetFavoriteMover();
 
+  // 로딩 중일 때 처리
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <>
       <Tab firstText='찜한 기사님' />
@@ -39,8 +45,13 @@ export default function UserFavoriteMover() {
             </div>
           </div>
         ) : (
-          <div>
-            {isLoading ? <LoadingSpinner /> : '데이터를 불러올 수 없습니다.'}
+          <div className={style.noContentsContainer}>
+            <div className={style.noContents}>
+              <NoContents
+                image='file'
+                contentText='아직 찜한 기사님이 없습니다.'
+              />
+            </div>
           </div>
         )}
       </div>

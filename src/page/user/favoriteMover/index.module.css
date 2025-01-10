@@ -22,12 +22,26 @@
   padding: 0 120px;
 }
 
+.noContentsContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.noContents {
+  display: flex;
+  height: 760px;
+}
+
 /* 1119px ~ 744px */
 @media (max-width: 1199px) and (min-width: 744px) {
   .cardContainer {
     grid-template-columns: repeat(1, 1fr);
     gap: 32px;
     padding: 0 72px;
+  }
+
+  .noContents {
+    height: 396px;
   }
 }
 
@@ -41,5 +55,9 @@
     grid-template-columns: repeat(1, 1fr);
     gap: 24px;
     padding: 0 24px;
+  }
+
+  .noContents {
+    height: 396px;
   }
 }
