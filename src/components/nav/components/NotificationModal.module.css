@@ -21,10 +21,6 @@
     background-color: #fff;
   }
 
-  .listContainer {
-    overflow: scroll;
-  }
-
   .title {
     padding: 14px 12px 10px 16px;
     display: flex;
@@ -108,10 +104,6 @@
 
     z-index: 100;
     background-color: #fff;
-  }
-
-  .listContainer {
-    overflow: scroll;
   }
 
   .title {
@@ -200,10 +192,6 @@
     background-color: #fff;
   }
 
-  .listContainer {
-    overflow: scroll;
-  }
-
   .title {
     padding: 14px 12px 14px 24px;
     display: flex;
@@ -266,4 +254,10 @@
     font-weight: 600;
     color: #1e90ff;
   }
+}
+
+.listContainer {
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
