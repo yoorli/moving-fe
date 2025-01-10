@@ -17,6 +17,11 @@ export default function PageError({
   buttonText,
   buttonHandler,
 }: pageErrorProps) {
+  if (contentTextSecond) {
+    if (!/^[\uac00-\ud7af]/.test(contentTextSecond)) {
+      contentTextSecond = '';
+    }
+  }
   return (
     <div className={style.overlay}>
       <div className={style.container}>

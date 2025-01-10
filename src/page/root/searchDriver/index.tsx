@@ -350,6 +350,7 @@ const SearchDriver = () => {
           key={`${user.id ?? 'no-id'}-${index}`}
             list={{
               ...user,
+              moverId: user.userId,
               profileImg: user.profileImg || undefined,
               serviceType: user.serviceType.map(
                 (type: string) => type as ChipProps['type'],

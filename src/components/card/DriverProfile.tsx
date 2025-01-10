@@ -16,22 +16,48 @@ import style from './DriverProfile.module.css';
 import fullHeartMedium from '../../assets/icons/ic_full_heart_medium.svg';
 import emptyHeartMedium from '../../assets/icons/ic_empty_heart_medium.svg';
 import yellowStarSmall from '../../assets/icons/ic_yellow_star_small.svg';
+import profileLarge from '../../assets/icons/ic_profile_large.svg';
+import { useParams } from 'react-router-dom';
 
 export default function DriverProfile({
   styles,
   type,
   list: user,
 }: DriverProfileProps) {
-  const isPc = useMedia().pc;
+  const [id, setId] = useState(Number);
 
+  const isPc = useMedia().pc;
+  const params = useParams().id;
   const { direction_driverDetail } = useDirection();
-  const id = Number(user.moverId);
+
+  useEffect(() => {
+    const newId =
+      !type && !user.moverId ? Number(params) : Number(user.moverId);
+    newId && setId(newId);
+  }, [type, user.moverId]);
 
   const [profileImg, setProfileImg] = useState<string | null>(null);
 
   useEffect(() => {
-    setProfileImg(checkImg(user.profileImg));
-  }, [user.profileImg]);
+    const loadImage = () => {
+      const localStorageKey = `profileImage_${id}`;
+      const storedImage = localStorage.getItem(localStorageKey);
+
+      if (storedImage) {
+        setProfileImg(storedImage);
+      } else {
+        const randomImage = checkImg(user.profileImg);
+        localStorage.setItem(localStorageKey, randomImage);
+        setProfileImg(randomImage);
+      }
+    };
+
+    if (!user.profileImg) {
+      loadImage();
+    } else {
+      setProfileImg(user.profileImg);
+    }
+  }, [user.profileImg, id]);
 
   const handleProfileClick = () => {
     if (
@@ -63,7 +89,7 @@ export default function DriverProfile({
         })}
       >
         <img
-          src={profileImg || ''}
+          src={type === 'profile' ? profileLarge : profileImg || ''}
           alt={`${user.moverName}'s profile`}
           className={classNames(style.avatar, {
             [style.avatarLarge]:
