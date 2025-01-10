@@ -1,3 +1,5 @@
+import { ENV } from '../../lib/api/STORAGE_KEY';
+
 const { Kakao } = window;
 
 const shareKakao = (resultUrl: string, nickname: string, type?: string) => {
@@ -6,9 +8,9 @@ const shareKakao = (resultUrl: string, nickname: string, type?: string) => {
     return;
   }
 
-  const BASE_URL = `${process.env.REACT_APP_API_URL}`;
+  const BASE_URL = `${ENV.API_REACT_APP}`;
   const fullUrl = `${BASE_URL}${resultUrl}`;
-  const imageUrl = `${BASE_URL}/images/img_logo_text_large.svg`;
+  const imageUrl = '%PUBLIC_URL%/img_logo_icon_text_xlarge.svg';
   const text = type
     ? `${nickname} 고객님의 견적서가 도착했습니다! 무빙에서 확인해 보세요!`
     : `${nickname} 기사님을 추천합니다! 무빙에서 확인해 보세요!`;

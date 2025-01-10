@@ -50,6 +50,13 @@ export default function WritableReviews({
     return <LoadingSpinner />;
   }
 
+  const totalPages =
+    data && itemsPerPage ? Math.ceil(data.total / itemsPerPage) : 0;
+
+  if (currentPage > totalPages) {
+    setCurrentPage(totalPages);
+  }
+
   return (
     <>
       {data.total !== 0 ? (

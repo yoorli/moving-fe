@@ -23,17 +23,25 @@ import NoContents from '../../../components/noContents/NoContents';
 import { AuthContext } from '../../../context/authContext';
 import { useMedia } from '../../../lib/function/useMediaQuery';
 import SnsShare from '../../../components/snsShare/SnsShare';
+import { Helmet } from 'react-helmet-async';
+import Toast from '../../../components/toast/Toast';
+import { ENV } from '../../../lib/api/STORAGE_KEY';
 
 const DriverDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
   const { userValue } = useContext(AuthContext);
-  const isLoggedIn = !!userValue.user; // 로그인 여부 확인
+  const isLoggedIn = !!userValue.user;
 
-  const { data: driver, isLoading, error, refetch } = useGetMoverDetail(Number(id));
+  const {
+    data: driver,
+    isLoading,
+    error,
+    refetch,
+  } = useGetMoverDetail(Number(id));
   const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
-  const { mutate: toggleFavorite } = useToggleFavoriteMover();
+  const toggleFavoriteMutation = useToggleFavoriteMover();
 
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1199);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,9 +51,7 @@ const DriverDetailPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const {
-    mobileWithChipDriverDetail
-  } = useMedia();
+  const { mobileWithChipDriverDetail } = useMedia();
 
   const {
     data: reviewData,
@@ -53,9 +59,15 @@ const DriverDetailPage = () => {
     error: reviewError,
   } = useGetMoverReviewList(Number(id), currentPage, itemsPerPage);
 
+  const [showToast, setShowToast] = useState(false);
+  const [errorModalMessage, setErrorModalMessage] = useState<string | null>(
+    null,
+  );
+
   useEffect(() => {
     if (driver) {
-      console.log('기사 상세 페이지:', driver);
+      setIsFavorite(driver.isFavorite);
+      setIsAssigned(driver.isAssigned);
     }
   }, [driver]);
 
@@ -67,8 +79,7 @@ const DriverDetailPage = () => {
 
   useEffect(() => {
     if (driver) {
-      setIsFavorite(driver.isFavorite);
-      setIsAssigned(driver.isAssigned);
+      console.log('기사 상세 데이터:', driver);
     }
   }, [driver]);
 
@@ -78,15 +89,15 @@ const DriverDetailPage = () => {
       return;
     }
 
-    if (!isLoggedIn) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-
-    toggleFavorite(driver.id, {
-      onSuccess: () => {
-        setIsFavorite((prev) => !prev);
-        refetch(); // 찜 상태 변경 후 데이터 새로고침
+    toggleFavoriteMutation.mutate(driver.id, {
+      onSuccess: (data) => {
+        setIsFavorite(data.isFavorite);
+        if (data.isFavorite !== driver.isFavorite) {
+          refetch();
+        }
+      },
+      onError: (error) => {
+        console.error('찜 상태 변경 실패:', error);
       },
     });
   };
@@ -97,13 +108,26 @@ const DriverDetailPage = () => {
       return;
     }
 
-    if (!isLoggedIn) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-
     if (!isAssigned && driver.isConfirmed) {
-      requestAssignedEstimate(driver.id);
+      requestAssignedEstimate(driver.id, {
+        onSuccess: () => setIsAssigned(true),
+        onError: (error: any) => {
+          console.error('지정 견적 요청 실패:', error);
+
+          const status = error.response?.status || error.status;
+
+          if (status === 400) {
+            setErrorModalMessage(
+              `${driver?.moverName} 기사님의 서비스 지역이 아닙니다.`,
+            );
+          } else {
+            // 기타 에러 메시지
+            setErrorModalMessage(
+              '지정 견적 요청 중 알 수 없는 오류가 발생했습니다.',
+            );
+          }
+        },
+      });
     } else if (!driver.isConfirmed) {
       setIsModalOpen(true);
     }
@@ -111,6 +135,13 @@ const DriverDetailPage = () => {
 
   const handleModalButtonClick = () => {
     navigate('/user/costCall');
+  };
+
+  const url = `${ENV.API_REACT_APP}${location.pathname}`;
+
+  const handleSnsShareClick = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 5000);
   };
 
   if (isLoading) {
@@ -137,152 +168,198 @@ const DriverDetailPage = () => {
   };
 
   return (
-    <div className={style.outerContainer}>
-      <div className={style.noPadding}></div>
-      <div className={style.container}>
-        <div className={style.leftFilters}>
-          <DriverCard
-            list={transformedDriver}
-            count={mobileWithChipDriverDetail ? 3 : 6}
-          />
-          <div className={style.section}>
-            <div className={style.border}></div>
-            {isMobileView && (
-              <>
-                <div style={{ marginTop: '24px' }}>
-                  <SnsShare nickname={driver.moverName} />
-                </div>
-                <div className={style.mobileBorder}></div>
-              </>
-            )}
-            <h2 className={style.sectionTitle}>상세설명</h2>
-            <p className={style.description}>{driver.description}</p>
-            <div className={style.border}></div>
-            <h2 className={style.sectionTitle}>제공 서비스</h2>
-            <div className={style.chips}>
-              {driver.serviceType.map((type, index) => (
-                <span key={index} className={style.serviceChip}>
-                  {translateServiceType(type)}
-                </span>
-              ))}
-            </div>
-            <div className={style.border}></div>
-            <h2 className={style.sectionTitle}>서비스 가능 지역</h2>
-            <div className={style.chips}>
-              {driver.serviceRegion.map((region, index) => (
-                <span key={index} className={style.regionChip}>
-                  {translateServiceRegion(region)}
-                </span>
-              ))}
-            </div>
-            <div className={style.reviewSeparator}></div>
-            {isReviewLoading ? (
-              <div>리뷰 데이터를 로딩 중입니다...</div>
-            ) : reviewError ? (
-              <div className={style.noContents}>
-                <NoContents image="file" contentText="일시적인 오류로 리뷰를 가져오지 못했습니다!" />
+    <>
+      <Helmet>
+        <meta property='og:url' content={url} />
+        <meta property='og:title' content='기사님 상세페이지 공유하기' />
+        <meta property='og:type' content='website' />
+        <meta
+          property='og:image'
+          content='%PUBLIC_URL%/img_logo_icon_text_xlarge.svg'
+        />
+        <meta
+          property='og:description'
+          content={`이 페이지는 ${driver?.moverName} 기사님 페이지입니다.`}
+        />
+        <title>기사님 상세페이지</title>
+      </Helmet>
+      <div className={style.outerContainer}>
+        <div className={style.noPadding}></div>
+        <div className={style.container}>
+          <div className={style.leftFilters}>
+            <DriverCard
+              list={transformedDriver}
+              count={mobileWithChipDriverDetail ? 3 : 6}
+            />
+            <div className={style.section}>
+              <div className={style.border}></div>
+              {isMobileView && (
+                <>
+                  <div style={{ marginTop: '24px' }}>
+                    <SnsShare
+                      nickname={driver.moverName}
+                      onClick={handleSnsShareClick}
+                    />
+                  </div>
+                  <div className={style.mobileBorder}></div>
+                </>
+              )}
+              <h2 className={style.sectionTitle}>상세설명</h2>
+              <p className={style.description}>{driver.description}</p>
+              <div className={style.border}></div>
+              <h2 className={style.sectionTitle}>제공 서비스</h2>
+              <div className={style.chips}>
+                {driver.serviceType.map((type, index) => (
+                  <span key={index} className={style.serviceChip}>
+                    {translateServiceType(type)}
+                  </span>
+                ))}
               </div>
-            ) : reviewData && reviewData.reviewStats.totalReviews !== 0 ? (
-              <>
-                <Review
-                  totalReviews={reviewData.reviewStats.totalReviews}
-                  averageRating={
-                    Object.entries(reviewData.reviewStats.reviewCount).reduce(
-                      (acc, [score, count]) =>
-                        acc + Number(score) * Number(count),
-                      0
-                    ) / reviewData.reviewStats.totalReviews
-                  }
-                  reviewStats={reviewData.reviewStats.reviewCount}
-                  reviews={reviewData.reviews.list}
-                />
-                <div
-                  style={{
-                    marginTop: '60px',
-                    marginBottom: '60px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Pagination
-                    currentPage={currentPage}
-                    data={reviewData.reviewStats.totalReviews}
-                    itemsPerPage={itemsPerPage}
-                    onPageChange={setCurrentPage}
+              <div className={style.border}></div>
+              <h2 className={style.sectionTitle}>서비스 가능 지역</h2>
+              <div className={style.chips}>
+                {driver.serviceRegion.map((region, index) => (
+                  <span key={index} className={style.regionChip}>
+                    {translateServiceRegion(region)}
+                  </span>
+                ))}
+              </div>
+              <div className={style.reviewSeparator}></div>
+              {isReviewLoading ? (
+                <div>리뷰 데이터를 로딩 중입니다...</div>
+              ) : reviewError ? (
+                <div className={style.noContents}>
+                  <NoContents
+                    image='file'
+                    contentText='일시적인 오류로 리뷰를 가져오지 못했습니다!'
                   />
                 </div>
-              </>
-            ) : (
-              <div className={style.noContents}>
-                <NoContents image="file" contentText="아직 리뷰가 없습니다!" />
-              </div>
-            )}
-          </div>
-        </div>
-        {!isMobileView && (
-          <div className={style.rightFilters}>
-            <h2>{driver.moverName} 기사님에게 지정 견적을 요청해보세요!</h2>
-            <div className={style.rightButtons}>
-              <Button
-                text='기사님 찜하기'
-                btnStyle='outlined354pxLine200'
-                src={isFavorite ? HeartIcon : HeartEmptyIcon}
-                srcLocationFront
-                alt='찜하기 아이콘'
-                className={style.heartButton}
-                onClick={handleFavoriteToggle}
-              />
-              <Button
-                text={isAssigned ? '지정 견적 요청 완료' : '지정 견적 요청하기'}
-                btnStyle='solid354pxBlue300'
-                className={style.requestButton}
-                disabled={isAssigned}
-                onClick={handleAssignRequest}
-              />
-               <div className={style.border}></div>
+              ) : reviewData && reviewData.reviewStats.totalReviews !== 0 ? (
+                <>
+                  <Review
+                    totalReviews={reviewData.reviewStats.totalReviews}
+                    averageRating={
+                      Object.entries(reviewData.reviewStats.reviewCount).reduce(
+                        (acc, [score, count]) =>
+                          acc + Number(score) * Number(count),
+                        0,
+                      ) / reviewData.reviewStats.totalReviews
+                    }
+                    reviewStats={reviewData.reviewStats.reviewCount}
+                    reviews={reviewData.reviews.list}
+                  />
+                  <div
+                    style={{
+                      marginTop: '60px',
+                      marginBottom: '60px',
+                      display: 'flex',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Pagination
+                      currentPage={currentPage}
+                      data={reviewData.reviewStats.totalReviews}
+                      itemsPerPage={itemsPerPage}
+                      onPageChange={setCurrentPage}
+                    />
+                  </div>
+                </>
+              ) : (
+                <div className={style.noContents}>
+                  <NoContents
+                    image='file'
+                    contentText='아직 리뷰가 없습니다!'
+                  />
+                </div>
+              )}
             </div>
-              <div>
+          </div>
+          {!isMobileView && (
+            <div className={style.rightFilters}>
+              <h2>{driver.moverName} 기사님에게 지정 견적을 요청해보세요!</h2>
+              <div className={style.rightButtons}>
+                <Button
+                  text='기사님 찜하기'
+                  btnStyle='outlined354pxLine200'
+                  src={isFavorite ? HeartIcon : HeartEmptyIcon}
+                  srcLocationFront
+                  alt='찜하기 아이콘'
+                  className={style.heartButton}
+                  onClick={handleFavoriteToggle}
+                />
+                <Button
+                  text={
+                    isAssigned ? '지정 견적 요청 완료' : '지정 견적 요청하기'
+                  }
+                  btnStyle='solid354pxBlue300'
+                  className={style.requestButton}
+                  disabled={isAssigned}
+                  onClick={handleAssignRequest}
+                />
+                <div className={style.border}></div>
+              </div>
+              <div style={{ marginTop: '10px' }}>
                 <SnsShare nickname={driver.moverName} />
               </div>
-          </div>
+            </div>
+          )}
+        </div>
+        {isMobileView && (
+          <FixedBottomTab
+            moverId={driver.id}
+            isFavorite={isFavorite}
+            handleFavoriteToggle={handleFavoriteToggle}
+            isAssigned={isAssigned}
+            handleAssignRequest={handleAssignRequest}
+            isConfirmed={driver.isConfirmed}
+            setModalOpen={setIsModalOpen}
+            isLoggedIn={isLoggedIn}
+            setLoginModalOpen={setIsLoginModalOpen}
+          />
+        )}
+
+        {errorModalMessage && (
+          <ModalContainer
+            title='지정 견적 요청 실패'
+            isText={true}
+            text={errorModalMessage}
+            buttonText='확인'
+            closeBtnClick={() => setErrorModalMessage(null)}
+            buttonClick={() => setErrorModalMessage(null)}
+            btnColorRed={true}
+          />
+        )}
+
+        {isModalOpen && (
+          <ModalContainer
+            title='지정 견적 요청하기'
+            isText={true}
+            text='일반 견적 요청을 먼저 진행해주세요.'
+            buttonText='일반 견적 요청하기'
+            closeBtnClick={() => setIsModalOpen(false)}
+            buttonClick={handleModalButtonClick}
+          />
+        )}
+        {isLoginModalOpen && (
+          <ModalContainer
+            title='로그인 후 이용해주세요'
+            isText={true}
+            text='서비스를 이용하시려면 로그인이 필요합니다.'
+            buttonText='로그인 하기'
+            closeBtnClick={() => setIsLoginModalOpen(false)}
+            buttonClick={() => navigate('/user/login')}
+          />
+        )}
+        {showToast && (
+          <Toast
+            text='링크 복사가 완료됐습니다.'
+            autoDismiss={true}
+            type='copy'
+          />
         )}
       </div>
-      {isMobileView && (
-        <FixedBottomTab
-          moverId={driver.id}
-          isFavorite={isFavorite}
-          setIsFavorite={setIsFavorite}
-          isAssigned={isAssigned}
-          setIsAssigned={setIsAssigned}
-          isConfirmed={driver.isConfirmed}
-          setModalOpen={setIsModalOpen}
-          isLoggedIn={isLoggedIn}
-          setLoginModalOpen={setIsLoginModalOpen}
-        />
-      )}
-      {isModalOpen && (
-        <ModalContainer
-          title='지정 견적 요청하기'
-          isText={true}
-          text='일반 견적 요청을 먼저 진행해주세요.'
-          buttonText='일반 견적 요청하기'
-          closeBtnClick={() => setIsModalOpen(false)}
-          buttonClick={handleModalButtonClick}
-        />
-      )}
-      {isLoginModalOpen && (
-        <ModalContainer
-          title='로그인 후 이용해주세요'
-          isText={true}
-          text='서비스를 이용하시려면 로그인이 필요합니다.'
-          buttonText='로그인 하기'
-          closeBtnClick={() => setIsLoginModalOpen(false)}
-          buttonClick={() => navigate('/user/login')}
-        />
-      )}
-    </div>
+    </>
   );
 };
 
 export default DriverDetailPage;
-

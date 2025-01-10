@@ -17,6 +17,7 @@ import { useGetEstimateDetail } from '../../../lib/useQueries/estimate';
 import { EstimateConsumer, EstimateMover } from '../../../types/apiTypes';
 
 import style from './index.module.css';
+import { ENV } from '../../../lib/api/STORAGE_KEY';
 
 import noItems from '../../../assets/icons/ic_noItems.svg';
 
@@ -33,7 +34,7 @@ export default function DriverCostDetailPage() {
 
   const location = useLocation();
 
-  const url = `${process.env.REACT_APP_API_URL}${location.pathname}`;
+  const url = `${ENV.API_FRONT}${location.pathname}`;
 
   const [showToast, setShowToast] = useState(false); // Toast 표시 여부 관리
 
@@ -111,7 +112,7 @@ export default function DriverCostDetailPage() {
         <meta property='og:type' content='website' />
         <meta
           property='og:image'
-          content={`${process.env.REACT_APP_API_URL}/images/img_logo_text_large.svg`}
+          content='%PUBLIC_URL%/img_logo_icon_text_xlarge.svg'
         />
         <meta
           property='og:description'
@@ -154,7 +155,7 @@ export default function DriverCostDetailPage() {
               <Toast
                 text='링크 복사가 완료됐습니다.'
                 autoDismiss={true}
-                dismissDuration={50000000}
+                type='copy'
               />
             )}
           </div>

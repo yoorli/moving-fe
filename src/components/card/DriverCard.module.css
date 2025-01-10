@@ -207,6 +207,10 @@
     flex-direction: column;
     height: 104px;
   }
+
+  .chipBox {
+    min-height: 0;
+  }
 }
 
 @media (max-width: 1199px) and (min-width: 744px) {
@@ -231,6 +235,9 @@
 
   .costBtn {
     height: 48px;
+  }
+  .chipBox {
+    min-height: 0;
   }
 }
 

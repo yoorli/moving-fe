@@ -11,6 +11,7 @@ import {
 import { DriverNav, NonLoginNav, UserNav } from '../components/nav/Nav';
 import { useMedia } from '../lib/function/useMediaQuery';
 import { AuthContext } from '../context/authContext';
+import { HelmetProvider } from 'react-helmet-async';
 
 export default function RendingLayout() {
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -55,51 +56,53 @@ export default function RendingLayout() {
 
   return (
     <>
-      <div className={style.container}>
-        <div className={style.wrapper}>
-          {!isPending && user ? (
-            user.userType === 'CUSTOMER' ? (
-              <UserNav
-                menuRef={menuRef}
-                profileRef={profileRef}
-                notificationRef={notificationRef}
-                modalController={() => toggleModal('menu')}
-                profileController={() => toggleModal('profile')}
-                notificationController={() => toggleModal('notification')}
-                profileModal={activeModal === 'profile'}
-                notificationModal={activeModal === 'notification'}
-              />
+      <HelmetProvider>
+        <div className={style.container}>
+          <div className={style.wrapper}>
+            {!isPending && user ? (
+              user.userType === 'CUSTOMER' ? (
+                <UserNav
+                  menuRef={menuRef}
+                  profileRef={profileRef}
+                  notificationRef={notificationRef}
+                  modalController={() => toggleModal('menu')}
+                  profileController={() => toggleModal('profile')}
+                  notificationController={() => toggleModal('notification')}
+                  profileModal={activeModal === 'profile'}
+                  notificationModal={activeModal === 'notification'}
+                />
+              ) : (
+                <DriverNav
+                  menuRef={menuRef}
+                  profileRef={profileRef}
+                  notificationRef={notificationRef}
+                  modalController={() => toggleModal('menu')}
+                  profileController={() => toggleModal('profile')}
+                  notificationController={() => toggleModal('notification')}
+                  profileModal={activeModal === 'profile'}
+                  notificationModal={activeModal === 'notification'}
+                />
+              )
             ) : (
-              <DriverNav
+              <NonLoginNav
                 menuRef={menuRef}
-                profileRef={profileRef}
-                notificationRef={notificationRef}
                 modalController={() => toggleModal('menu')}
-                profileController={() => toggleModal('profile')}
-                notificationController={() => toggleModal('notification')}
-                profileModal={activeModal === 'profile'}
-                notificationModal={activeModal === 'notification'}
               />
-            )
-          ) : (
-            <NonLoginNav
-              menuRef={menuRef}
-              modalController={() => toggleModal('menu')}
-            />
-          )}
-          <Outlet />
+            )}
+            <Outlet />
+          </div>
         </div>
-      </div>
 
-      {!pc && activeModal === 'menu' && user ? (
-        user?.userType === 'CUSTOMER' ? (
-          <UserMenuModal modalController={() => toggleModal('menu')} />
-        ) : (
-          <DriverMenuModal modalController={() => toggleModal('menu')} />
-        )
-      ) : !pc && activeModal === 'menu' && !user ? (
-        <NonLoginMenuModal modalController={() => toggleModal('menu')} />
-      ) : null}
+        {!pc && activeModal === 'menu' && user ? (
+          user?.userType === 'CUSTOMER' ? (
+            <UserMenuModal modalController={() => toggleModal('menu')} />
+          ) : (
+            <DriverMenuModal modalController={() => toggleModal('menu')} />
+          )
+        ) : !pc && activeModal === 'menu' && !user ? (
+          <NonLoginMenuModal modalController={() => toggleModal('menu')} />
+        ) : null}
+      </HelmetProvider>
     </>
   );
 }

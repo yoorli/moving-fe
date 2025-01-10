@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useGetMoverList } from '../../../lib/useQueries/driver';
 import { useGetFavoriteMover } from '../../../lib/useQueries/favorite';
@@ -79,6 +79,10 @@ const SearchDriver = () => {
     limit: 10,
   };
 
+  const regionFilterRef = useRef<HTMLDivElement>(null);
+  const serviceFilterRef = useRef<HTMLDivElement>(null);
+  const sortFilterRef = useRef<HTMLDivElement>(null);
+
   const { data: moverList, isLoading: isMoverLoading } =
     useGetMoverList(queryParams);
   const { data: favoriteMoverData, isLoading: isFavoriteLoading } =
@@ -148,6 +152,10 @@ const SearchDriver = () => {
     }
   }, [pendingMoverList, moverList]);
 
+  useEffect(() => {
+    console.log('기사님 카드:', { movers, hasNextPage });
+  }, [page]); // page 변경 시에만 실행
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPendingKeyword(e.target.value);
   };
@@ -191,6 +199,30 @@ const SearchDriver = () => {
     setOpenFilter((prev) => (prev === filterName ? null : filterName));
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      const filterRefs = {
+        [FILTER_TYPES.REGION]: regionFilterRef,
+        [FILTER_TYPES.SERVICE]: serviceFilterRef,
+        [FILTER_TYPES.SORT]: sortFilterRef,
+      };
+
+      if (
+        openFilter &&
+        filterRefs[openFilter]?.current &&
+        !filterRefs[openFilter]?.current?.contains(target)
+      ) {
+        setOpenFilter(null);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [openFilter]);
+
   const handleDriverCardClick = (id: number) => {
     navigate(`/driver/${id}`);
   };
@@ -203,36 +235,44 @@ const SearchDriver = () => {
   const renderFilters = () => (
     <>
       <div className={style.compactFilters}>
-        <FilterDropdownMedium
-          placeholder={selectedRegionLabel}
-          items={REGION_ITEMS}
-          onSelect={(label) => handleSelect(FILTER_TYPES.REGION, label)}
-          isRegion
-          isOpen={openFilter === FILTER_TYPES.REGION}
-          onToggle={() => handleToggleFilter(FILTER_TYPES.REGION)}
-        />
-        <FilterDropdownMedium
-          placeholder={selectedServiceLabel}
-          items={SERVICE_ITEMS}
-          onSelect={(label) => handleSelect(FILTER_TYPES.SERVICE, label)}
-          isOpen={openFilter === FILTER_TYPES.SERVICE}
-          onToggle={() => handleToggleFilter(FILTER_TYPES.SERVICE)}
+        <div ref={regionFilterRef}>
+          <FilterDropdownMedium
+            placeholder={selectedRegionLabel}
+            items={REGION_ITEMS}
+            onSelect={(label) => handleSelect(FILTER_TYPES.REGION, label)}
+            isRegion
+            isOpen={openFilter === FILTER_TYPES.REGION}
+            onToggle={() => handleToggleFilter(FILTER_TYPES.REGION)}
+          />
+        </div>
+
+        <div ref={serviceFilterRef}>
+          <FilterDropdownMedium
+            placeholder={selectedServiceLabel}
+            items={SERVICE_ITEMS}
+            onSelect={(label) => handleSelect(FILTER_TYPES.SERVICE, label)}
+            isOpen={openFilter === FILTER_TYPES.SERVICE}
+            onToggle={() => handleToggleFilter(FILTER_TYPES.SERVICE)}
+          />
+        </div>
+      </div>
+
+      <div ref={sortFilterRef}>
+        <SortDropdown
+          placeholder={
+            SORT_OPTIONS.find((option) => option.value === sortOption)?.label ||
+            '리뷰 많은순'
+          }
+          options={SORT_OPTIONS}
+          isOpen={openFilter === FILTER_TYPES.SORT}
+          onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
+          onSelect={handleSortSelect}
+          className={`${style.sortDropdown} ${
+            openFilter === FILTER_TYPES.SORT ? style.dropdownOpen : ''
+          }`}
+          hasWrapper={window.innerWidth > 1199}
         />
       </div>
-      <SortDropdown
-        placeholder={
-          SORT_OPTIONS.find((option) => option.value === sortOption)?.label ||
-          '리뷰 많은순'
-        }
-        options={SORT_OPTIONS}
-        isOpen={openFilter === FILTER_TYPES.SORT}
-        onToggle={() => handleToggleFilter(FILTER_TYPES.SORT)}
-        onSelect={handleSortSelect}
-        className={`${style.sortDropdown} ${
-          openFilter === FILTER_TYPES.SORT ? style.dropdownOpen : ''
-        }`}
-        hasWrapper={window.innerWidth > 1199}
-      />
     </>
   );
 
@@ -293,7 +333,6 @@ const SearchDriver = () => {
   };
 
   const renderDriverCards = () => {
-    console.log('기사님 카드:', { movers, hasNextPage });
 
     return (
       <div
@@ -307,7 +346,7 @@ const SearchDriver = () => {
       >
         {movers.map((user: Mover) => (
           <DriverCard
-            key={`${user.id}-${user.moverId || 'no-moverId'}`}
+            key={`${user.id}-${user.id || 'no-moverId'}`}
             list={{
               ...user,
               profileImg: user.profileImg || undefined,
@@ -340,42 +379,50 @@ const SearchDriver = () => {
         <LoadingSpinner />
       ) : (
         <div
-          className={`${style.container} ${isMediumScreen ? style.compactLayout : ''}`}
+          className={`${style.container} ${
+            isMediumScreen ? style.compactLayout : ''
+          }`}
         >
           <div
-            className={`${style.filterRow} ${isMediumScreen ? style.compactFilterRow : ''}`}
+            className={`${style.filterRow} ${
+              isMediumScreen ? style.compactFilterRow : ''
+            }`}
           >
             {isMediumScreen ? (
               renderFilters()
             ) : (
               <>
                 <div className={style.leftFilters}>
-                  <FilterDropdown
-                    title='지역을 선택해주세요'
-                    placeholder={selectedRegionLabel}
-                    items={REGION_ITEMS}
-                    onSelect={(label) =>
-                      handleSelect(FILTER_TYPES.REGION, label)
-                    }
-                    isRegion
-                    isOpen={openFilter === FILTER_TYPES.REGION}
-                    onToggle={() => handleToggleFilter(FILTER_TYPES.REGION)}
-                  />
-                  <FilterDropdown
-                    title='어떤 서비스가 필요하세요?'
-                    placeholder={selectedServiceLabel}
-                    items={SERVICE_ITEMS}
-                    onSelect={(label) =>
-                      handleSelect(FILTER_TYPES.SERVICE, label)
-                    }
-                    isOpen={openFilter === FILTER_TYPES.SERVICE}
-                    onToggle={() => handleToggleFilter(FILTER_TYPES.SERVICE)}
-                  />
+                  <div ref={regionFilterRef} style={{ marginTop: '20px' }}>
+                    <FilterDropdown
+                      title='지역을 선택해주세요'
+                      placeholder={selectedRegionLabel}
+                      items={REGION_ITEMS}
+                      onSelect={(label) =>
+                        handleSelect(FILTER_TYPES.REGION, label)
+                      }
+                      isRegion
+                      isOpen={openFilter === FILTER_TYPES.REGION}
+                      onToggle={() => handleToggleFilter(FILTER_TYPES.REGION)}
+                    />
+                  </div>
+                  <div ref={serviceFilterRef} style={{ marginTop: '30px' }}>
+                    <FilterDropdown
+                      title='어떤 서비스가 필요하세요?'
+                      placeholder={selectedServiceLabel}
+                      items={SERVICE_ITEMS}
+                      onSelect={(label) =>
+                        handleSelect(FILTER_TYPES.SERVICE, label)
+                      }
+                      isOpen={openFilter === FILTER_TYPES.SERVICE}
+                      onToggle={() => handleToggleFilter(FILTER_TYPES.SERVICE)}
+                    />
+                  </div>
                   <div className={style.favoriteDrivers}>찜한 기사님</div>
                   {renderFavoriteDrivers()}
                 </div>
                 <div className={style.rightFilters}>
-                  <div className={style.sortSection}>
+                  <div ref={sortFilterRef} className={style.sortSection}>
                     <SortDropdown
                       placeholder={
                         SORT_OPTIONS.find(
@@ -393,7 +440,7 @@ const SearchDriver = () => {
                     <div className={style.searchSection}>
                       <DriverSearch
                         placeholder='기사님을 검색하세요'
-                        value={pendingKeyword} // 입력 중인 검색어
+                        value={pendingKeyword}
                         onChange={handleSearchChange}
                         onKeyPress={handleSearchKeyPress}
                       />
@@ -413,7 +460,7 @@ const SearchDriver = () => {
             <div className={style.searchBarCompact}>
               <DriverSearch
                 placeholder='기사님을 검색하세요'
-                value={pendingKeyword} // 입력 중인 검색어
+                value={pendingKeyword}
                 onChange={handleSearchChange}
                 onKeyPress={handleSearchKeyPress}
               />

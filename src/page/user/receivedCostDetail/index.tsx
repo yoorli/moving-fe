@@ -11,7 +11,8 @@ import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 import ModalContainer from '../../../components/modal/ModalContainer';
 
 export default function ReceivedCostDetail() {
-  const { direction_pendingCost, direction_receivedCost } = useDirection();
+  const { direction_pendingCost, direction_receivedCost, direction_root } =
+    useDirection();
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('second');
 
   const handleTabChange = (selectedTab: 'first' | 'second') => {
@@ -23,7 +24,7 @@ export default function ReceivedCostDetail() {
   const { data, isLoading, error } = useGetEstimate(id ?? '');
 
   const modalBtnClick = () => {
-    window.location.reload();
+    direction_root();
   };
 
   return (
