@@ -71,10 +71,6 @@ const router = createBrowserRouter([
             path: '/driver/signup',
             element: <DriverSignupPage />,
           },
-          // {
-          //   path: '*',
-          //   element: <NotFound />, // 404 Not Found
-          // },
         ],
       },
       {
