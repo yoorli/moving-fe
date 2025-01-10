@@ -7,7 +7,9 @@ import { useGetEstimateReqList } from '../../../lib/useQueries/estimateReq';
 import Pagination from '../../../components/pagination/Pagination';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
 import NoContents from '../../../components/noContents/NoContents';
-import ModalContainer from '../../../components/modal/ModalContainer';
+import PageError from '../../../components/pageError/PageError';
+
+import noItems from '../../../assets/icons/ic_noItems.svg';
 
 export default function ReceivedCost() {
   const [currentTab, setCurrentTab] = useState<'first' | 'second'>('second');
@@ -30,7 +32,7 @@ export default function ReceivedCost() {
     direction_root,
   } = useDirection();
 
-  const modalBtnClick = () => {
+  const handleErrorClick = () => {
     direction_root();
   };
 
@@ -66,6 +68,14 @@ export default function ReceivedCost() {
           <div className={style.noContents}>
             {isLoading ? (
               <LoadingSpinner />
+            ) : error ? (
+              <PageError
+                image={noItems}
+                contentTextFirst='데이터를 불러오는 중 에러가 발생했습니다:'
+                contentTextSecond={error.message}
+                buttonText='홈으로 돌아가기'
+                buttonHandler={handleErrorClick}
+              />
             ) : (
               <NoContents
                 image='file'
@@ -76,17 +86,6 @@ export default function ReceivedCost() {
               />
             )}
           </div>
-        )}
-        {error && (
-          <ModalContainer
-            title='에러 메시지'
-            isText={true}
-            text={error.message}
-            buttonText='확인'
-            closeBtnClick={() => modalBtnClick()}
-            buttonClick={modalBtnClick}
-            btnColorRed={true}
-          />
         )}
       </div>
     </>

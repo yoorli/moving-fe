@@ -1,7 +1,10 @@
+import useDirection from '../../../lib/function/direction';
 import style from './EditBtn.module.css';
 
 export const CancelBtn = () => {
-  return <div className={style.cancel}>취소</div>;
+   const { direction_root } =
+      useDirection();
+  return <div onClick={direction_root}className={style.cancel}>취소</div>;
 };
 
 type Props = {

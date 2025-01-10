@@ -186,7 +186,7 @@ export default function DriverEditProfilePage() {
           textAreaHeandler={textAreaHeandler}
         />
         <div className={style.bottom}>
-          <CancelBtn />
+          <CancelBtn/>
           <TextBtn
             onClick={profilEdit}
             text={isLoginPending ? 'loading...' : '수정하기'}
