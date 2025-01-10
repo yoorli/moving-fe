@@ -25,6 +25,7 @@ import { useMedia } from '../../../lib/function/useMediaQuery';
 import SnsShare from '../../../components/snsShare/SnsShare';
 import { Helmet } from 'react-helmet-async';
 import Toast from '../../../components/toast/Toast';
+import { useGetPendingEstimate } from '../../../lib/useQueries/estimate';
 import { ENV } from '../../../lib/api/STORAGE_KEY';
 
 const DriverDetailPage = () => {
@@ -40,6 +41,9 @@ const DriverDetailPage = () => {
     error,
     refetch,
   } = useGetMoverDetail(Number(id));
+
+  const { data: pendingMoverList } = useGetPendingEstimate();
+
   const { mutate: requestAssignedEstimate } = useRequestAssignedEstimate();
   const toggleFavoriteMutation = useToggleFavoriteMover();
 
@@ -166,6 +170,18 @@ const DriverDetailPage = () => {
     serviceType: driver.serviceType.map((type) => type as ChipProps['type']),
     profileImg: driver.profileImg || undefined,
   };
+
+  if (pendingMoverList && transformedDriver) {
+    for (let i = 0; i < pendingMoverList.list.length; i++) {
+      const pendingMover = pendingMoverList.list[i];
+
+      if (pendingMover.moverId === transformedDriver.id) {
+        if (!transformedDriver.serviceType.includes('WAITING')) {
+          transformedDriver.serviceType.push('WAITING');
+        }
+      }
+    }
+  }
 
   return (
     <>
