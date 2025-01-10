@@ -23,7 +23,7 @@ const SnsShare = ({ nickname, type, onClick }: SnsShareProps) => {
   const { pc } = useMedia();
   const location = useLocation();
 
-  const url = `${ENV.API_REACT_APP}${location.pathname}`;
+  const url = `${ENV.API_FRONT}${location.pathname}`;
   const path = `${location.pathname}`;
 
   const handleCopyClipBoard = async (url: string) => {

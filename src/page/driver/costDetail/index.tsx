@@ -30,7 +30,7 @@ export default function DriverCostDetailPage() {
 
   const location = useLocation();
 
-  const url = `${ENV.API_REACT_APP}${location.pathname}`;
+  const url = `${ENV.API_FRONT}${location.pathname}`;
 
   const [showToast, setShowToast] = useState(false); // Toast 표시 여부 관리
 
