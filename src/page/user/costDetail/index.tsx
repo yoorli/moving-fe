@@ -104,15 +104,14 @@ const CostDetail = () => {
 
   if (error) {
     const errorMessage =
-      error.response?.status === 401
-        ? '데이터를 불러오는 중 에러가 발생했습니다: 권한이 없습니다.'
-        : '데이터를 불러오는 중 에러가 발생했습니다: 존재하지 않는 견적입니다.';
+      error.status === 401 ? '권한이 없습니다.' : '존재하지 않는 견적입니다.';
 
     return (
       <div className={`${style.outerContainer} ${style.errorContainer}`}>
         <PageError
           image={noItems}
-          contentText={errorMessage}
+          contentTextFirst='데이터를 불러오는 중 에러가 발생했습니다:'
+          contentTextSecond={errorMessage}
           buttonText='홈으로 돌아가기'
           buttonHandler={() => navigate('/')}
         />

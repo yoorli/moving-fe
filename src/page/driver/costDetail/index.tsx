@@ -20,6 +20,7 @@ import style from './index.module.css';
 import { ENV } from '../../../lib/api/STORAGE_KEY';
 
 import noItems from '../../../assets/icons/ic_noItems.svg';
+import useDirection from '../../../lib/function/direction';
 
 // 타입 가드 함수
 function isEstimateMover(
@@ -36,7 +37,9 @@ export default function DriverCostDetailPage() {
 
   const url = `${ENV.API_FRONT}${location.pathname}`;
 
-  const [showToast, setShowToast] = useState(false); // Toast 표시 여부 관리
+  const { direction_root } = useDirection();
+
+  const [showToast, setShowToast] = useState(false);
 
   const numericId = id ? Number(id) : null;
 
@@ -49,6 +52,10 @@ export default function DriverCostDetailPage() {
   const handleSnsShareClick = () => {
     setShowToast(true);
     setTimeout(() => setShowToast(false), 3000);
+  };
+
+  const handleErrorClick = () => {
+    direction_root();
   };
 
   if (numericId === null || isNaN(numericId)) {
@@ -72,7 +79,10 @@ export default function DriverCostDetailPage() {
       <div className={style.noContent}>
         <PageError
           image={noItems}
-          contentText={`데이터를 불러오는 중 에러가 발생했습니다: ${error.message}`}
+          contentTextFirst={'데이터를 불러오는 중 에러가 발생했습니다:'}
+          contentTextSecond={`${error.message}`}
+          buttonText='홈으로 돌아가기'
+          buttonHandler={handleErrorClick}
         />
       </div>
     );

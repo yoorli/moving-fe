@@ -126,8 +126,9 @@ const DriverDetailPage = () => {
         },
         onError: (error: any) => {
           console.error('지정 견적 요청 실패:', error);
+          console.log('Error object:', error);
 
-          const status = error.response?.status || error.status;
+          const status = error.status || error.response?.status;
 
           setIsAssigned(false); // 에러 발생 시 상태 초기화
 
@@ -168,11 +169,14 @@ const DriverDetailPage = () => {
   }
 
   if (!driver) {
+    const errorMessage = '해당하는 기사님이 존재하지 않습니다.';
+
     return (
       <div className={`${style.outerContainer} ${style.noDriverError}`}>
         <PageError
           image={noItems}
-          contentText='데이터를 불러오는 중 에러가 발생했습니다: 해당하는 기사님이 존재하지 않습니다.'
+          contentTextFirst='데이터를 불러오는 중 에러가 발생했습니다:'
+          contentTextSecond={errorMessage}
           buttonText='홈으로 돌아가기'
           buttonHandler={() => navigate('/')}
         />
@@ -393,4 +397,3 @@ const DriverDetailPage = () => {
 };
 
 export default DriverDetailPage;
-
