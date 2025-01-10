@@ -76,6 +76,9 @@
 
     box-sizing: border-box;
     margin-top: 24px;
+    padding-left: 120px;
+    padding-right: 120px;
+    
   }
 
   .wrapper {
@@ -88,8 +91,6 @@
 
     box-sizing: border-box;
     padding-top: 32px;
-    padding-right: 24px;
-    padding-left: 24px;
 
     width: 100%;
     max-width: 1400px;
