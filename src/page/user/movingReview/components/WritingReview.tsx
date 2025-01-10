@@ -30,7 +30,13 @@ export default function WritingReview({
   return (
     <div className={style.container}>
       <div className={style.mover}>
-        <div className={style.chipContainer}>
+        <div
+          className={
+            mover.serviceType?.length === 3
+              ? style.chipContainer
+              : style.notMaxChip
+          }
+        >
           <div className={style.serviceChip}>
             {mover.serviceType?.map((type: string, index: number) => (
               <Chip key={index} type={type as ChipType} />

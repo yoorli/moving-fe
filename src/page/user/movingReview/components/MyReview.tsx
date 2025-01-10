@@ -46,9 +46,6 @@ export default function MyReview() {
     setCurrentPage(totalPages);
   }
 
-  // console.log(data.list);
-  // console.log(data.list.reverse())
-
   return (
     <div className={style.container}>
       <div className={style.cardContainer}>
