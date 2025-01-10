@@ -19,7 +19,10 @@ export function getStars(rating: number) {
   }
   if (remainder > 0) {
     stars.push(
-      <div style={{ position: 'relative', width: '24px', height: '24px' }}>
+      <div
+        key='partialStar'
+        style={{ position: 'relative', width: '24px', height: '24px' }}
+      >
         <img
           src={emptyStarMedium}
           alt='empty star'
@@ -43,7 +46,7 @@ export function getStars(rating: number) {
   }
   if (rating <= 4) {
     for (let i = 1; i <= 5 - rating; i++) {
-      stars.push(<img src={emptyStarMedium} alt='empty star' />);
+      stars.push(<img key={`empty-${i}`} src={emptyStarMedium} alt="empty star" />);
     }
   }
   return stars;
@@ -99,7 +102,10 @@ export default function UserProfile({ type, list: user }: UserProfileProps) {
           </div>
         </div>
       ) : (
-        <div className={style.reviewProfile} onClick={() => direction_driverDetail(Number(user.moverId))}>
+        <div
+          className={style.reviewProfile}
+          onClick={() => direction_driverDetail(Number(user.moverId))}
+        >
           <div className={style.profileImage}>
             <img
               src={checkImg(user.profileImg)}
