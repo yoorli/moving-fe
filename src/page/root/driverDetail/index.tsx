@@ -237,6 +237,7 @@ const DriverDetailPage = () => {
             <DriverCard
               list={{...transformedDriver, isConfirmed:false}}
               count={mobileWithChipDriverDetail ? 3 : 6}
+              styles = 'none'
             />
             <div className={style.section}>
               <div className={style.border}></div>
