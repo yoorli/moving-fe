@@ -73,7 +73,7 @@ export default function MyReview() {
         </div>
       ) : (
         <div className={style.noContents}>
-          <NoContents image='file' contentText='내가 쓴 리뷰가 없습니다.' />
+          <NoContents image='file' contentText='아직 작성한 리뷰가 없습니다.' />
         </div>
       )}
     </>
