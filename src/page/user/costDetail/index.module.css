@@ -137,6 +137,10 @@
   font-weight: 600;
 }
 
+.errorContainer {
+  margin-top: 40px;
+}
+
 @media (max-width: 1199px) and (min-width: 744px) {
   .container {
     flex-direction: column;
