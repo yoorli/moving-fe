@@ -18,6 +18,11 @@
   padding: 0 120px;
 }
 
+.noContents {
+  display: flex;
+  height: 760px;
+}
+
 @media (max-width: 1375px) {
   .container {
     gap: 48px;
@@ -41,6 +46,10 @@
     gap: 32px;
 
     padding: 0 72px;
+  }
+
+  .noContents {
+    height: 396px;
   }
 }
 

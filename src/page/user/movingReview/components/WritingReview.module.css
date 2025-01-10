@@ -52,6 +52,7 @@
   font-family: 'Pretendard Variable';
   color: var(--black-200);
   resize: none;
+  font-size: 20px;
 }
 
 .textArea::placeholder {
@@ -68,6 +69,10 @@
 
   .rating {
     padding: 20px 0;
+  }
+
+  .textArea {
+    font-size: 16px;
   }
 
   .textArea::placeholder {
