@@ -8,6 +8,8 @@ import CostInfo from '../../../components/costInfo/CostInfo';
 import NoContents from '../../../components/noContents/NoContents';
 import Toast from '../../../components/toast/Toast';
 import LoadingSpinner from '../../../components/loading/LoadingSpinner';
+import NotFound from '../../../components/404/NotFound';
+import PageError from '../../../components/pageError/PageError';
 
 import { useMedia } from '../../../lib/function/useMediaQuery';
 import { formatCurrency } from '../../../lib/function/utils';
@@ -16,6 +18,8 @@ import { EstimateConsumer, EstimateMover } from '../../../types/apiTypes';
 
 import style from './index.module.css';
 import { ENV } from '../../../lib/api/STORAGE_KEY';
+
+import noItems from '../../../assets/icons/ic_noItems.svg';
 
 // 타입 가드 함수
 function isEstimateMover(
@@ -48,7 +52,11 @@ export default function DriverCostDetailPage() {
   };
 
   if (numericId === null || isNaN(numericId)) {
-    return <div>잘못된 요청입니다. ID를 확인해주세요.</div>;
+    return (
+      <div className={style.noContent}>
+        <NotFound />
+      </div>
+    );
   }
 
   if (isLoading) {
@@ -60,13 +68,20 @@ export default function DriverCostDetailPage() {
   }
 
   if (error) {
-    return <div>데이터를 불러오는 중 에러가 발생했습니다: {error.message}</div>;
+    return (
+      <div className={style.noContent}>
+        <PageError
+          image={noItems}
+          contentText={`데이터를 불러오는 중 에러가 발생했습니다: ${error.message}`}
+        />
+      </div>
+    );
   }
 
   if (!user) {
     return (
       <div className={style.noContent}>
-        <NoContents image='file' />
+        <NoContents image='file' contentText='보낸 견적이 없어요!' />
       </div>
     );
   }

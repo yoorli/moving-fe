@@ -299,7 +299,10 @@ const DriverDetailPage = () => {
                 <div className={style.border}></div>
               </div>
               <div style={{ marginTop: '10px' }}>
-                <SnsShare nickname={driver.moverName} />
+                <SnsShare
+                  nickname={driver.moverName}
+                  onClick={handleSnsShareClick}
+                />
               </div>
             </div>
           )}
