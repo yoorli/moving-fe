@@ -1,11 +1,15 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getFavoriteMover, toggleFavoriteMover } from '../api/favorite';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/authContext';
 
 /* 찜한 기사님 조회 */
 export function useGetFavoriteMover() {
+  const { userValue } = useContext(AuthContext);
   return useQuery({
     queryKey: ['favoriteMover'],
     queryFn: getFavoriteMover,
+    enabled: !!userValue?.user?.id,
   });
 }
 
@@ -21,4 +25,3 @@ export function useToggleFavoriteMover() {
     },
   });
 }
-
