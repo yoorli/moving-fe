@@ -3,7 +3,7 @@ import style from './NotificationModal.module.css';
 import IcXLarge from '../../../assets/icons/ic_x_large.svg';
 import { getNotificationDate } from '../../../lib/function/utils';
 
-import { Notification } from '../mockData';
+import { Notification } from './type';
 import {
   useGetNotification,
   useCreateNotificationRead,

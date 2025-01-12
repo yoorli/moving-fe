@@ -10,6 +10,8 @@ import {
   updateEstimateConfirmed,
 } from '../api/estimate';
 import { EstimateParams, PaginationParams } from '../../types/apiTypes';
+import { AuthContext } from '../../context/authContext';
+import { useContext } from 'react';
 
 // 확정된 견적 리스트 조회
 export function useGetEstimateConfirmed(queryParams: PaginationParams) {
@@ -56,9 +58,12 @@ export function useGetEstimateDetail(
 
 /* 유저-대기 중인 견적 조회 */
 export function useGetPendingEstimate() {
+  const { userValue } = useContext(AuthContext);
+
   return useQuery({
     queryKey: ['pendingEstimate'],
-    queryFn: () => getPendingEstimate(),
+    queryFn: getPendingEstimate,
+    enabled: !!userValue?.user?.id,
   });
 }
 
