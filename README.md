@@ -201,6 +201,17 @@
 ## <span id="roles">📝 5. 역할 분담</span>
 ### **김대건**
 
+🎶 **공통 컴포넌트**
+
+- 🔗 **[비로그인 레이아웃](https://github.com/moving-team/moving-fe/blob/main/src/layout/RendingLayout.tsx)**  
+  : 비로그인 사용자를 위한 레이아웃으로, **네비게이션 바**와 **모달 상태**를 관리합니다.
+
+- 🔗 **[소비자 레이아웃](https://github.com/moving-team/moving-fe/blob/main/src/layout/UserLayout.tsx)**  
+  : **소비자** 전용 레이아웃으로, **회원 정보 등록 여부**를 확인하고 **소비자 네비게이션 바**를 렌더링합니다.
+
+- 🔗 **[기사님 레이아웃](https://github.com/moving-team/moving-fe/blob/main/src/layout/DriverLayout.tsx)**  
+  : **기사님** 전용 레이아웃으로, **서비스 정보 등록 여부**를 확인하고 **기사님 네비게이션 바**를 렌더링합니다.
+
 ✨ **[랜딩 페이지](https://github.com/moving-team/moving-fe/blob/main/src/page/root/index.tsx)**
 - **소비자, 기사님** 공용 페이지
 
@@ -570,7 +581,7 @@
 
 <br>
 
-✨ **[이사 리뷰](https://github.com/moving-team/moving-fe/blob/main/src/page/user/movingReview/index.tsx)** 
+✨ **[이사 리뷰 페이지](https://github.com/moving-team/moving-fe/blob/main/src/page/user/movingReview/index.tsx)** 
 - **소비자**는 **이사 리뷰 페이지**에서 작성한 리뷰 내역과 작성 가능한 리뷰 목록을 확인할 수 있습니다.
 
 <table>
@@ -587,7 +598,7 @@
 <br>
 
 
-✨ **[이사 리뷰](https://github.com/moving-team/moving-fe/blob/main/src/page/user/favoriteMover/index.tsx)** 
+✨ **[찜한 기사님 페이지](https://github.com/moving-team/moving-fe/blob/main/src/page/user/favoriteMover/index.tsx)** 
 - **소비자**는 **찜한 기사님 페이지**에서 찜한 기사님을 조회할 수 있습니다.
 
 <table>
