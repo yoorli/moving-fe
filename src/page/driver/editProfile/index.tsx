@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CancelBtn, TextBtn } from '../../../components/page/edit/EditBtn';
 import DriverregisterMid from './components/Mid';
 import style from './index.module.css';
@@ -9,6 +9,7 @@ import { translateServiceReverseRegionArray } from '../../../lib/function/utils'
 import { auth } from '../../../lib/api/auth';
 import { isAxiosError } from 'axios';
 import { AuthContext } from '../../../context/authContext';
+
 
 export default function DriverEditProfilePage() {
   const {
@@ -27,6 +28,16 @@ export default function DriverEditProfilePage() {
     office: undefined,
     region: [],
   });
+
+  useEffect(()=>{
+    setValues((prev)=>({
+      ...prev,
+      name : user?.Mover?.nickname ?? 'loading...',
+      history: user?.Mover?.career ?? 'loading...',
+      introduce_detail: user?.Mover?.description ?? 'loading...',
+      introduce_simple: user?.Mover?.summary ?? 'loading...',
+    }))
+  },[user])
 
   const [validation, setValidation] = useState<DriverregisterValidation>({
     image: true,
