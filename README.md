@@ -6,7 +6,6 @@
 
 
 
-
 <b>[Moving 바로가기](https://moving-fe-teal.vercel.app)</b> <br>
 
 <br> 
@@ -122,7 +121,7 @@
 <br>
 
 ### 시연 영상
-![image]()
+[![MOVING 시연 영상](https://img.youtube.com/vi/영상ID/0.jpg)](https://github.com/user-attachments/assets/44cb82a9-84d9-47ae-a8e4-a27945bdd328)
 
 <br><br>
 
