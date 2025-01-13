@@ -330,7 +330,7 @@ export function DriverNav({
             <img
               onClick={profileController}
               className={style.navIconProfile}
-              src={profile}
+              src={user?.Mover?.profileImage ?? profile}
               alt=''
             />
             <span className={style.navIconText}>{user?.name}</span>
@@ -362,7 +362,7 @@ export function DriverNav({
             <img
               onClick={profileController}
               className={style.navIcon}
-              src={profileMobile}
+              src={user?.Mover?.profileImage ?? profileMobile}
               alt=''
             />
             {profileModal ? (
