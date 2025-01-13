@@ -169,7 +169,8 @@ export default function DriverCostCallPage() {
           <div className={style.filter}>
             <div className={style.searchBar}>
               <Search
-                placeholder='어떤 고객님을 찾고 계세요?'
+                placeholder1='어떤 고객님을 찾고 계세요?'
+                placeholder2='고객님의 성함, 상세 출발지, 상세 도착지를 검색할 수 있어요!'
                 setSearchTerm={setSearchTerm}
               />
             </div>

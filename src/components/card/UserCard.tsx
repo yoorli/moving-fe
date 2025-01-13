@@ -84,7 +84,7 @@ export default function UserCard({
         </div>
         {type !== 'review' ? (
           <div className={style.createAt}>
-            {(list.updatedAt) && time}
+            {(list.createAt || list.updatedAt) && time}
           </div>
         ) : (
           <div className={style.createAtRType}>{list.createAt && time}</div>
