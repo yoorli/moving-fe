@@ -6,13 +6,14 @@ import Button from '../btn/Button';
 import Chip from '../chip/Chip';
 
 import { useMedia } from '../../lib/function/useMediaQuery';
-import { checkImg, formatCurrency, getChips } from '../../lib/function/utils';
+import { formatCurrency, getChips } from '../../lib/function/utils';
 import { ChipType, DriverProfileProps } from '../../types/cardTypes';
 
 import style from './DriverCard.module.css';
 
 import writing from '../../assets/icons/ic_writing_medium.svg';
 import writingGray from '../../assets/icons/ic_writing_gray.svg';
+import profileLarge from '../../assets/icons/ic_profile_large.svg';
 
 export default function DriverCard({
   editInfoBtn, // 기본 정보 수정 버튼
@@ -66,7 +67,7 @@ export default function DriverCard({
           {!isPc && (
             <div className={style.profileImage}>
               <img
-                src={checkImg(list.profileImg)}
+                src={list.profileImg ? list.profileImg : profileLarge}
                 alt={`${list.moverName}'s profile`}
                 className={style.avatar}
               />

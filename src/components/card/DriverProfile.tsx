@@ -94,7 +94,13 @@ export default function DriverProfile({
         })}
       >
         <img
-          src={type === 'profile' ? profileLarge : profileImg || ''}
+          src={
+            type === 'profile'
+              ? user.profileImg
+                ? profileImg || ''
+                : profileLarge
+              : profileImg || ''
+          }
           alt={`${user.moverName}'s profile`}
           className={classNames(style.avatar, {
             [style.avatarLarge]:
