@@ -74,6 +74,10 @@ const DriverDetailPage = () => {
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
+  useEffect(() => {
     if (driver) {
       setIsFavorite(driver.isFavorite);
       setIsAssigned(driver.isAssigned);
