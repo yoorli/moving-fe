@@ -115,26 +115,9 @@ const DriverDetailPage = () => {
     const handleErrorResponse = (status: number, message: string) => {
       if (status === 400) {
         switch (message) {
-          case '존재하지 않는 기사님입니다.':
-            setErrorModalMessage(
-              `${driver.moverName} 기사님은 존재하지 않습니다.`,
-            );
-            break;
           case '일반 견적 요청을 먼저 진행해 주세요.':
-            setErrorModalMessage(
-              `먼저 ${driver.moverName} 기사님에게 일반 견적 요청을 진행해주세요.`,
-            );
+            setErrorModalMessage('일반 견적 요청을 먼저 진행해주세요.');
             setIsModalOpen(true); // 일반 견적 요청 모달
-            break;
-          case '해당 기사가 보낸 견적이 존재 합니다.':
-            setErrorModalMessage(
-              `${driver.moverName} 기사님이 이미 견적을 보냈습니다.`,
-            );
-            break;
-          case '이미 기사님께 지정 견적 요청을 하셨습니다.':
-            setErrorModalMessage(
-              `이미 ${driver.moverName} 기사님께 지정 견적 요청을 하셨습니다.`,
-            );
             break;
           case '해당 기사님의 서비스 지역이 아닙니다.':
             setErrorModalMessage(
@@ -148,9 +131,9 @@ const DriverDetailPage = () => {
         setErrorModalMessage('권한이 없습니다. 로그인 후 다시 시도해주세요.');
         setIsLoginModalOpen(true); // 로그인 모달
       } else if (status === 403) {
-        setErrorModalMessage('이 서비스는 소비자 전용입니다. 접근 권한이 없습니다.');
-      } else if (status === 404) {
-        setErrorModalMessage(`${driver.moverName} 기사님은 존재하지 않습니다.`);
+        setErrorModalMessage(
+          '이 서비스는 소비자 전용입니다. 접근 권한이 없습니다.',
+        );
       } else if (status === 500) {
         setErrorModalMessage(
           '서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
@@ -164,18 +147,13 @@ const DriverDetailPage = () => {
 
     if (!isAssigned && driver.isConfirmed) {
       requestAssignedEstimate(driver.id, {
-        onSuccess: (data) => {
-          const status = data?.status;
-
-          if (status === 201) {
-            if (!isAssigned) {
-              refetch();
-              setIsAssigned(true);
-              setIsAssignedEstimateReqOpen(true); // 지정 견적 요청 모달
-            }
+        onSuccess: () => {
+          if (!isAssigned) {
+            refetch();
+            setIsAssigned(true);
+            setIsAssignedEstimateReqOpen(true); // 지정 견적 요청 모달
           }
         },
-
         onError: (error: any) => {
           const status = error.status || error.response?.status;
           const message = error.message || error.response?.data?.message;
