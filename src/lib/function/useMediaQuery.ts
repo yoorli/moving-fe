@@ -18,6 +18,11 @@ export function useMedia() {
   // max 칩 4개까지 있는 경우 모바일에서의 칩 나열
   const mobileWithChipMaxFour = useMediaQuery({ query: '(max-width: 482px' });
 
+  // max 칩 4개까지 있는 경우 테블릿에서의 칩 나열
+  const tabletWithChipMaxFour = useMediaQuery({
+    query: '(min-width: 1200px) and (max-width: 1401px)',
+  });
+
   const mobileWithChipSearDriver = useMediaQuery({
     query: '(min-width: 1191px) and (max-width: 1214px)',
   });
@@ -34,7 +39,7 @@ export function useMedia() {
     query: '(max-width: 420px)',
   });
 
-  const mobileWithChipCostDetail= useMediaQuery({
+  const mobileWithChipCostDetail = useMediaQuery({
     query: '(max-width: 420px)',
   });
 
@@ -45,10 +50,11 @@ export function useMedia() {
     mobileWithChip,
     mobileWithChipSecond,
     mobileWithChipMaxFour,
+    tabletWithChipMaxFour,
     mobileWithChipSearDriver,
     mobileWithChipSearDriverSecond,
     mobileWithChipSearDriveLast,
     mobileWithChipDriverDetail,
-    mobileWithChipCostDetail
+    mobileWithChipCostDetail,
   };
 }
