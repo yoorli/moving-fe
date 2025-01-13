@@ -2,7 +2,8 @@
 	<span id="top">
 	<h1>Moving 프론트엔드 레포지토리</h1><br>
 
-![image]()
+![image](https://github.com/user-attachments/assets/d26fa78e-ed85-4e8a-bc33-1eb6d475b099)
+
 
 
 
@@ -345,6 +346,9 @@
 
 - 🔗 **[리뷰 컴포넌트](https://github.com/moving-team/moving-fe/blob/main/src/components/review/Review.tsx)**  
   : 기사님에 대한 평균 평점, 별점 분포, 개별 리뷰를 시각적으로 보여주는 컴포넌트.
+
+- 🔗 **[Toast 컴포넌트](https://github.com/moving-team/moving-fe/blob/main/src/components/toast/Toast.tsx)**  
+  : 간단한 **알림 메시지**를 화면에 표시하며, **자동 또는 수동**으로 사라지도록 설정할 수 있고, **사라지는 시간**도 조정할 수 있는 컴포넌트.
 
 - 🔗 **[검색 컴포넌트](https://github.com/moving-team/moving-fe/blob/main/src/components/search/Search.tsx)**  
   : 기사님 및 서비스에 대한 검색 기능을 제공하는 컴포넌트.
