@@ -5,6 +5,7 @@ import avatarPink from '../../assets/images/img_avatar_pink_medium.svg';
 import avatarPurple from '../../assets/images/img_avatar_purple_medium.svg';
 import avatarYellow from '../../assets/images/img_avatar_yellow_medium.svg';
 
+//기본 이미지 랜덤 표시시
 export const checkImg = (img: any) => {
   const defaultImg: Record<number, string> = {
     1: avatarBlue,
@@ -194,4 +195,23 @@ export const translateServiceReverseRegionArray = (
     serviceRegion.map((region) => serviceRegionReverseMapper[region]) ||
     '알 수 없는 지역'
   );
+};
+
+// 지역명 간소화 - 기사유저 받은 요청 페이지
+export const simplifyAddress = (address: string): string => {
+  const pattern =
+    /^(서울|부산|대구|인천|광주|대전|울산|세종|제주|경기|강원|충북|충남|전북|전남|경북|경남|서울특별시|부산광역시|대구광역시|인천광역시|광주광역시|대전광역시|울산광역시|세종특별자치시|제주특별자치도|경상북도|경상남도|전라북도|전라남도|충청북도|충청남도|강원도|경기도)[^\s]*\s*([\uac00-\ud7af]+[시군구])/;
+
+  const match = address.match(pattern);
+
+  if (match) {
+    let province = match[1];
+    const city = match[2];
+
+    province = province.replace(/특별자치시|광역시|특별자치도|도$/, '').trim();
+
+    return `${province} ${city}`;
+  }
+
+  return address;
 };

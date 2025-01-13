@@ -30,7 +30,9 @@ export interface BaseProps {
     movingDate?: string; // 이사 날짜
     serviceType?: ChipType[]; // 서비스 유형
     departure?: string; // 출발지
-    arrival?: string; // 도착지
+    arrival?: string; // 상세 도착지
+    detailDeparture?: string; // 상세 출발지
+    detailArrival?: string; // 도착지
     price?: number; // 견적가
     createAt?: string; // 작성일
     updatedAt?: string; // 작성일
@@ -42,6 +44,7 @@ export interface BaseProps {
     };
     comment?: string; //요구사항   *
     confirmationCount?: number; // 확정 건 수 *
+    estimateReqId?: number; // 견적 요청 id
   };
 }
 
@@ -56,7 +59,6 @@ export interface DriverProfileProps extends BaseProps {
   costListBtn?: () => void; //견적 목록보기 버튼
   list: BaseProps['list'] & {
     estimateId?: number; // 견적 id
-    estimateReqId?: number;
     career?: number; // 경력
     summary?: string; // 한 줄 소개
     serviceRegion?: string[]; // 서비스 지역
@@ -79,7 +81,6 @@ export interface UserProfileProps extends BaseProps {
   rejectCostBtn?: () => void;
   list: BaseProps['list'] & {
     customerId?: number; // 고객 아이디
-    estimateReqId?: number; // 견적 요청 id
     movingType?: ChipType; // 이사 서비스 유형
     customerName?: string; // 고객 이름
     isRejected?: boolean; // 반려 여부

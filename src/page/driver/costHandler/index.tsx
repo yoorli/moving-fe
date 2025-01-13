@@ -23,6 +23,8 @@ import icCheckMedium from '../../../assets/icons/ic_check_medium.svg';
 interface User {
   estimateId: number;
   comment?: string;
+  isConfirmed: boolean;
+  isReqConfirmed: boolean;
   isMoveDateOver: boolean;
   isCancelled: boolean;
   isRejected: boolean;
@@ -124,6 +126,7 @@ export default function DriverCostHandlerPage() {
 
   const disabledCard = (user: User) => {
     if (user.isMoveDateOver) return '이사 완료된 견적이에요';
+    if (user.isReqConfirmed && !user.isConfirmed) return '마감된 견적이에요';
     if (user.isCancelled) return '취소된 요청이에요';
     if (user.isRejected) return '반려된 요청이에요';
     return false;
@@ -237,7 +240,7 @@ export default function DriverCostHandlerPage() {
                       <div className={style.cardCover}></div>
                       <div className={style.cardButton}>
                         {disabledCard(user)}
-                        {user.isMoveDateOver && (
+                        {(
                           <Button
                             text='견적 상세보기'
                             btnStyle='solid123pxBlue100'

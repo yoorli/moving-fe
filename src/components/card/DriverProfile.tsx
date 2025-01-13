@@ -119,7 +119,7 @@ export default function DriverProfile({
                 user.reviewStats.totalReviews !== undefined && (
                   <span className={style.stars}>
                     <img src={yellowStarSmall} alt='yellowStar' />
-                    {user.reviewStats.averageScore.toFixed(1)}
+                    {(user.reviewStats.averageScore ?? 0).toFixed(1)}
                     <span style={{ color: 'var(--gray-300)' }}>
                       ({user.reviewStats.totalReviews})
                     </span>
@@ -201,7 +201,7 @@ export default function DriverProfile({
                     })}
                   >
                     <img src={yellowStarSmall} alt='yellowStar' />
-                    {user.reviewStats.averageScore.toFixed(1)}
+                    {(user.reviewStats.averageScore ?? 0).toFixed(1)}
                     <span style={{ color: 'var(--gray-300)' }}>
                       ({user.reviewStats.totalReviews})
                     </span>
