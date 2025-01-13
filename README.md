@@ -691,7 +691,7 @@
 <br>
 
 ✨ **[기사님 내 견적 관리 페이지](https://github.com/moving-team/moving-fe/blob/main/src/page/driver/costHandler/index.tsx)**  
-- **기사님**은 **전체 견적**, **확정 견적**, **반려 및 취소한 견적 요청** 리스트에 대해 조회할 수 있습니다.  
+- **기사님**은 **전체 견적**, **확정 견적**, **반려 및 취소한 견적 요청** 리스트에 대해 조회할 수 있습니다.  
 
 
 <table>
