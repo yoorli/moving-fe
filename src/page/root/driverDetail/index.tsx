@@ -148,7 +148,7 @@ const DriverDetailPage = () => {
         setErrorModalMessage('권한이 없습니다. 로그인 후 다시 시도해주세요.');
         setIsLoginModalOpen(true); // 로그인 모달
       } else if (status === 403) {
-        setErrorModalMessage('소비자 전용 API입니다. 접근 권한이 없습니다.');
+        setErrorModalMessage('이 서비스는 소비자 전용입니다. 접근 권한이 없습니다.');
       } else if (status === 404) {
         setErrorModalMessage(`${driver.moverName} 기사님은 존재하지 않습니다.`);
       } else if (status === 500) {
