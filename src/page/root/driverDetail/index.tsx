@@ -147,11 +147,14 @@ const DriverDetailPage = () => {
 
     if (!isAssigned && driver.isConfirmed) {
       requestAssignedEstimate(driver.id, {
-        onSuccess: () => {
-          if (!isAssigned) {
-            refetch();
-            setIsAssigned(true);
-            setIsAssignedEstimateReqOpen(true); // 지정 견적 요청 모달
+        onSuccess: (data) => {
+          const status = data?.status;
+          if (status === 201) {
+            if (!isAssigned) {
+              refetch();
+              setIsAssigned(true);
+              setIsAssignedEstimateReqOpen(true);
+            }
           }
         },
         onError: (error: any) => {
@@ -163,7 +166,7 @@ const DriverDetailPage = () => {
         },
       });
     } else if (!driver.isConfirmed) {
-      setIsModalOpen(true); // 일반 견적 요청 모달
+      setIsModalOpen(true);
     }
   };
 
