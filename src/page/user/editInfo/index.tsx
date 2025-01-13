@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CancelBtn, TextBtn } from '../../../components/page/edit/EditBtn';
 import style from './index.module.css';
 import { editValidation } from '../../../lib/function/validation';
@@ -7,8 +7,12 @@ import EditMidComponent from './components/Mid';
 import { UserEditInfoFormValidation, UserEditInfoFormValues } from './type';
 import { auth } from '../../../lib/api/auth';
 import { isAxiosError } from 'axios';
+import { AuthContext } from '../../../context/authContext';
 
 export default function UserEditInfoPage() {
+   const {
+      userValue: { user },
+    } = useContext(AuthContext);
   const [values, setValues] = useState<UserEditInfoFormValues>({
     name: '',
     phoneNumber: '',
@@ -16,6 +20,14 @@ export default function UserEditInfoPage() {
     newPassword: '',
     confirmNewPassword: '',
   });
+
+   useEffect(()=>{
+      setValues((prev)=>({
+        ...prev,
+        name: user?.name,
+        phoneNumber: user?.phoneNumber ?? 'loading...',
+      }))
+    },[user])
 
   const [validation, setValidation] = useState<UserEditInfoFormValidation>({
     name: true,
