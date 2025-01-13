@@ -5,6 +5,7 @@ import { ChipType } from '../../../../types/cardTypes';
 import LoadingSpinner from '../../../../components/loading/LoadingSpinner';
 import NoContents from '../../../../components/noContents/NoContents';
 import useDirection from '../../../../lib/function/direction';
+import { useMedia } from '../../../../lib/function/useMediaQuery';
 
 interface PendingListProps {
   setIsConfirmModalOpen: (value: boolean) => void; // Modal 열기
@@ -41,6 +42,7 @@ export default function PendingList({
 }: PendingListProps) {
   const { data, isLoading } = useGetPendingEstimate();
   const { direction_userCostDetail } = useDirection();
+  const { mobileWithChipMaxFour, tabletWithChipMaxFour } = useMedia();
 
   const confirmCostBtn = (estimateId: number) => {
     setSelectedEstimateId(estimateId);
@@ -65,6 +67,7 @@ export default function PendingList({
               key={cost.estimateId}
               list={cost}
               type='waiting'
+              count={mobileWithChipMaxFour || tabletWithChipMaxFour ? 3 : 6}
               confirmCostBtn={() => confirmCostBtn(cost.estimateId)}
               detailBtn={() => detailbtn(cost.estimateId)}
             />

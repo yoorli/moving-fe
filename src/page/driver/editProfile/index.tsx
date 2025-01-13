@@ -144,7 +144,7 @@ export default function DriverEditProfilePage() {
             return values[data] === 'on';
           })
           .map((data) => (data as string).toUpperCase()),
-        region: translateServiceReverseRegionArray(values.region as string[]),
+        serviceRegion: translateServiceReverseRegionArray(values.region as string[]),
         nickname: values.name,
         career: values.history,
         summary: values.introduce_simple,
@@ -162,8 +162,7 @@ export default function DriverEditProfilePage() {
       } catch (e) {
         if (isAxiosError(e)) {
           const data = e.response?.data;
-
-          alert(data);
+          alert(data.message);
         }
       } finally {
         setIsLoginPending(false);
