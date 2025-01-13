@@ -113,7 +113,6 @@ const SearchDriver = () => {
     if (moverList) {
       setMovers((prevMovers) => {
         if (page === 1) {
-          console.log(`검색어 "${searchKeyword}"에 대한 결과:`, moverList.list);
           return moverList.list;
         }
         return [...prevMovers, ...moverList.list]; // 페이지가 증가하면 데이터를 누적
@@ -153,10 +152,6 @@ const SearchDriver = () => {
     }
   }, [pendingMoverList, moverList]);
 
-  useEffect(() => {
-    console.log('기사님 카드:', { movers, hasNextPage });
-  }, [page]);
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPendingKeyword(e.target.value);
   };
@@ -170,13 +165,9 @@ const SearchDriver = () => {
   };
 
   const handleLoadMore = () => {
-    console.log('현재 페이지:', page);
-    console.log('다음 페이지 존재:', hasNextPage);
-
     if (hasNextPage) {
       setPage((prevPage) => {
         const nextPage = prevPage + 1;
-        console.log('다음 페이지로 이동:', nextPage);
         return nextPage;
       });
     }
@@ -315,7 +306,7 @@ const SearchDriver = () => {
       <div className={style.favoriteDriversContainer}>
         {favoriteMoverList.slice(0, 3).map((user: Mover, index: number) => (
           <DriverCard
-          key={`${user.moverId ?? 'no-moverId'}-${index}`}
+            key={`${user.moverId ?? 'no-moverId'}-${index}`}
             list={{
               ...user,
               profileImg: user.profileImg || undefined,
@@ -334,7 +325,6 @@ const SearchDriver = () => {
   };
 
   const renderDriverCards = () => {
-
     return (
       <div
         className={`${style.cardContainer} ${
@@ -347,7 +337,7 @@ const SearchDriver = () => {
       >
         {movers.map((user: Mover, index: number) => (
           <DriverCard
-          key={`${user.id ?? 'no-id'}-${index}`}
+            key={`${user.id ?? 'no-id'}-${index}`}
             list={{
               ...user,
               moverId: user.userId,

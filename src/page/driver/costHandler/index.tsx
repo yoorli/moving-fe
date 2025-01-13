@@ -22,6 +22,7 @@ import icCheckMedium from '../../../assets/icons/ic_check_medium.svg';
 
 interface User {
   estimateId: number;
+  estimateReqId: number;
   comment?: string;
   isConfirmed: boolean;
   isReqConfirmed: boolean;
@@ -245,8 +246,8 @@ export default function DriverCostHandlerPage() {
                             text='견적 상세보기'
                             btnStyle='solid123pxBlue100'
                             onClick={() =>
-                              user.estimateId &&
-                              direction_costDetail(user.estimateId)
+                              user.estimateId || user.estimateReqId &&
+                              direction_costDetail(user.estimateId || user.estimateReqId)
                             }
                           />
                         )}

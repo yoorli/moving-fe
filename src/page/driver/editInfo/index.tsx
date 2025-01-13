@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CancelBtn, TextBtn } from '../../../components/page/edit/EditBtn';
 
 import style from './index.module.css';
@@ -8,8 +8,12 @@ import DriverregisterMid from './components/Mid';
 import { DriverEditInfoForm, DriverEditInfoValidation } from './type';
 import { auth } from '../../../lib/api/auth';
 import { isAxiosError } from 'axios';
+import { AuthContext } from '../../../context/authContext';
 
 export default function DriverEditInfoPage() {
+   const {
+        userValue: { user },
+      } = useContext(AuthContext);
   const [values, setValues] = useState<DriverEditInfoForm>({
     name: '',
     phoneNumber: '',
@@ -17,6 +21,13 @@ export default function DriverEditInfoPage() {
     newPassword: '',
     confirmNewPassword: '',
   });
+   useEffect(()=>{
+        setValues((prev)=>({
+          ...prev,
+          name: user?.name,
+          phoneNumber: user?.phoneNumber ?? 'loading...',
+        }))
+      },[user])
 
   const [validation, setValidation] = useState<DriverEditInfoValidation>({
     name: true,

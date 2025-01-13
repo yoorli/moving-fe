@@ -402,7 +402,7 @@ export function DriverNav({
             <img
               onClick={profileController}
               className={style.navIcon}
-              src={profile}
+              src={user?.Mover?.profileImage ?? profileMobile}
               alt=''
             />
             {profileModal ? (
