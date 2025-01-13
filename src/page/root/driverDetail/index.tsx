@@ -86,12 +86,6 @@ const DriverDetailPage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    if (driver) {
-      console.log('기사 상세 데이터:', driver);
-    }
-  }, [driver]);
-
   const handleFavoriteToggle = () => {
     if (!driver) {
       console.error('기사님 데이터가 없습니다.');
@@ -163,7 +157,7 @@ const DriverDetailPage = () => {
         );
       } else {
         setErrorModalMessage(
-          `알 수 없는 오류가 발생했습니다. 다시 시도해주세요. (상태 코드: ${status})`,
+          `알 수 없는 오류가 발생했습니다. 다시 시도해주세요. (오류 코드: ${status})`,
         );
       }
     };
@@ -183,7 +177,6 @@ const DriverDetailPage = () => {
         },
 
         onError: (error: any) => {
-
           const status = error.status || error.response?.status;
           const message = error.message || error.response?.data?.message;
 

@@ -54,7 +54,6 @@ const CostDetail = () => {
 
   useEffect(() => {
     if (estimate) {
-      console.log('견적 상세 데이터:', estimate);
       setIsFavorite(estimate.isFavorite);
       setIsConfirmed(estimate.isConfirmed);
     }
@@ -63,20 +62,13 @@ const CostDetail = () => {
   const handleFavoriteToggle = () => {
     if (!estimate) return;
 
-    console.log('기사님 찜하기 상태 변경 요청:', {
-      moverId: estimate.moverId,
-      현재찜하기상태: isFavorite,
-    });
-
     toggleFavoriteMutation.mutate(estimate.moverId, {
       onSuccess: (data) => {
-        console.log('기사님 찜하기 상태 변경 성공:', data);
 
         setIsFavorite(data.isFavorite);
 
         // 상태가 변경되었을 경우에만 refetch 호출
         if (data.isFavorite !== estimate.isFavorite) {
-          console.log('최신 데이터');
           refetch();
         }
       },
@@ -88,11 +80,9 @@ const CostDetail = () => {
 
   const handleConfirmClick = () => {
     if (!isConfirmed) {
-      console.log('견적 확정 요청:', { estimateId: estimate?.estimateId });
 
       updateEstimateConfirmed(Number(estimate.estimateId), {
         onSuccess: () => {
-          console.log('견적 확정 성공');
           setIsConfirmed(true);
         },
         onError: (error) => {
