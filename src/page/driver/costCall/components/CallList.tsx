@@ -6,7 +6,7 @@ import Chip from '../../../../components/chip/Chip';
 import UserProfile from '../../../../components/card/UserProfile';
 import ModalInput from './ModalInput';
 
-import { ChipType } from '../../../../types/cardTypes';
+import { UserProfileProps } from '../../../../types/cardTypes';
 import { useMedia } from '../../../../lib/function/useMediaQuery';
 import { useCreateEstimate } from '../../../../lib/useQueries/estimate';
 import { useUpdateEstimateReject } from '../../../../lib/useQueries/assignedEstimateReq';
@@ -15,21 +15,10 @@ import style from './CallList.module.css';
 
 import icCheckLarge from '../../../../assets/icons/ic_check_large.svg';
 import icCheckMedium from '../../../../assets/icons/ic_check_medium.svg';
-
-interface User {
-  estimateReqId: number;
-  movingType: ChipType;
-  isAssigned: boolean;
-  customerName: string;
-  movingDate: string;
-  departure: string;
-  arrival: string;
-  createAt: string;
-  comment?: string;
-}
+import { simplifyAddress } from '../../../../lib/function/utils';
 
 interface CallListProps {
-  list: User[];
+  list: UserProfileProps['list'][];
   refetchList: () => void;
 }
 
@@ -90,25 +79,25 @@ export default function CallList({ list, refetchList }: CallListProps) {
             resetModalState();
           },
           onError: (error) => {
-            setError(error.message)
-            setIsErrorModalOpen(true)
+            setError(error.message);
+            setIsErrorModalOpen(true);
           },
         },
       );
     } else {
-      updateEstimateReject(user.estimateReqId, {
+      updateEstimateReject(user.estimateReqId!, {
         onSuccess: () => {
           refetchList(); // 데이터 갱신
           setIsModalOpen(false);
           resetModalState();
         },
         onError: (error) => {
-          setError(error.message)
-          setIsErrorModalOpen(true)
+          setError(error.message);
+          setIsErrorModalOpen(true);
         },
       });
     }
-    setIsModalOpen(false)
+    setIsModalOpen(false);
   };
 
   const resetModalState = () => {
@@ -130,7 +119,13 @@ export default function CallList({ list, refetchList }: CallListProps) {
       {list.map((user, index) => (
         <UserCard
           key={user.estimateReqId}
-          list={user}
+          list={{
+            ...user,
+            departure: user.departure && simplifyAddress(user.departure),
+            arrival: user.arrival && simplifyAddress(user.arrival),
+            detailDeparture: user.departure,
+            detailArrival: user.arrival,
+          }}
           type='receive'
           sendCostBtn={() => sendBtnHandler(index)}
           rejectCostBtn={() => rejectBtnHandler(index)}
@@ -146,7 +141,17 @@ export default function CallList({ list, refetchList }: CallListProps) {
         >
           <div className={style.container}>
             <div className={style.chipBar}>
-              <Chip type={list[userIndex].movingType} />
+              <Chip
+                type={
+                  list[userIndex].movingType as
+                    | 'SMALL'
+                    | 'HOUSE'
+                    | 'OFFICE'
+                    | 'ASSIGN'
+                    | 'CONFIRM'
+                    | 'WAITING'
+                }
+              />
               {list[userIndex].isAssigned && <Chip type='ASSIGN' />}
             </div>
             <div className={style.profile}>
