@@ -246,7 +246,7 @@ export default function DriverCostHandlerPage() {
                             text='견적 상세보기'
                             btnStyle='solid123pxBlue100'
                             onClick={() =>
-                              user.estimateId || user.estimateReqId &&
+                              (user.estimateId || user.estimateReqId) &&
                               direction_costDetail(user.estimateId || user.estimateReqId)
                             }
                           />
