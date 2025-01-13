@@ -28,7 +28,7 @@ export default function UserCostCallPage() {
     arrival: false,
   });
 
-  const { data, isLoading, error } = useGetCustomer();
+  const { data, isLoading, isFetching, error } = useGetCustomer();
 
   const handleErrorClick = () => {
     direction_root();
@@ -69,7 +69,7 @@ export default function UserCostCallPage() {
         </>
       ) : (
         <div className={style.noContents}>
-          {isLoading ? (
+          {isLoading || isFetching ? (
             <LoadingSpinner />
           ) : (
             <NoContents
