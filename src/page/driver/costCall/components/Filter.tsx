@@ -68,6 +68,7 @@ export default function Filter({
                 type='checkbox'
                 checked={allChecked}
                 onChange={handleAllCheck}
+                className={style.showPointer}
               />
               전체선택
             </span>
